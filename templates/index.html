@@ -21,7 +21,13 @@
 <link rel="stylesheet"href="/static/datatable/css/jquery.dataTables.min.css" >
 <script type="text/javascript" src="/static/datatable/js/jquery.dataTables.min.js"></script>
 
-
+<script type="text/javascript" src="/static/datatable/js/jszip.min.js"></script>
+<script type="text/javascript" src="/static/datatable/js/pdfmake.min.js"></script>
+<link rel="stylesheet" href="/static/datatable/js/buttons.dataTables.min.css">
+<script type="text/javascript" src="/static/datatable/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="/static/datatable/js/vfs_fonts.js"></script>
+<script type="text/javascript" src="/static/datatable/js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="/static/datatable/js/buttons.print.min.js"></script>
 
 
 </head>
@@ -327,6 +333,12 @@ dataSet = [];
 
     dtable = $('#searchtable').DataTable( {
         data : dataSet,
+        dom: 'lBfrtip',
+        lengthMenu: [
+            [ 10, 50, 100, -1 ],
+            [ '10', '50', '100', 'all' ]
+        ],
+        buttons: ['copy', 'excel', 'pdf'],
         columns: [
             { title: "Hostname" },
             { title: "IP" },
