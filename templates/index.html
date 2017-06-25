@@ -73,10 +73,12 @@
      </li>
      </ul>
 <div style="float:right;margin-top:10px">
+  <span id="load-status" class="label label-danger">RUNNING</span>
   <input id='datetimepicker1' type='text' />
        <a href="#" id="back" class="btn btn-sm btn-info" onclick="history('back')"><span class="glyphicon glyphicon-step-backward"></span></a>
       <a href="#" id="play" class="btn btn-sm btn-info" onclick="snap_play()"><span id="play_ico" class="glyphicon glyphicon-pause"></span></a>
       <a href="#" id="forw" class="btn btn-sm btn-info" onclick="history('forward')"><span class="glyphicon glyphicon-step-forward"></span></a>
+      
 </div>
   </div>
 
@@ -203,9 +205,10 @@ try{
 
 tmp = canvas._objects
 //console.log(canvas._objects)
+$("#load-status").text("loading...");
 $.post("update",
 {
-
+  
   "update" : JSON.stringify(canvas.toJSON(["name"]))
 
 },
@@ -214,10 +217,12 @@ function(data, status)
 
    if (data == "success")
    {
+     $("#load-status").text("saved");
      alert("Saved");
    }
    else
    {
+     $("#load-status").text("save fail");
      alert("Not Saved");
    }
 });
@@ -256,6 +261,7 @@ $("#forw").toggle();
 $("#datetimepicker1").toggle();
 if(play_snap == true)
   {
+
     play_snap = false;$('#play_ico').removeClass('glyphicon glyphicon-pause').addClass('glyphicon glyphicon-play');
   }
 }
@@ -302,10 +308,12 @@ try{
 if(play_snap == true)
   {
     console.log("PAUSE");
+    $("#load-status").text("Pause");
     play_snap = false;history_lock = false;$('#play_ico').removeClass('glyphicon glyphicon-pause').addClass('glyphicon glyphicon-play');
   }
 else{
   console.log("PLAY");
+  $("#load-status").text("Play");
   play_snap = true;
   location.reload();
   $('#play_ico').removeClass('glyphicon glyphicon-pause').addClass('glyphicon glyphicon-pause');
@@ -402,7 +410,7 @@ catch(err)
 
 function get_up(data_history="live",timestmp="")
 {
-  if(new_update_required == false || (play_snap == false && history_lock == false)){console.log("Paused...");return ""}
+  if(new_update_required == false || (play_snap == false && history_lock == false)){console.log("Paused...");$("#load-status").text("Paused...");return ""}
 try{
 
 new_update_required = false;
@@ -419,11 +427,14 @@ get_post = {INID: in_update,SESSION : out_update,history : data_history, time : 
 // GETTING LIVE UPDATE FROM SERVER
 else{ get_post = {INID: in_update,SESSION : out_update} }
 
-$.ajax({type: 'POST',url:"api",data:get_post,success:aj_post,error:function (xhr, ajaxOptions, thrownError){new_update_required = true;console.log("Post Err");}})
+$("#load-status").text("loading...");
+$.ajax({type: 'POST',url:"api",data:get_post,success:aj_post,error:function (xhr, ajaxOptions, thrownError)
+  {new_update_required = true;console.log("Post Err");$("#load-status").text("failed");}})
 
 function aj_post(data)
 {
 new_update_required = true;
+$("#load-status").text("Done");
 if(data == "None"){console.log("RECEVING None");return "";}
 console.log("RECEVING REQUEST: IN:"+data["in_update"]+" OUT:"+data["out_update"]);
 $('#inid').text("INID: "+data["in_update"]);
@@ -470,6 +481,7 @@ canvas.renderAll()
 
 process_in_out(dinput,doutput)
 new_update_required = true;
+
 }
 
 //POST FUNCTION END
