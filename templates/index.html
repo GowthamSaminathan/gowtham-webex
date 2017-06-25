@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Network Snap</title>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <script type="text/javascript" src="/static/jquery.min.js"></script>
+    <link rel="stylesheet" href="/static/boot/css/bootstrap.min.css">
+    <script type="text/javascript" src="/static/boot/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="/static/boot-select/css/bootstrap-select.min.css">
+   <script type="text/javascript" src="/static/boot-select/js/bootstrap-select.min.js"></script>
+   <script type="text/javascript" src="/static/moment.min.js"></script>
+
+
+<link rel="stylesheet" href="/static/bootstrap-datetimepicker.min.css" />
+<script type="text/javascript" src="/static/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="/static/fabric.min.js"></script>
+
+<link rel="stylesheet"href="/static/datatable/css/jquery.dataTables.min.css" >
+<script type="text/javascript" src="/static/datatable/js/jquery.dataTables.min.js"></script>
+
+
+
+
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Network Snap</a></h1>
+    </div>
+    <ul id="edit_me" class="nav navbar-nav">
+      <li class="active"><a href="#" onclick="edit_me()">Edit</a></li>
+      
+      
+      <li class="active"><h4><span id="inid" class="label label-primary">INID</span></h4></li>
+      <li class="active"><h4><span id="outid" class="label label-success">SNAPSHOT</span></h4></li>
+      <li class="active"><h4><span id="outtime" class="label label-info">LASTSNAP</span></h4></li>
+      
+
+
+      <li id="device_h">
+      <select id="device" class="selectpicker form-control" data-live-search="true" title="Select Device Name">
+
+      </select>
+      </li>
+      <li id="element_h">
+            <select id="element" class="selectpicker form-control" data-live-search="true" title="Select Monitoring Element">
+            
+            </select>
+      </li>
+     <li id="xyz_h">
+     <select id="xyz" class="selectpicker form-control" data-live-search="true" title="Select Object">
+     <option>Link</option>
+     <option>Device</option>
+     <option>Label</option>
+      </select>
+     </li>
+     <li id="button_h">
+          <button id="button" type="button" class="btn btn-primary" onclick="add_element()">ADD</button>
+     </li>
+     <li id="button2_h">
+	           <button id="button2" type="button" class="btn btn-primary" onclick="save_edit()">SAVE</button>
+     </li>
+     </ul>
+<div style="float:right;margin-top:10px">
+  <input id='datetimepicker1' type='text' />
+       <a href="#" id="back" class="btn btn-sm btn-info" onclick="history('back')"><span class="glyphicon glyphicon-step-backward"></span></a>
+      <a href="#" id="play" class="btn btn-sm btn-info" onclick="snap_play()"><span id="play_ico" class="glyphicon glyphicon-pause"></span></a>
+      <a href="#" id="forw" class="btn btn-sm btn-info" onclick="history('forward')"><span class="glyphicon glyphicon-step-forward"></span></a>
+</div>
+  </div>
+
+</nav>
+
+<div class="container-fluid" >
+  <div class="row">
+<div class="col-md-6">
+
+<canvas id="live" width="1302" height="627"> </canvas>
+</div>
+
+<div class="col-md-6">
+<table id="searchtable" class="display"></table>
+</div></div></div>
+
+
+<script type="text/javascript">
+            $(function () {
+                var dateNow = new Date();
+                console.log(dateNow);
+                $('#datetimepicker1').datetimepicker({format:'DD-MM-YYYY HH:mm',defaultDate:dateNow});
+                $('div.dataTables_filter input').attr('id', 'tabsearch');
+            });
+        </script>
+
+<script>
+
+canvas = new fabric.Canvas('live');
+new_update_required = true;
+play_snap = true;
+
+var draw_data = {}
+
+$( document ).ajaxError(function( event, jqxhr, settings, thrownError ) {
+  
+console.log(settings);
+
+});
+
+// Deleting canvas element by pressing (DEL)
+$(document).keydown(function (e) {
+if (e.keyCode == 46 && e.shiftKey == true)
+{
+if(canvas.getActiveGroup())
+{
+canvas.getActiveGroup().forEachObject(function(o){ canvas.remove(o) });
+canvas.discardActiveGroup().renderAll();}else{canvas.remove(canvas.getActiveObject());}}
+});
+
+function add_element()
+{
+// ADD NEW ELEMENT TO X,Y POINT
+var dev = $("#device").val();
+var ele = $("#element").val();
+var xyz = $("#xyz").val();
+if (dev.length < 1 || ele.length < 1 || xyz.length < 1)
+{
+
+  alert("Please Select");
+
+}
+else
+{
+
+if (typeof(draw_data) != "object")
+{
+  // OVERWRIGHT CORRUPTED DATA
+  draw_data = {}
+}
+
+if (xyz == "Link")
+{
+if (ele != 0)
+{
+var lin = new fabric.Line([400, 400, 400, 100], {left: 170,top: 150,stroke: 'green',strokeWidth: 20})
+lin.toObject = (function(toObject) {return function() {return fabric.util.object.extend(toObject.call(this), {name: this.name});};})(lin.toObject);
+lin.name = dev+"_"+ele;
+canvas.add(lin)
+canvas.renderAll()
+}else{alert("Please Select Correct Element");}
+}
+
+
+else if(xyz == "Device")
+{
+
+if (ele == 0)
+{
+var circle = new fabric.Circle({radius: 100,fill: '#eef',left: 100, top: 100});
+var text1 = new fabric.Text('New Device', {fontSize: 40,fill: 'green',left: 130, top: 120});
+var text2 = new fabric.Text('000', {fontSize: 80,fill: 'green',left: 140, top: 160,textAlign : 'center'});
+//var text3 = new fabric.Text('Cpu/Mem: 0/0', {fontSize: 20,fill: 'green',left: 125, top: 250});
+
+var group = new fabric.Group([ circle, text1 , text2], {left: 100,top: 100});
+group.toObject = (function(toObject) {return function() {return fabric.util.object.extend(toObject.call(this), {name: this.name});};})(group.toObject);
+group.name = dev+"_"+ele;
+canvas.add(group)
+canvas.renderAll()
+
+}else{alert("Please Select Device Element");}
+
+}
+else if (xyz == "Label")
+{
+if (ele != 0)
+{
+var text4 = new fabric.Text('New Label', {fontSize: 80,fill: 'green',left: 140, top: 160});
+text4.toObject = (function(toObject) {return function() {return fabric.util.object.extend(toObject.call(this), {name: this.name});};})(text4.toObject);
+text4.name = dev+"_"+ele;
+canvas.add(text4)
+canvas.renderAll()
+}else{alert("Please Select Correct Element");}
+}
+
+else{console.log("Invalid Object :"+xyz);}
+}
+}
+
+function save_edit()
+{
+// UPLOADE SAVED X,Y VALUES TO SERVER
+try{
+
+tmp = canvas._objects
+//console.log(canvas._objects)
+$.post("update",
+{
+
+  "update" : JSON.stringify(canvas.toJSON(["name"]))
+
+},
+function(data, status)
+{
+
+   if (data == "success")
+   {
+     alert("Saved");
+   }
+   else
+   {
+     alert("Not Saved");
+   }
+});
+}
+
+catch(err)
+{
+ console.log("save_data Error:"+err);
+}
+
+}
+
+
+$("#history_h").hide();
+$("#device_h").hide();
+$("#element_h").hide();
+$("#xyz_h").hide();
+$("#button_h").hide();
+$("#button2_h").hide();
+
+function edit_me()
+{
+// HIDE/UNHIDE EDIT ELEMENT
+$("#history_h").hide();
+$("#device_h").toggle();
+$("#element_h").toggle();
+$("#xyz_h").toggle();
+$("#button_h").toggle();
+$("#button2_h").toggle();
+$("#inid").toggle();
+$("#outid").toggle();
+$("#outtime").toggle();
+$("#back").toggle();
+$("#play").toggle();
+$("#forw").toggle();
+$("#datetimepicker1").toggle();
+if(play_snap == true)
+  {
+    play_snap = false;$('#play_ico').removeClass('glyphicon glyphicon-pause').addClass('glyphicon glyphicon-play');
+  }
+}
+
+function history()
+{
+// HIDE/UNHIDE EDIT ELEMENT
+$("#history_h").toggle();
+$("#datetimepicker1").toggle();
+$("#device_h").hide();
+$("#element_h").hide();
+$("#xyz_h").hide();
+$("#button_h").hide();
+$("#button2_h").hide();
+$("#inid").show();
+$("#outid").show();
+$("#outtime").show();
+}
+
+function back_snap(){
+
+try{
+
+
+}catch(err){console.log("back_snap Error>:"+err)}
+
+
+}
+
+function forw_snap(){
+
+try{
+
+
+}catch(err){console.log("forw_snap Error>:"+err)}
+
+
+}
+
+function snap_play(){
+
+try{
+
+if(play_snap == true)
+  {
+    console.log("PAUSE");
+    play_snap = false;history_lock = false;$('#play_ico').removeClass('glyphicon glyphicon-pause').addClass('glyphicon glyphicon-play');
+  }
+else{
+  console.log("PLAY");
+  play_snap = true;
+  location.reload();
+  $('#play_ico').removeClass('glyphicon glyphicon-pause').addClass('glyphicon glyphicon-pause');
+
+}
+
+}catch(err){console.log("play_snap Error>:"+err)}
+
+
+}
+
+
+function dispimage()
+{
+imageObj.onload = function() {
+context.width = imageObj.width;
+context.height = imageObj.height;
+context.drawImage(imageObj,0,0,imageObj.width,imageObj.height);
+};
+imageObj.src = 'static/live.jpg';
+}
+
+var dtable;
+dataSet = [];
+
+    dtable = $('#searchtable').DataTable( {
+        data : dataSet,
+        columns: [
+            { title: "Hostname" },
+            { title: "IP" },
+            { title: "Monitor" },
+            { title: "name" },
+            { title: "score" },
+            { title: "out" }
+        ]
+    } );
+
+
+canvas.on('mouse:down', function(e) 
+{
+  // Filter table by IP
+  try{
+    var ele = e.target
+    ele = ele.name.split("_");
+    //array start from "0" need to minis one
+    dinput[ele[0]-1].Hostname
+    var ch = $('#tabsearch')
+    ch.val(dinput[ele[0]-1].IP)
+    ch.trigger('keyup');
+  }catch(err){console.log("canvas Mouse over Error:"+err)}
+  
+});
+
+
+
+
+/// #################################### LOGICAL FUNCTION  /////////////
+var in_update = 0;
+var out_update = 0;
+var dinput = 0;
+var doutput = 0;
+
+$('#device').on('change', function() { try{
+  $('#element').empty();
+  for (var jj in dinput) {
+
+  if (dinput[jj].ID == this.value)
+  {
+
+    var all_obj = dinput[jj].Monitoring_obj;
+    //console.log(all_obj);
+
+    //var sj= document.getElementById('element');
+    //sj.options[sj.options.length]= new Option("Device",0);
+
+    for (var jjj in all_obj) {
+    var sj= document.getElementById('element');
+    sj.options[sj.options.length]= new Option(all_obj[jjj].name, all_obj[jjj].id);
+    $('.selectpicker').selectpicker('refresh');
+    }
+  }
+
+  }
+}
+catch(err)
+{console.log("Error device on change"+err)}
+})
+
+function get_up(data_history="live",timestmp="")
+{
+  if(new_update_required == false || (play_snap == false && history_lock == false)){console.log("Paused...");return ""}
+try{
+
+new_update_required = false;
+history_lock = false;
+if (typeof(in_update) != "number" ) {in_update = 0}
+if (typeof(out_update) != "number" ) {out_update = 0}
+console.log("SENDING REQUEST: IN:"+in_update+" OUT:"+out_update)
+if (data_history != "live"){
+
+// GET History update from server
+get_post = {INID: in_update,SESSION : out_update,history : data_history, time : timestmp}
+
+}
+// GETTING LIVE UPDATE FROM SERVER
+else{ get_post = {INID: in_update,SESSION : out_update} }
+
+$.ajax({type: 'POST',url:"api",data:get_post,success:aj_post,error:function (xhr, ajaxOptions, thrownError){new_update_required = true;console.log("Post Err");}})
+
+function aj_post(data)
+{
+new_update_required = true;
+if(data == "None"){console.log("RECEVING None");return "";}
+console.log("RECEVING REQUEST: IN:"+data["in_update"]+" OUT:"+data["out_update"]);
+$('#inid').text("INID: "+data["in_update"]);
+$('#outid').text("SNAP: "+data["out_update"]);
+
+in_update = data["in_update"];
+out_update = data["out_update"];
+if(data["input"] == 0)
+{
+  // No change in INPUT 
+	data["input"]
+}
+else
+{
+     //New update received for INPUT
+     $('#device').empty();
+     dinput = data["input"]
+     //console.log(dinput);
+
+     // Create option based on device name,ip and ID
+     for (var j in dinput) {
+        var s= document.getElementById('device');
+        s.options[s.options.length]= new Option(dinput[j].Hostname, dinput[j].ID);
+        var s= document.getElementById('device');
+        s.options[s.options.length]= new Option(dinput[j].IP, dinput[j].ID);
+        $('.selectpicker').selectpicker('refresh');
+  		//console.log(dinput[j].Hostname);
+
+  		}
+
+
+}
+doutput = data["output"];
+draw_data = data["draw"];
+if (draw_data != 0 && data["output"] != 0)
+{
+  // Draw updated Toplology
+try{
+console.log("Drawing Topology");
+canvas.loadFromJSON(draw_data)
+canvas.renderAll()
+}catch(err){console.log("Error draw_data"+err)}}
+
+
+process_in_out(dinput,doutput)
+new_update_required = true;
+}
+
+//POST FUNCTION END
+
+}catch(err){console.log("Error get_up"+err);new_update_required = true;}}
+
+function get_fab_objid_byname(nam){
+var allob = [] ;
+try{
+var obj = canvas.getObjects();
+for (var i = 0; i < obj.length; i++)
+{
+if (obj[i].name == nam )
+{
+allob.push(i);
+}
+}
+//console.log(allob);
+}catch(err){console.log("FabID error:"+err)}
+return allob
+}
+
+function process_in_out(din,dout)
+{
+  // Receving JSON input & output in array string
+ try
+ {
+  
+   //console.log()
+   
+   if(dout == 0) {dout = "0"}; // To Fix calculating length for number 
+   if(din == 0) {din = "0"}; // To Fix calculating length for number 
+
+   if (din.length > 0 && dout.length > 0)
+   {
+     
+     if(Array.isArray(din) == true && Array.isArray(dout) == true)
+      {
+        
+        //clear Table for new update
+        dtable.clear().draw();
+        var dout_l = dout.length;
+        var din_l = din.length;
+		    var fabobj = canvas.getObjects()
+
+		for (var i = 0; i < dout_l; i++)
+		{
+        // Reading host by host
+        //console.log(dout[i]);
+        $('#outtime').text(dout[i].TD);
+        $('#datetimepicker1').val(moment(new Date(dout[i].TD)).format('DD-MM-YYYY H:m'))
+        $("#datetimepicker1").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+
+
+        dinone = false;
+		    host_id = dout[i].ID
+		    hostOUT = ""
+        //Getting OUT for single host
+		    hostOUT = dout[i].OUT;
+        //Get Input from output
+        for(var di = 0; di < din_l ; di++){if(din[di].ID == host_id ){dinone = din[di];break;}}
+        drawtable(dout[i],dinone);
+			if ( typeof(hostOUT) == typeof(hostOUT))
+			{
+		    for (var ii = 0; ii < hostOUT.length; ii++)
+		    {
+            // Reading OUT array
+		        //console.log("SYSTEM ID:"+host_id+" | OBJECT ID:"+hostOUT.id+" | DATA:"+hostOUT[ii].out);
+		        // UPDATE SCREEN VALUE
+		        try{
+		        fabid = []
+            // Retrive fabid based on hostid & elementid
+				    var fabid = get_fab_objid_byname(host_id+"_"+hostOUT[ii].id)
+            //console.log(fabid)
+                if (fabid.length > 0)
+                {
+                 for ( var ij = 0 ; ij < fabid.length ; ij++)
+                 {
+
+                    var fabele = fabobj[fabid[ij]]
+                    //console.log(fabele);
+                    //console.log(hostOUT.data[ii].out);
+                    // Get OUT 0 to check device status
+                    // IF ID : ITS DEVICE
+                    if (hostOUT[ii].score == 100 )
+                    {
+                    	// Device reachable
+						        fabele.getObjects()[0].setFill("#eef");
+                    fabele.getObjects()[1].setText(""+dinone.Hostname);
+                    fabele.getObjects()[2].setText(""+hostOUT[ii].score);
+						        canvas.renderAll();
+                    }
+                    else
+                    {
+                        // Device Not reachable
+                    	fabele.getObjects()[0].setFill("orange");
+                      fabele.getObjects()[1].setText(""+dinone.Hostname);
+                      fabele.getObjects()[2].setText(""+hostOUT[ii].score);
+						          canvas.renderAll();
+                    }
+
+                    
+                 }
+                }
+				}
+				catch(err){console.log("Error UPDATE SCREEN VALUE :"+err)}
+
+
+		   }
+
+		   }
+		}
+		}
+
+ }
+}catch(err){console.log("process_in_out"+err)}
+}
+
+function history(h){
+
+
+var t = $('#datetimepicker1').val();
+
+if(play_snap == true)
+  {
+    console.log("PAUSE");
+    play_snap = false;$('#play_ico').removeClass('glyphicon glyphicon-pause').addClass('glyphicon glyphicon-play');
+  }
+
+history_lock = true;
+get_up(h,t);
+
+
+}
+
+
+function drawtable(dout,din){
+
+try{
+
+for(var ddout = 0; ddout < dout.OUT.length;ddout ++)
+{
+var a = dout.OUT[ddout].out;
+dtable.rows.add([[din.Hostname,din.IP,din.Monitoring_obj[ddout].monitor,din.Monitoring_obj[ddout].name,dout.OUT[ddout].score,JSON.stringify(a)]]);
+dtable.draw();
+}
+}catch(err){console.log("Draw Table Error"+err)}
+
+
+}
+
+get_up();
+setInterval(get_up,4000);
+
+</script>
+
+</body>
+
+
+</html>
