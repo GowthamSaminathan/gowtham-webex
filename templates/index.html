@@ -96,7 +96,12 @@
 </div></div></div>
 
 
+<style>
+html body {background-color: rgba(240, 240, 240,1.00);}
+</style>
+
 <script type="text/javascript">
+
             $(function () {
                 var dateNow = new Date();
                 console.log(dateNow);
@@ -154,7 +159,7 @@ if (xyz == "Link")
 {
 if (ele != 0)
 {
-var lin = new fabric.Line([400, 400, 400, 100], {left: 170,top: 150,stroke: 'green',strokeWidth: 20})
+var lin = new fabric.Line([200, 200, 200, 50], {left: 170,top: 150,stroke: '#4d0099',strokeWidth: 8})
 lin.toObject = (function(toObject) {return function() {return fabric.util.object.extend(toObject.call(this), {name: this.name});};})(lin.toObject);
 lin.name = dev+"_"+ele;
 canvas.add(lin)
@@ -168,9 +173,9 @@ else if(xyz == "Device")
 
 if (ele == 0)
 {
-var circle = new fabric.Circle({radius: 100,fill: '#eef',left: 100, top: 100});
-var text1 = new fabric.Text('New Device', {fontSize: 40,fill: 'green',left: 130, top: 120});
-var text2 = new fabric.Text('000', {fontSize: 80,fill: 'green',left: 140, top: 160,textAlign : 'center'});
+var circle = new fabric.Circle({radius: 100,fill: '#00e600',left: 100, top: 100});
+var text1 = new fabric.Text($("#device option:selected").text(), {fontSize: 40,fill: '#ffffff',left: 130, top: 120});
+var text2 = new fabric.Text('000', {fontSize: 80,fill: '#ffffff',left: 140, top: 160,textAlign : 'center'});
 //var text3 = new fabric.Text('Cpu/Mem: 0/0', {fontSize: 20,fill: 'green',left: 125, top: 250});
 
 var group = new fabric.Group([ circle, text1 , text2], {left: 100,top: 100});
@@ -186,7 +191,7 @@ else if (xyz == "Label")
 {
 if (ele != 0)
 {
-var text4 = new fabric.Text('New Label', {fontSize: 80,fill: 'green',left: 140, top: 160});
+var text4 = new fabric.Text('New', {fontSize: 80,fill: 'green',left: 140, top: 160});
 text4.toObject = (function(toObject) {return function() {return fabric.util.object.extend(toObject.call(this), {name: this.name});};})(text4.toObject);
 text4.name = dev+"_"+ele;
 canvas.add(text4)
@@ -434,7 +439,8 @@ $.ajax({type: 'POST',url:"api",data:get_post,success:aj_post,error:function (xhr
 function aj_post(data)
 {
 new_update_required = true;
-$("#load-status").text("Done");
+$("#load-status").text("Updated");
+$("#load-status").fadeIn(150).fadeOut(150).fadeIn(150).fadeOut(250).fadeIn(250);
 if(data == "None"){console.log("RECEVING None");return "";}
 console.log("RECEVING REQUEST: IN:"+data["in_update"]+" OUT:"+data["out_update"]);
 $('#inid').text("INID: "+data["in_update"]);
@@ -526,14 +532,14 @@ function process_in_out(din,dout)
         var dout_l = dout.length;
         var din_l = din.length;
 		    var fabobj = canvas.getObjects()
-
+        $("#datetimepicker1").fadeIn(100).fadeOut(100).fadeIn(100);
 		for (var i = 0; i < dout_l; i++)
 		{
         // Reading host by host
         //console.log(dout[i]);
         $('#outtime').text(dout[i].TD);
-        $('#datetimepicker1').val(moment(new Date(dout[i].TD)).format('DD-MM-YYYY H:m'))
-        $("#datetimepicker1").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+        $('#datetimepicker1').val(moment(new Date(dout[i].TD)).format('DD-MM-YYYY HH:mm'))
+        
 
 
         dinone = false;
@@ -569,7 +575,7 @@ function process_in_out(din,dout)
                     if (hostOUT[ii].score == 100 )
                     {
                     	// Device reachable
-						        fabele.getObjects()[0].setFill("#eef");
+						        fabele.getObjects()[0].setFill("##00e600");
                     fabele.getObjects()[1].setText(""+dinone.Hostname);
                     fabele.getObjects()[2].setText(""+hostOUT[ii].score);
 						        canvas.renderAll();
@@ -577,7 +583,7 @@ function process_in_out(din,dout)
                     else
                     {
                         // Device Not reachable
-                    	fabele.getObjects()[0].setFill("orange");
+                    	fabele.getObjects()[0].setFill("#ff471a");
                       fabele.getObjects()[1].setText(""+dinone.Hostname);
                       fabele.getObjects()[2].setText(""+hostOUT[ii].score);
 						          canvas.renderAll();
