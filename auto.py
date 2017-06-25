@@ -12,7 +12,7 @@ import getpass
 import ast
 import pymongo
 import re
-
+import pandas as pd
 
 #j = {"objects":[{"id":"1","type":"interface","in":"Gi0/0","monitor":["speed","duplex","bits","error"]},{"id":"2","type":"interface","name":"Gi0/1","monitor":["speed","duplex","bits","error"]}]}
 #jj = json.dumps(j)
@@ -174,7 +174,7 @@ def get_ssh_ses(IP,Authentication,timeout):
     return ses
 
 def self_check():
-    return {"id":"0","out":{"status":"reachable"}}
+    return {"id":0,"out":{"status":"reachable"}}
 
 def device_check(ses,Os):
     try:
@@ -232,7 +232,7 @@ def start_run():
                     jout = {}
                     if sess == None or type(sess) == str:
                         print("Failed >"+str(Hostname)+" "+str(IP))
-                        jout = [{"id":"0","out":{"status":"unreachable"}}]
+                        jout = [{"id":0,"out":{"status":"unreachable"}}]
                     else:
                         jout = device_check(sess , Monitoring_obj)
 
@@ -249,11 +249,39 @@ def start_run():
     except Exception as e:
         print("start_run Error >"+str(e))
 
+def xls_input(filename):
+    try:
+        xl = pd.ExcelFile(filename)
+        df1 = xl.parse('input')
+        ID = list(set((df1.get("ID"))))
+        full_list = []
+        for i in ID:
+            local_list = []
+            xx = ""
+            for index, row in df1.iterrows():
+                if row["ID"] == i:
+                    a = {"id":int(row["_id"]),"type": row["_type"] , "name": row["_name"] , "monitor":row["_monitor"], "rank": json.loads(row["_rank"])}
+                    local_list.append(a)
+                    xx = row
+            full_list.append({"ID":int(xx["ID"]),"Hostname": str(xx["Hostname"]),"IP":str(xx["IP"]),"Authentication":xx["Authentication"],
+                "Model":str(xx["Model"]),"Mode":str(xx["Mode"]),"timeout":int(xx["timeout"]),"Monitoring_obj":local_list})
+        return full_list
 
-def mongdb():
+    except Exception as e:
+        print("xls_input Error>"+str(e))
+
+
+def mongdb(input="xls"):
     try:
         INID  = 1
-        csv_data = list(csv.DictReader(open('input.csv')))
+        if input == "xls":
+            csv_data = xls_input("snap_in.xlsx")
+            if csv_data == None or len(csv_data) == 0:
+                print("No valid XLS input")
+                return None
+        else:
+            csv_data = list(csv.DictReader(open('input.csv')))
+        
         # Add or Update new session in SESSION collection
         mcollection = mdb['SESSION']
         session = (list(mcollection.find()))
@@ -270,7 +298,10 @@ def mongdb():
         # ADD INID in INPUT collection
         for d in csv_data:
             # Json loads used to convert string to array object
-           d.update({"INID":INID,"Monitoring_obj":json.loads(d.get("Monitoring_obj"))})
+            if input == "xls":
+                d.update({"INID":INID,"Monitoring_obj":d.get("Monitoring_obj")})
+            else:
+                d.update({"INID":INID,"Monitoring_obj":json.loads(d.get("Monitoring_obj"))})
 
         mcollection = mdb['INPUT']
         mcollection.insert(csv_data)
