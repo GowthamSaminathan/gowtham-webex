@@ -26,7 +26,7 @@ class score_gen():
     def regex_check(self,ranks,alloutput):
         try:
             # Get jsion data
-            print "<<<",alloutput
+            #print "<<<",alloutput
             alloutput = "|".join(alloutput.values())
 
             for rank in ranks:
@@ -38,7 +38,7 @@ class score_gen():
                     return -1
                 for r in reg:
                     # Match all regex to retun the score
-                    print "Reg>>",r
+                    #print "Reg>>",r
                     rd = re.findall(r,alloutput)
                     if len(rd) > 0:
                         return score
@@ -60,6 +60,7 @@ class score_gen():
             scored_output = []
             elements_input = dinput.get("Monitoring_obj")
             elements_output = doutput.get("OUT")
+            total_score = 100
             for eo in elements_output:
                 # Process every elemet output with element input
                 # default score -1
@@ -72,11 +73,18 @@ class score_gen():
                             #Input and Output ID matched 
                             # Check regex for scoring
                             score = self.regex_check(ei.get("rank"),eo.get("out"))
+                            if eout_id != 0 and score != 100:
+                                # if score is not equal to 100 and and sore is not self score
+                                total_score = total_score - 1
                 except Exception as e:
                     print("score_me Error>"+str(e))
+                    total_score = -1
 
                 eo.update({"score":score})
                 scored_output.append(eo)
+            for seo in scored_output:
+                if seo.get("id") == 0:
+                    seo.update({"score":total_score})
             doutput.update({"OUT":scored_output})
             #print (doutput)
             return doutput

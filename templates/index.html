@@ -567,6 +567,7 @@ function process_in_out(din,dout)
                  for ( var ij = 0 ; ij < fabid.length ; ij++)
                  {
 
+                    scolor = "#ff471a"
                     var fabele = fabobj[fabid[ij]]
                     //console.log(fabele);
                     //console.log(hostOUT.data[ii].out);
@@ -574,21 +575,23 @@ function process_in_out(din,dout)
                     // IF ID : ITS DEVICE
                     if (hostOUT[ii].score == 100 )
                     {
-                    	// Device reachable
-						        fabele.getObjects()[0].setFill("#00e600");
-                    fabele.getObjects()[1].setText(""+dinone.Hostname);
-                    fabele.getObjects()[2].setText(""+hostOUT[ii].score);
-						        canvas.renderAll();
+                    scolor = "#00e600"
+                    }
+                    else if (hostOUT[ii].score <= 0)
+                    {
+                        // Device Not reachable
+                        scolor = "#ff471a"
+                    	
                     }
                     else
                     {
-                        // Device Not reachable
-                    	fabele.getObjects()[0].setFill("#ff471a");
-                      fabele.getObjects()[1].setText(""+dinone.Hostname);
-                      fabele.getObjects()[2].setText(""+hostOUT[ii].score);
-						          canvas.renderAll();
-                    }
 
+                        scolor = "#ff8902"
+                    }
+                    fabele.getObjects()[0].setFill(scolor);
+                    fabele.getObjects()[1].setText(""+dinone.Hostname);
+                    fabele.getObjects()[2].setText(""+hostOUT[ii].score);
+                    canvas.renderAll();
                     
                  }
                 }
