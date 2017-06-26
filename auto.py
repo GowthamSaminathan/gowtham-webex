@@ -26,7 +26,7 @@ class score_gen():
     def regex_check(self,ranks,alloutput):
         try:
             # Get jsion data
-            #print "<<<",alloutput
+            print "<<<",alloutput
             alloutput = "|".join(alloutput.values())
 
             for rank in ranks:
@@ -38,6 +38,7 @@ class score_gen():
                     return -1
                 for r in reg:
                     # Match all regex to retun the score
+                    print "Reg>>",r
                     rd = re.findall(r,alloutput)
                     if len(rd) > 0:
                         return score
@@ -173,8 +174,8 @@ def get_ssh_ses(IP,Authentication,timeout):
             return ses
     return ses
 
-def self_check():
-    return {"id":0,"out":{"status":"reachable"}}
+def self_check(ses,element):
+    return {"status":"reachable"}
 
 def device_check(ses,Os):
     try:

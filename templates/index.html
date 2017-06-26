@@ -173,7 +173,7 @@ else if(xyz == "Device")
 
 if (ele == 0)
 {
-var circle = new fabric.Circle({radius: 100,fill: '#00e600',left: 100, top: 100});
+var circle = new fabric.Circle({radius: 100,fill: '#333333',left: 100, top: 100});
 var text1 = new fabric.Text($("#device option:selected").text(), {fontSize: 40,fill: '#ffffff',left: 130, top: 120});
 var text2 = new fabric.Text('000', {fontSize: 80,fill: '#ffffff',left: 140, top: 160,textAlign : 'center'});
 //var text3 = new fabric.Text('Cpu/Mem: 0/0', {fontSize: 20,fill: 'green',left: 125, top: 250});
@@ -575,7 +575,7 @@ function process_in_out(din,dout)
                     if (hostOUT[ii].score == 100 )
                     {
                     	// Device reachable
-						        fabele.getObjects()[0].setFill("##00e600");
+						        fabele.getObjects()[0].setFill("#00e600");
                     fabele.getObjects()[1].setText(""+dinone.Hostname);
                     fabele.getObjects()[2].setText(""+hostOUT[ii].score);
 						        canvas.renderAll();

@@ -23,7 +23,7 @@ def cis_sw_int(ses,monobj):
 		data = str(ses[0].before)
 		if data.find("line protocol is up") == -1:
 			# Interface down
-			return "down"
+			return {"interface":"down"}
 		if "bits" in mon_:
 
 			redata = re.findall(r'input rate [0-9]+|output rate [0-9]+',data)
