@@ -105,7 +105,7 @@ html body {background-color: rgba(240, 240, 240,1.00);}
             $(function () {
                 var dateNow = new Date();
                 console.log(dateNow);
-                $('#datetimepicker1').datetimepicker({format:'DD-MM-YYYY HH:mm',defaultDate:dateNow});
+                $('#datetimepicker1').datetimepicker({format:'DD-MM-YYYY HH:mm:ss',defaultDate:dateNow});
                 $('div.dataTables_filter input').attr('id', 'tabsearch');
             });
         </script>
@@ -370,9 +370,9 @@ canvas.on('mouse:down', function(e)
     var ele = e.target
     ele = ele.name.split("_");
     //array start from "0" need to minis one
-    dinput[ele[0]-1].Hostname
+    //dinput[ele[0]-1].Hostname
     var ch = $('#tabsearch')
-    ch.val(dinput[ele[0]-1].IP)
+    ch.val(ele[0])
     ch.trigger('keyup');
   }catch(err){console.log("canvas Mouse over Error:"+err)}
   
@@ -391,7 +391,7 @@ $('#device').on('change', function() { try{
   $('#element').empty();
   for (var jj in dinput) {
 
-  if (dinput[jj].ID == this.value)
+  if (dinput[jj].IP == this.value)
   {
 
     var all_obj = dinput[jj].Monitoring_obj;
@@ -463,9 +463,9 @@ else
      // Create option based on device name,ip and ID
      for (var j in dinput) {
         var s= document.getElementById('device');
-        s.options[s.options.length]= new Option(dinput[j].Hostname, dinput[j].ID);
+        s.options[s.options.length]= new Option(dinput[j].Hostname, dinput[j].IP);
         var s= document.getElementById('device');
-        s.options[s.options.length]= new Option(dinput[j].IP, dinput[j].ID);
+        s.options[s.options.length]= new Option(dinput[j].IP, dinput[j].IP);
         $('.selectpicker').selectpicker('refresh');
   		//console.log(dinput[j].Hostname);
 
@@ -538,7 +538,7 @@ function process_in_out(din,dout)
         // Reading host by host
         //console.log(dout[i]);
         $('#outtime').text(dout[i].TD);
-        $('#datetimepicker1').val(moment(new Date(dout[i].TD)).format('DD-MM-YYYY HH:mm'))
+        $('#datetimepicker1').val(moment(new Date(dout[i].TD)).format('DD-MM-YYYY HH:mm:ss'))
         
 
 
@@ -560,7 +560,7 @@ function process_in_out(din,dout)
 		        try{
 		        fabid = []
             // Retrive fabid based on hostid & elementid
-				    var fabid = get_fab_objid_byname(host_id+"_"+hostOUT[ii].id)
+				    var fabid = get_fab_objid_byname(dinone.IP+"_"+hostOUT[ii].id)
             //console.log(fabid)
                 if (fabid.length > 0)
                 {

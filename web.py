@@ -62,8 +62,8 @@ def history():
 				start = result.get("time1")
 				end = result.get("time2")
 				if start != None and end != None:
-					start = datetime.datetime.strptime(start, "%d-%m-%Y %H:%M")
-					end = datetime.datetime.strptime(end, "%d-%m-%Y %H:%M")
+					start = datetime.datetime.strptime(start, "%d-%m-%Y %H:%M:%S")
+					end = datetime.datetime.strptime(end, "%d-%m-%Y %H:%M:%S")
 				
 				if result["type"] == "count":
 					#print result["type"]
@@ -91,7 +91,7 @@ def history():
 				elif result["type"] == "back":
 					tim = result["time"]
 					mcollection = mdb['OUTPUT']
-					qr = mcollection.find({"TD":{"$lte":datetime.datetime.strptime(tim, "%d-%m-%Y %H:%M")}},{"_id":0,"SESSION":1,"INID":1,"TD":1}).sort([("TD",-1)]).limit(1)
+					qr = mcollection.find({"TD":{"$lte":datetime.datetime.strptime(tim, "%d-%m-%Y %H:%M:%S")}},{"_id":0,"SESSION":1,"INID":1,"TD":1}).sort([("TD",-1)]).limit(1)
 					qr = list(qr)
 					if len(qr) > 0:
 						qr = qr[0]
@@ -101,7 +101,7 @@ def history():
 				elif result["type"] == "forward":
 					tim = result["time"]
 					mcollection = mdb['OUTPUT']
-					qr = mcollection.find({"TD":{"$gte":datetime.datetime.strptime(tim, "%d-%m-%Y %H:%M")}},{"_id":0,"SESSION":1,"INID":1,"TD":1}).sort([("TD",1)]).limit(1)
+					qr = mcollection.find({"TD":{"$gte":datetime.datetime.strptime(tim, "%d-%m-%Y %H:%M:%S")}},{"_id":0,"SESSION":1,"INID":1,"TD":1}).sort([("TD",1)]).limit(1)
 					qr = list(qr)
 					if len(qr) > 0:
 						qr = qr[0]
@@ -150,7 +150,7 @@ def result():
 				
 				if history == "back":
 					#find({"$and":[{"TD":{"$lte":datetime.datetime.fromtimestamp(float(h_time))}}]},{"_id":0,"SESSION":1,"INID":1,"TD":1}).sort([("TD",-1)]).limit(1)
-					qr = mcollection.find({ "$or" : [ { "INID" : {"$ne": int(iin_update)} }, { "SESSION" : {"$ne": int(oout_update)} } ] ,"TD":{"$lte":datetime.datetime.strptime(h_time, "%d-%m-%Y %H:%M")-datetime.timedelta(minutes=330)}}).sort([("TD",-1)]).limit(1)
+					qr = mcollection.find({ "$or" : [ { "INID" : {"$ne": int(iin_update)} }, { "SESSION" : {"$ne": int(oout_update)} } ] ,"TD":{"$lte":datetime.datetime.strptime(h_time, "%d-%m-%Y %H:%M:%S")-datetime.timedelta(minutes=330)}}).sort([("TD",-1)]).limit(1)
 					qr = list(qr)
 					if len(qr) > 0:
 						qr = qr[0]
@@ -164,7 +164,7 @@ def result():
 						return "None"
 				
 				elif history == "forward":
-					qr = mcollection.find({ "$or" : [ { "INID" : {"$ne": int(iin_update)} }, { "SESSION" : {"$ne": int(oout_update)} } ] ,"TD":{"$gte":datetime.datetime.strptime(h_time, "%d-%m-%Y %H:%M")-datetime.timedelta(minutes=330)}}).sort([("TD",1)]).limit(1)
+					qr = mcollection.find({ "$or" : [ { "INID" : {"$ne": int(iin_update)} }, { "SESSION" : {"$ne": int(oout_update)} } ] ,"TD":{"$gte":datetime.datetime.strptime(h_time, "%d-%m-%Y %H:%M:%S")-datetime.timedelta(minutes=330)}}).sort([("TD",1)]).limit(1)
 					qr = list(qr)
 					if len(qr) > 0:
 						qr = qr[0]
