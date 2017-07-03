@@ -45,7 +45,52 @@ def login(hostname='',auth=[],login_timeout=6,etimeout=5):
         return return_typ
 
 
-auth = []
-auth.append({"username":"gowtham","password":"Pong@123"})
+def cis_bgp(ses,monobj):
+    try:
+        out = {}
+        mon_ = monobj.get("monitor")
+        mon_ = mon_.split(",")
+        
+        type_ = monobj.get("type")
+        in_ = monobj.get("name")
 
-def cis_bgp():
+        exp = ses[1]
+        cmd = "show ip bgp summary "
+        ses[0].sendline("terminal length 0")
+        ses[0].sendline(cmd)
+        ses[0].expect([cmd,pxssh.TIMEOUT],timeout=5)
+        ses[0].expect([exp,pxssh.TIMEOUT],timeout=5)
+        data = str(ses[0].before)
+        for host in mon_:
+            try:
+                ot=""
+                pos = data.find(host)
+                print host
+                if pos > -1:
+                    n = filter(None,data[pos:].split("\n")[0].split(" "))
+                    ot = "neighbor:"+n[0]+"|"+"AS:"+n[2]+"|"+"uptime:"+n[-2]+"|"+"received-prf:"+n[-1]
+                    ot = ot.strip()
+            except Exception as e:
+                print("cis_bgp Error 2>"+str(e))
+            out.update({host:ot})
+        print out
+        return out
+    except Exception as e:
+        print("cis_bgp Error 1>"+str(e))
+
+auth = []
+auth.append({"username":"cisco","password":"cisco"})
+
+monobj = {"monitor":"10.1.1.3,10.1.1.4","type":"cis_bgp","name":"bgp"}
+
+
+ses = login("10.1.1.2",auth)
+if type(ses) != str and ses != None:
+    print "Login Success"
+    #ssh_ses.update({IP:ses})
+else:
+    print "Failed"
+    exit()
+
+cis_bgp(ses,monobj)
+

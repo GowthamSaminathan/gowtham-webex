@@ -8,3 +8,4 @@ ID,Hostname,IP,Authentication,Model,Mode,timeout,_id,_type,_name,_monitor,_rank
 3,CHN_3,10.1.1.4,"{""username"":""cisco"",""password"":""cisco""}",asdasd,TRUE,10,0,self_check,self,self,"[{""regex"":[""unreachable""],""score"":50},{""regex"":[""reachable""],""score"":10}]"
 3,CHN_3,10.1.1.4,"{""username"":""cisco"",""password"":""cisco""}",asdasd,TRUE,10,1,cis_sw_int,Fa0/0,"speed,duplex,bits,error","[{""regex"":[""down""],""score"":20},{""regex"":[""up""],""score"":0}]"
 3,CHN_3,10.1.1.4,"{""username"":""cisco"",""password"":""cisco""}",asdasd,TRUE,10,2,cis_sw_int,Fa0/1,"speed,duplex,bits,error","[{""regex"":[""down""],""score"":20},{""regex"":[""up""],""score"":0}]"
+,,,,,,,,cis_bgp,"10.1.1.3,10.1.1.4",,
