@@ -13,11 +13,16 @@ import ast
 import pymongo
 import re
 import pandas as pd
+from flask import Flask, render_template, request
+from flask import jsonify
+from threading import Thread
+global _mongoc,_mdb
 
 #j = {"objects":[{"id":"1","type":"interface","in":"Gi0/0","monitor":["speed","duplex","bits","error"]},{"id":"2","type":"interface","name":"Gi0/1","monitor":["speed","duplex","bits","error"]}]}
 #jj = json.dumps(j)
 #O = json.loads(jj)
 
+app = Flask(__name__)
 
 ### PAGE 1 START ####
 class score_gen():
@@ -206,10 +211,10 @@ def device_check(ses,Os):
         print("Error >"+str(e))
 
         
-def start_run():
+def start_run(input_file_path):
     try:
         # start create DB function
-        if mongdb() == True:
+        if mongdb(input_file_path) == True:
             pass;
         else:
             print("STOPPED")
@@ -219,12 +224,12 @@ def start_run():
             tim = time.strftime('%Y-%m-%d %H:%M:%S')
             session = session + 1
             print("STARTING SESSION >"+str(session))
-            mcollection = mdb['SESSION']
+            mcollection = _mdb['SESSION']
             sesout = mcollection.find_one({"_id":1})
             INID = sesout.get("INID")
 
             #Get INPUT based on INID
-            mcollection = mdb['INPUT']
+            mcollection = _mdb['INPUT']
             all_data = mcollection.find({"INID":INID})
             for row in all_data:
                 try:
@@ -246,14 +251,14 @@ def start_run():
                         jout = device_check(sess , Monitoring_obj)
 
                     #INSERT OUTPUT TO DB
-                    dbdata = score_me(row,{"SESSION":int(session),"ID":int(ID),"OUT":jout,"TD":datetime.datetime.now(),"INID":INID})
-                    mcollection = mdb['OUTPUT']
+                    dbdata = _score_me(row,{"SESSION":int(session),"ID":int(ID),"OUT":jout,"TD":datetime.datetime.now(),"INID":INID})
+                    mcollection = _mdb['OUTPUT']
                     mcollection.insert(dbdata)
                 except Exception as e:
                     print("start_run trying Error>>"+str(e))
 
             #UPDATE CURRENT SESSION
-            mcollection = mdb['SESSION']
+            mcollection = _mdb['SESSION']
             mcollection.update({"_id":1},{"$set":{"SESSION":session}})
     except Exception as e:
         print("start_run Error >"+str(e))
@@ -280,19 +285,20 @@ def xls_input(filename):
         print("xls_input Error>"+str(e))
 
 
-def mongdb(input="xls"):
+def mongdb(input="xls",filepath=None):
     try:
         INID  = 1
         if input == "xls":
-            csv_data = xls_input("snap_in.xlsx")
+            csv_data = xls_input(filepath)
             if csv_data == None or len(csv_data) == 0:
                 print("No valid XLS input")
                 return None
         else:
-            csv_data = list(csv.DictReader(open('input.csv')))
+            return None
+            #csv_data = list(csv.DictReader(open('input.csv')))
         
         # Add or Update new session in SESSION collection
-        mcollection = mdb['SESSION']
+        mcollection = _mdb['SESSION']
         session = (list(mcollection.find()))
         if len(session) > 0:
             INID = session[0].get("INID")
@@ -312,23 +318,32 @@ def mongdb(input="xls"):
             else:
                 d.update({"INID":INID,"Monitoring_obj":json.loads(d.get("Monitoring_obj"))})
 
-        mcollection = mdb['INPUT']
+        mcollection = _mdb['INPUT']
         mcollection.insert(csv_data)
-        mongoc.close()
+        _mongoc.close()
         return True
     except Exception as e:
         print(e,"Error mongdb")
 
-# connect to LIVE database
 
-mongoc = pymongo.MongoClient('localhost', 27017)
-mdb = mongoc['LIVE']
-print ("Connected to 'LIVE' database...")
 
-# Insitate Score Me object
-scor = score_gen()
-score_me = scor.score_me
+def main_run(filepath):
+    # connect to LIVE database
+    _mongoc = pymongo.MongoClient('localhost', 27017)
+    _mdb = _mongoc['LIVE']
+    print ("Connected to 'LIVE' database...")
 
-print ("Starting...")
-start_run()
+    # Insitate Score Me object
+    scor = score_gen()
+    _score_me = scor.score_me
 
+    print ("Starting...")
+    start_run("xls",filepath)
+
+
+
+
+        
+
+if __name__ == '__main__':
+    pass;

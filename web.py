@@ -1,15 +1,27 @@
 from flask import Flask, render_template, request
 from flask import jsonify
+from werkzeug.utils import secure_filename
 import json
 import MySQLdb
 import os,time
 #import pymongo
 import datetime
 from flask_pymongo import PyMongo
+import glob
+import net_auto
+from threading import Thread
+
+
+# Create dummy thread
+global main_thread
+main_thread = Thread(target="",name="No")
+main_thread.run()
+main_thread.isAlive()
 
 app = Flask(__name__,static_url_path='/static')
 app.config['MONGO_DBNAME'] = 'LIVE'
 app.config['MONGO_URI'] = 'mongodb://127.0.0.1:27017/LIVE'
+app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(),"input_file")
 mongoc = PyMongo(app)
 
 
@@ -212,5 +224,98 @@ def result():
 	 if request.method == 'GET':
 			return jsonify(sqlget_output("0"))
 
+@app.route('/upload_input',methods = ['POST', 'GET'])
+def upload_input():
+    if request.method == 'POST':
+    	try:
+        	f = request.files['file']
+        	filename = secure_filename(f.filename)
+        	print os.path.join(app.config['UPLOAD_FOLDER'])
+        	f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        	return 'success'
+        except Exception as e:
+        	print e
+        	return "failed"
+
+@app.route('/job',methods = ['POST', 'GET'])
+def get_job():
+	global main_thread
+	status = {"status":"error"}
+	if request.method == 'POST':
+		try:
+			typ = request.form.get('type')
+			if typ == "GetRunningJob":
+				if main_thread.isAlive() == True:
+					status = {"status":"Running","jobname":main_thread.getName()}
+				else:
+					status = {"status":"Not Running","jobname":main_thread.getName()}
+			elif jn == "kill":
+				if main_thread.isAlive() == True:
+					jn = request.form.get('jobname')
+					job_name = main_thread.getName()
+					if jn == job_name:
+						pass;
+						# Killing is not possible in threading module
+						#main_thread.kill()
+					else:
+						status = {"status":"No Job Found","jobname":jn}
+				else:
+					status = {"status":"Not Running","jobname":main_thread.getName()}
+			return jsonify(status)
+		except Exception as e:
+			return jsonify({"status":"error"})
+
+@app.route('/new_job',methods = ['POST', 'GET'])
+def new_job():
+	global main_thread
+	status = {"status":"error"}
+	if request.method == 'POST':
+		try:
+			fn = request.form.get('filename')
+			jn = request.form.get('jobname')
+			if fn == None or jn == None:
+				return jsonify(status)
+			filename = secure_filename(fn)
+			full_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+			if os.path.isfile(full_path):
+				# Schudle Job
+				if main_thread.isAlive() == False:
+					jn = jn+"-"+str(datetime.datetime.now().strftime("%d-%B-%H:%M:%S"))
+					main_thread = Thread(target=net_auto_modul.main_run,name = jn, args=(full_path,jn,))
+					main_thread.start()
+					status = {"status":"Job Started"}
+				else:
+					status = {"status":"ExistingJobRunning"}
+			else:
+				status = {"status":"InputFileNotFound"}
+			return jsonify(status)
+		except Exception as e:
+			print e
+			return jsonify({"status":"error"})
+
+@app.route('/download_input',methods = ['POST', 'GET'])
+def download_input():
+    if request.method == 'POST':
+    	try:
+    		f = request.files['file']
+        	return send_from_directory(directory=app.config['UPLOAD_FOLDER'], filename=f)
+        except Exception as e:
+        	print e
+        	return "failed"
+
+@app.route('/list_input',methods = ['POST', 'GET'])
+def list_input():
+    if request.method == 'POST':
+    	try:
+    		name = os.listdir(app.config['UPLOAD_FOLDER'])
+    		if len(name) > 0:
+    			return jsonify({"files":name})
+    		else:
+    			return "failed"
+        except Exception as e:
+        	return "failed"
+
+
 if __name__ == '__main__':
-	 app.run(host="0.0.0.0", port=int("8888"), debug=True)
+	net_auto_modul = net_auto.main_model()
+	app.run(host="0.0.0.0", port=int("8888"), debug=True)
