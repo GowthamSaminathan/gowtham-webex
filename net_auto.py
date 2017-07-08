@@ -106,7 +106,7 @@ class main_model():
         #Saving ssh session
         self.ssh_ses = {}
 
-    def login(self,hostname='',auth=[],login_timeout=1,etimeout=5):
+    def login(self,hostname='',auth=[],logpath="default_log.txt",login_timeout=1,etimeout=5):
         # Login to NPCI device , "enable" password check disabled because of aaa conf in NPCI
         if len(auth) > 0:
             for au in auth:
@@ -119,7 +119,7 @@ class main_model():
                                     "StrictHostKeyChecking": "no",
                                     "UserKnownHostsFile": "/dev/null"},timeout=login_timeout)
                     s.login(hostname, username, password,auto_prompt_reset=False,login_timeout=login_timeout)
-                    #s.logfile = open("ssh_log.txt", "ab")
+                    s.logfile = open(logpath+"_"+str(hostname)+".txt", "ab")
                     # Send enter to get router prompt to check login success
                     s.sendline('')
                     # expecting cisco , juniper , fortigate prompt 
@@ -163,7 +163,7 @@ class main_model():
             pass;
         
 
-    def get_ssh_ses(self,IP,Authentication,timeout):
+    def get_ssh_ses(self,IP,Authentication,timeout,dir_path):
         try:
             ses = self.ssh_ses.get(IP)
             live_ses = False
@@ -181,7 +181,7 @@ class main_model():
             live_ses = False
 
         if live_ses != True:
-            ses = self.login(IP,Authentication)
+            ses = self.login(IP,Authentication,dir_path)
             if type(ses) != str and ses != None:
                 self.ssh_ses.update({IP:ses})
                 return ses
@@ -208,7 +208,7 @@ class main_model():
             print("Error >"+str(e))
 
             
-    def start_run(self,input_file_path):
+    def start_run(self,input_file_path,jobname):
         try:
             # start create DB function
             if self.mongdb("xls",input_file_path) == True:
@@ -230,6 +230,14 @@ class main_model():
                 all_data = mcollection.find({"INID":INID})
                 for row in all_data:
                     try:
+
+                        jobname = jobname.replace(":","-")
+                        dir_path = os.path.join(os.getcwd(),"divlog")
+                        dir_path = os.path.join(dir_path,jobname)
+                        if not os.path.exists(dir_path):
+                            os.makedirs(dir_path)
+                        dir_path = os.path.join(dir_path,jobname)
+
                         ID = Hostname = IP = Authentication = Model = Monitoring_obj = Mode = timeout = None
                         ID = row.get("ID")
                         Hostname = row.get("Hostname")
@@ -239,7 +247,7 @@ class main_model():
                         Monitoring_obj = row.get("Monitoring_obj")
                         Mode = row.get("Mode")
                         timeout = row.get("timeout")
-                        sess = self.get_ssh_ses(IP,[Authentication],timeout)
+                        sess = self.get_ssh_ses(IP,[Authentication],timeout,dir_path)
                         jout = {}
                         if sess == None or type(sess) == str:
                             print("Failed >"+str(Hostname)+" "+str(IP))
@@ -248,7 +256,7 @@ class main_model():
                             jout = self.device_check(sess , Monitoring_obj)
 
                         #INSERT OUTPUT TO DB
-                        dbdata = self.score_me(row,{"SESSION":int(session),"ID":int(ID),"OUT":jout,"TD":datetime.datetime.now(),"INID":INID})
+                        dbdata = self.score_me(row,{"SESSION":int(session),"ID":int(ID),"OUT":jout,"TD":datetime.datetime.now(),"INID":INID,"JOBNAME":jobname})
                         mcollection = self.mdb['OUTPUT']
                         mcollection.insert(dbdata)
                     except Exception as e:
@@ -335,7 +343,7 @@ class main_model():
         self.score_me = scor.score_me
 
         print ("Starting...")
-        self.start_run(filepath)
+        self.start_run(filepath,jobname)
 
 
 

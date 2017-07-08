@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request , send_file
 from flask import jsonify
 from werkzeug.utils import secure_filename
 import json
@@ -9,6 +9,7 @@ import datetime
 from flask_pymongo import PyMongo
 import glob
 import net_auto
+import shutil
 from threading import Thread
 
 
@@ -293,14 +294,32 @@ def new_job():
 			print e
 			return jsonify({"status":"error"})
 
-@app.route('/download_input',methods = ['POST', 'GET'])
-def download_input():
+@app.route('/delete_input',methods = ['POST', 'GET'])
+def delete_input():
     if request.method == 'POST':
     	try:
-    		f = request.files['file']
-        	return send_from_directory(directory=app.config['UPLOAD_FOLDER'], filename=f)
+    		status = {"status":"Not Deleted"}
+    		fn = request.form.get('filename')
+        	full_path = os.path.join(app.config['UPLOAD_FOLDER'], fn)
+        	try:
+        		os.remove(full_path)
+        		return jsonify({"status":"Deleted"})
+        	except:
+        		return jsonify(status)
         except Exception as e:
         	print e
+        	return "failed"
+
+@app.route('/download_input',methods = ['POST', 'GET'])
+def download_input():
+    if request.method == 'GET':
+    	try:
+    		dfile = request.args.get('download')
+    		if dfile != None:
+    			rf = os.path.join(os.getcwd(),"input_file")
+    			fp = os.path.join(rf,dfile)
+    			return send_file(fp, as_attachment=True)
+        except Exception as e:
         	return "failed"
 
 @app.route('/list_input',methods = ['POST', 'GET'])
@@ -312,6 +331,23 @@ def list_input():
     			return jsonify({"files":name})
     		else:
     			return "failed"
+        except Exception as e:
+        	return "failed"
+
+@app.route('/rawdownload',methods = ['POST', 'GET'])
+def rawdownload():
+    if request.method == 'GET':
+    	try:
+    		rawfile = request.args.get('download')
+    		if rawfile != None:
+    			rf = os.path.join(os.getcwd(),"divlog")
+    			rawfile = rawfile.replace(":","-")
+    			fp = os.path.join(rf,rawfile)
+    			if os.path.isfile(fp+".zip") == True:
+    				pass;
+    			else:
+    				shutil.make_archive(fp,"zip",fp)
+    			return send_file(fp+".zip", as_attachment=True)
         except Exception as e:
         	return "failed"
 

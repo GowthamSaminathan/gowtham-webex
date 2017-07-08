@@ -34,6 +34,39 @@
 <body>
 
 
+<!-- Manage Input -->
+  <div class="modal fade" id="manageinput" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Manage Input</h4>
+          
+        </div>
+        <div class="modal-body">
+        <div class="form-group">
+          <label for="inputdefault">Input File</label>
+         <select id="listinput2" class="form-control"  title="Select File" style="width:70%;">
+         
+        </select>
+        </div>
+        <button id="downinput" type="button" class="btn btn-danger" onclick="down_input()">Download</button> 
+        <button id="delinput" type="button" class="btn btn-danger" onclick="del_input()">Delete</button>
+  
+         <!-- <table id="listinput" class="display"></table> -->
+         
+          
+        </div>
+        <div class="modal-footer">
+          <h4><span id="manage_status" class="label label-warning" style="float:left;"></span></h4>
+
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      </div></div>
+
   <!-- Upload File -->
   <div class="modal fade" id="uploadinput" role="dialog">
     <div class="modal-dialog">
@@ -99,7 +132,7 @@
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
-      </div></div></div>
+      </div></div>
 
 
 <nav class="navbar navbar-default">
@@ -123,11 +156,11 @@
       <ul class="dropdown-menu" role="menu">
       <li><a href="#" onclick="new_ses()">New</a></li>
       <li><a href="#" onclick="upload_input()">Upload input</a></li>
+      <li><a href="#" onclick="manage_input()">Download \ Delete input</a></li>
       </ul>
       </div></li>
-      <li class="active"><h4><span id="inid" class="label label-primary">INID</span></h4></li>
-      <li class="active"><h4><span id="outid" class="label label-success">SNAPSHOT</span></h4></li>
-      <li class="active"><h4><span id="outtime" class="label label-info">LASTSNAP</span></h4></li>
+
+      <li class="active"><h4><span id="outtime" class="label label-default">LASTSNAP</span></h4></li>
       
 
 
@@ -156,7 +189,10 @@
      </li>
      </ul>
 <div style="float:right;margin-top:10px">
-  <span id="load-status" class="label label-danger">RUNNING</span>
+        <span id="load-status" class="label label-danger">RUNNING</span>
+        <span id="inid" class="label label-primary">INID</span>
+        <span id="outid" class="label label-success">SNAPSHOT</span>
+        <span id="jobdesc" class="label label-info">JOBNAME</span>
   <input id='datetimepicker1' type='text' />
        <a href="#" id="back" class="btn btn-sm btn-info" onclick="history('back')"><span class="glyphicon glyphicon-step-backward"></span></a>
       <a href="#" id="play" class="btn btn-sm btn-info" onclick="snap_play()"><span id="play_ico" class="glyphicon glyphicon-pause"></span></a>
@@ -374,6 +410,7 @@ $("#uploadinput").modal({backdrop: "static"});
 
 }
 
+
 function list_input(){
 $("#listupdate").modal({backdrop: "static"});
 
@@ -479,6 +516,18 @@ context.drawImage(imageObj,0,0,imageObj.width,imageObj.height);
 imageObj.src = 'static/live.jpg';
 }
 
+
+
+
+function downloadraw(){
+
+var job_name = $("#jobdesc").text();
+window.open('rawdownload?download='+job_name, '_blank');
+//window.location.href = 'rawdownload?download='+job_name;
+
+
+}
+
 var dtable;
 dataSet = [];
 
@@ -489,7 +538,7 @@ dataSet = [];
             [ 10, 50, 100, -1 ],
             [ '10', '50', '100', 'all' ]
         ],
-        buttons: ['copy', 'excel', 'pdf'],
+        buttons: ['copy', 'excel', 'pdf' , {text: 'RAW',action:downloadraw}],
         columns: [
             { title: "Hostname" },
             { title: "IP" },
@@ -538,6 +587,7 @@ function send_suc(data){  $("#newrun_status").text(data["status"]);  $("#jobname
 function new_ses(){
 //listtable.clear().draw();
 $('#listinput').empty();
+$("#newrun_status").text("");
 var sj= document.getElementById('listinput');
 sj.options[sj.options.length]= new Option("Select File","Select File");
 $("#showinput").modal({backdrop: "static"});
@@ -561,6 +611,65 @@ d = data1[ddout];
 sj.options[sj.options.length]= new Option(d,d);
 }
 }catch(err){console.log("Draw Table Error"+err)}
+
+}
+
+}
+
+
+function manage_input(){
+//listtable.clear().draw();
+$("#manage_status").text("");
+$('#listinput2').empty();
+var sj= document.getElementById('listinput2');
+sj.options[sj.options.length]= new Option("Select File","Select File");
+$("#manageinput").modal({backdrop: "static"});
+$.ajax({type: 'POST',url:"list_input",data:{},success:list_files,error:function (xhr, ajaxOptions, thrownError)
+  {console.log("Post Error");}})
+
+// List input files
+
+function list_files(data){
+
+data1 = data["files"];
+try{
+var sj= document.getElementById('listinput2');
+for(var ddout = 0; ddout < data1.length;ddout ++)
+{
+
+d = data1[ddout];
+//listtable.rows.add([[d]]);
+//listtable.draw();
+
+sj.options[sj.options.length]= new Option(d,d);
+}
+}catch(err){console.log("Draw Table Error"+err)}
+
+}
+
+}
+
+
+function down_input(){
+
+
+var fname = $("#listinput2").val();
+window.open('download_input?download='+fname, '_blank');
+}
+
+function del_input(){
+
+
+var fname = $("#listinput2").val();
+$("#manage_status").text("");
+
+$.ajax({type: 'POST',url:"delete_input",data:{filename:fname},success:manage_files,error:function (xhr, ajaxOptions, thrownError)
+  {console.log("Post Error");}})
+
+function manage_files(data){
+  if (data["status"] == "Deleted"){manage_input();}
+  $("#manage_status").text(data["status"]);
+
 
 }
 
@@ -741,7 +850,7 @@ function process_in_out(din,dout)
 		{
         // Reading host by host
         //console.log(dout[i]);
-        //$('#outtime').text(dout[i].TD);
+        $('#jobdesc').text(dout[i].JOBNAME);
         $('#datetimepicker1').val(moment(new Date(dout[i].TD)).format('DD-MM-YYYY HH:mm:ss'))
         
 
@@ -848,9 +957,10 @@ dtable.draw();
 
 //Get Running Job Status
 function job_status(){
+try{
 $('#outtime').text("Checking...");
 $.ajax({type: 'POST',url:"job",data:{type:"GetRunningJob"},success:getrunjob,error:function (xhr, ajaxOptions, thrownError)
-  {cosole.log("Error > job_status"); }})
+  {console.log("Error > job_status"); }})
 
 function getrunjob(data){ 
 
@@ -863,8 +973,8 @@ $('#outtime').fadeIn(150).fadeOut(150).fadeIn(150).fadeOut(250).fadeIn(250)
 
 
 }
+}catch(err){console.log("job_status Error"+err)}
 }
-
 //Get update
 get_up();
 setInterval(get_up,4000);
