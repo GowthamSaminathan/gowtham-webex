@@ -83,6 +83,8 @@ class score_gen():
                             if eout_id != 0 and score != 100:
                                 # if score is not equal to 100 and and sore is not self score
                                 total_score = total_score - 1
+                            elif eout_id == 0:
+                                total_score = score
                 except Exception as e:
                     print("score_me Error>"+str(e))
                     total_score = -1
@@ -225,7 +227,7 @@ class main_model():
         jout = {}
         if sess == None or type(sess) == str:
             print("Failed >"+str(Hostname)+" "+str(IP))
-            jout = [{"id":0,"out":{"status":"unreachable"}}]
+            jout = [{"id":0,"out":{"status":"down"}}]
         else:
             jout = self.device_check(sess , Monitoring_obj)
 

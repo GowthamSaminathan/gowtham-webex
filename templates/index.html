@@ -142,7 +142,7 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Network Snap</a></h1>
+      <a class="navbar-brand" href="#" style="font-weight: bold;">Network Snap</a></h1>
     </div>
 
 
@@ -155,10 +155,10 @@
       <li class="active">
       <div style="float:left;margin-top:10px" class="btn-group">
       <button type="button" class="btn btn-warning dropdown-toggle btn-xs " data-toggle="dropdown">
-      Action
+      <span style="font-weight: bold;">Action</span>
       <span class="caret"></span></button>
       <ul class="dropdown-menu" role="menu">
-      <li><a href="#" onclick="new_ses()">New</a></li>
+      <li><a href="#" onclick="new_ses()">New Job</a></li>
       <li><a href="#" onclick="upload_input()">Upload input</a></li>
       <li><a href="#" onclick="manage_input()">Download \ Delete input</a></li>
       </ul>
@@ -854,9 +854,9 @@ function process_in_out(din,dout)
 		for (var i = 0; i < dout_l; i++)
 		{
         // Reading host by host
-        //console.log(dout[i]);
+        console.log(dout[i].TD);
         $('#jobdesc').text(dout[i].JOBNAME);
-        $('#datetimepicker1').val(moment(new Date(dout[i].TD)).format('DD-MM-YYYY HH:mm:ss'))
+        $('#datetimepicker1').val(moment.utc(new Date(dout[i].TD)).format('DD-MM-YYYY HH:mm:ss'))
         
 
 

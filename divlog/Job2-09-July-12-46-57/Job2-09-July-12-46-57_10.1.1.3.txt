@@ -1,0 +1,12 @@
+
+
+R2#terminal length 0
+show interface Fa0/0
+terminal length 0
+R2#show interface Fa0/0
+terminal length 0
+show interface Fa0/1
+terminal length 0
+show clock
+Connection to 10.1.1.3 closed by remote host.
+show tech
