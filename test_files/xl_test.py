@@ -2,7 +2,7 @@ import pandas as pd
 import csv
 import json
 
-xl = pd.ExcelFile("E:\\in.xlsx")
+xl = pd.ExcelFile("snap_in.xlsx")
 df1 = xl.parse('input')
 ID = list(set((df1.get("ID"))))
 full_list = []
@@ -12,6 +12,7 @@ for i in ID:
     xx = ""
     for index, row in df1.iterrows():
      #print row['IP'] , row['_id'], row['_type'] , row['_name'] , row['_monitor'], row['_rank']
+         print index
          if row["ID"] == i:
              a = json.dumps({"id":int(row["_id"]),"type": row["_type"] , "name": row["_name"] , "monitor":row["_monitor"], "rank": json.loads(row["_rank"])})
              local_list.append(a)
@@ -27,8 +28,8 @@ for d in full_list:
             # Json loads used to convert string to array object
            d.update({"INID":22,"Monitoring_obj":d.get("Monitoring_obj")})
 
-for t in full_list:
-    print t
+#for t in full_list:
+#    print t
 
 ##keys = full_list[0].keys()
 ##with open('d:\\people.csv', 'wb') as output_file:

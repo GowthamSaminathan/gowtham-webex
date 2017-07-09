@@ -231,6 +231,8 @@ def upload_input():
     	try:
         	f = request.files['file']
         	filename = secure_filename(f.filename)
+        	jn = str(datetime.datetime.now().strftime("%d-%B-%H_%M_%S"))
+        	filename = jn+"-"+filename
         	print os.path.join(app.config['UPLOAD_FOLDER'])
         	f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         	return 'success'

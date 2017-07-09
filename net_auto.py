@@ -12,7 +12,7 @@ import getpass
 import ast
 import pymongo
 import re
-import pandas as pd
+import pandas
 from flask import Flask, render_template, request
 from flask import jsonify
 from threading import Thread
@@ -212,14 +212,14 @@ class main_model():
 
     def single_host(self,row2,dir_path):
         #Login and run 
-        ID = Hostname = IP = Authentication = Model = Monitoring_obj = Mode = timeout = None
+        ID = Hostname = IP = Authentication = Monitoring_obj = timeout = None
         ID = row2.get("ID")
         Hostname = row2.get("Hostname")
         IP = row2.get("IP")
         Authentication = json.loads(row2.get("Authentication"))
-        Model = row2.get("Model")
+        #Model = row2.get("Model")
         Monitoring_obj = row2.get("Monitoring_obj")
-        Mode = row2.get("Mode")
+        #Mode = row2.get("Mode")
         timeout = row2.get("timeout")
         sess = self.get_ssh_ses(IP,[Authentication],timeout,dir_path)
         jout = {}
@@ -258,6 +258,7 @@ class main_model():
                     os.makedirs(dir_path)
                 dir_path = os.path.join(dir_path,jobname)
                 print "Apprentice>"+str(apprentice)
+                # Share work to threads
                 with ThreadPoolExecutor(max_workers=apprentice) as executor:
                     futures = [executor.submit(self.single_host, row,dir_path) for row in all_data]
                     for future in as_completed(futures):
@@ -280,20 +281,27 @@ class main_model():
 
     def xls_input(self,filename):
         try:
-            xl = pd.ExcelFile(filename)
+            xl = pandas.ExcelFile(filename)
             df1 = xl.parse('input')
-            ID = list(set((df1.get("ID"))))
+            IP = list(set((df1.get("IP"))))
             full_list = []
-            for i in ID:
+            for inx , i in enumerate(IP):
+                elmt_id = 0
                 local_list = []
                 xx = ""
                 for index, row in df1.iterrows():
-                    if row["ID"] == i:
-                        a = {"id":int(row["_id"]),"type": row["_type"] , "name": row["_name"] , "monitor":row["_monitor"], "rank": json.loads(row["_rank"])}
+                    if row["IP"] == i:
+                        # Setting "self" name id to "0"
+                        if row["name"] == "self":
+                            elmt_id2 = 0
+                        else:
+                            elmt_id = elmt_id + 1
+                            elmt_id2 = elmt_id
+                        a = {"id":elmt_id2,"type": row["type"] , "name": row["name"] , "monitor":row["monitor"], "rank": json.loads(row["rank"])}
                         local_list.append(a)
                         xx = row
-                full_list.append({"ID":int(xx["ID"]),"Hostname": str(xx["Hostname"]),"IP":str(xx["IP"]),"Authentication":xx["Authentication"],
-                    "Model":str(xx["Model"]),"Mode":str(xx["Mode"]),"timeout":int(xx["timeout"]),"Monitoring_obj":local_list})
+                full_list.append({"ID":inx,"Hostname": str(xx["Hostname"]),"IP":str(xx["IP"]),"Authentication":xx["Authentication"],
+                    "timeout":int(xx["timeout"]),"Monitoring_obj":local_list})
             return full_list
 
         except Exception as e:
