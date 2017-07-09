@@ -274,6 +274,13 @@ def new_job():
 		try:
 			fn = request.form.get('filename')
 			jn = request.form.get('jobname')
+			apr = request.form.get('apprentice')
+			try:
+				apr = int(apr)
+				if apr < 1:
+					apr = 5
+			except:
+				apr = 5
 			if fn == None or jn == None:
 				return jsonify(status)
 			filename = secure_filename(fn)
@@ -282,7 +289,7 @@ def new_job():
 				# Schudle Job
 				if main_thread.isAlive() == False:
 					jn = jn+"-"+str(datetime.datetime.now().strftime("%d-%B-%H:%M:%S"))
-					main_thread = Thread(target=net_auto_modul.main_run,name = jn, args=(full_path,jn,))
+					main_thread = Thread(target=net_auto_modul.main_run,name = jn, args=(full_path,jn,apr,))
 					main_thread.start()
 					status = {"status":"Job Started"}
 				else:

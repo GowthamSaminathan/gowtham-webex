@@ -120,6 +120,10 @@
         <label for="inputdefault">Job Name</label>
           <input class="form-control" id="jobname" type="text" style="width:70%;">
         </div>
+        <div class="form-group">
+        <label for="inputdefault">Number of Apprentice(s)</label>
+          <input class="form-control" id="apprentice" type="text" value=5 style="width:70%;">
+        </div>
         <button id="newrun" type="button" class="btn btn-danger" onclick="send_run()">Run</button>  
   
          <!-- <table id="listinput" class="display"></table> -->
@@ -573,10 +577,11 @@ function send_run(){
 
 var fname = $("#listinput").val();
 var desc = $("#jobname").val();
+var appr = $("#apprentice").val();
 $("#newrun_status").text("");
 if (fname == "Select File"){$("#newrun_status").text("Please select input file");return "";}
 if (desc.length < 1){$("#newrun_status").text("Please add job name");return "";}
-$.ajax({type: 'POST',url:"new_job",data:{filename:fname,jobname:desc},success:send_suc,error:function (xhr, ajaxOptions, thrownError)
+$.ajax({type: 'POST',url:"new_job",data:{filename:fname,jobname:desc,apprentice:appr},success:send_suc,error:function (xhr, ajaxOptions, thrownError)
   {$("#newrun_status").text("Error"); }})
 
 function send_suc(data){  $("#newrun_status").text(data["status"]);  $("#jobname").val(""); }

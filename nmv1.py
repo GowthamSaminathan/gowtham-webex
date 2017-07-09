@@ -69,7 +69,7 @@ def cis_sw_int(ses,monobj):
 		print("Error cis_sw_int"+str(e))
 
 
-def self_check(self,ses,element):
+def self_check(ses,element):
     return {"status":"reachable"}
 
 def cis_bgp(ses,monobj):

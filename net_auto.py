@@ -16,6 +16,8 @@ import pandas as pd
 from flask import Flask, render_template, request
 from flask import jsonify
 from threading import Thread
+from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import as_completed
 
 
 #j = {"objects":[{"id":"1","type":"interface","in":"Gi0/0","monitor":["speed","duplex","bits","error"]},{"id":"2","type":"interface","name":"Gi0/1","monitor":["speed","duplex","bits","error"]}]}
@@ -144,7 +146,7 @@ class main_model():
                         print("Error>"+err+":"+hostname)
                         return "TIMEOUT"
                 except Exception as e:
-                    print("Unknown Error"+str(e))
+                    print("Unknown Error :"+str(e))
                     return "TIMEOUT"
             return return_typ
 
@@ -165,7 +167,8 @@ class main_model():
 
     def get_ssh_ses(self,IP,Authentication,timeout,dir_path):
         try:
-            ses = self.ssh_ses.get(IP)
+            #ses = self.ssh_ses.get(IP)  # Not required to store session
+            ses = None
             live_ses = False
             if ses == None:
                 #print("SSH SESSION NOT FOUND FOR "+str(IP))
@@ -183,7 +186,7 @@ class main_model():
         if live_ses != True:
             ses = self.login(IP,Authentication,dir_path)
             if type(ses) != str and ses != None:
-                self.ssh_ses.update({IP:ses})
+                #self.ssh_ses.update({IP:ses}) # Not required to store session
                 return ses
         return ses
 
@@ -207,8 +210,28 @@ class main_model():
         except Exception as e:
             print("Error >"+str(e))
 
+    def single_host(self,row2,dir_path):
+        #Login and run 
+        ID = Hostname = IP = Authentication = Model = Monitoring_obj = Mode = timeout = None
+        ID = row2.get("ID")
+        Hostname = row2.get("Hostname")
+        IP = row2.get("IP")
+        Authentication = json.loads(row2.get("Authentication"))
+        Model = row2.get("Model")
+        Monitoring_obj = row2.get("Monitoring_obj")
+        Mode = row2.get("Mode")
+        timeout = row2.get("timeout")
+        sess = self.get_ssh_ses(IP,[Authentication],timeout,dir_path)
+        jout = {}
+        if sess == None or type(sess) == str:
+            print("Failed >"+str(Hostname)+" "+str(IP))
+            jout = [{"id":0,"out":{"status":"unreachable"}}]
+        else:
+            jout = self.device_check(sess , Monitoring_obj)
+
+        return [jout,ID]
             
-    def start_run(self,input_file_path,jobname):
+    def start_run(self,input_file_path,jobname,apprentice = 5):
         try:
             # start create DB function
             if self.mongdb("xls",input_file_path) == True:
@@ -228,40 +251,27 @@ class main_model():
                 #Get INPUT based on INID
                 mcollection = self.mdb['INPUT']
                 all_data = mcollection.find({"INID":INID})
-                for row in all_data:
-                    try:
-
-                        jobname = jobname.replace(":","-")
-                        dir_path = os.path.join(os.getcwd(),"divlog")
-                        dir_path = os.path.join(dir_path,jobname)
-                        if not os.path.exists(dir_path):
-                            os.makedirs(dir_path)
-                        dir_path = os.path.join(dir_path,jobname)
-
-                        ID = Hostname = IP = Authentication = Model = Monitoring_obj = Mode = timeout = None
-                        ID = row.get("ID")
-                        Hostname = row.get("Hostname")
-                        IP = row.get("IP")
-                        Authentication = json.loads(row.get("Authentication"))
-                        Model = row.get("Model")
-                        Monitoring_obj = row.get("Monitoring_obj")
-                        Mode = row.get("Mode")
-                        timeout = row.get("timeout")
-                        sess = self.get_ssh_ses(IP,[Authentication],timeout,dir_path)
-                        jout = {}
-                        if sess == None or type(sess) == str:
-                            print("Failed >"+str(Hostname)+" "+str(IP))
-                            jout = [{"id":0,"out":{"status":"unreachable"}}]
-                        else:
-                            jout = self.device_check(sess , Monitoring_obj)
-
-                        #INSERT OUTPUT TO DB
-                        dbdata = self.score_me(row,{"SESSION":int(session),"ID":int(ID),"OUT":jout,"TD":datetime.datetime.now(),"INID":INID,"JOBNAME":jobname})
-                        mcollection = self.mdb['OUTPUT']
-                        mcollection.insert(dbdata)
-                    except Exception as e:
-                        print("start_run trying Error>>"+str(e))
-
+                jobname = jobname.replace(":","-")
+                dir_path = os.path.join(os.getcwd(),"divlog")
+                dir_path = os.path.join(dir_path,jobname)
+                if not os.path.exists(dir_path):
+                    os.makedirs(dir_path)
+                dir_path = os.path.join(dir_path,jobname)
+                print "Apprentice>"+str(apprentice)
+                with ThreadPoolExecutor(max_workers=apprentice) as executor:
+                    futures = [executor.submit(self.single_host, row,dir_path) for row in all_data]
+                    for future in as_completed(futures):
+                        try:
+                            jout2 = future.result()
+                            jout = jout2[0]
+                            ID = jout2[1]
+                            #INSERT OUTPUT TO DB
+                            dbdata = self.score_me(row,{"SESSION":int(session),"ID":int(ID),"OUT":jout,"TD":datetime.datetime.now(),"INID":INID,"JOBNAME":jobname})
+                            mcollection = self.mdb['OUTPUT']
+                            mcollection.insert(dbdata)
+                        except Exception as e:
+                            print("start_run trying Error>>"+str(e))
+                
                 #UPDATE CURRENT SESSION
                 mcollection = self.mdb['SESSION']
                 mcollection.update({"_id":1},{"$set":{"SESSION":session}})
@@ -332,7 +342,7 @@ class main_model():
 
 
 
-    def main_run(self,filepath,jobname):
+    def main_run(self,filepath,jobname,apprentice):
         # connect to LIVE database
         self.mongoc = pymongo.MongoClient('localhost', 27017)
         self.mdb = self.mongoc['LIVE']
@@ -343,7 +353,7 @@ class main_model():
         self.score_me = scor.score_me
 
         print ("Starting...")
-        self.start_run(filepath,jobname)
+        self.start_run(filepath,jobname,apprentice)
 
 
 

@@ -15,7 +15,7 @@ def login(hostname='',auth=[],login_timeout=6,etimeout=5):
                                 "StrictHostKeyChecking": "no",
                                 "UserKnownHostsFile": "/dev/null"},timeout=login_timeout)
                 s.login(hostname, username, password,auto_prompt_reset=False,login_timeout=login_timeout)
-                s.logfile = open("loggg.txt", "w")
+                s.logfile = open("log1.txt", "ab")
                 # Send enter to get router prompt to check login success
                 s.sendline('')
                 # expecting cisco , juniper , fortigate prompt 
