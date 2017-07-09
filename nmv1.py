@@ -3,6 +3,26 @@ from pexpect import pxssh
 import pexpect
 import getpass
 
+def raw(ses,monobj):
+    try:
+        out = {"result":"failed"}
+        mon = monobj.get("monitor")
+        mon = mon.split(",")
+            
+        type_ = monobj.get("type")
+        in_ = monobj.get("name")
+        exp = ses[1]
+        ses[0].sendline("terminal length 0")
+        for cmd in mon:
+            ses[0].sendline(cmd)
+            ses[0].expect([cmd,pxssh.TIMEOUT])
+            ses[0].expect([exp,pxssh.EOF,pxssh.TIMEOUT],timeout=300)
+            #data = str(ses[0].before)
+        out.update({"result":"success"})
+        return out
+    except:
+        return out
+
 def cis_sw_int(ses,monobj):
 	# Monitor cisco switch interface : speed, duplex, error , bits 
 	try:

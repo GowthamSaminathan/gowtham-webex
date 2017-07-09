@@ -1,11 +1,70 @@
 
 
-R1#terminal length 0
+R2#terminal length 0
+show interface Fa0/0
+terminal length 0
+R2#show interface Fa0/0
+FastEthernet0/0 is up, line protocol is up 
+  Hardware is Gt96k FE, address is c202.1ce4.0000 (bia c202.1ce4.0000)
+  Internet address is 10.1.1.3/24
+  MTU 1500 bytes, BW 10000 Kbit/sec, DLY 1000 usec, 
+     reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, loopback not set
+  Keepalive set (10 sec)
+  Half-duplex, 10Mb/s, 100BaseTX/FX
+  ARP type: ARPA, ARP Timeout 04:00:00
+  Last input 00:00:00, output 00:00:00, output hang never
+  Last clearing of "show interface" counters never
+  Input queue: 0/75/0/0 (size/max/drops/flushes); Total output drops: 0
+  Queueing strategy: fifo
+  Output queue: 0/40 (size/max)
+  5 minute input rate 0 bits/sec, 0 packets/sec
+  5 minute output rate 0 bits/sec, 0 packets/sec
+     1229 packets input, 166123 bytes
+     Received 337 broadcasts, 0 runts, 0 giants, 0 throttles
+     0 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored
+     0 watchdog
+     0 input packets with dribble condition detected
+     2108 packets output, 220906 bytes, 0 underruns
+     0 output errors, 0 collisions, 0 interface resets
+     0 babbles, 0 late collision, 0 deferred
+     0 lost carrier, 0 no carrier
+     0 output buffer failures, 0 output buffers swapped out
+R2#terminal length 0
+show interface Fa0/1
+terminal length 0
+R2#show interface Fa0/1
+FastEthernet0/1 is administratively down, line protocol is down 
+  Hardware is Gt96k FE, address is c202.1ce4.0001 (bia c202.1ce4.0001)
+  MTU 1500 bytes, BW 10000 Kbit/sec, DLY 1000 usec, 
+     reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, loopback not set
+  Keepalive set (10 sec)
+  Half-duplex, 10Mb/s, 100BaseTX/FX
+  ARP type: ARPA, ARP Timeout 04:00:00
+  Last input never, output never, output hang never
+  Last clearing of "show interface" counters never
+  Input queue: 0/75/0/0 (size/max/drops/flushes); Total output drops: 0
+  Queueing strategy: fifo
+  Output queue: 0/40 (size/max)
+  5 minute input rate 0 bits/sec, 0 packets/sec
+  5 minute output rate 0 bits/sec, 0 packets/sec
+     0 packets input, 0 bytes
+     Received 0 broadcasts, 0 runts, 0 giants, 0 throttles
+     0 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored
+     0 watchdog
+     0 input packets with dribble condition detected
+     0 packets output, 0 bytes, 0 underruns
+     0 output errors, 0 collisions, 0 interface resets
+     0 babbles, 0 late collision, 0 deferred
+     0 lost carrier, 0 no carrier
+     0 output buffer failures, 0 output buffers swapped out
+R2#terminal length 0
 show clock
 terminal length 0
-R1#show clock
-*01:36:42.967 UTC Fri Mar 1 2002
-R1#show tech
+R2#show clock
+*01:43:24.123 UTC Fri Mar 1 2002
+R2#show tech
 show tech
 
 ------------------ show version ------------------
@@ -18,7 +77,7 @@ Compiled Wed 13-Aug-08 21:36 by prod_rel_team
 ROM: ROMMON Emulation Microcode
 ROM: 3700 Software (C3725-ADVENTERPRISEK9-M), Version 12.4(15)T7, RELEASE SOFTWARE (fc3)
 
-R1 uptime is 1 hour, 36 minutes
+R2 uptime is 1 hour, 43 minutes
 System returned to ROM by unknown reload cause - suspect boot_data[BOOT_COUNT] 0x0, BOOT_COUNT 0, BOOTDATA 19
 System image file is "tftp://255.255.255.255/unknown"
 
@@ -60,7 +119,7 @@ service timestamps debug datetime msec
 service timestamps log datetime msec
 no service password-encryption
 !
-hostname R1
+hostname R2
 !
 boot-start-marker
 boot-end-marker
@@ -113,10 +172,10 @@ ip tcp synwait-time 5
 !
 !
 interface Loopback0
- ip address 1.1.1.1 255.255.255.255
+ ip address 2.2.2.2 255.255.255.255
 !
 interface FastEthernet0/0
- ip address 10.1.1.2 255.255.255.0
+ ip address 10.1.1.3 255.255.255.0
  duplex auto
  speed auto
 !
@@ -129,8 +188,8 @@ interface FastEthernet0/1
 router bgp 65001
  no synchronization
  bgp log-neighbor-changes
- network 1.1.1.1 mask 255.255.255.255
- neighbor 10.1.1.3 remote-as 65001
+ network 2.2.2.2 mask 255.255.255.255
+ neighbor 10.1.1.2 remote-as 65001
  neighbor 10.1.1.4 remote-as 65001
  no auto-summary
 !
@@ -181,27 +240,26 @@ Minimum process stacks:
  5124/6000   Clock Update Proc
  5416/6000   Inspect Init Msg
  5364/6000   SPAN Subsystem
- 5368/6000   FLEX DSPRM boot download main
+ 5364/6000   FLEX DSPRM boot download main
  5416/6000   SASL MAIN
  2412/3000   allegro libretto init
-10888/12000  Router Init
+10884/12000  Router Init
   500/12000  Init
 59156/60000  script background loader
- 4320/6000   Update prst
+ 4316/6000   Update prst
  5204/6000   RADIUS INITCONFIG
- 5332/6000   BGP Accepter
  3360/6000   BGP Open
  2100/3000   Rom Random Update Process
- 6704/12000  SSH Process
+ 8500/12000  SSH Process
 
 Interrupt level stacks:
 Level    Called Unused/Size  Name
-  1       10175   7764/9000  Network interfaces
-  2        3638   8572/9000  DMA/Timer Interrupt
+  1        4581   7764/9000  Network interfaces
+  2        1291   8572/9000  DMA/Timer Interrupt
   3           0   9000/9000  PA Management Int Handler
-  4         388   8604/9000  Console Uart
+  4         213   8604/9000  Console Uart
   5           0   9000/9000  External Interrupt
-  7     1451244   8564/9000  NMI Interrupt Handler
+  7     1552227   8564/9000  NMI Interrupt Handler
 
 Invalid boot_data=0xB6001780
 
@@ -210,8 +268,8 @@ Invalid boot_data=0xB6001780
 
 
 FastEthernet0/0 is up, line protocol is up 
-  Hardware is Gt96k FE, address is c201.09e0.0000 (bia c201.09e0.0000)
-  Internet address is 10.1.1.2/24
+  Hardware is Gt96k FE, address is c202.1ce4.0000 (bia c202.1ce4.0000)
+  Internet address is 10.1.1.3/24
   MTU 1500 bytes, BW 10000 Kbit/sec, DLY 1000 usec, 
      reliability 255/255, txload 1/255, rxload 1/255
   Encapsulation ARPA, loopback not set
@@ -223,20 +281,20 @@ FastEthernet0/0 is up, line protocol is up
   Input queue: 1/75/0/0 (size/max/drops/flushes); Total output drops: 0
   Queueing strategy: fifo
   Output queue: 0/40 (size/max)
-  5 minute input rate 0 bits/sec, 0 packets/sec
-  5 minute output rate 0 bits/sec, 0 packets/sec
-     3639 packets input, 342599 bytes
-     Received 312 broadcasts, 0 runts, 0 giants, 0 throttles
+  5 minute input rate 1000 bits/sec, 1 packets/sec
+  5 minute output rate 1000 bits/sec, 1 packets/sec
+     1292 packets input, 169833 bytes
+     Received 337 broadcasts, 0 runts, 0 giants, 0 throttles
      0 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored
      0 watchdog
      0 input packets with dribble condition detected
-     5852 packets output, 1982950 bytes, 0 underruns
+     2208 packets output, 238436 bytes, 0 underruns
      0 output errors, 0 collisions, 0 interface resets
      0 babbles, 0 late collision, 0 deferred
      0 lost carrier, 0 no carrier
      0 output buffer failures, 0 output buffers swapped out
 FastEthernet0/1 is administratively down, line protocol is down 
-  Hardware is Gt96k FE, address is c201.09e0.0001 (bia c201.09e0.0001)
+  Hardware is Gt96k FE, address is c202.1ce4.0001 (bia c202.1ce4.0001)
   MTU 1500 bytes, BW 10000 Kbit/sec, DLY 1000 usec, 
      reliability 255/255, txload 1/255, rxload 1/255
   Encapsulation ARPA, loopback not set
@@ -262,7 +320,7 @@ FastEthernet0/1 is administratively down, line protocol is down
      0 output buffer failures, 0 output buffers swapped out
 Loopback0 is up, line protocol is up 
   Hardware is Loopback
-  Internet address is 1.1.1.1/32
+  Internet address is 2.2.2.2/32
   MTU 1514 bytes, BW 8000000 Kbit/sec, DLY 5000 usec, 
      reliability 255/255, txload 1/255, rxload 1/255
   Encapsulation LOOPBACK, loopback not set
@@ -285,83 +343,83 @@ Loopback0 is up, line protocol is up
 204 client added: RF_INTERNAL_MSG(0) seq=0
 204 client added: RF_LAST_CLIENT(65000) seq=260
 204 client added: CHKPT RF(25) seq=68
-222 client added: FH COMMON RF CLIENT(70) seq=172
-222 client added: History RF Client(35) seq=149
-223 client added: IKE RF Client(135) seq=233
-224 client added: IPSEC RF Client(136) seq=234
-224 client added: IOS FW RF Client(140) seq=237
-224 client added: SNMP RF Client(34) seq=146
-226 *my state = INITIALIZATION(2) *peer state = DISABLED(1)
-226 RF_PROG_INITIALIZATION(100) RF_INTERNAL_MSG(0) op=0 rc=11
-239 RF_PROG_INITIALIZATION(100) CHKPT RF(25) op=0 rc=11
-239 RF_PROG_INITIALIZATION(100) SNMP RF Client(34) op=0 rc=11
-239 RF_PROG_INITIALIZATION(100) History RF Client(35) op=0 rc=11
-239 RF_PROG_INITIALIZATION(100) FH COMMON RF CLIENT(70) op=0 rc=11
-239 RF_PROG_INITIALIZATION(100) IKE RF Client(135) op=0 rc=11
-239 RF_PROG_INITIALIZATION(100) IPSEC RF Client(136) op=0 rc=11
-239 RF_PROG_INITIALIZATION(100) IOS FW RF Client(140) op=0 rc=11
-239 RF_PROG_INITIALIZATION(100) RF_LAST_CLIENT(65000) op=0 rc=11
-239 *my state = NEGOTIATION(3) peer state = DISABLED(1)
-833 Configuration parsing complete
-908 System initialization complete
-913 RF_STATUS_PEER_PRESENCE(400) op=0 rc=0
-927 RF_STATUS_PEER_COMM(401) op=0 rc=0
-927 RF_EVENT_GO_ACTIVE(512) op=0 rc=0
-927 *my state = ACTIVE-FAST(9) peer state = DISABLED(1)
-927 RF_STATUS_MAINTENANCE_ENABLE(403) CHKPT RF(25) op=0 rc=0
-927 RF_STATUS_MAINTENANCE_ENABLE(403) SNMP RF Client(34) op=0 rc=0
-927 RF_STATUS_MAINTENANCE_ENABLE(403) IKE RF Client(135) op=0 rc=0
-927 RF_STATUS_MAINTENANCE_ENABLE(403) IPSEC RF Client(136) op=0 rc=0
-927 RF_STATUS_MAINTENANCE_ENABLE(403) IOS FW RF Client(140) op=0 rc=0
-927 RF_PROG_ACTIVE_FAST(200) RF_INTERNAL_MSG(0) op=0 rc=11
-927 RF_PROG_ACTIVE_FAST(200) CHKPT RF(25) op=0 rc=11
-928 RF_PROG_ACTIVE_FAST(200) SNMP RF Client(34) op=0 rc=11
-928 RF_PROG_ACTIVE_FAST(200) History RF Client(35) op=0 rc=11
-928 RF_PROG_ACTIVE_FAST(200) FH COMMON RF CLIENT(70) op=0 rc=11
-928 RF_PROG_ACTIVE_FAST(200) IKE RF Client(135) op=0 rc=11
-928 RF_PROG_ACTIVE_FAST(200) IPSEC RF Client(136) op=0 rc=11
-928 RF_PROG_ACTIVE_FAST(200) IOS FW RF Client(140) op=0 rc=11
-928 RF_PROG_ACTIVE_FAST(200) RF_LAST_CLIENT(65000) op=0 rc=11
-928 *my state = ACTIVE-DRAIN(10) peer state = DISABLED(1)
-928 RF_PROG_ACTIVE_DRAIN(201) RF_INTERNAL_MSG(0) op=0 rc=11
-928 RF_PROG_ACTIVE_DRAIN(201) CHKPT RF(25) op=0 rc=11
-928 RF_PROG_ACTIVE_DRAIN(201) SNMP RF Client(34) op=0 rc=11
-928 RF_PROG_ACTIVE_DRAIN(201) History RF Client(35) op=0 rc=11
-928 RF_PROG_ACTIVE_DRAIN(201) FH COMMON RF CLIENT(70) op=0 rc=11
-928 RF_PROG_ACTIVE_DRAIN(201) IKE RF Client(135) op=0 rc=11
-928 RF_PROG_ACTIVE_DRAIN(201) IPSEC RF Client(136) op=0 rc=11
-928 RF_PROG_ACTIVE_DRAIN(201) IOS FW RF Client(140) op=0 rc=11
-928 RF_PROG_ACTIVE_DRAIN(201) RF_LAST_CLIENT(65000) op=0 rc=11
-928 *my state = ACTIVE_PRECONFIG(11) peer state = DISABLED(1)
-928 RF_PROG_ACTIVE_PRECONFIG(202) RF_INTERNAL_MSG(0) op=0 rc=11
-928 RF_PROG_ACTIVE_PRECONFIG(202) CHKPT RF(25) op=0 rc=11
-928 RF_PROG_ACTIVE_PRECONFIG(202) SNMP RF Client(34) op=0 rc=11
-928 RF_PROG_ACTIVE_PRECONFIG(202) History RF Client(35) op=0 rc=11
-928 RF_PROG_ACTIVE_PRECONFIG(202) FH COMMON RF CLIENT(70) op=0 rc=11
-928 RF_PROG_ACTIVE_PRECONFIG(202) IKE RF Client(135) op=0 rc=11
-928 RF_PROG_ACTIVE_PRECONFIG(202) IPSEC RF Client(136) op=0 rc=11
-928 RF_PROG_ACTIVE_PRECONFIG(202) IOS FW RF Client(140) op=0 rc=11
-928 RF_PROG_ACTIVE_PRECONFIG(202) RF_LAST_CLIENT(65000) op=0 rc=11
-928 *my state = ACTIVE_POSTCONFIG(12) peer state = DISABLED(1)
-928 RF_PROG_ACTIVE_POSTCONFIG(203) RF_INTERNAL_MSG(0) op=0 rc=11
-928 RF_PROG_ACTIVE_POSTCONFIG(203) CHKPT RF(25) op=0 rc=11
-928 RF_PROG_ACTIVE_POSTCONFIG(203) SNMP RF Client(34) op=0 rc=11
-928 RF_PROG_ACTIVE_POSTCONFIG(203) History RF Client(35) op=0 rc=11
-928 RF_PROG_ACTIVE_POSTCONFIG(203) FH COMMON RF CLIENT(70) op=0 rc=11
-928 RF_PROG_ACTIVE_POSTCONFIG(203) IKE RF Client(135) op=0 rc=11
-928 RF_PROG_ACTIVE_POSTCONFIG(203) IPSEC RF Client(136) op=0 rc=11
-928 RF_PROG_ACTIVE_POSTCONFIG(203) IOS FW RF Client(140) op=0 rc=11
-928 RF_PROG_ACTIVE_POSTCONFIG(203) RF_LAST_CLIENT(65000) op=0 rc=11
-928 *my state = ACTIVE(13) peer state = DISABLED(1)
-928 RF_PROG_ACTIVE(204) RF_INTERNAL_MSG(0) op=0 rc=11
-930 RF_PROG_ACTIVE(204) CHKPT RF(25) op=0 rc=11
-930 RF_PROG_ACTIVE(204) SNMP RF Client(34) op=0 rc=11
-970 RF_PROG_ACTIVE(204) History RF Client(35) op=0 rc=11
-970 RF_PROG_ACTIVE(204) FH COMMON RF CLIENT(70) op=0 rc=11
-970 RF_PROG_ACTIVE(204) IKE RF Client(135) op=0 rc=11
-970 RF_PROG_ACTIVE(204) IPSEC RF Client(136) op=0 rc=11
-970 RF_PROG_ACTIVE(204) IOS FW RF Client(140) op=0 rc=11
-970 RF_PROG_ACTIVE(204) RF_LAST_CLIENT(65000) op=0 rc=11
+220 client added: FH COMMON RF CLIENT(70) seq=172
+220 client added: History RF Client(35) seq=149
+221 client added: IKE RF Client(135) seq=233
+222 client added: IPSEC RF Client(136) seq=234
+222 client added: IOS FW RF Client(140) seq=237
+222 client added: SNMP RF Client(34) seq=146
+224 *my state = INITIALIZATION(2) *peer state = DISABLED(1)
+224 RF_PROG_INITIALIZATION(100) RF_INTERNAL_MSG(0) op=0 rc=11
+237 RF_PROG_INITIALIZATION(100) CHKPT RF(25) op=0 rc=11
+237 RF_PROG_INITIALIZATION(100) SNMP RF Client(34) op=0 rc=11
+237 RF_PROG_INITIALIZATION(100) History RF Client(35) op=0 rc=11
+237 RF_PROG_INITIALIZATION(100) FH COMMON RF CLIENT(70) op=0 rc=11
+237 RF_PROG_INITIALIZATION(100) IKE RF Client(135) op=0 rc=11
+237 RF_PROG_INITIALIZATION(100) IPSEC RF Client(136) op=0 rc=11
+237 RF_PROG_INITIALIZATION(100) IOS FW RF Client(140) op=0 rc=11
+237 RF_PROG_INITIALIZATION(100) RF_LAST_CLIENT(65000) op=0 rc=11
+237 *my state = NEGOTIATION(3) peer state = DISABLED(1)
+823 Configuration parsing complete
+898 System initialization complete
+903 RF_STATUS_PEER_PRESENCE(400) op=0 rc=0
+914 RF_STATUS_PEER_COMM(401) op=0 rc=0
+915 RF_EVENT_GO_ACTIVE(512) op=0 rc=0
+915 *my state = ACTIVE-FAST(9) peer state = DISABLED(1)
+915 RF_STATUS_MAINTENANCE_ENABLE(403) CHKPT RF(25) op=0 rc=0
+915 RF_STATUS_MAINTENANCE_ENABLE(403) SNMP RF Client(34) op=0 rc=0
+915 RF_STATUS_MAINTENANCE_ENABLE(403) IKE RF Client(135) op=0 rc=0
+915 RF_STATUS_MAINTENANCE_ENABLE(403) IPSEC RF Client(136) op=0 rc=0
+915 RF_STATUS_MAINTENANCE_ENABLE(403) IOS FW RF Client(140) op=0 rc=0
+915 RF_PROG_ACTIVE_FAST(200) RF_INTERNAL_MSG(0) op=0 rc=11
+915 RF_PROG_ACTIVE_FAST(200) CHKPT RF(25) op=0 rc=11
+915 RF_PROG_ACTIVE_FAST(200) SNMP RF Client(34) op=0 rc=11
+915 RF_PROG_ACTIVE_FAST(200) History RF Client(35) op=0 rc=11
+915 RF_PROG_ACTIVE_FAST(200) FH COMMON RF CLIENT(70) op=0 rc=11
+915 RF_PROG_ACTIVE_FAST(200) IKE RF Client(135) op=0 rc=11
+915 RF_PROG_ACTIVE_FAST(200) IPSEC RF Client(136) op=0 rc=11
+916 RF_PROG_ACTIVE_FAST(200) IOS FW RF Client(140) op=0 rc=11
+916 RF_PROG_ACTIVE_FAST(200) RF_LAST_CLIENT(65000) op=0 rc=11
+916 *my state = ACTIVE-DRAIN(10) peer state = DISABLED(1)
+916 RF_PROG_ACTIVE_DRAIN(201) RF_INTERNAL_MSG(0) op=0 rc=11
+916 RF_PROG_ACTIVE_DRAIN(201) CHKPT RF(25) op=0 rc=11
+916 RF_PROG_ACTIVE_DRAIN(201) SNMP RF Client(34) op=0 rc=11
+916 RF_PROG_ACTIVE_DRAIN(201) History RF Client(35) op=0 rc=11
+916 RF_PROG_ACTIVE_DRAIN(201) FH COMMON RF CLIENT(70) op=0 rc=11
+916 RF_PROG_ACTIVE_DRAIN(201) IKE RF Client(135) op=0 rc=11
+916 RF_PROG_ACTIVE_DRAIN(201) IPSEC RF Client(136) op=0 rc=11
+916 RF_PROG_ACTIVE_DRAIN(201) IOS FW RF Client(140) op=0 rc=11
+916 RF_PROG_ACTIVE_DRAIN(201) RF_LAST_CLIENT(65000) op=0 rc=11
+916 *my state = ACTIVE_PRECONFIG(11) peer state = DISABLED(1)
+916 RF_PROG_ACTIVE_PRECONFIG(202) RF_INTERNAL_MSG(0) op=0 rc=11
+916 RF_PROG_ACTIVE_PRECONFIG(202) CHKPT RF(25) op=0 rc=11
+916 RF_PROG_ACTIVE_PRECONFIG(202) SNMP RF Client(34) op=0 rc=11
+916 RF_PROG_ACTIVE_PRECONFIG(202) History RF Client(35) op=0 rc=11
+916 RF_PROG_ACTIVE_PRECONFIG(202) FH COMMON RF CLIENT(70) op=0 rc=11
+916 RF_PROG_ACTIVE_PRECONFIG(202) IKE RF Client(135) op=0 rc=11
+916 RF_PROG_ACTIVE_PRECONFIG(202) IPSEC RF Client(136) op=0 rc=11
+916 RF_PROG_ACTIVE_PRECONFIG(202) IOS FW RF Client(140) op=0 rc=11
+916 RF_PROG_ACTIVE_PRECONFIG(202) RF_LAST_CLIENT(65000) op=0 rc=11
+916 *my state = ACTIVE_POSTCONFIG(12) peer state = DISABLED(1)
+916 RF_PROG_ACTIVE_POSTCONFIG(203) RF_INTERNAL_MSG(0) op=0 rc=11
+916 RF_PROG_ACTIVE_POSTCONFIG(203) CHKPT RF(25) op=0 rc=11
+916 RF_PROG_ACTIVE_POSTCONFIG(203) SNMP RF Client(34) op=0 rc=11
+916 RF_PROG_ACTIVE_POSTCONFIG(203) History RF Client(35) op=0 rc=11
+916 RF_PROG_ACTIVE_POSTCONFIG(203) FH COMMON RF CLIENT(70) op=0 rc=11
+916 RF_PROG_ACTIVE_POSTCONFIG(203) IKE RF Client(135) op=0 rc=11
+916 RF_PROG_ACTIVE_POSTCONFIG(203) IPSEC RF Client(136) op=0 rc=11
+916 RF_PROG_ACTIVE_POSTCONFIG(203) IOS FW RF Client(140) op=0 rc=11
+916 RF_PROG_ACTIVE_POSTCONFIG(203) RF_LAST_CLIENT(65000) op=0 rc=11
+916 *my state = ACTIVE(13) peer state = DISABLED(1)
+916 RF_PROG_ACTIVE(204) RF_INTERNAL_MSG(0) op=0 rc=11
+917 RF_PROG_ACTIVE(204) CHKPT RF(25) op=0 rc=11
+917 RF_PROG_ACTIVE(204) SNMP RF Client(34) op=0 rc=11
+954 RF_PROG_ACTIVE(204) History RF Client(35) op=0 rc=11
+954 RF_PROG_ACTIVE(204) FH COMMON RF CLIENT(70) op=0 rc=11
+954 RF_PROG_ACTIVE(204) IKE RF Client(135) op=0 rc=11
+954 RF_PROG_ACTIVE(204) IPSEC RF Client(136) op=0 rc=11
+954 RF_PROG_ACTIVE(204) IOS FW RF Client(140) op=0 rc=11
+954 RF_PROG_ACTIVE(204) RF_LAST_CLIENT(65000) op=0 rc=11
 
 
 
@@ -386,30 +444,30 @@ IMASK= 0x90003DCD ICause= 0x0
 Serial 0 mask 30000F3Serial 0 cause 0
 IpDiffservP0L= 0x0 IpDiffservP0H= 0x0 IpDiffservP1L= 0x0 IpDiffservP1H= 0x0 
  IP VLAN TAG PRI= 0x0  IP VLAN TAG PRI= 0x0 
- First rxd Q0= 0x7BE5F70  Curr rxd Q0= 0x7BE5F70 
+ First rxd Q0= 0x7BE5D00  Curr rxd Q0= 0x7BE5D00 
  First rxd Q1= 0x7BE6040  Curr rxd Q1= 0x7BE6040 
  First rxd Q2= 0x7BE64A0  Curr rxd Q2= 0x7BE64A0 
  First rxd Q3= 0x7BE6900  Curr rxd Q3= 0x7BE6900 
- First txd Q0= 0x7BE7340  First txd Q1= 0x7BE75A0 
+ First txd Q0= 0x7BE7000  First txd Q1= 0x7BE75A0 
 gt96kfe_instance=0x666313F4, registers=0xB4084800
 RxRing entries=64, tx ring entries=128
        RxR0=0x 7BE5BE0, RxR1=0x 7BE6040, RxR2=0x 7BE64A0, RxR3=0x 7BE6900 
 Malloc RxR0=0x 7BE5BE0, RxR1=0x 7BE6040, RxR2=0x 7BE64A0, RxR3=0x 7BE6900 
 SDOW RxR0=0x66631A24, RxR1=0x66631B58, RxR2=0x66631C8C, RxR3=0x66631DC0 
-HEAD RxR0=0x39, RxR1=0x0, RxR2=0x0, RxR3=0x0 
+HEAD RxR0=0x11, RxR1=0x0, RxR2=0x0, RxR3=0x0 
 TAIL RxR0=0x0, RxR1=0x0, RxR2=0x0, RxR30x0 
 
 tx_limited=0(128)
 TxR0=0x 7BE6D60, TxR1=0x 7BE75A0 
-COUNT TxR0=0xC, TxR1=0x0
-Head TxR0=0x5E, TxR1=0x0 Tail TxR0=0x6A, TxR1=0x0
+COUNT TxR0=0x4, TxR1=0x0
+Head TxR0=0x2A, TxR1=0x0 Tail TxR0=0x2E, TxR1=0x0
 
  PHY registers:
   Register 0x00:   1000  782C  0040  61D4  01E1  41E1  0000  0000
   Register 0x08:   0000  0000  0000  0000  0000  0000  0000  0000
   Register 0x10:   0000  0000  0000  0000  0000  0000  0000  0000
   Register 0x18:   0000  0000  0000  0000  0000  0000  0000
-Bytes_recvd 342545 Bytes_sent 1980582 Frames_recvd 3638 Frames_sent 5848
+Bytes_recvd 169725 Bytes_sent 236068 Frames_recvd 1290 Frames_sent 2204
 total_bytes_RX 0 Total_frames_RX 0 Bcast_frames_recvd 0
 Mcast_frames_RX 0 CRC_err 0 Ovr_sized_frames 0
 Fragments 0 Jabber 0 collision 0
@@ -421,7 +479,7 @@ Mcast_frames_tx 0 Bcast_frames_tx 0 Sml_frame_recvd 0
 
  Software MAC address filter(hash:length/addr/mask/hits):
   0x00:  0  ffff.ffff.ffff  0000.0000.0000         0
-  0x09:  0  c201.09e0.0000  0000.0000.0000         0
+  0x1C:  0  c202.1ce4.0000  0000.0000.0000         0
   0xC0:  0  0100.0ccc.cccc  0000.0000.0000         0
 
 ======= Driver Counters =======
@@ -484,7 +542,7 @@ Mcast_frames_tx 0 Bcast_frames_tx 0 Sml_frame_recvd 0
 
  Software MAC address filter(hash:length/addr/mask/hits):
   0x00:  0  ffff.ffff.ffff  0000.0000.0000         0
-  0x08:  0  c201.09e0.0001  0000.0000.0000         0
+  0x1D:  0  c202.1ce4.0001  0000.0000.0000         0
   0xC0:  0  0100.0ccc.cccc  0000.0000.0000         0
 
 ======= Driver Counters =======
@@ -499,8 +557,8 @@ rx_soft_overflow_err=  0  rx_overflow_err= 0
 
 
     Line       User       Host(s)              Idle       Location
-   0 con 0                idle                 01:25:04   
-* 98 vty 0     cisco      idle                 00:00:01 10.1.1.1
+   0 con 0                idle                 01:31:40   
+* 98 vty 0     cisco      idle                 00:00:04 10.1.1.1
 
   Interface    User               Mode         Idle     Peer Address
 
@@ -520,7 +578,7 @@ File Systems:
              -             -    opaque     rw   archive:
              -             -    opaque     rw   system:
              -             -    opaque     rw   tmpsys:
-         57336         51066     nvram     rw   nvram:
+         57336         54001     nvram     rw   nvram:
              -             -    opaque     rw   null:
              -             -   network     rw   tftp:
 *            -             -     flash     rw   flash:
@@ -543,37 +601,36 @@ File Systems:
 
 Directory of nvram:/
 
-   53  -rw-        1233                    <no date>  startup-config
-   54  ----        1913                    <no date>  private-config
+   53  -rw-        1235                    <no date>  startup-config
+   54  ----           0                    <no date>  private-config
     1  ----          15                    <no date>  persistent-data
     2  -rw-           4                    <no date>  rf_cold_starts
-    3  -rw-           0                    <no date>  ifIndex-table
 
-57336 bytes total (51066 bytes free)
+57336 bytes total (54001 bytes free)
 
 ------------------ show memory statistics ------------------
 
 
                 Head    Total(b)     Used(b)     Free(b)   Lowest(b)  Largest(b)
-Processor   6613F920    26989056    21190760     5798296     4554896     4392692
+Processor   6613F920    26989056    21185464     5803592     4489568     4352328
       I/O    7A00000     6291456     4125672     2165784     2165784     2165756
 
 ------------------ show process memory ------------------
 
 
-Processor Pool Total:   26989056 Used:   21190148 Free:    5798908
+Processor Pool Total:   26989056 Used:   21184860 Free:    5804196
       I/O Pool Total:    6291456 Used:    4125664 Free:    2165792
 
  PID TTY  Allocated      Freed    Holding    Getbufs    Retbufs Process
-   0   0   38304276   14512124   20929948          0          0 *Init*          
-   0   0      12052     496028      12052          0          0 *Sched*         
-   0   0   14439216   15015124      58912     177080     177080 *Dead*          
-   1   0      98616      13968     105684          0          0 Chunk Manager   
+   0   0   38370936   14513408   20995264          0          0 *Init*          
+   0   0      12052     278632      12052          0          0 *Sched*         
+   0   0     827416    1393528      45260     177080     177080 *Dead*          
+   1   0      88512      13968      95580          0          0 Chunk Manager   
    2   0        252        252       4068          0          0 Load Meter      
    3   0          0          0       7128          0          0 chkpt message ha
    4   0      65588          0      90656          0          0 EDDRI_MAIN      
    5   0       3100          0      10228          0          0 Check heaps     
-   6   0       5400          0      12468       2268          0 Pool Manager    
+   6   0          0          0       7068          0          0 Pool Manager    
    7   0        252        252       7068          0          0 Timers          
    8   0          0          0      13068          0          0 OIR Handler     
    9   0          0          0      25068          0          0 Crash writer    
@@ -584,14 +641,14 @@ Processor Pool Total:   26989056 Used:   21190148 Free:    5798908
   14   0          0          0       7068          0          0 IPC Deferred Por
   15   0        744          0       7812          0          0 IPC Seat Manager
   16   0          0          0       7068          0          0 IPC BackPressure
-  17   0      40936        832      47172          0          0 ARP Input       
+  17   0      20992        940      27120          0          0 ARP Input       
   18   0       1652       1652       7068          0          0 ARP Background  
   19   0        252        252       7068          0          0 ATM Idle Timer  
   20   0        252        252       7068          0          0 AAA high-capacit
   21   0          0          0       7068          0          0 AAA_SERVER_DEADT
   22   0          0          0      13068          0          0 Policy Manager  
   23   0        252        252       7068          0          0 DDR Timers      
-  24   0       3940          0      11008          0          0 Entity MIB API  
+  24   0       3956          0      11024          0          0 Entity MIB API  
   25   0     264484          0     273864     113400          0 EEM ED Syslog   
   26   0          0          0       7068          0          0 HC Counter Timer
   27   0        252        252       7068          0          0 Serial Backgroun
@@ -606,13 +663,13 @@ Processor Pool Total:   26989056 Used:   21190148 Free:    5798908
   36   0      23116        424      14556          0          0 Net Background  
   37   0        712        456      13324          0          0 IDB Work        
   38   0          0          0      13068          0          0 Logger          
-  39   0      13672        252       7420          0          0 TTY Background  
+  39   0      13696        252       7444          0          0 TTY Background  
   40   0          0          0      10068          0          0 Per-Second Jobs 
   41   0          0          0       4068          0          0 Inode Table Dest
   42   0          0          0       7068          0          0 DHCPD Timer     
   43   0          0          0       7068          0          0 IKE HA Mgr      
   44   0          0          0       7068          0          0 IPSEC HA Mgr    
-  45   0      45648        864      30588          0          0 rf task         
+  45   0      45608        800      30612          0          0 rf task         
   46   0          0          0       7068          0          0 Net Input       
   47   0        252        252       7068          0          0 Compute load avg
   48   0          0          0       7068          0          0 Per-minute Jobs 
@@ -652,14 +709,14 @@ Processor Pool Total:   26989056 Used:   21190148 Free:    5798908
   82   0       1936        252       8752          0          0 CDP Protocol    
   83   0       6124          0      13192          0          0 IP ARP Adjacency
   84   0      49384          0      56452          0          0 IP ARP Retry Age
-  85   0      65856      28812      15812          0          0 IP Input        
+  85   0      42532      12348      14440          0          0 IP Input        
   86   0          0          0       7068          0          0 ICMP event handl
   87   0        252        252       7068          0          0 TurboACL        
   88   0        252        252       7068          0          0 TurboACL chunk  
   89   0          0          0       7068          0          0 IPv6 RIB Redistr
-  90   0        252        252       7068          0          0 MOP Protocols   
+  90   0       5592        252      12408       2268          0 MOP Protocols   
   91   0        504        504      13068          0          0 PPP Hooks       
-  92   0     819804     825208      14396          0          0 Exec            
+  92   0      15928      22428      13228          0          0 Exec            
   93   0          0          0      13068          0          0 SSS Manager     
   94   0          0          0      13068          0          0 SSS Test Client 
   95   0          0          0       7068          0          0 SSS Feature Mana
@@ -681,7 +738,7 @@ Processor Pool Total:   26989056 Used:   21190148 Free:    5798908
  111   0      75664       2196      73840          0          0 CEF process     
  112   0          0          0       7068          0          0 Socket Timers   
  113   0          0          0      13068          0          0 TCP Timer       
- 114   0     388732      28812      14892          0          0 TCP Protocols   
+ 114   0     149172      28812      14872          0          0 TCP Protocols   
  115   0          0          0      25068          0          0 COPS            
  116   0        504        252       7320          0          0 Dot1x Supplicant
  117   0        504        252       7320          0          0 Dot1x Supplicant
@@ -742,10 +799,10 @@ Processor Pool Total:   26989056 Used:   21190148 Free:    5798908
  172   0          0          0       7068          0          0 EM Background Pr
  173   0          0          0       7068          0          0 Key chain liveke
  174   0        252        252       7068          0          0 LINE AAA        
- 175   0       6212      17848       7068          0          0 LOCAL AAA       
+ 175   0       2648       6808       7068          0          0 LOCAL AAA       
  176   0       1028        252       7844          0          0 TPLUS           
  177   0        252        252       7068          0          0 VSP_MGR         
- 178   0        428        252       9244          0          0 Crypto WUI      
+ 178   0        432        252       9248          0          0 Crypto WUI      
  179   0       5304        252      12120          0          0 Crypto Support  
  180   0          0          0       7068          0          0 IPSECv6 PS Proc 
  181   0          0          0       7068          0          0 EPM MAIN PROCESS
@@ -761,15 +818,15 @@ Processor Pool Total:   26989056 Used:   21190148 Free:    5798908
  191   0        336          0       7404          0          0 CCSWVOICE       
  192   0          0          0       7068          0          0 cpf_process_tpQ 
  193   0        940          0      62008          0          0 http client proc
- 194   0    1549068    1538484      17848          0          0 crypto sw pk pro
+ 194   0    1221528    1206232      18848          0          0 crypto sw pk pro
  195   0     247992          0     255060          0          0 QOS_MODULE_MAIN 
  196   0        284          0      25352          0          0 RPMS_PROC_MAIN  
  197   0          0          0      25068          0          0 VoIP AAA        
- 198   0      24744       8568      15772          0          0 crypto engine pr
- 199   0       4460        832      16696          0          0 Crypto CA       
+ 198   0      23688       8384      14900          0          0 crypto engine pr
+ 199   0       4436        832      16672          0          0 Crypto CA       
  200   0          0          0       9068          0          0 Crypto PKI-CRL  
  201   0          0          0       9068          0          0 Crypto SSL      
- 202   0          0          0      13068          0          0 encrypt proc    
+ 202   0          0          0      13128          0          0 encrypt proc    
  203   0          0          0       7068          0          0 Crypto INT      
  204   0        252        716      13068          0          0 Crypto IKE Dispa
  205   0       6880        252      19696          0          0 Crypto IKMP     
@@ -797,89 +854,89 @@ Processor Pool Total:   26989056 Used:   21190148 Free:    5798908
  227   0          0          0       7068          0          0 trunk conditioni
  228   0       4660          0      11728          0          0 trunk conditioni
  229   0      12228       4504      14632          0          0 VLAN Manager    
- 230   0      45564          0      16232          0          0 BGP Router      
- 231   0     170616      11016     177072          0          0 EEM Server      
+ 230   0      45788          0      16260          0          0 BGP Router      
+ 231   0     142500       9180     148956          0          0 EEM Server      
  232   0        612          0      10068          0          0 EEM ED CLI      
  233   0        612          0      10068          0          0 EEM ED Counter  
- 234   0       1224          0      10068          0          0 EEM ED Interface
- 235   0       1224          0      10068          0          0 EEM ED IOSWD    
- 236   0       1224          0      10068          0          0 EEM ED None     
+ 234   0        612          0      10068          0          0 EEM ED Interface
+ 235   0        612          0      10068          0          0 EEM ED IOSWD    
+ 236   0        612          0      10068          0          0 EEM ED None     
  237   0       1224          0      10068          0          0 EEM ED OIR      
  238   0       1224          0      10068          0          0 EEM ED SNMP     
  239   0       1224          0      10068          0          0 EEM ED Timer    
  240   0      10020        912      16176          0          0 EEM Policy Direc
- 241   0       5544       5544      13068          0          0 Syslog          
+ 241   0       5420       5420      13068          0          0 Syslog          
  242   0          0          0       7068          0          0 IP SLA MPLSLM Pr
  243   0          0          0       7068          0          0 VPDN Test       
- 244   0       8584          0      15452          0          0 SSH Event handle
+ 244   0       8648          0      15404          0          0 SSH Event handle
  245   0        224          0       7292          0          0 CEF Scanner     
- 246   0       7420          0       7068          0          0 TCP Listener    
- 247  98     889532     863268      38684          0          0 SSH Process     
+ 246   0          0          0       7068          0          0 TCP Listener    
+ 247  98     908232     878108      42508          0          0 SSH Process     
  248   0          0          0       7068          0          0 BGP I/O         
  249   0          0          0      10068          0          0 BGP Scanner     
  250   0          0          0       7068          0          0 BGP Event       
-                                 25308372 Total
+                                 25303180 Total
 
 ------------------ show process cpu ------------------
 
 
-CPU utilization for five seconds: 32%/52%; one minute: 6%; five minutes: 6%
+CPU utilization for five seconds: 85%/100%; one minute: 8%; five minutes: 2%
  PID Runtime(ms)   Invoked      uSecs   5Sec   1Min   5Min TTY Process 
-   1           8        77        103  0.00%  0.00%  0.00%   0 Chunk Manager    
-   2          12      1161         10  0.00%  0.01%  0.00%   0 Load Meter       
+   1          12        75        160  0.00%  0.00%  0.00%   0 Chunk Manager    
+   2           0      1242          0  0.00%  0.01%  0.00%   0 Load Meter       
    3           0         1          0  0.00%  0.00%  0.00%   0 chkpt message ha 
    4           0         1          0  0.00%  0.00%  0.00%   0 EDDRI_MAIN       
-   5        5096       689       7396  0.00%  0.09%  0.07%   0 Check heaps      
-   6           4         2       2000  0.00%  0.00%  0.00%   0 Pool Manager     
+   5        5080       728       6978  0.00%  0.04%  0.05%   0 Check heaps      
+   6           0         1          0  0.00%  0.00%  0.00%   0 Pool Manager     
    7           0         2          0  0.00%  0.00%  0.00%   0 Timers           
    8           0         1          0  0.00%  0.00%  0.00%   0 OIR Handler      
    9           0         1          0  0.00%  0.00%  0.00%   0 Crash writer     
-  10           0       195          0  0.00%  0.00%  0.00%   0 Environmental mo 
-  11           0        97          0  0.00%  0.00%  0.00%   0 IPC Dynamic Cach 
+  10           0       208          0  0.00%  0.00%  0.00%   0 Environmental mo 
+  11           0       104          0  0.00%  0.00%  0.00%   0 IPC Dynamic Cach 
   12           0         1          0  0.00%  0.00%  0.00%   0 IPC Zone Manager 
-  13         132      5779         22  0.00%  0.00%  0.00%   0 IPC Periodic Tim 
-  14         144      5779         24  0.07%  0.00%  0.00%   0 IPC Deferred Por 
-  15           4         1       4000  0.00%  0.00%  0.00%   0 IPC Seat Manager 
+  13         116      6200         18  0.00%  0.00%  0.00%   0 IPC Periodic Tim 
+  14         228      6200         36  0.00%  0.00%  0.00%   0 IPC Deferred Por 
+  15           0         1          0  0.00%  0.00%  0.00%   0 IPC Seat Manager 
   16           0         1          0  0.00%  0.00%  0.00%   0 IPC BackPressure 
-  17          36        56        642  0.00%  0.00%  0.00%   0 ARP Input        
-  18          48      6031          7  0.00%  0.00%  0.00%   0 ARP Background   
+  17          24        56        428  0.00%  0.00%  0.00%   0 ARP Input        
+  18          56      6471          8  0.00%  0.00%  0.00%   0 ARP Background   
   19           0         2          0  0.00%  0.00%  0.00%   0 ATM Idle Timer   
   20           0         2          0  0.00%  0.00%  0.00%   0 AAA high-capacit 
   21           0         1          0  0.00%  0.00%  0.00%   0 AAA_SERVER_DEADT 
   22           0         1          0  0.00%  0.00%  0.00%   0 Policy Manager   
   23           0         2          0  0.00%  0.00%  0.00%   0 DDR Timers       
   24           4         2       2000  0.00%  0.00%  0.00%   0 Entity MIB API   
-  25         104        14       7428  0.00%  0.00%  0.00%   0 EEM ED Syslog    
-  26         452      1740        259  0.00%  0.02%  0.00%   0 HC Counter Timer 
+  25         112        13       8615  0.00%  0.00%  0.00%   0 EEM ED Syslog    
+  26         496      1862        266  0.08%  0.01%  0.00%   0 HC Counter Timer 
   27           0         2          0  0.00%  0.00%  0.00%   0 Serial Backgroun 
   28           0         1          0  0.00%  0.00%  0.00%   0 RO Notify Timers 
   29           0         1          0  0.00%  0.00%  0.00%   0 RMI RM Notify Wa 
   30           4         2       2000  0.00%  0.00%  0.00%   0 SMART            
-  31         108      5782         18  0.00%  0.00%  0.00%   0 GraphIt          
+  31         592      6199         95  0.16%  0.01%  0.00%   0 GraphIt          
   32           0         2          0  0.00%  0.00%  0.00%   0 Dialer event     
   33           0         1          0  0.00%  0.00%  0.00%   0 SERIAL A'detect  
   34           0         2          0  0.00%  0.00%  0.00%   0 XML Proxy Client 
-  35           4         1       4000  0.00%  0.00%  0.00%   0 Critical Bkgnd   
-  36          88      3556         24  0.00%  0.00%  0.00%   0 Net Background   
-  37           0         2          0  0.00%  0.00%  0.00%   0 IDB Work         
-  38           4        12        333  0.00%  0.00%  0.00%   0 Logger           
-  39          72      5773         12  0.00%  0.00%  0.00%   0 TTY Background   
-  40          88      5784         15  0.00%  0.01%  0.00%   0 Per-Second Jobs  
+  35           0         1          0  0.00%  0.00%  0.00%   0 Critical Bkgnd   
+  36          84      4347         19  0.00%  0.00%  0.00%   0 Net Background   
+  37           8         2       4000  0.00%  0.00%  0.00%   0 IDB Work         
+  38           8         9        888  0.00%  0.00%  0.00%   0 Logger           
+  39          68      6194         10  0.00%  0.00%  0.00%   0 TTY Background   
+  40          20      6201          3  0.08%  0.02%  0.00%   0 Per-Second Jobs  
   41           0         1          0  0.00%  0.00%  0.00%   0 Inode Table Dest 
-  42           0        49          0  0.00%  0.00%  0.00%   0 DHCPD Timer      
+  42           0        52          0  0.00%  0.00%  0.00%   0 DHCPD Timer      
   43           0         1          0  0.00%  0.00%  0.00%   0 IKE HA Mgr       
   44           0         1          0  0.00%  0.00%  0.00%   0 IPSEC HA Mgr     
-  45         208        16      13000  0.00%  0.00%  0.00%   0 rf task          
+  45         200        16      12500  0.00%  0.00%  0.00%   0 rf task          
   46           0         1          0  0.00%  0.00%  0.00%   0 Net Input        
-  47        3856      1161       3321  0.00%  0.05%  0.07%   0 Compute load avg 
-  48         360        97       3711  0.00%  0.00%  0.00%   0 Per-minute Jobs  
+  47        4244      1242       3417  0.08%  0.08%  0.08%   0 Compute load avg 
+  48         392       104       3769  0.00%  0.00%  0.00%   0 Per-minute Jobs  
   49           0         1          0  0.00%  0.00%  0.00%   0 AggMgr Process   
   50           0         1          0  0.00%  0.00%  0.00%   0 dev_device_inser 
   51           0         1          0  0.00%  0.00%  0.00%   0 dev_device_remov 
-  52          12       966         12  0.00%  0.00%  0.00%   0 mxt5100          
+  52           4      1034          3  0.00%  0.00%  0.00%   0 mxt5100          
   53           0         1          0  0.00%  0.00%  0.00%   0 sal_dpc_process  
   54           0         1          0  0.00%  0.00%  0.00%   0 ARL Table Manage 
-  55           4         2       2000  0.00%  0.00%  0.00%   0 ESWILPPM         
+  55           0         2          0  0.00%  0.00%  0.00%   0 ESWILPPM         
   56           0         2          0  0.00%  0.00%  0.00%   0 Eswilp Storm Con 
   57           0         2          0  0.00%  0.00%  0.00%   0 SM Monitor       
   58          12         2       6000  0.00%  0.00%  0.00%   0 VNM DSPRM MAIN   
@@ -887,62 +944,62 @@ CPU utilization for five seconds: 32%/52%; one minute: 6%; five minutes: 6%
   60           0         2          0  0.00%  0.00%  0.00%   0 FLEX DNLD MAIN   
   61           0         1          0  0.00%  0.00%  0.00%   0 HDV background   
   62           0         2          0  0.00%  0.00%  0.00%   0 Bryce I2C CMD Qu 
-  63           0         2          0  0.00%  0.00%  0.00%   0 VMI Background   
+  63           4         2       2000  0.00%  0.00%  0.00%   0 VMI Background   
   64           0         1          0  0.00%  0.00%  0.00%   0 RF_INTERDEV_DELA 
   65           0         1          0  0.00%  0.00%  0.00%   0 RF_INTERDEV_SCTP 
-  66          72      5778         12  0.00%  0.00%  0.00%   0 Ether-Switch RBC 
+  66          44      6199          7  0.00%  0.00%  0.00%   0 Ether-Switch RBC 
   67           0         1          0  0.00%  0.00%  0.00%   0 AAL2CPS TIMER_CU 
   68           0         1          0  0.00%  0.00%  0.00%   0 IGMP Snooping Pr 
   69           0         1          0  0.00%  0.00%  0.00%   0 IGMP Snooping Re 
-  70           8       195         41  0.00%  0.00%  0.00%   0 Call Management  
+  70           0       208          0  0.00%  0.00%  0.00%   0 Call Management  
   71           0         1          0  0.00%  0.00%  0.00%   0 CF_INTERDEV_SCTP 
   72           0         2          0  0.00%  0.00%  0.00%   0 Dot1x Mgr Proces 
   73           0         1          0  0.00%  0.00%  0.00%   0 MAB Framework    
   74           0         1          0  0.00%  0.00%  0.00%   0 EAP Framework    
-  75           0         2          0  0.00%  0.00%  0.00%   0 DTP Protocol     
-  76          40      5777          6  0.00%  0.00%  0.00%   0 PI MATM Aging Pr 
-  77           0       581          0  0.00%  0.00%  0.00%   0 EtherChnl        
-  78           8        54        148  0.07%  0.00%  0.00%   0 AAA Server       
+  75           4         2       2000  0.00%  0.00%  0.00%   0 DTP Protocol     
+  76          44      6198          7  0.00%  0.00%  0.00%   0 PI MATM Aging Pr 
+  77           0       622          0  0.00%  0.00%  0.00%   0 EtherChnl        
+  78           4        21        190  0.00%  0.00%  0.00%   0 AAA Server       
   79           0         1          0  0.00%  0.00%  0.00%   0 AAA ACCT Proc    
-  80        1600    179600          8  0.14%  0.16%  0.16%   0 ACCT Periodic Pr 
+  80        1656    193387          8  0.08%  0.19%  0.17%   0 ACCT Periodic Pr 
   81           0         2          0  0.00%  0.00%  0.00%   0 AAA Dictionary R 
-  82          40       878         45  0.00%  0.00%  0.00%   0 CDP Protocol     
+  82          60       837         71  0.00%  0.00%  0.00%   0 CDP Protocol     
   83          12         4       3000  0.00%  0.00%  0.00%   0 IP ARP Adjacency 
-  84        1920    179600         10  0.21%  0.17%  0.16%   0 IP ARP Retry Age 
-  85        1164      3025        384  0.14%  0.04%  0.03%   0 IP Input         
+  84        2008    193386         10  0.00%  0.14%  0.16%   0 IP ARP Retry Age 
+  85         444      1121        396  0.50%  0.07%  0.01%   0 IP Input         
   86           0         1          0  0.00%  0.00%  0.00%   0 ICMP event handl 
   87           0         5          0  0.00%  0.00%  0.00%   0 TurboACL         
   88           0         2          0  0.00%  0.00%  0.00%   0 TurboACL chunk   
   89           0         1          0  0.00%  0.00%  0.00%   0 IPv6 RIB Redistr 
-  90           0        12          0  0.00%  0.00%  0.00%   0 MOP Protocols    
+  90           4        13        307  0.00%  0.00%  0.00%   0 MOP Protocols    
   91           0         3          0  0.00%  0.00%  0.00%   0 PPP Hooks        
-  92        1884       109      17284  0.00%  0.00%  0.00%   0 Exec             
+  92         124        66       1878  0.00%  0.00%  0.00%   0 Exec             
   93           0         1          0  0.00%  0.00%  0.00%   0 SSS Manager      
-  94           0       773          0  0.00%  0.00%  0.00%   0 SSS Test Client  
+  94           0       827          0  0.00%  0.00%  0.00%   0 SSS Test Client  
   95           0         1          0  0.00%  0.00%  0.00%   0 SSS Feature Mana 
-  96         144     22565          6  0.07%  0.02%  0.00%   0 SSS Feature Time 
+  96         176     24216          7  0.00%  0.02%  0.00%   0 SSS Feature Time 
   97           0         2          0  0.00%  0.00%  0.00%   0 Spanning Tree    
   98           0         1          0  0.00%  0.00%  0.00%   0 X.25 Encaps Mana 
-  99           0         8          0  0.00%  0.00%  0.00%   0 SSM connection m 
- 100           4         1       4000  0.00%  0.00%  0.00%   0 AC Switch        
- 101         200         9      22222  0.00%  0.00%  0.00%   0 EAPoUDP Process  
- 102           0         2          0  0.00%  0.00%  0.00%   0 IP Host Track Pr 
+  99           4         8        500  0.00%  0.00%  0.00%   0 SSM connection m 
+ 100           0         1          0  0.00%  0.00%  0.00%   0 AC Switch        
+ 101         232         9      25777  0.00%  0.00%  0.00%   0 EAPoUDP Process  
+ 102           4         2       2000  0.00%  0.00%  0.00%   0 IP Host Track Pr 
  103           0         2          0  0.00%  0.00%  0.00%   0 KRB5 AAA         
- 104           0       105          0  0.00%  0.00%  0.00%   0 IP Background    
+ 104           0       112          0  0.00%  0.00%  0.00%   0 IP Background    
  105           8         4       2000  0.00%  0.00%  0.00%   0 IP RIB Update    
- 106           4         2       2000  0.00%  0.00%  0.00%   0 PPP IP Route     
+ 106           0         2          0  0.00%  0.00%  0.00%   0 PPP IP Route     
  107           0         2          0  0.00%  0.00%  0.00%   0 PPP IPCP         
  108           0         1          0  0.00%  0.00%  0.00%   0 IP Traceroute    
  109           0         1          0  0.00%  0.00%  0.00%   0 SNMP Timers      
  110           0         1          0  0.00%  0.00%  0.00%   0 Asy FS Helper    
- 111        1128      9108        123  0.00%  0.02%  0.01%   0 CEF process      
- 112           8      5776          1  0.00%  0.00%  0.00%   0 Socket Timers    
- 113         220      1397        157  0.14%  0.01%  0.00%   0 TCP Timer        
- 114          84        74       1135  0.00%  0.00%  0.00%   0 TCP Protocols    
+ 111        2984     12161        245  0.00%  0.03%  0.06%   0 CEF process      
+ 112           0      6197          0  0.00%  0.00%  0.00%   0 Socket Timers    
+ 113          44       495         88  0.00%  0.01%  0.00%   0 TCP Timer        
+ 114           4        42         95  0.00%  0.00%  0.00%   0 TCP Protocols    
  115           0         1          0  0.00%  0.00%  0.00%   0 COPS             
  116           0         2          0  0.00%  0.00%  0.00%   0 Dot1x Supplicant 
  117           0         2          0  0.00%  0.00%  0.00%   0 Dot1x Supplicant 
- 118           4         2       2000  0.00%  0.00%  0.00%   0 Dot1x Supplicant 
+ 118           0         2          0  0.00%  0.00%  0.00%   0 Dot1x Supplicant 
  119           0         2          0  0.00%  0.00%  0.00%   0 L2MM             
  120           0         1          0  0.00%  0.00%  0.00%   0 MRD              
  121           0         1          0  0.00%  0.00%  0.00%   0 IGMPSN           
@@ -951,31 +1008,31 @@ CPU utilization for five seconds: 32%/52%; one minute: 6%; five minutes: 6%
  124           4         2       2000  0.00%  0.00%  0.00%   0 PPPoE Flow Contr 
  125           4         2       2000  0.00%  0.00%  0.00%   0 SCTP Main Proces 
  126           0         1          0  0.00%  0.00%  0.00%   0 IUA Main Process 
- 127         428      5777         74  0.00%  0.00%  0.00%   0 RUDPV1 Main Proc 
+ 127        1080      6199        174  0.00%  0.00%  0.00%   0 RUDPV1 Main Proc 
  128           0         1          0  0.00%  0.00%  0.00%   0 bsm_timers       
- 129         560      5778         96  0.00%  0.04%  0.02%   0 bsm_xmt_proc     
+ 129         220      6200         35  0.00%  0.00%  0.00%   0 bsm_xmt_proc     
  130           0         1          0  0.00%  0.00%  0.00%   0 CES Client SVC R 
- 131         368     11552         31  0.07%  0.09%  0.08%   0 DHCPD Receive    
- 132           4         2       2000  0.00%  0.00%  0.00%   0 Dialer Forwarder 
- 133          12        97        123  0.00%  0.00%  0.00%   0 IP Cache Ager    
- 134        1124        98      11469  0.00%  0.01%  0.00%   0 Adj Manager      
+ 131         788     12394         63  0.16%  0.12%  0.09%   0 DHCPD Receive    
+ 132           0         2          0  0.00%  0.00%  0.00%   0 Dialer Forwarder 
+ 133           4       104         38  0.00%  0.00%  0.00%   0 IP Cache Ager    
+ 134        1240       105      11809  0.00%  0.02%  0.00%   0 Adj Manager      
  135           0         3          0  0.00%  0.00%  0.00%   0 Flow Exporter Ti 
  136           0         2          0  0.00%  0.00%  0.00%   0 ATM OAM Input    
  137           0         2          0  0.00%  0.00%  0.00%   0 ATM OAM TIMER    
- 138           0        21          0  0.00%  0.00%  0.00%   0 HTTP CORE        
+ 138           4        22        181  0.00%  0.00%  0.00%   0 HTTP CORE        
  139           0         1          0  0.00%  0.00%  0.00%   0 RARP Input       
- 140           0        68          0  0.00%  0.00%  0.00%   0 Transport Port A 
+ 140           0        40          0  0.00%  0.00%  0.00%   0 Transport Port A 
  141           0         1          0  0.00%  0.00%  0.00%   0 IPv6 Inspect Tim 
  142           0         1          0  0.00%  0.00%  0.00%   0 PAD InCall       
  143           0         2          0  0.00%  0.00%  0.00%   0 X.25 Background  
  144           0         2          0  0.00%  0.00%  0.00%   0 PPP Bind         
  145           0         2          0  0.00%  0.00%  0.00%   0 PPP SSS          
  146           0         1          0  0.00%  0.00%  0.00%   0 MQC Flow Event B 
- 147         304     57609          5  0.07%  0.08%  0.08%   0 RBSCP Background 
+ 147         248     61951          4  0.08%  0.08%  0.08%   0 RBSCP Background 
  148           0         1          0  0.00%  0.00%  0.00%   0 VPDN call manage 
- 149          96     11274          8  0.00%  0.00%  0.00%   0 Inspect process  
- 150           4       103         38  0.00%  0.00%  0.00%   0 DHCPD Database   
- 151           4        20        200  0.00%  0.00%  0.00%   0 Authentication P 
+ 149          84     12106          6  0.00%  0.00%  0.00%   0 Inspect process  
+ 150           0       109          0  0.00%  0.00%  0.00%   0 DHCPD Database   
+ 151           0        21          0  0.00%  0.00%  0.00%   0 Authentication P 
  152           0         1          0  0.00%  0.00%  0.00%   0 Auth-proxy AAA B 
  153           0         1          0  0.00%  0.00%  0.00%   0 CHKPT EXAMPLE    
  154           0         1          0  0.00%  0.00%  0.00%   0 CHKPT DevTest    
@@ -988,51 +1045,51 @@ CPU utilization for five seconds: 32%/52%; one minute: 6%; five minutes: 6%
  161           0         2          0  0.00%  0.00%  0.00%   0 CIFS Proxy Proce 
  162           4         2       2000  0.00%  0.00%  0.00%   0 URL filter proc  
  163           0         1          0  0.00%  0.00%  0.00%   0 Crypto HW Proc   
- 164          20         2      10000  0.00%  0.00%  0.00%   0 CCVPM_HDSPRM     
- 165           8      2144          3  0.00%  0.00%  0.00%   0 FLEX DSPRM MAIN  
- 166          20      2142          9  0.00%  0.00%  0.00%   0 FLEX DSP KEEPALI 
- 167           0       234          0  0.00%  0.00%  0.00%   0 CRM_CALL_UPDATE_ 
- 168           4         4       1000  0.00%  0.00%  0.00%   0 HDA DSPRM MAIN   
- 169           0         2          0  0.00%  0.00%  0.00%   0 cpf_process_msg_ 
+ 164          24         2      12000  0.00%  0.00%  0.00%   0 CCVPM_HDSPRM     
+ 165          12      2300          5  0.00%  0.00%  0.00%   0 FLEX DSPRM MAIN  
+ 166           4      2298          1  0.00%  0.00%  0.00%   0 FLEX DSP KEEPALI 
+ 167           0       250          0  0.00%  0.00%  0.00%   0 CRM_CALL_UPDATE_ 
+ 168           0         4          0  0.00%  0.00%  0.00%   0 HDA DSPRM MAIN   
+ 169           4         2       2000  0.00%  0.00%  0.00%   0 cpf_process_msg_ 
  170           0         2          0  0.00%  0.00%  0.00%   0 AAA Cached Serve 
- 171           0         2          0  0.00%  0.00%  0.00%   0 ENABLE AAA       
+ 171           4         2       2000  0.00%  0.00%  0.00%   0 ENABLE AAA       
  172           0         1          0  0.00%  0.00%  0.00%   0 EM Background Pr 
  173           0         1          0  0.00%  0.00%  0.00%   0 Key chain liveke 
  174           0         2          0  0.00%  0.00%  0.00%   0 LINE AAA         
- 175          52        54        962  0.00%  0.00%  0.00%   0 LOCAL AAA        
+ 175           8        21        380  0.00%  0.00%  0.00%   0 LOCAL AAA        
  176           0         2          0  0.00%  0.00%  0.00%   0 TPLUS            
  177           0         2          0  0.00%  0.00%  0.00%   0 VSP_MGR          
- 178           0         3          0  0.00%  0.00%  0.00%   0 Crypto WUI       
+ 178           8         3       2666  0.00%  0.00%  0.00%   0 Crypto WUI       
  179           4         2       2000  0.00%  0.00%  0.00%   0 Crypto Support   
  180           0         1          0  0.00%  0.00%  0.00%   0 IPSECv6 PS Proc  
  181           0         1          0  0.00%  0.00%  0.00%   0 EPM MAIN PROCESS 
  182           4         1       4000  0.00%  0.00%  0.00%   0 CCVPM_HTSP       
  183           0         2          0  0.00%  0.00%  0.00%   0 VPM_MWI_BACKGROU 
- 184           0         1          0  0.00%  0.00%  0.00%   0 CCVPM_R2         
+ 184           4         1       4000  0.00%  0.00%  0.00%   0 CCVPM_R2         
  185           0         1          0  0.00%  0.00%  0.00%   0 EPHONE MWI Refre 
- 186           4         7        571  0.00%  0.00%  0.00%   0 FB/KS Log HouseK 
+ 186           0         7          0  0.00%  0.00%  0.00%   0 FB/KS Log HouseK 
  187           0         1          0  0.00%  0.00%  0.00%   0 EPHONE MWI BG Pr 
  188           0         1          0  0.00%  0.00%  0.00%   0 Skinny HW confer 
- 189          48       194        247  0.00%  0.00%  0.00%   0 VOICE REG BG Pro 
+ 189          72       207        347  0.00%  0.00%  0.00%   0 VOICE REG BG Pro 
  190           0         1          0  0.00%  0.00%  0.00%   0 Presence Process 
  191           0         1          0  0.00%  0.00%  0.00%   0 CCSWVOICE        
  192           0         1          0  0.00%  0.00%  0.00%   0 cpf_process_tpQ  
  193           0         1          0  0.00%  0.00%  0.00%   0 http client proc 
- 194        3744       297      12606  0.00%  0.00%  0.00%   0 crypto sw pk pro 
- 195           4         1       4000  0.00%  0.00%  0.00%   0 QOS_MODULE_MAIN  
+ 194        2800       200      14000  0.00%  0.00%  0.00%   0 crypto sw pk pro 
+ 195          12         1      12000  0.00%  0.00%  0.00%   0 QOS_MODULE_MAIN  
  196           0         1          0  0.00%  0.00%  0.00%   0 RPMS_PROC_MAIN   
  197           0         1          0  0.00%  0.00%  0.00%   0 VoIP AAA         
- 198          60         9       6666  0.00%  0.00%  0.00%   0 crypto engine pr 
- 199          16         4       4000  0.00%  0.00%  0.00%   0 Crypto CA        
+ 198          76        10       7600  0.00%  0.00%  0.00%   0 crypto engine pr 
+ 199          20         4       5000  0.00%  0.00%  0.00%   0 Crypto CA        
  200           0         1          0  0.00%  0.00%  0.00%   0 Crypto PKI-CRL   
  201           0         1          0  0.00%  0.00%  0.00%   0 Crypto SSL       
  202           0         1          0  0.00%  0.00%  0.00%   0 encrypt proc     
  203           0         1          0  0.00%  0.00%  0.00%   0 Crypto INT       
- 204           4         3       1333  0.00%  0.00%  0.00%   0 Crypto IKE Dispa 
+ 204           0         3          0  0.00%  0.00%  0.00%   0 Crypto IKE Dispa 
  205           4         3       1333  0.00%  0.00%  0.00%   0 Crypto IKMP      
- 206          24         1      24000  0.00%  0.00%  0.00%   0 Crypto IKEv2     
+ 206          20         1      20000  0.00%  0.00%  0.00%   0 Crypto IKEv2     
  207           0         1          0  0.00%  0.00%  0.00%   0 IPSEC manual key 
- 208         272       292        931  0.00%  0.00%  0.00%   0 IPSEC key engine 
+ 208         264       313        843  0.00%  0.00%  0.00%   0 IPSEC key engine 
  209           0         1          0  0.00%  0.00%  0.00%   0 CRYPTO QoS proce 
  210           4         4       1000  0.00%  0.00%  0.00%   0 Crypto ACL       
  211           0         1          0  0.00%  0.00%  0.00%   0 Crypto PAS Proc  
@@ -1040,22 +1097,22 @@ CPU utilization for five seconds: 32%/52%; one minute: 6%; five minutes: 6%
  213           0         1          0  0.00%  0.00%  0.00%   0 GDOI GM Process  
  214           0         1          0  0.00%  0.00%  0.00%   0 UNICAST REKEY    
  215           0         1          0  0.00%  0.00%  0.00%   0 UNICAST REKEY AC 
- 216           4         2       2000  0.00%  0.00%  0.00%   0 Control-plane ho 
+ 216           0         2          0  0.00%  0.00%  0.00%   0 Control-plane ho 
  217           0         1          0  0.00%  0.00%  0.00%   0 PM Callback      
  218           0         1          0  0.00%  0.00%  0.00%   0 DATA Transfer Pr 
  219           0         1          0  0.00%  0.00%  0.00%   0 DATA Collector   
  220           0         2          0  0.00%  0.00%  0.00%   0 AAA SEND STOP EV 
- 221           4         3       1333  0.00%  0.00%  0.00%   0 EEM ED Resource  
+ 221           0         3          0  0.00%  0.00%  0.00%   0 EEM ED Resource  
  222           0         5          0  0.00%  0.00%  0.00%   0 EEM ED Track     
- 223          20       581         34  0.00%  0.00%  0.00%   0 RMON Recycle Pro 
+ 223           4       621          6  0.00%  0.00%  0.00%   0 RMON Recycle Pro 
  224           0         2          0  0.00%  0.00%  0.00%   0 RMON Deferred Se 
  225           0         1          0  0.00%  0.00%  0.00%   0 Syslog Traps     
- 226           0         1          0  0.00%  0.00%  0.00%   0 Crypto cTCP proc 
- 227          60      5752         10  0.00%  0.00%  0.00%   0 trunk conditioni 
- 228           0         1          0  0.00%  0.00%  0.00%   0 trunk conditioni 
- 229           4         2       2000  0.00%  0.00%  0.00%   0 VLAN Manager     
- 230         160     12123         13  0.00%  0.00%  0.00%   0 BGP Router       
- 231          12        52        230  0.00%  0.00%  0.00%   0 EEM Server       
+ 226           4         1       4000  0.00%  0.00%  0.00%   0 Crypto cTCP proc 
+ 227         368      6178         59  0.00%  0.01%  0.00%   0 trunk conditioni 
+ 228           4         1       4000  0.00%  0.00%  0.00%   0 trunk conditioni 
+ 229          12         2       6000  0.00%  0.00%  0.00%   0 VLAN Manager     
+ 230         112     12905          8  0.00%  0.00%  0.00%   0 BGP Router       
+ 231          20        44        454  0.00%  0.00%  0.00%   0 EEM Server       
  232           0         5          0  0.00%  0.00%  0.00%   0 EEM ED CLI       
  233           0         5          0  0.00%  0.00%  0.00%   0 EEM ED Counter   
  234           4         5        800  0.00%  0.00%  0.00%   0 EEM ED Interface 
@@ -1063,28 +1120,45 @@ CPU utilization for five seconds: 32%/52%; one minute: 6%; five minutes: 6%
  236           0         5          0  0.00%  0.00%  0.00%   0 EEM ED None      
  237           0         5          0  0.00%  0.00%  0.00%   0 EEM ED OIR       
  238           0         5          0  0.00%  0.00%  0.00%   0 EEM ED SNMP      
- 239           0       149          0  0.00%  0.00%  0.00%   0 EEM ED Timer     
+ 239           4       159         25  0.00%  0.00%  0.00%   0 EEM ED Timer     
  240           4         4       1000  0.00%  0.00%  0.00%   0 EEM Policy Direc 
- 241           0         7          0  0.00%  0.00%  0.00%   0 Syslog           
- 242           0       226          0  0.00%  0.00%  0.00%   0 IP SLA MPLSLM Pr 
- 243           0         1          0  0.00%  0.00%  0.00%   0 VPDN Test        
- 244           0         4          0  0.00%  0.00%  0.00%   0 SSH Event handle 
- 245           8       200         40  0.00%  0.00%  0.00%   0 CEF Scanner      
- 246           4         3       1333  0.00%  0.00%  0.00%   0 TCP Listener     
- 247        2228       231       9645 31.36%  2.59%  0.53%  98 SSH Process      
- 248         540       250       2160  0.00%  0.00%  0.00%   0 BGP I/O          
- 249        2168       387       5602  0.00%  0.04%  0.00%   0 BGP Scanner      
+ 241           4         6        666  0.00%  0.00%  0.00%   0 Syslog           
+ 242           4       310         12  0.00%  0.00%  0.00%   0 IP SLA MPLSLM Pr 
+ 243           4         1       4000  0.00%  0.00%  0.00%   0 VPDN Test        
+ 244           4         4       1000  0.00%  0.00%  0.00%   0 SSH Event handle 
+ 245           4       216         18  0.00%  0.00%  0.00%   0 CEF Scanner      
+ 246           0         1          0  0.00%  0.00%  0.00%   0 TCP Listener     
+ 247        5032       356      14134 83.97%  7.68%  1.60%  98 SSH Process      
+ 248         416       350       1188  0.00%  0.00%  0.00%   0 BGP I/O          
+ 249        1972       414       4763  0.00%  0.02%  0.00%   0 BGP Scanner      
  250           0         1          0  0.00%  0.00%  0.00%   0 BGP Event       
 
 ------------------ show process cpu history ------------------
 
 
 
-R1   01:36:46 AM Friday Mar 1 2002 UTC
+R2   01:43:30 AM Friday Mar 1 2002 UTC
 
                                                                 
-    33                                                          
-    22    11111               22222               11111     1111
+    8111                                                        
+    5222     11111     11111               11111     1111111111 
+100                                                             
+ 90 *                                                           
+ 80 *                                                           
+ 70 *                                                           
+ 60 *                                                           
+ 50 *                                                           
+ 40 *                                                           
+ 30 *                                                           
+ 20 *                                                           
+ 10 ****                                                        
+   0....5....1....1....2....2....3....3....4....4....5....5....6
+             0    5    0    5    0    5    0    5    0    5    0
+               CPU% per second (last 60 seconds)
+
+                                                                
+                                   1                            
+    211111122121211211111222111121181211211112111121461141112122
 100                                                             
  90                                                             
  80                                                             
@@ -1092,40 +1166,23 @@ R1   01:36:46 AM Friday Mar 1 2002 UTC
  60                                                             
  50                                                             
  40                                                             
- 30 **                                                          
- 20 **                                                          
- 10 **                                                          
-   0....5....1....1....2....2....3....3....4....4....5....5....6
-             0    5    0    5    0    5    0    5    0    5    0
-               CPU% per second (last 60 seconds)
-
-                                                                
-    8 58 2 772  673 2 3 91  2                                   
-    222129115911708112524212512221223211212115611611111221111111
-100                                                             
- 90                     *                                       
- 80 *  *    *           *                                       
- 70 *  *   **   **      *                                       
- 60 *  *   **   **      *                                       
- 50 * **   **   **      *                                       
- 40 * **   **   ***   * *                                       
- 30 * ** * ***  ***   * *   *                                   
- 20 * ** * ***  *** * * #   *                                   
- 10 # ## * ###  ##* * # #*  *                **  *              
+ 30                                                             
+ 20                                *                            
+ 10                                *                 *          
    0....5....1....1....2....2....3....3....4....4....5....5....6
              0    5    0    5    0    5    0    5    0    5    0
                CPU% per minute (last 60 minutes)
               * = maximum CPU%   # = average CPU%
 
                                                                             
-    5                                                                       
-    2                                                                       
+    3                                                                       
+    9                                                                       
 100                                                                         
  90                                                                         
  80                                                                         
  70                                                                         
  60                                                                         
- 50 *                                                                       
+ 50                                                                         
  40 *                                                                       
  30 *                                                                       
  20 *                                                                       
@@ -1152,7 +1209,7 @@ R1   01:36:46 AM Friday Mar 1 2002 UTC
 	RMA Test History         : FF
 	RMA History              : FF
 	Chassis Serial Number    : FTX0945W0MY
-	Chassis MAC Address      : c201.09e0.0000
+	Chassis MAC Address      : c202.1ce4.0000
 	MAC Address block size   : 48
 	Field Diagnostics Data   : FF FF FF FF FF FF FF FF 
 	Hardware Revision        : 0.1
@@ -1163,7 +1220,7 @@ R1   01:36:46 AM Friday Mar 1 2002 UTC
 	  0x10: 61 40 02 59 C0 46 03 20 00 3F 13 02 42 44 30 85
 	  0x20: 1C 10 82 06 80 FF FF FF FF C4 08 FF FF FF FF FF
 	  0x30: FF FF FF 81 FF FF FF FF 03 FF 04 FF C2 8B 46 54
-	  0x40: 58 30 39 34 35 57 30 4D 59 C3 06 C2 01 09 E0 00
+	  0x40: 58 30 39 34 35 57 30 4D 59 C3 06 C2 02 1C E4 00
 	  0x50: 00 43 00 30 C5 08 FF FF FF FF FF FF FF FF 41 00
 	  0x60: 01 01 02 FF FF FF FF FF FF FF FF FF FF FF FF FF
 	  0x70: FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
@@ -1183,7 +1240,7 @@ Slot 0:
 	RMA Test History         : FF
 	RMA History              : FF
 	Chassis Serial Number    : FTX0945W0MY
-	Chassis MAC Address      : c201.09e0.0000
+	Chassis MAC Address      : c202.1ce4.0000
 	MAC Address block size   : 48
 	Field Diagnostics Data   : FF FF FF FF FF FF FF FF 
 	Hardware Revision        : 0.1
@@ -1195,7 +1252,7 @@ Slot 0:
 	  0x10: 61 40 02 59 C0 46 03 20 00 3F 13 02 42 44 30 85
 	  0x20: 1C 10 82 06 80 FF FF FF FF C4 08 FF FF FF FF FF
 	  0x30: FF FF FF 81 FF FF FF FF 03 FF 04 FF C2 8B 46 54
-	  0x40: 58 30 39 34 35 57 30 4D 59 C3 06 C2 01 09 E0 00
+	  0x40: 58 30 39 34 35 57 30 4D 59 C3 06 C2 02 1C E4 00
 	  0x50: 00 43 00 30 C5 08 FF FF FF FF FF FF FF FF 41 00
 	  0x60: 01 01 02 FF FF FF FF FF FF FF FF FF FF FF FF FF
 	  0x70: FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
@@ -1215,13 +1272,13 @@ Slot 0:
  Intr Mask is 9700
         Level               Intr count  
 ----------------------------------------
-       1(netio)                 10334      
-       2(dma/wd)                3693      
+       1(netio)                 4728      
+       2(dma/wd)                1346      
        3(net mgt)               0      
-       4(console)               388      
+       4(console)               213      
        5(error)                 0      
        6(unknown)               0      
-       7(timer)                 1451535      
+       7(timer)                 1552541      
 
 
 3725 Backplane EEPROM:
@@ -1236,7 +1293,7 @@ Slot 0:
 	RMA Test History         : FF
 	RMA History              : FF
 	Chassis Serial Number    : FTX0945W0MY
-	Chassis MAC Address      : c201.09e0.0000
+	Chassis MAC Address      : c202.1ce4.0000
 	MAC Address block size   : 48
 	Field Diagnostics Data   : FF FF FF FF FF FF FF FF 
 	Hardware Revision        : 0.1
@@ -1247,7 +1304,7 @@ Slot 0:
 	  0x10: 61 40 02 59 C0 46 03 20 00 3F 13 02 42 44 30 85
 	  0x20: 1C 10 82 06 80 FF FF FF FF C4 08 FF FF FF FF FF
 	  0x30: FF FF FF 81 FF FF FF FF 03 FF 04 FF C2 8B 46 54
-	  0x40: 58 30 39 34 35 57 30 4D 59 C3 06 C2 01 09 E0 00
+	  0x40: 58 30 39 34 35 57 30 4D 59 C3 06 C2 02 1C E4 00
 	  0x50: 00 43 00 30 C5 08 FF FF FF FF FF FF FF FF 41 00
 	  0x60: 01 01 02 FF FF FF FF FF FF FF FF FF FF FF FF FF
 	  0x70: FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
@@ -1257,8 +1314,8 @@ CPU Registers:
   Configuration            : 0xC08FF0
   Status                   : 0x3400FF01
   Cause                    : 0x0
-  Count                    : 0x3B420384
-  Compare                  : 0x3B6E455C
+  Count                    : 0x311F59BC
+  Compare                  : 0x311ECBDC
 
 
 TLB entries :
@@ -1430,12 +1487,12 @@ PCI_1:
 
 GT64120 Channel 1 DMA (Packet coalescing DMA channel):
  dma_list=0x66535CA0, dma_ring=0x7B99AE0, dma_entries=256
- dma_free=0x665365EC, dma_reqt=0x665365EC, dma_done=0x665365EC
- thread=0x665365D8, thread_end=0x665365D8
+ dma_free=0x665362F4, dma_reqt=0x665362F4, dma_done=0x665362F4
+ thread=0x665362E0, thread_end=0x665362E0
  backup_thread=0x0, backup_thread_end=0x0
  dma_working=0, dma_stalls=0, dma_stall_loop=0
- dma_complete=3703, post_coalesce_frames=3703
- exhausted_dma_entries=0, post_dma_callback=3640
+ dma_complete=1361, post_coalesce_frames=1361
+ exhausted_dma_entries=0, post_dma_callback=1342
 
 GT64120 Rev level     : 5
 GT64120 Register Dump : Registers at 0xB4000000
@@ -1517,11 +1574,11 @@ DMA Channels :
  ch2_dma_count        : 0x00000000 (b/s 0x00000000)
  ch3_dma_count        : 0x00000000 (b/s 0x00000000)
  ch0_dma_src          : 0x00000000 (b/s 0x00000000)
- ch1_dma_src          : 0x200BC507 (b/s 0x07C50B20)
+ ch1_dma_src          : 0x2004C007 (b/s 0x07C00420)
  ch2_dma_src          : 0x00000000 (b/s 0x00000000)
  ch3_dma_src          : 0x00000000 (b/s 0x00000000)
  ch0_dma_dst          : 0x00000000 (b/s 0x00000000)
- ch1_dma_dst          : 0x2AA6DC07 (b/s 0x07DCA62A)
+ ch1_dma_dst          : 0x4A17A007 (b/s 0x07A0174A)
  ch2_dma_dst          : 0x00000000 (b/s 0x00000000)
  ch3_dma_dst          : 0x00000000 (b/s 0x00000000)
  ch0_next_ptr         : 0x00000000 (b/s 0x00000000)
@@ -1770,47 +1827,47 @@ Total call-legs: 0
 
 ------------------ show crypto key mypubkey rsa ------------------
 
-% Key pair was generated at: 00:11:35 UTC Mar 1 2002
+% Key pair was generated at: 00:11:49 UTC Mar 1 2002
 Key name: ssh
- Storage Device: private-config
+ Storage Device: not specified
  Usage: General Purpose Key
  Key is not exportable.
  Key Data:
-  30819F30 0D06092A 864886F7 0D010101 05000381 8D003081 89028181 00D3C3F9 
-  6A07BEF7 AAA140BA C2384ED6 8323BE25 3CA6470A 89C09EC9 35378F87 44E04495 
-  025C5F10 860CBF47 6F98AA27 EC3FD938 0F4721F3 3061B659 70E34898 A9B79DA0 
-  BD99A64A 3AD869E7 22BAF1AC 4736562D CC9804C7 F031427B D5C0B9AC C4F6EDE9 
-  FB5E14D2 8B610957 DF88E924 D3C34895 78D976EF 28F421B4 1A2978AB 89020301 0001
-% Key pair was generated at: 01:11:38 UTC Mar 1 2002
+  30819F30 0D06092A 864886F7 0D010101 05000381 8D003081 89028181 00B10C9D 
+  0612B7E5 55593512 5A87F28E 2509DD28 301AC792 097BE1D1 AEB6FD2E 63D1F2BC 
+  6FF75139 B32528B6 F4EC6D88 A273C6C4 A2EEE21C 8DA6479F FA8B73A2 0B99C3C3 
+  4E1CD5EC 7FB32A32 F1A97301 9D145274 74A278E5 BD4884B3 303565C6 5C771FC4 
+  DB533AB7 9A2816CC 2A571008 E1DE31AD 43AF5628 BC8EE8EF CB4C7387 6F020301 0001
+% Key pair was generated at: 01:11:51 UTC Mar 1 2002
 Key name: ssh.server
 Temporary key
  Usage: Encryption Key
  Key is not exportable.
  Key Data:
-  307C300D 06092A86 4886F70D 01010105 00036B00 30680261 00C6BD4B 892D6771 
-  F40B5F81 0282C8EB D6E33A39 7A8A8FCB 94EE6B93 AF21571A 280709E8 507F2025 
-  5A38E1D9 661B678E 86901862 1281AB28 E743451D C91A84F5 7E788AD8 FAC9A3F3 
-  5948A64E EC905510 F514EEC0 343B9BEB 7A4A5A13 B7CC5920 DB020301 0001
+  307C300D 06092A86 4886F70D 01010105 00036B00 30680261 00D3BC63 4070690D 
+  3D2E681B 7415E5CF 5BA9DB20 78985933 371865E9 241F5540 A32E4D3F 4924745F 
+  4EF5D422 D520717A CEC50C6A 13F26372 A40C1CA3 856FCA6F D2830E7C 8532FF58 
+  410829C6 E8E3321B 9BE64E69 F4551D42 31839022 1106141C 4B020301 0001
 
 ------------------ show buffers ------------------
 
 
 Buffer elements:
-     1099 in free list (1119 max allowed)
-     22306 hits, 0 misses, 619 created
+     1105 in free list (1119 max allowed)
+     7470 hits, 0 misses, 619 created
 
 Public buffer pools:
-Small buffers, 104 bytes (total 53, permanent 50, peak 53 @ 01:36:37):
-     51 in free list (20 min, 150 max allowed)
-     4248 hits, 1 misses, 0 trims, 3 created
+Small buffers, 104 bytes (total 53, permanent 50, peak 53 @ 01:43:21):
+     49 in free list (20 min, 150 max allowed)
+     2056 hits, 1 misses, 0 trims, 3 created
      0 failures (0 no memory)
-Middle buffers, 600 bytes (total 34, permanent 25, peak 34 @ 01:36:37):
-     13 in free list (10 min, 150 max allowed)
-     7375 hits, 3 misses, 0 trims, 9 created
+Middle buffers, 600 bytes (total 34, permanent 25, peak 34 @ 01:43:21):
+     19 in free list (10 min, 150 max allowed)
+     2083 hits, 3 misses, 0 trims, 9 created
      0 failures (0 no memory)
 Big buffers, 1536 bytes (total 50, permanent 50):
      50 in free list (5 min, 150 max allowed)
-     1749 hits, 0 misses, 0 trims, 0 created
+     766 hits, 0 misses, 0 trims, 0 created
      0 failures (0 no memory)
 VeryBig buffers, 4520 bytes (total 10, permanent 10):
      10 in free list (0 min, 100 max allowed)
@@ -1827,8 +1884,8 @@ Huge buffers, 18024 bytes (total 0, permanent 0):
 
 Interface buffer pools:
 Syslog ED Pool buffers, 600 bytes (total 150, permanent 150):
-     143 in free list (150 min, 150 max allowed)
-     17 hits, 0 misses
+     144 in free list (150 min, 150 max allowed)
+     16 hits, 0 misses
 CD2430 I/O buffers, 1536 bytes (total 0, permanent 0):
      0 in free list (0 min, 0 max allowed)
      0 hits, 0 fallbacks
@@ -1870,7 +1927,7 @@ FastEthernet0/0 buffers, 1552 bytes (total 512, permanent 512):
      0 in free list (0 min, 512 max allowed)
      512 hits, 0 fallbacks
      512 max cache size, 256 in cache
-     3976 hits in cache, 0 misses in cache
+     1631 hits in cache, 0 misses in cache
 FastEthernet0/1 buffers, 1552 bytes (total 512, permanent 512):
      0 in free list (0 min, 512 max allowed)
      512 hits, 0 fallbacks
@@ -1890,7 +1947,7 @@ PID:                   , VID: 0.1, SN: FTX0945W0MY
 
 
                 Head    Total(b)     Used(b)     Free(b)   Lowest(b)  Largest(b)
-Processor   6613F920    26989056    21190760     5798296     4554896     4392692
+Processor   6613F920    26989056    21188656     5800400     4489568     4352328
       I/O    7A00000     6291456     4125672     2165784     2165784     2165756
 
 ------------------ show memory summary -----------------
@@ -1914,12 +1971,12 @@ Alloc PC        Size     Blocks      Bytes    What
 0x60027DD4 0000000480 0000000001 0000000480    CCE dp c3pl fi
 0x60027DD4 0000000756 0000000001 0000000756    CCE dp c3pl fi
 0x60027DD4 0000001000 0000000001 0000001000    pak subblock c
-0x60027DD4 0000005000 0000000002 0000010000    List Headers
-0x60027DD4 0000010000 0000000002 0000020000    pak subblock c
+0x60027DD4 0000010000 0000000002 0000020000    IPS CAT string
 0x60027DD4 0000065536 0000000001 0000065536    regex
 0x60028168 0000000400 0000000001 0000000400    *Init*
 0x6002861C 0000000048 0000000001 0000000048    (fragment) (Free Blocks)
-0x6002861C 0000000088 0000000001 0000000088    (fragment) (Free Blocks)
+0x6002861C 0000000080 0000000001 0000000080    (fragment) (Free Blocks)
+0x60028754 0000000360 0000000001 0000000360    (fragment) (Free Blocks)
 0x6002C590 0000000344 0000000018 0000006192    Pool Info
 0x6002CC94 0000000512 0000000001 0000000512    Pool Cache
 0x6002CC94 0000002048 0000000004 0000008192    Pool Cache
@@ -1943,10 +2000,10 @@ Alloc PC        Size     Blocks      Bytes    What
 0x60187F90 0000009940 0000000001 0000009940    mxt5100
 0x60187FC0 0000001420 0000000001 0000001420    mxt5100
 0x602006DC 0000000024 0000000268 0000006432    Init
-0x60266068 0000000896 0000000001 0000000896    *In-use Packet Header*
+0x60266068 0000000896 0000000003 0000002688    *In-use Packet Header*
 0x6026A7AC 0000057336 0000000001 0000057336    Init
 0x60276B90 0000000136 0000000001 0000000136    Init
-0x60276B90 0000000168 0000000001 0000000168    SSH Process (Free Blocks)
+0x60276B90 0000000184 0000000001 0000000184    SSH Process (Free Blocks)
 0x6027B718 0000000024 0000000002 0000000048    *Init*
 0x6027BBDC 0000000112 0000000001 0000000112    Init
 0x6027BBF0 0000005120 0000000001 0000005120    Init
@@ -1982,8 +2039,7 @@ Alloc PC        Size     Blocks      Bytes    What
 0x605481C4 0000000064 0000000001 0000000064    Init
 0x605481E4 0000000064 0000000001 0000000064    Init
 0x60548204 0000000024 0000000001 0000000024    Init
-0x60559800 0000000896 0000001063 0000952448    *Free Packet Header*
-0x60559800 0000000956 0000000001 0000000956    *Free Packet Header*
+0x60559800 0000000896 0000001072 0000960512    *Free Packet Header*
 0x60559850 0000000756 0000000150 0000113400    *Packet Data*
 0x60561BC0 0000010000 0000000001 0000010000    Packet Elements Cache
 0x60561BF0 0000010000 0000000001 0000010000    Packet Elements
@@ -2035,7 +2091,6 @@ Alloc PC        Size     Blocks      Bytes    What
 0x605B41D8 0000000024 0000000002 0000000048    Init
 0x605B4210 0000000024 0000000002 0000000048    Init
 0x605B499C 0000000076 0000000002 0000000152    Init
-0x605B499C 0000000024 0000000001 0000000024    (fragment) (Free Blocks)
 0x605B4A38 0000000040 0000000002 0000000080    Init
 0x605BEC40 0000096000 0000000001 0000096000    Simple Trace
 0x605E3154 0000000808 0000000001 0000000808    CSM data
@@ -2056,8 +2111,6 @@ Alloc PC        Size     Blocks      Bytes    What
 0x606CB9D4 0000002552 0000000001 0000002552    logical-tab-phy-ports
 0x606F5268 0000005000 0000000001 0000005000    FEC XDR chunk
 0x60735A74 0000000372 0000000001 0000000372    Init
-0x60737BD8 0000001320 0000000001 0000001320    (coalesced) (Free Blocks)
-0x60737BD8 0000001368 0000000001 0000001368    (coalesced) (Free Blocks)
 0x6073945C 0000001024 0000000002 0000002048    AF filter
 0x6073961C 0000000100 0000000006 0000000600    AF entry
 0x6073A580 0000000896 0000000008 0000007168    *In-use Packet Header*
@@ -2306,17 +2359,17 @@ Alloc PC        Size     Blocks      Bytes    What
 0x60BFAFF8 0000000256 0000000001 0000000256    Init
 0x60C0040C 0000000172 0000000005 0000000860    Process Signals
 0x60C0040C 0000000180 0000000001 0000000180    Process Signals
-0x60C0040C 0000000196 0000000002 0000000392    Process Signals
+0x60C0040C 0000000196 0000000001 0000000196    Process Signals
 0x60C0040C 0000000200 0000000005 0000001000    Process Signals
 0x60C0095C 0000003000 0000000006 0000018000    Process Stack
 0x60C0095C 0000006000 0000000173 0001038000    Process Stack
 0x60C0095C 0000008000 0000000004 0000032000    Process Stack
 0x60C0095C 0000009000 0000000022 0000198000    Process Stack
-0x60C0095C 0000012000 0000000037 0000444000    Scheduler Stack
+0x60C0095C 0000012000 0000000037 0000444000    Process Stack
 0x60C0095C 0000024000 0000000008 0000192000    Process Stack
 0x60C0095C 0000054000 0000000001 0000054000    Interrupt Stack
 0x60C0095C 0000060000 0000000001 0000060000    Process Stack
-0x60C0095C 0000000024 0000000002 0000000048    Process Stack (Free Blocks)
+0x60C0095C 0000000024 0000000001 0000000024    (fragment) (Free Blocks)
 0x60C01098 0000000252 0000000001 0000000252    *Init*
 0x60C8B244 0000000024 0000000001 0000000024    Init
 0x60C922C0 0000000024 0000000001 0000000024    Init
@@ -2397,6 +2450,7 @@ Alloc PC        Size     Blocks      Bytes    What
 0x60E462B8 0000020000 0000000001 0000020000    dynamic ARP subblock
 0x60E46E30 0000010000 0000000001 0000010000    ARP IDB Subblock
 0x60E47790 0000002000 0000000001 0000002000    interface ARP subblock
+0x60E4AEBC 0000000024 0000000001 0000000024    (coalesced) (Free Blocks)
 0x60E4B4EC 0000000024 0000000005 0000000120    Init
 0x60E4CCDC 0000020000 0000000001 0000020000    ARP Entry
 0x60E4F86C 0000005000 0000000001 0000005000    ARP tree node
@@ -2461,8 +2515,9 @@ Alloc PC        Size     Blocks      Bytes    What
 0x6100FED8 0000003776 0000000001 0000003776    Init
 0x6104866C 0000000024 0000000006 0000000144    Init
 0x61048698 0000001024 0000000006 0000006144    Init
-0x61048794 0000065536 0000000006 0000393216    BGP IPv4 Unicast path-chunk
-0x61048840 0000065536 0000000006 0000393216    BGP IPv4 Unicast net-chunk
+0x61048794 0000065536 0000000006 0000393216    BGP IPv4 Multicast path-chunk
+0x61048840 0000065536 0000000005 0000327680    BGP IPv4 Unicast net-chunk
+0x61048840 0000128160 0000000001 0000128160    BGP IPv6 Unicast net-chunk
 0x61048870 0000004608 0000000002 0000009216    Init
 0x61048870 0000018360 0000000004 0000073440    Init
 0x61048888 0000001020 0000000006 0000006120    Init
@@ -2510,7 +2565,7 @@ Alloc PC        Size     Blocks      Bytes    What
 0x61049054 0000005000 0000000001 0000005000    BGP fcache-chunk
 0x6104908C 0000005000 0000000001 0000005000    BGP bcache-chunk
 0x610490CC 0000020000 0000000001 0000020000    BGP (2) attr
-0x610490CC 0000032768 0000000003 0000098304    BGP (0) attr
+0x610490CC 0000032768 0000000003 0000098304    BGP (1) attr
 0x61049120 0000003000 0000000001 0000003000    BGP attrlist-chunk
 0x61049158 0000002000 0000000001 0000002000    BGP worktype-chunk
 0x61049190 0000010000 0000000001 0000010000    BGP gwcache-chunk
@@ -2518,7 +2573,7 @@ Alloc PC        Size     Blocks      Bytes    What
 0x61049200 0000003000 0000000001 0000003000    BGP nbr-info chunk
 0x61049238 0000003000 0000000001 0000003000    BGP NLRI-chunk
 0x61049270 0000000480 0000000001 0000000480    BGP SNPA-chunk
-0x610492BC 0000065536 0000000007 0000458752    BGP (1) update
+0x610492BC 0000065536 0000000007 0000458752    BGP (0) update
 0x61049314 0000065536 0000000001 0000065536    BGP battr chunk
 0x6104934C 0000000252 0000000001 0000000252    BGP vpnv4 soo
 0x61049384 0000003000 0000000001 0000003000    BGP BFD MSG
@@ -2552,12 +2607,14 @@ Alloc PC        Size     Blocks      Bytes    What
 0x61318A80 0000000024 0000000001 0000000024    Init
 0x61318B34 0000000040 0000000032 0000001280    Init
 0x61318B64 0000000136 0000000032 0000004352    Init
-0x61339CC4 0000000284 0000000002 0000000568    atm vcd info
+0x61339CC4 0000000284 0000000002 0000000568    pvc control block
 0x6134FF9C 0000000216 0000000002 0000000432    CDP Protocol
 0x6134FF9C 0000000060 0000000001 0000000060    (fragment) (Free Blocks)
+0x6134FF9C 0000000144 0000000001 0000000144    (fragment) (Free Blocks)
 0x613505DC 0000000268 0000000001 0000000268    Init
 0x613507D8 0000000024 0000000001 0000000024    Init
 0x61356B20 0000000252 0000000002 0000000504    CDP Protocol
+0x61356B20 0000000148 0000000001 0000000148    (fragment) (Free Blocks)
 0x6135850C 0000000024 0000000001 0000000024    CDP hw subblock
 0x6135850C 0000000072 0000000001 0000000072    CDP hw subblock
 0x6135A490 0000000100 0000000001 0000000100    CDP sw subblock
@@ -2571,8 +2628,8 @@ Alloc PC        Size     Blocks      Bytes    What
 0x6137212C 0000001024 0000000001 0000001024    CLNS adjacency database
 0x61372B6C 0000008400 0000000001 0000008400    CLNS ESIS PDB
 0x61393548 0000008400 0000000001 0000008400    BGP's CLNS Neighbors PDB
+0x61393548 0000000024 0000000001 0000000024    (fragment) (Free Blocks)
 0x613936A8 0000008400 0000000001 0000008400    BGP's CLNS routes PDB
-0x613936A8 0000000024 0000000001 0000000024    (fragment) (Free Blocks)
 0x61393730 0000000024 0000000001 0000000024    Init
 0x6139E2E0 0000001152 0000000001 0000001152    Init
 0x6139E2F0 0000005504 0000000001 0000005504    Init
@@ -2583,8 +2640,7 @@ Alloc PC        Size     Blocks      Bytes    What
 0x61411B80 0000000024 0000000002 0000000048    AAA SG NAME
 0x61414598 0000001024 0000000001 0000001024    AAA attr list handle IDs
 0x61414690 0000009600 0000000001 0000009600    AAA attr list handle IDs
-0x614158B0 0000000024 0000000001 0000000024    AAA Attr String (Free Blocks)
-0x61417614 0000000048 0000000001 0000000048    (fragment) (Free Blocks)
+0x61417614 0000000044 0000000001 0000000044    (fragment) (Free Blocks)
 0x61424078 0000004096 0000000001 0000004096    AAA Unique Id Hash Table
 0x6142412C 0000065536 0000000001 0000065536    AAA DB Chunk
 0x6143A58C 0000000024 0000000004 0000000096    Init
@@ -2636,7 +2692,7 @@ Alloc PC        Size     Blocks      Bytes    What
 0x6147C128 0000000160 0000000001 0000000160    Ion New Block
 0x6147C548 0000000024 0000000001 0000000024    Ion Password
 0x6147D8B0 0000000036 0000000001 0000000036    Init
-0x61487524 0000558052 0000000001 0000558052    (coalesced) (Free Blocks)
+0x61487524 0004352328 0000000001 0004352328    (coalesced) (Free Blocks)
 0x61488E88 0000000512 0000000001 0000000512    Init
 0x61490AFC 0000000412 0000000001 0000000412    Name info
 0x614935C0 0000000308 0000000001 0000000308    Name view
@@ -2652,18 +2708,19 @@ Alloc PC        Size     Blocks      Bytes    What
 0x61495AB4 0000000480 0000000007 0000003360    String-DB hand
 0x61495B1C 0000000896 0000000007 0000006272    String-DB entr
 0x61495B48 0000000024 0000000211 0000005064    NameDB String
-0x61495B48 0000000028 0000000012 0000000336    NameDB String
+0x61495B48 0000000028 0000000011 0000000308    NameDB String
 0x61495B48 0000000032 0000000007 0000000224    NameDB String
 0x61495B48 0000000036 0000000004 0000000144    NameDB String
-0x61495B48 0000000040 0000000001 0000000040    NameDB String
+0x61495B48 0000000040 0000000002 0000000080    NameDB String
 0x61495B48 0000000044 0000000001 0000000044    NameDB String
 0x61495B48 0000000048 0000000003 0000000144    NameDB String
-0x61495B48 0000000052 0000000002 0000000104    NameDB String
+0x61495B48 0000000052 0000000001 0000000052    NameDB String
 0x61495B48 0000000060 0000000001 0000000060    NameDB String
 0x61495B48 0000000064 0000000001 0000000064    NameDB String
 0x61495B48 0000000068 0000000002 0000000136    NameDB String
 0x61495B48 0000000072 0000000010 0000000720    NameDB String
 0x61495B48 0000000080 0000000005 0000000400    NameDB String
+0x61495B48 0000000084 0000000001 0000000084    NameDB String
 0x61495B48 0000000100 0000000001 0000000100    NameDB String
 0x61495C08 0000000896 0000000007 0000006272    String-DB owne
 0x61496064 0000000096 0000000001 0000000096    Init
@@ -2673,13 +2730,12 @@ Alloc PC        Size     Blocks      Bytes    What
 0x6149E238 0000000420 0000000001 0000000420    SSH Process
 0x6149F7B0 0000004384 0000000009 0000039456    TTY data
 0x614A2334 0000000072 0000000001 0000000072    Bitfield pool
-0x614A2368 0000000340 0000000001 0000000340    Bitfields
-0x614A2368 0000001500 0000000001 0000001500    Bitfields
+0x614A2368 0000000348 0000000001 0000000348    Bitfields
+0x614A2368 0000001548 0000000001 0000001548    Bitfields
 0x614A2D24 0000004008 0000000001 0000004008    TTY timers array
-0x614A2D84 0000000048 0000000001 0000000048    TTY timer block
-0x614A2D84 0000000100 0000000001 0000000100    TTY timer block
-0x614A2D84 0000000028 0000000001 0000000028    (fragment) (Free Blocks)
-0x614A2EF8 0000000108 0000000001 0000000108    TTYBKG Timer
+0x614A2D84 0000000100 0000000002 0000000200    TTY timer block
+0x614A2EF8 0000000040 0000000001 0000000040    TTYBKG Timer
+0x614A2EF8 0000000024 0000000001 0000000024    (fragment) (Free Blocks)
 0x614A7030 0000000024 0000000012 0000000288    Init
 0x614A7030 0000000092 0000000001 0000000092    Init
 0x614A7040 0000000024 0000000013 0000000312    Init
@@ -2713,15 +2769,15 @@ Alloc PC        Size     Blocks      Bytes    What
 0x614BCD34 0000032768 0000000001 0000032768    Parse Nodes
 0x614BFCCC 0000000024 0000000069 0000001656    Init
 0x614BFCCC 0000000044 0000000001 0000000044    Init
-0x614BFCCC 0000000024 0000000076 0000001824    Init (Free Blocks)
+0x614BFCCC 0000000024 0000000079 0000001896    Init (Free Blocks)
 0x614C2BC0 0000000720 0000000001 0000000720    Init
 0x614C2E20 0000000300 0000000001 0000000300    Init
 0x614C2F84 0000000040 0000000001 0000000040    Init
-0x614C3154 0000000024 0000000924 0000022176    Parser Linkage
+0x614C3154 0000000024 0000000923 0000022152    Parser Linkage
 0x614C3154 0000000028 0000000002 0000000056    Parser Linkage
 0x614C3154 0000000032 0000000001 0000000032    Parser Linkage
 0x614C3154 0000000036 0000000002 0000000072    Parser Linkage
-0x614C3154 0000000040 0000000001 0000000040    Parser Linkage
+0x614C3154 0000000040 0000000002 0000000080    Parser Linkage
 0x614C3154 0000000044 0000000001 0000000044    Parser Linkage
 0x614C3154 0000000048 0000000005 0000000240    Parser Linkage
 0x614C3154 0000000052 0000000002 0000000104    Parser Linkage
@@ -2747,8 +2803,9 @@ Alloc PC        Size     Blocks      Bytes    What
 0x614C4CE4 0000000032 0000000001 0000000032    Parser Mode Q2
 0x614C4CE4 0000000056 0000000001 0000000056    Parser Mode Q2
 0x614C4CE4 0000000060 0000000001 0000000060    Parser Mode Q2
-0x614C728C 0000000480 0000000012 0000005760    Chain Cache No
-0x614C728C 0000000536 0000000001 0000000536    Chain Cache No
+0x614C728C 0000000480 0000000011 0000005280    Chain Cache No
+0x614C728C 0000000532 0000000001 0000000532    Chain Cache No
+0x614C7394 0000000480 0000000001 0000000480    Chain Cache No
 0x614C927C 0000000032 0000000020 0000000640    Init
 0x614C9374 0000000024 0000000004 0000000096    Init
 0x614C9430 0000000024 0000000004 0000000096    Init
@@ -2757,7 +2814,7 @@ Alloc PC        Size     Blocks      Bytes    What
 0x614CBA0C 0000000024 0000000001 0000000024    Init
 0x614D9C54 0000000032 0000000016 0000000512    Parser Alias
 0x614D9C80 0000000024 0000000016 0000000384    *Init*
-0x614E1920 0000006144 0000000001 0000006144    (coalesced) (Free Blocks)
+0x614E1920 0000007852 0000000001 0000007852    (coalesced) (Free Blocks)
 0x614E3BB8 0000000024 0000000001 0000000024    Init
 0x614EB178 0000000024 0000000018 0000000432    Cond Debug definition
 0x614EFC60 0000000084 0000000002 0000000168    GraphIt Data
@@ -2821,7 +2878,7 @@ Alloc PC        Size     Blocks      Bytes    What
 0x616B4BCC 0000000116 0000000001 0000000116    DSS-SB
 0x616F36D0 0000000160 0000000001 0000000160    Entity MIB API
 0x616F36D0 0000000172 0000000001 0000000172    Entity MIB API
-0x616F36D0 0000000176 0000000001 0000000176    Entity MIB API
+0x616F36D0 0000000192 0000000001 0000000192    Entity MIB API
 0x616F36D0 0000000200 0000000013 0000002600    Entity MIB API
 0x61700918 0000000024 0000000003 0000000072    Init
 0x61700944 0000000040 0000000003 0000000120    Init
@@ -2831,12 +2888,15 @@ Alloc PC        Size     Blocks      Bytes    What
 0x617285BC 0000000264 0000000002 0000000528    Init
 0x6172E340 0000000024 0000000001 0000000024    EM EVENT HANDLER
 0x61756418 0000000244 0000000001 0000000244    Init
-0x617A5A64 0000000896 0000000007 0000006272    *In-use Packet Header*
+0x617A5A64 0000000896 0000000006 0000005376    *In-use Packet Header*
 0x617A924C 0000009056 0000000001 0000009056    EEM Policy Director
 0x617ADF80 0000000040 0000000001 0000000040    Init
-0x617BF2BC 0000000840 0000000018 0000015120    EEM Server
-0x617BF384 0000004200 0000000018 0000075600    EEM Server
-0x617BF398 0000004200 0000000018 0000075600    EEM Server
+0x617BF2BC 0000000840 0000000014 0000011760    EEM Server
+0x617BF2BC 0000000912 0000000001 0000000912    EEM Server
+0x617BF2BC 0000000036 0000000001 0000000036    (fragment) (Free Blocks)
+0x617BF2BC 0000000096 0000000001 0000000096    (fragment) (Free Blocks)
+0x617BF384 0000004200 0000000015 0000063000    EEM Server
+0x617BF398 0000004200 0000000015 0000063000    EEM Server
 0x617C1BAC 0000000672 0000000001 0000000672    EEM Server
 0x617C505C 0000000040 0000000001 0000000040    Init
 0x617DD1C4 0000000040 0000000028 0000001120    Init
@@ -3113,7 +3173,7 @@ Alloc PC        Size     Blocks      Bytes    What
 0x61A04DE8 0000005000 0000000001 0000005000    HTTP_SMALL_CHUNK
 0x61A0A42C 0000000084 0000000012 0000001008    HTTP
 0x61A0A42C 0000000116 0000000001 0000000116    HTTP
-0x61A0A42C 0000000124 0000000001 0000000124    HTTP
+0x61A0A42C 0000000128 0000000001 0000000128    HTTP
 0x61A0A42C 0000000024 0000000001 0000000024    (fragment) (Free Blocks)
 0x61A24804 0000000056 0000000004 0000000224    SNMP IDB
 0x61A24804 0000000100 0000000001 0000000100    SNMP IDB
@@ -3126,21 +3186,22 @@ Alloc PC        Size     Blocks      Bytes    What
 0x61A28C20 0000000040 0000000001 0000000040    Init
 0x61A28C20 0000000044 0000000002 0000000088    Init
 0x61A28C20 0000000100 0000000001 0000000100    Init
-0x61A294EC 0000000024 0000000001 0000000024    IFINDEX hw subblock
-0x61A294EC 0000000036 0000000001 0000000036    IFINDEX hw subblock
-0x61A294EC 0000000080 0000000001 0000000080    IFINDEX hw subblock
-0x61A2C308 0000000040 0000000020 0000000800    Init
-0x61A2C330 0000000044 0000000020 0000000880    Init
+0x61A294EC 0000000024 0000000002 0000000048    IFINDEX hw subblock
+0x61A294EC 0000000032 0000000001 0000000032    IFINDEX hw subblock
+0x61A2C308 0000000040 0000000019 0000000760    Init
+0x61A2C308 0000000108 0000000001 0000000108    Init
+0x61A2C330 0000000044 0000000019 0000000836    Init
+0x61A2C330 0000000108 0000000001 0000000108    Init
 0x61A2D8D4 0000005000 0000000001 0000005000    File Descriptors
-0x61A2DBCC 0004392692 0000000001 0004392692    (coalesced) (Free Blocks)
+0x61A2DBCC 0000878876 0000000001 0000878876    (coalesced) (Free Blocks)
 0x61A2E520 0000000028 0000000006 0000000168    Init
 0x61A33BB4 0000010000 0000000001 0000010000    Pathents for parsing
 0x61A33BE0 0000010000 0000000001 0000010000    TTY Pathents for parsing
 0x61A34CF0 0000001368 0000000001 0000001368    Init
 0x61A37FEC 0000000028 0000000003 0000000084    Init
-0x61A3AC18 0000000320 0000000001 0000000320    (coalesced) (Free Blocks)
+0x61A3AC18 0000000400 0000000001 0000000400    (coalesced) (Free Blocks)
 0x61A3E980 0000000360 0000000001 0000000360    Init
-0x61A441C8 0000000404 0000000001 0000000404    SSH Process (Free Blocks)
+0x61A441C8 0000000400 0000000001 0000000400    SSH Process (Free Blocks)
 0x61A6D078 0000000024 0000000001 0000000024    Init
 0x61A71800 0000000024 0000000003 0000000072    Init
 0x61A71850 0000000024 0000000003 0000000072    Init
@@ -3186,7 +3247,7 @@ Alloc PC        Size     Blocks      Bytes    What
 0x61D26FF8 0000004800 0000000001 0000004800    Init
 0x61D27030 0000000152 0000000001 0000000152    Init
 0x61D299DC 0000000032 0000000001 0000000032    Init
-0x61D31A74 0000000232 0000000001 0000000232    ATF node
+0x61D31A74 0000000264 0000000001 0000000264    ATF node
 0x61D31A74 0000002000 0000000001 0000002000    ATF node
 0x61D31AA0 0000000140 0000000001 0000000140    ATF nbr
 0x61D31AA0 0000000404 0000000001 0000000404    ATF nbr
@@ -3198,15 +3259,16 @@ Alloc PC        Size     Blocks      Bytes    What
 0x61D36134 0000000032 0000000001 0000000032    Init
 0x61D361DC 0000000124 0000000001 0000000124    ATF v4 query
 0x61D361DC 0000000328 0000000001 0000000328    ATF v4 query
-0x61D44544 0000000144 0000000003 0000000432    URL filter proc
+0x61D44544 0000000144 0000000003 0000000432    http client process
 0x61D44544 0000000160 0000000001 0000000160    TPLUS
 0x61D44544 0000000200 0000000001 0000000200    DHCPD Receive
-0x61D445C8 0000000512 0000000005 0000002560    HTTP CORE
-0x61D44600 0000000128 0000000003 0000000384    URL filter proc
+0x61D445C8 0000000512 0000000005 0000002560    TPLUS
+0x61D44600 0000000128 0000000003 0000000384    http client process
 0x61D47174 0000000200 0000000001 0000000200    DHCPD Receive
 0x61D6C4AC 0000000252 0000000001 0000000252    DHCPD Receive
-0x61D75D30 0000000896 0000000004 0000003584    *In-use Packet Header*
+0x61D75D30 0000000896 0000000002 0000001792    *In-use Packet Header*
 0x61D79854 0000001320 0000000005 0000006600    TCP CB
+0x61D79854 0000000024 0000000001 0000000024    (fragment) (Free Blocks)
 0x61D82824 0000000024 0000000002 0000000048    Init
 0x61D924D8 0000001176 0000000001 0000001176    IPX IDB
 0x61D99920 0000000028 0000000001 0000000028    NOV HW Subblock
@@ -3329,7 +3391,6 @@ Alloc PC        Size     Blocks      Bytes    What
 0x6203986C 0000000024 0000000002 0000000048    Init
 0x6212331C 0000000480 0000000001 0000000480    LLC CB
 0x6212FEDC 0000001024 0000000001 0000001024    Init
-0x62132408 0000000024 0000000001 0000000024    local_aaa_authen3 (Free Blocks)
 0x6213F560 0000000416 0000000005 0000002080    ivr: mediaContent
 0x6213F744 0000000024 0000000005 0000000120    ivr: mediaContent name
 0x62140134 0000000024 0000000005 0000000120    Init
@@ -3350,10 +3411,10 @@ Alloc PC        Size     Blocks      Bytes    What
 0x6220E398 0000000404 0000000001 0000000404    LSPV parser tt status pool
 0x6220E3C4 0000065536 0000000001 0000065536    LSPV parser tt path pool
 0x62237BD4 0000000080 0000000003 0000000240    SWIDB_SB: NETBIOS Info
-0x6223A3FC 0000000100 0000000001 0000000100    SWIDB_SB: NETBIOS Info
+0x6223A3FC 0000000124 0000000001 0000000124    SWIDB_SB: NETBIOS Info
 0x62275AA0 0000001500 0000000001 0000001500    NTP Chunk
 0x6227B1EC 0000000040 0000000001 0000000040    NTP refclock vectors
-0x6227FC80 0000000480 0000000001 0000000480    (coalesced) (Free Blocks)
+0x6227FC80 0000000416 0000000001 0000000416    SSH Process (Free Blocks)
 0x622851CC 0000001908 0000000001 0000001908    Init
 0x622F39D8 0000000300 0000000001 0000000300    X25PAD PACKET
 0x62316D40 0000001024 0000000001 0000001024    PPP HANDLE IDs
@@ -3541,7 +3602,7 @@ Alloc PC        Size     Blocks      Bytes    What
 0x62850834 0000000036 0000000001 0000000036    Init
 0x62850844 0000000024 0000000001 0000000024    Init
 0x62850924 0000000024 0000000001 0000000024    Init
-0x62851CEC 0000000144 0000000001 0000000144    SSH Process (Free Blocks)
+0x62851CEC 0000000148 0000000001 0000000148    SSH Process (Free Blocks)
 0x6285A194 0000000024 0000000002 0000000048    Init
 0x6285A194 0000000040 0000000001 0000000040    Init
 0x6285DE8C 0000000024 0000000215 0000005160    SNMP Trap
@@ -3642,19 +3703,21 @@ Alloc PC        Size     Blocks      Bytes    What
 0x62B086B0 0000005000 0000000001 0000005000    List Headers
 0x62B0DB58 0000001032 0000000001 0000001032    Process Array
 0x62B0DBEC 0000000712 0000000250 0000178000    Process
-0x62B0DBEC 0000000032 0000000001 0000000032    (fragment) (Free Blocks)
-0x62B0DBEC 0000000052 0000000001 0000000052    (fragment) (Free Blocks)
+0x62B0DBEC 0000000024 0000000001 0000000024    (fragment) (Free Blocks)
 0x62B10538 0000005000 0000000002 0000010000    Watcher Info
 0x62B107AC 0000001500 0000000013 0000019500    Watched Semaph
-0x62B107AC 0000010000 0000000003 0000030000    Watched Boolea
-0x62B10DE4 0000000200 0000000244 0000048800    Process Events
-0x62B10DE4 0000000248 0000000002 0000000496    Process Events
+0x62B107AC 0000010000 0000000003 0000030000    Watched Queue
+0x62B10DE4 0000000200 0000000245 0000049000    Process Events
+0x62B10DE4 0000000252 0000000001 0000000252    Process Events
 0x62B10DE4 0000000260 0000000003 0000000780    Process Events
 0x62B10DE4 0000000272 0000000001 0000000272    Process Events
 0x62B10DE4 0000000024 0000000001 0000000024    (fragment) (Free Blocks)
 0x62B10DE4 0000000032 0000000001 0000000032    (fragment) (Free Blocks)
+0x62B10DE4 0000000052 0000000001 0000000052    (fragment) (Free Blocks)
 0x62B10DE4 0000000060 0000000001 0000000060    (fragment) (Free Blocks)
+0x62B10DE4 0000000072 0000000001 0000000072    (fragment) (Free Blocks)
 0x62B10DE4 0000000092 0000000001 0000000092    (fragment) (Free Blocks)
+0x62B10DE4 0000000132 0000000001 0000000132    (fragment) (Free Blocks)
 0x62B1334C 0000001500 0000000001 0000001500    messages
 0x62B1337C 0000001500 0000000001 0000001500    Watched messages
 0x62B133A8 0000010000 0000000001 0000010000    Watched Queue
@@ -3725,12 +3788,13 @@ Alloc PC        Size     Blocks      Bytes    What
 0x62B1CA8C 0000000024 0000000468 0000011232    *Init*
 0x62B1CA8C 0000000028 0000000002 0000000056    Init
 0x62B1CA8C 0000000032 0000000001 0000000032    Init
-0x62B1CA8C 0000000040 0000000001 0000000040    Init
 0x62B1CA8C 0000000048 0000000003 0000000144    Init
 0x62B1CA8C 0000000052 0000000001 0000000052    Init
-0x62B1CA8C 0000000068 0000000002 0000000136    Init
+0x62B1CA8C 0000000064 0000000001 0000000064    Init
+0x62B1CA8C 0000000068 0000000001 0000000068    Init
 0x62B1CA8C 0000000072 0000000004 0000000288    Init
 0x62B1CA8C 0000000080 0000000001 0000000080    Init
+0x62B1CA8C 0000000084 0000000001 0000000084    Init
 0x62B1CA8C 0000000096 0000000001 0000000096    Init
 0x62B1D4B8 0000005000 0000000001 0000005000    RMI-RUT Chunks
 0x62B1D4D4 0000000064 0000000001 0000000064    Resource User Type IDs
@@ -3784,7 +3848,7 @@ Alloc PC        Size     Blocks      Bytes    What
 0x62BD5638 0000000048 0000000001 0000000048    Dialog Manager Control Block
 0x62BDC230 0000000024 0000000001 0000000024    Shared-Line CCB Table
 0x62BDC294 0000000148 0000000032 0000004736    Init
-0x62C06770 0000824284 0000000001 0000824284    (coalesced) (Free Blocks)
+0x62C06770 0000546328 0000000001 0000546328    (coalesced) (Free Blocks)
 0x62C5113C 0000020000 0000000001 0000020000    VPDN subblock chunks
 0x62C51B50 0000065536 0000000001 0000065536    VPDN msg chunks
 0x62C53F0C 0000065536 0000000001 0000065536    VPDN call req chunk
@@ -3844,80 +3908,69 @@ Alloc PC        Size     Blocks      Bytes    What
 0x62E9669C 0000000028 0000000001 0000000028    Init
 0x62EE54B8 0000000264 0000000001 0000000264    Init
 0x62F4D530 0000000032 0000000003 0000000096    crypto_handle_table
-0x62F4D530 0000000048 0000000001 0000000048    crypto_handle_table
-0x62F4D530 0000000028 0000000002 0000000056    (fragment) (Free Blocks)
+0x62F4D530 0000000108 0000000001 0000000108    crypto_handle_table
+0x62F4D530 0000000028 0000000001 0000000028    (fragment) (Free Blocks)
 0x62F635D0 0000000024 0000000016 0000000384    Init
-0x62F635D0 0000000028 0000000005 0000000140    Init
-0x62F635D0 0000000032 0000000002 0000000064    Init
-0x62F635D0 0000000036 0000000003 0000000108    Init
-0x62F635D0 0000000044 0000000002 0000000088    Init
-0x62F635D0 0000000060 0000000003 0000000180    Init
-0x62F635D0 0000000072 0000000001 0000000072    Init
-0x62F635D0 0000000076 0000000001 0000000076    Init
-0x62F635D0 0000000092 0000000001 0000000092    Init
+0x62F635D0 0000000028 0000000004 0000000112    Init
+0x62F635D0 0000000032 0000000005 0000000160    Init
+0x62F635D0 0000000036 0000000002 0000000072    Init
+0x62F635D0 0000000040 0000000004 0000000160    Init
+0x62F635D0 0000000044 0000000001 0000000044    Init
+0x62F635D0 0000000048 0000000001 0000000048    Init
+0x62F635D0 0000000052 0000000001 0000000052    Init
+0x62F635D0 0000000056 0000000001 0000000056    Init
+0x62F635D0 0000000060 0000000002 0000000120    Init
+0x62F635D0 0000000068 0000000002 0000000136    Init
+0x62F635D0 0000000096 0000000001 0000000096    Init
+0x62F635D0 0000000100 0000000001 0000000100    Init
 0x62F635D0 0000000104 0000000004 0000000416    Init
-0x62F635D0 0000000108 0000000001 0000000108    Init
 0x62F635D0 0000000112 0000000002 0000000224    Init
 0x62F635D0 0000000116 0000000002 0000000232    Init
 0x62F635D0 0000000120 0000000002 0000000240    Init
 0x62F635D0 0000000124 0000000002 0000000248    Init
-0x62F635D0 0000000128 0000000001 0000000128    Init
-0x62F635D0 0000000132 0000000001 0000000132    Init
-0x62F635D0 0000000136 0000000003 0000000408    crypto engine proc
-0x62F635D0 0000000140 0000000026 0000003640    crypto engine proc
-0x62F635D0 0000000148 0000000001 0000000148    SSH Process
-0x62F635D0 0000000152 0000000001 0000000152    SSH Process
-0x62F635D0 0000000156 0000000002 0000000312    SSH Process
-0x62F635D0 0000000164 0000000001 0000000164    SSH Process
-0x62F635D0 0000000168 0000000001 0000000168    SSH Process
-0x62F635D0 0000000172 0000000002 0000000344    SSH Process
-0x62F635D0 0000000176 0000000005 0000000880    crypto engine proc
-0x62F635D0 0000000184 0000000001 0000000184    SSH Process
-0x62F635D0 0000000188 0000000002 0000000376    SSH Process
+0x62F635D0 0000000128 0000000002 0000000256    Init
+0x62F635D0 0000000136 0000000004 0000000544    SSH Process
+0x62F635D0 0000000140 0000000029 0000004060    SSH Process
+0x62F635D0 0000000144 0000000002 0000000288    crypto sw pk proc
+0x62F635D0 0000000152 0000000002 0000000304    SSH Process
+0x62F635D0 0000000156 0000000003 0000000468    crypto sw pk proc
+0x62F635D0 0000000160 0000000001 0000000160    crypto sw pk proc
+0x62F635D0 0000000164 0000000002 0000000328    SSH Process
+0x62F635D0 0000000176 0000000001 0000000176    crypto engine proc
+0x62F635D0 0000000180 0000000002 0000000360    Init
+0x62F635D0 0000000184 0000000003 0000000552    crypto sw pk proc
+0x62F635D0 0000000188 0000000001 0000000188    SSH Process
 0x62F635D0 0000000192 0000000001 0000000192    crypto engine proc
-0x62F635D0 0000000196 0000000002 0000000392    Init
-0x62F635D0 0000000200 0000000005 0000001000    SSH Process
-0x62F635D0 0000000204 0000000024 0000004896    Init
-0x62F635D0 0000000208 0000000002 0000000416    crypto engine proc
-0x62F635D0 0000000212 0000000001 0000000212    SSH Process
-0x62F635D0 0000000216 0000000002 0000000432    SSH Process
-0x62F635D0 0000000220 0000000002 0000000440    SSH Process
-0x62F635D0 0000000224 0000000001 0000000224    SSH Process
-0x62F635D0 0000000228 0000000001 0000000228    SSH Process
-0x62F635D0 0000000236 0000000002 0000000472    SSH Process
-0x62F635D0 0000000252 0000000002 0000000504    SSH Process
-0x62F635D0 0000000256 0000000001 0000000256    Init
-0x62F635D0 0000000260 0000000002 0000000520    SSH Process
-0x62F635D0 0000000264 0000000001 0000000264    SSH Process
-0x62F635D0 0000000268 0000000021 0000005628    crypto engine proc
-0x62F635D0 0000000300 0000000001 0000000300    SSH Process
-0x62F635D0 0000000312 0000000001 0000000312    SSH Process
-0x62F635D0 0000000316 0000000001 0000000316    SSH Process
-0x62F635D0 0000000320 0000000001 0000000320    SSH Process
-0x62F635D0 0000000340 0000000001 0000000340    SSH Process
+0x62F635D0 0000000200 0000000004 0000000800    SSH Process
+0x62F635D0 0000000204 0000000030 0000006120    Init
+0x62F635D0 0000000216 0000000001 0000000216    SSH Process
+0x62F635D0 0000000220 0000000002 0000000440    crypto engine proc
+0x62F635D0 0000000240 0000000001 0000000240    SSH Process
+0x62F635D0 0000000244 0000000002 0000000488    SSH Process
+0x62F635D0 0000000252 0000000001 0000000252    SSH Process
+0x62F635D0 0000000268 0000000025 0000006700    SSH Process
 0x62F635D0 0000000028 0000000002 0000000056    (fragment) (Free Blocks)
-0x62F635D0 0000000032 0000000002 0000000064    (fragment) (Free Blocks)
-0x62F635D0 0000000052 0000000001 0000000052    (fragment) (Free Blocks)
-0x62F635D0 0000000056 0000000001 0000000056    (fragment) (Free Blocks)
-0x62F635D0 0000000064 0000000001 0000000064    (fragment) (Free Blocks)
-0x62F635D0 0000000068 0000000002 0000000136    (fragment) (Free Blocks)
-0x62F635D0 0000000088 0000000002 0000000176    (fragment) (Free Blocks)
-0x62F635D0 0000000096 0000000001 0000000096    (fragment) (Free Blocks)
+0x62F635D0 0000000032 0000000001 0000000032    (fragment) (Free Blocks)
+0x62F635D0 0000000036 0000000001 0000000036    (fragment) (Free Blocks)
+0x62F635D0 0000000044 0000000001 0000000044    (fragment) (Free Blocks)
+0x62F635D0 0000000048 0000000002 0000000096    (fragment) (Free Blocks)
+0x62F635D0 0000000072 0000000001 0000000072    (fragment) (Free Blocks)
+0x62F635D0 0000000096 0000000002 0000000192    (fragment) (Free Blocks)
+0x62F635D0 0000000136 0000000001 0000000136    (fragment) (Free Blocks)
 0x62F66BCC 0000000024 0000000001 0000000024    Init
-0x62F67194 0000000180 0000000001 0000000180    crypto sw pk proc
+0x62F67194 0000000164 0000000001 0000000164    crypto sw pk proc
 0x62F671A0 0000000488 0000000001 0000000488    crypto sw pk proc
 0x62F671A0 0000000636 0000000001 0000000636    crypto sw pk proc
 0x62F67CA0 0000000116 0000000001 0000000116    Init
-0x62F751E0 0000000556 0000000001 0000000556    Crypto Engine Object Table
+0x62F751E0 0000000512 0000000001 0000000512    Crypto Engine Object Table
 0x62F751E0 0000000936 0000000001 0000000936    Crypto Engine Object Table
 0x62F751E0 0000008584 0000000002 0000017168    Crypto Engine Object Table
 0x62F75BF8 0000002000 0000000001 0000002000    Crypto requests
-0x62F83368 0000000040 0000000001 0000000040    Init
+0x62F83368 0000000096 0000000001 0000000096    Init
 0x62F8E7A0 0000004004 0000000001 0000004004    Init
 0x62F8E7B8 0000000404 0000000001 0000000404    Init
 0x62F8E7D0 0000000204 0000000001 0000000204    Init
-0x62F8EC80 0000000044 0000000001 0000000044    Software engine status
-0x62F8FDDC 0000000192 0000000001 0000000192    SSH Process (Free Blocks)
+0x62F8EC80 0000000072 0000000001 0000000072    Software engine status
 0x62F92690 0000000896 0000000001 0000000896    *In-use Packet Header*
 0x62F96DF0 0000020380 0000000001 0000020380    Init
 0x62F96E2C 0000004164 0000000001 0000004164    Init
@@ -3927,29 +3980,25 @@ Alloc PC        Size     Blocks      Bytes    What
 0x62FBEB14 0000004096 0000000003 0000012288    SSH2 Buffer
 0x62FBEB7C 0000001024 0000000001 0000001024    SSH2 Buffer
 0x62FBEB7C 0000002048 0000000002 0000004096    SSH2 Buffer
-0x62FBEB7C 0000000932 0000000001 0000000932    (fragment) (Free Blocks)
-0x62FBEB7C 0000002824 0000000001 0000002824    (coalesced) (Free Blocks)
+0x62FBEB7C 0000000220 0000000001 0000000220    (coalesced) (Free Blocks)
 0x62FBECF0 0000005120 0000000001 0000005120    SSH2 Buffer
 0x62FBF064 0000000024 0000000001 0000000024    SSH2 String
-0x62FBF064 0000000124 0000000001 0000000124    (coalesced) (Free Blocks)
-0x62FBF064 0000000132 0000000002 0000000264    (coalesced) (Free Blocks)
-0x62FBF064 0000000136 0000000002 0000000272    (coalesced) (Free Blocks)
-0x62FBF064 0000000140 0000000001 0000000140    (coalesced) (Free Blocks)
-0x62FBF064 0000000144 0000000001 0000000144    (coalesced) (Free Blocks)
-0x62FBF064 0000000148 0000000004 0000000592    (coalesced) (Free Blocks)
+0x62FBF064 0000000128 0000000004 0000000512    (coalesced) (Free Blocks)
 0x62FC2578 0000000024 0000000001 0000000024    SSH2 Session-id
 0x62FC310C 0000000516 0000000002 0000001032    SSH2 memory
+0x62FC310C 0000000068 0000000001 0000000068    (fragment) (Free Blocks)
 0x62FC38C0 0000000024 0000000001 0000000024    AAA Request Data
 0x62FC38C0 0000000216 0000000001 0000000216    AAA Request
-0x62FC3930 0000000032 0000000001 0000000032    AAA Attr String (Free Blocks)
-0x62FC40CC 0000000108 0000000001 0000000108    SSH2 Channel
-0x62FE20C8 0000000156 0000000001 0000000156    Crypto CA
+0x62FC40CC 0000000104 0000000001 0000000104    SSH2 Channel
+0x62FE20C8 0000000172 0000000001 0000000172    Crypto CA
+0x63001D60 0000000240 0000000001 0000000240    (coalesced) (Free Blocks)
+0x63005AB8 0000000216 0000000001 0000000216    (coalesced) (Free Blocks)
+0x63005AB8 0000000240 0000000001 0000000240    (coalesced) (Free Blocks)
+0x6300735C 0000000228 0000000001 0000000228    (coalesced) (Free Blocks)
 0x63014BF0 0000000240 0000000001 0000000240    Crypto CA
-0x63014D4C 0000000200 0000000001 0000000200    Crypto CA
+0x63014D4C 0000000160 0000000001 0000000160    Crypto CA
 0x63015A98 0000000192 0000000001 0000000192    Crypto CA
 0x6303B708 0000000528 0000000001 0000000528    Crypto CA
-0x6303B708 0000000024 0000000001 0000000024    (coalesced) (Free Blocks)
-0x6303B708 0000001368 0000000001 0000001368    (coalesced) (Free Blocks)
 0x63047DE8 0000000024 0000000001 0000000024    Init
 0x6305AD70 0000003988 0000000001 0000003988    AUTH-PROXY hash pointer
 0x6305AE28 0000001024 0000000001 0000001024    Authproxy info handle table
@@ -3975,9 +4024,6 @@ Alloc PC        Size     Blocks      Bytes    What
 0x63143CD8 0000003000 0000000001 0000003000    Crypto ACL Commands
 0x63152418 0000000572 0000000001 0000000572    crypto fragment info
 0x6315253C 0000000564 0000000001 0000000564    Init
-0x63167638 0000010000 0000000001 0000010000    show session ike sa chunk buffer
-0x63167670 0000010000 0000000001 0000010000    show session ipsec flow chunk buffer
-0x631676A8 0000005000 0000000001 0000005000    show session chunk buffer
 0x63169480 0000000028 0000000001 0000000028    Init
 0x6316948C 0000000024 0000000001 0000000024    Init
 0x63174A7C 0000001500 0000000001 0000001500    KMI id chunk pool
@@ -4108,7 +4154,8 @@ Alloc PC        Size     Blocks      Bytes    What
 0x634A38C0 0000004188 0000000001 0000004188    sslvpn url disp
 0x634A38C0 0000032768 0000000001 0000032768    sslvpn url disp
 0x634A38E8 0000000072 0000000001 0000000072    Init
-0x634B3B34 0000001996 0000000001 0000001996    (coalesced) (Free Blocks)
+0x634B3B34 0000003092 0000000001 0000003092    (coalesced) (Free Blocks)
+0x634B3B34 0000003528 0000000001 0000003528    (coalesced) (Free Blocks)
 0x634B5730 0000000040 0000000001 0000000040    HTTP Process
 0x634BC50C 0000000708 0000000001 0000000708    webvpn session
 0x634BC50C 0000065536 0000000001 0000065536    webvpn session
@@ -4184,6 +4231,7 @@ Alloc PC        Size     Blocks      Bytes    What
 0x6361E7FC 0000000064 0000000001 0000000064    Init
 0x63620F38 0000000256 0000000035 0000008960    Init
 0x63620F38 0000032768 0000000001 0000032768    Init
+0x63620F38 0000000144 0000000001 0000000144    (fragment) (Free Blocks)
 0x63622DD8 0000000252 0000000001 0000000252    ATF route nodes
 0x63622DD8 0000000256 0000000003 0000000768    EIGRP-IPv6 summary
 0x63622DD8 0000000328 0000000001 0000000328    IPv6 Static RIB
@@ -4217,19 +4265,18 @@ Alloc PC        Size     Blocks      Bytes    What
 0x63630F1C 0000010000 0000000004 0000040000    Tree DB Node Chunk
 0x6363D4D4 0000000024 0000000001 0000000024    Hashtable
 0x6363D4F0 0000000128 0000000001 0000000128    Hashtable Buckets
-0x6363DC5C 0000000024 0000000002 0000000048    Iterator (Free Blocks)
-0x6363DC94 0000000024 0000000002 0000000048    Iterator Hash Entry (Free Blocks)
+0x6363DC5C 0000000024 0000000001 0000000024    Iterator (Free Blocks)
+0x6363DC5C 0000000080 0000000001 0000000080    Iterator (Free Blocks)
+0x6363DC94 0000000024 0000000001 0000000024    Iterator Hash Entry (Free Blocks)
+0x6363DC94 0000000036 0000000001 0000000036    Iterator Hash Entry (Free Blocks)
 0x63642610 0000001024 0000000001 0000001024    Init
-0x63645B4C 0000000160 0000000242 0000038720    *Init*
-0x63645B4C 0000000176 0000000002 0000000352    rf task
-0x63645B4C 0000000200 0000000009 0000001800    Router Init
-0x63645B4C 0000000220 0000000001 0000000220    TCP Protocols
+0x63645B4C 0000000160 0000000243 0000038880    *Init*
+0x63645B4C 0000000192 0000000001 0000000192    crypto engine proc
+0x63645B4C 0000000200 0000000011 0000002200    Router Init
 0x63645B4C 0000000228 0000000001 0000000228    BGP Router
-0x63645B4C 0000000232 0000000001 0000000232    Init
-0x63645B4C 0000000028 0000000001 0000000028    (fragment) (Free Blocks)
-0x0       0000000000 0000018725 0020202468    Pool Summary
-0x0       0000000000 0000000153 0005798296    Pool Summary (Free Blocks)
-0x0       0000000052 0000018878 0000981656    Pool Summary(All Block Headers)
+0x0       0000000000 0000018720 0020207364    Pool Summary
+0x0       0000000000 0000000151 0005800400    Pool Summary (Free Blocks)
+0x0       0000000052 0000018871 0000981292    Pool Summary(All Block Headers)
 
           I/O memory
 
@@ -4255,9 +4302,9 @@ Alloc PC        Size     Blocks      Bytes    What
 0x0       0000000000 0000000002 0002165784    Pool Summary (Free Blocks)
 0x0       0000000052 0000000195 0000010140    Pool Summary(All Block Headers)
 
-0x0       0000000000 0000018918 0024318000    Memory Summary
+0x0       0000000000 0000018913 0024322896    Memory Summary
 
-0x0       0000000000 0000000155 0007964080    Memory Summary (Free Blocks)
+0x0       0000000000 0000000153 0007966184    Memory Summary (Free Blocks)
 
 ------------------ show region ------------------
 
@@ -4354,4 +4401,4 @@ Crypto Engine Connections
 No SAs found
 
 
-R1#
+R2#

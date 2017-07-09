@@ -45,6 +45,26 @@ def login(hostname='',auth=[],login_timeout=6,etimeout=5):
         return return_typ
 
 
+def raw(ses,monobj):
+    try:
+        out = {"result":"failed"}
+        mon = monobj.get("monitor")
+        mon = mon.split(",")
+            
+        type_ = monobj.get("type")
+        in_ = monobj.get("name")
+        exp = ses[1]
+        ses[0].sendline("terminal length 0")
+        for cmd in mon:
+            ses[0].sendline(cmd)
+            ses[0].expect([cmd,pxssh.TIMEOUT])
+            ses[0].expect([exp,pxssh.EOF,pxssh.TIMEOUT],timeout=300)
+            #data = str(ses[0].before)
+        out.update({"result":"success"})
+        return out
+    except:
+        return out
+
 def cis_bgp(ses,monobj):
     try:
         out = {}
@@ -81,7 +101,7 @@ def cis_bgp(ses,monobj):
 auth = []
 auth.append({"username":"cisco","password":"cisco"})
 
-monobj = {"monitor":"10.1.1.3,10.1.1.4","type":"cis_bgp","name":"bgp"}
+monobj = {"monitor":"show clock,show tech","type":"raw","name":"raw"}
 
 
 ses = login("10.1.1.2",auth)
@@ -92,5 +112,5 @@ else:
     print "Failed"
     exit()
 
-cis_bgp(ses,monobj)
+print raw(ses,monobj)
 
