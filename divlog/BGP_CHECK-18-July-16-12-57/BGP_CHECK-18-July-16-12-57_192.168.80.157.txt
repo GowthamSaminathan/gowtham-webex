@@ -1,0 +1,41 @@
+
+
+CTS_ALB_COMM_MUM_RCOM_SW_C#terminal length 0
+show interface Gi0/1
+terminal length 0
+Command authorization failed.
+
+CTS_ALB_COMM_MUM_RCOM_SW_C#show interface Gi0/1
+GigabitEthernet0/1 is up, line protocol is up (connected) 
+  Hardware is Gigabit Ethernet, address is c414.3c43.d001 (bia c414.3c43.d001)
+  Description: *** Connected to SEC Router Gi0/1 ***
+  MTU 1500 bytes, BW 1000000 Kbit/sec, DLY 10 usec, 
+     reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, loopback not set
+  Keepalive set (10 sec)
+  Full-duplex, 1000Mb/s, media type is 10/100/1000BaseTX
+  input flow-control is off, output flow-control is unsupported 
+  ARP type: ARPA, ARP Timeout 04:00:00
+  Last input 00:00:12, output 00:00:00, output hang never
+  Last clearing of "show interface" counters never
+  Input queue: 0/75/0/0 (size/max/drops/flushes); Total output drops: 0
+  Queueing strategy: fifo
+  Output queue: 0/40 (size/max)
+  5 minute input rate 533000 bits/sec, 70 packets/sec
+  5 minute output rate 469000 bits/sec, 144 packets/sec
+     21161808 packets input, 16952807046 bytes, 0 no buffer
+     Received 1526910 broadcasts (1488545 multicasts)
+     0 runts, 0 giants, 0 throttles 
+     0 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored
+     0 watchdog, 1488545 multicast, 0 pause input
+     0 input packets with dribble condition detected
+ --More-- terminal length 0
+show clock
+        
+CTS_ALB_COMM_MUM_RCOM_SW_C#erminal length 0
+                             ^
+% Invalid input detected at '^' marker.
+
+CTS_ALB_COMM_MUM_RCOM_SW_C#show clock
+16:13:08.878 IST Tue Jul 18 2017
+CTS_ALB_COMM_MUM_RCOM_SW_C#

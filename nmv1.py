@@ -108,6 +108,7 @@ def cis_bgp(ses,monobj):
         ses[0].expect([cmd,pxssh.TIMEOUT],timeout=5)
         ses[0].expect([exp,pxssh.TIMEOUT],timeout=5)
         data = str(ses[0].before)
+	all_ot = []
         for host in mon_:
             try:
                 ot=""
@@ -115,11 +116,11 @@ def cis_bgp(ses,monobj):
                 print host
                 if pos > -1:
                     n = filter(None,data[pos:].split("\n")[0].split(" "))
-                    ot = "neighbor:"+n[0]+"|"+"AS:"+n[2]+"|"+"uptime:"+n[-2]+"|"+"received-prf:"+n[-1]
-                    ot = ot.strip()
+                    ot = {"neighbor":n[0].strip(),"AS":n[2].strip(),"uptime":n[-2].strip(),"received-prf":n[-1].strip()}
+                    all_ot.append(ot)
             except Exception as e:
                 print("cis_bgp Error 2>"+str(e))
-            out.update({host:ot})
+            out.update({"BGP":all_ot})
         print out
         return out
     except Exception as e:

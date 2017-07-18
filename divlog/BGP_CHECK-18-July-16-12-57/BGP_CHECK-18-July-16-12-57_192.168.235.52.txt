@@ -1,0 +1,23 @@
+
+
+CTS_UNION_CHN_AIRTEL_C#terminal length 0
+show ip bgp summary 
+terminal length 0
+CTS_UNION_CHN_AIRTEL_C#show ip bgp summary 
+BGP router identifier 192.168.235.52, local AS number 65008
+BGP table version is 400121, main routing table version 400121
+333 network entries using 47952 bytes of memory
+441 path entries using 35280 bytes of memory
+63/29 BGP path/bestpath attribute entries using 9576 bytes of memory
+32 BGP AS-PATH entries using 1378 bytes of memory
+0 BGP route-map cache entries using 0 bytes of memory
+0 BGP filter-list cache entries using 0 bytes of memory
+BGP using 94186 total bytes of memory
+128 received paths for inbound soft reconfiguration
+BGP activity 28978/28645 prefixes, 203269/202828 paths, scan interval 60 secs
+
+Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+192.168.145.179 4        65008  601788  463791   400121    0    0 30w4d         252
+192.168.164.138 4        18101       0       0        1    0    0 never    Idle (Admin)
+192.168.220.205 4         9730    3388    3198   400121    0    0 2d00h          56
+CTS_UNION_CHN_AIRTEL_C#
