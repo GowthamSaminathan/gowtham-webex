@@ -16,7 +16,7 @@ def raw(ses,monobj):
         for cmd in mon:
             ses[0].sendline(cmd)
             ses[0].expect([cmd,pxssh.TIMEOUT])
-            ses[0].expect([exp,pxssh.EOF,pxssh.TIMEOUT],timeout=300)
+            ses[0].expect([exp,pxssh.TIMEOUT],timeout=300)
             #data = str(ses[0].before)
         out.update({"result":"success"})
         return out

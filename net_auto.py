@@ -1,7 +1,6 @@
 from nmv1 import *
 import json
 import csv
-import MySQLdb
 import datetime
 import time
 import os.path
@@ -110,7 +109,7 @@ class main_model():
         #Saving ssh session
         self.ssh_ses = {}
 
-    def login(self,hostname='',auth=[],logpath="default_log.txt",login_timeout=1,etimeout=5):
+    def login(self,hostname='',auth=[],logpath="default_log.txt",login_timeout=10,etimeout=6):
         # Login to NPCI device , "enable" password check disabled because of aaa conf in NPCI
         if len(auth) > 0:
             for au in auth:
@@ -126,10 +125,12 @@ class main_model():
                     s.logfile = open(logpath+"_"+str(hostname)+".txt", "ab")
                     # Send enter to get router prompt to check login success
                     s.sendline('')
-                    # expecting cisco , juniper , fortigate prompt 
-                    s.expect(["#",">","\$",pexpect.TIMEOUT],timeout=etimeout)
+                    # expecting cisco , juniper , fortigate prompt
+		    ex = ["#",">","\$",pexpect.TIMEOUT] 
+                    match_ex = s.expect(ex,timeout=etimeout)
                     login_chk = s.before.strip()
-                    if len(login_chk) > 0:
+		    print ">>>",match_ex
+                    if len(login_chk) > 0 and match_ex < 3:
                         host_name = login_chk.decode("utf-8")
                         aftr = s.after
                         if type(aftr) == str:

@@ -2,7 +2,6 @@ from flask import Flask, render_template, request , send_file
 from flask import jsonify
 from werkzeug.utils import secure_filename
 import json
-import MySQLdb
 import os,time
 #import pymongo
 import datetime
