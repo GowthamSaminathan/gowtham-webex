@@ -125,11 +125,10 @@ class main_model():
                     s.logfile = open(logpath+"_"+str(hostname)+".txt", "ab")
                     # Send enter to get router prompt to check login success
                     s.sendline('')
-                    # expecting cisco , juniper , fortigate prompt
-		    ex = ["#",">","\$",pexpect.TIMEOUT] 
+                    ex = ["#",">","\$",pexpect.TIMEOUT]
+                    # expecting cisco , juniper , fortigate prompt 
                     match_ex = s.expect(ex,timeout=etimeout)
                     login_chk = s.before.strip()
-		    print ">>>",match_ex
                     if len(login_chk) > 0 and match_ex < 3:
                         host_name = login_chk.decode("utf-8")
                         aftr = s.after
@@ -167,7 +166,6 @@ class main_model():
         except Exception as e:
             pass;
         
-
     def get_ssh_ses(self,IP,Authentication,timeout,dir_path):
         try:
             #ses = self.ssh_ses.get(IP)  # Not required to store session
@@ -214,7 +212,7 @@ class main_model():
             print("Error >"+str(e))
 
     def single_host(self,row2,dir_path):
-        #Login and run 
+        #Login and run
         ID = Hostname = IP = Authentication = Monitoring_obj = timeout = None
         ID = row2.get("ID")
         Hostname = row2.get("Hostname")
@@ -224,6 +222,16 @@ class main_model():
         Monitoring_obj = row2.get("Monitoring_obj")
         #Mode = row2.get("Mode")
         timeout = row2.get("timeout")
+
+        try:
+            mongoc = pymongo.MongoClient('localhost', 27017)
+            mdb = mongoc['LIVE']
+            mcollection = mdb['SESSION']
+            mcollection.update({"_id":1,"STATUS.IP":IP},{ "$set": { "STATUS.$.TYPE" : "Running" } })
+            mongoc.close()
+        except Exception as e:
+            print("Error > single_host"+str(e))
+
         sess = self.get_ssh_ses(IP,[Authentication],timeout,dir_path)
         jout = {}
         if sess == None or type(sess) == str:
@@ -232,11 +240,12 @@ class main_model():
         else:
             jout = self.device_check(sess , Monitoring_obj)
 
-        return [jout,ID]
+        return [jout,ID,IP]
             
     def start_run(self,input_file_path,jobname,apprentice = 5):
         try:
             # start create DB function
+            self.jobname = jobname
             if self.mongdb("xls",input_file_path) == True:
                 pass;
             else:
@@ -269,10 +278,14 @@ class main_model():
                             jout2 = future.result()
                             jout = jout2[0]
                             ID = jout2[1]
+                            IP = jout2[2]
                             #INSERT OUTPUT TO DB
                             dbdata = self.score_me(row,{"SESSION":int(session),"ID":int(ID),"OUT":jout,"TD":datetime.datetime.now(),"INID":INID,"JOBNAME":jobname})
                             mcollection = self.mdb['OUTPUT']
                             mcollection.insert(dbdata)
+                            #Update session table
+                            mcollection = self.mdb['SESSION']
+                            mcollection.update({"_id":1,"STATUS.IP":IP},{ "$set": { "STATUS.$.TYPE" : "Completed" } })
                         except Exception as e:
                             print("start_run trying Error>>"+str(e))
                 
@@ -323,19 +336,14 @@ class main_model():
                 return None
                 #csv_data = list(csv.DictReader(open('input.csv')))
             
-            # Add or Update new session in SESSION collection
+            #Get INID from SESSION
             mcollection = self.mdb['SESSION']
             session = (list(mcollection.find()))
             if len(session) > 0:
                 INID = session[0].get("INID")
                 if INID != None:
                     INID = INID+1
-                    mcollection.update({"_id":1},{"_id":1,"INID":INID,"SESSION":0})
-                    print("SESSION UPDATED , INID = "+str(INID))
-            else:
-                mcollection.insert({"_id":1,"INID":INID,"SESSION":0})
-                print("CREATING NEW SESSION ADDED , INID = 1")
-            
+                    
             # ADD INID in INPUT collection
             for d in csv_data:
                 # Json loads used to convert string to array object
@@ -346,6 +354,14 @@ class main_model():
 
             mcollection = self.mdb['INPUT']
             mcollection.insert(csv_data)
+
+            ses = mcollection.find({"INID":INID},{"Hostname":1,"IP":1,"_id":0})
+            # Add or Update new session in SESSION collection
+            mcollection = self.mdb['SESSION']
+            #print list(ses)
+            mcollection.update({"_id":1},{"_id":1,"INID":INID,"SESSION":0,"JOBNAME":self.jobname,"STATUS":list(ses),"STARTDATE":datetime.datetime.now()})
+            print("SESSION UPDATED , INID = "+str(INID))
+            
             #self.mongoc.close()
             return True
         except Exception as e:

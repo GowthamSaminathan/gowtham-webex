@@ -139,6 +139,47 @@
       </div></div>
 
 
+
+
+
+
+
+
+<!-- Get Session status -->
+  <div class="modal fade" id="showsession" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"><span id="sesjobstatus" class="label label-default">Loading Job Status ...</span></h4>
+          <span id="sescompleted" class="label label-success"></span>
+          <span id="sesrunning" class="label label-primary"></span>
+          <span id="seshold" class="label label-danger"></span>
+          <span id="sestime" class="label label-info"></span>
+        </div>
+        <div class="modal-body">
+        <table id="sessiontable" class="display"></table>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      </div></div>
+
+
+
+
+
+
+
+
+
+
+
+
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -159,6 +200,7 @@
       <span class="caret"></span></button>
       <ul class="dropdown-menu" role="menu">
       <li><a href="#" onclick="new_ses()">New Job</a></li>
+      <li><a href="#" onclick="disp_session()">View Running Job</a></li>
       <li><a href="#" onclick="upload_input()">Upload input</a></li>
       <li><a href="#" onclick="manage_input()">Download \ Delete input</a></li>
       </ul>
@@ -553,6 +595,24 @@ dataSet = [];
         ]
     } );
 
+//Session table
+var stable;
+sesdata = [];
+
+    stable = $('#sessiontable').DataTable( {
+        data : sesdata,
+        "searching": false,
+        "scrollY":"200px",
+        "scrollCollapse":true,
+        "paging":false,
+        dom: 'lrtip',
+        columns: [
+            { title: "Hostname" },
+            { title: "IP" },
+            { title: "STATUS" }
+        ]
+    } );
+
 
 //List input file in datatable
 
@@ -584,7 +644,17 @@ if (desc.length < 1){$("#newrun_status").text("Please add job name");return "";}
 $.ajax({type: 'POST',url:"new_job",data:{filename:fname,jobname:desc,apprentice:appr},success:send_suc,error:function (xhr, ajaxOptions, thrownError)
   {$("#newrun_status").text("Error"); }})
 
-function send_suc(data){  $("#newrun_status").text(data["status"]);  $("#jobname").val(""); }
+function send_suc(data)
+{
+
+ $("#newrun_status").text(data["status"]);  $("#jobname").val("");
+ if ( data["status"] == "Job Started"){
+  //if job started success , then display session status
+  disp_session();
+  $('#showinput').modal('hide');
+ }
+
+ }
 
 }
 
@@ -620,6 +690,81 @@ sj.options[sj.options.length]= new Option(d,d);
 }
 
 }
+
+
+// Check if mouse is down ( to stop update of session)
+var mouse_down = false;
+$(document).mousedown(function() {
+    mouse_down = true;
+}).mouseup(function() {
+    mouse_down = false;  
+});
+
+
+function get_session()
+{
+if ($('#showsession').is(':visible') == true )
+{
+try{
+console.log("Request session status");
+$.ajax({type: 'POST',url:"getsession",data:{"session":"live"},success:update_ses,error:function (xhr, ajaxOptions, thrownError)
+  {console.log("Post Error");}})
+
+function update_ses(data)
+{
+if (data == "failed")
+{
+    console.log("Failed to get session update")
+}
+else
+{
+ses = data["session"];
+ses = ses[0];
+ses_status = ses["STATUS"];
+if (mouse_down != true)
+{
+stable.clear().draw();
+}
+ses_hold = 0
+ses_completed = 0
+ses_running = 0
+
+for(var stat = 0; stat < ses_status.length;stat ++)
+{
+one_stat = ses_status[stat]
+sip = one_stat["IP"];
+shost = one_stat["Hostname"];
+stype = one_stat["TYPE"];
+if (stype == undefined)
+{stype = "Hold";ses_hold = ses_hold + 1;}
+if (stype == "Completed"){ses_completed = ses_completed + 1;}
+if (stype == "Running"){ses_running = ses_running + 1;}
+if (mouse_down != true)
+{
+stable.rows.add([[shost,sip,stype]]);
+stable.draw();
+}
+}
+
+$("#sesjobstatus").text("Job: "+ses["JOBNAME"]);
+$("#seshold").text("Hold: "+ses_hold);
+$("#sesrunning").text("Running: "+ses_running);
+$("#sescompleted").text("Completed: "+ses_completed+" / "+ses_status.length);
+$("#sestime").text("Started: "+ses["STARTDATE"]);
+}
+
+}
+}catch(err){console.log("get_session >"+err)}
+}
+}
+
+function disp_session()
+{
+
+$("#showsession").modal({backdrop: "static"});
+  
+}
+
 
 
 function manage_input(){
@@ -984,7 +1129,7 @@ $('#outtime').fadeIn(150).fadeOut(150).fadeIn(150).fadeOut(250).fadeIn(250)
 get_up();
 setInterval(get_up,4000);
 setInterval(job_status,3000);
-
+setInterval(get_session,4000);
 </script>
 
 </body>

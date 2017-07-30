@@ -359,6 +359,20 @@ def rawdownload():
         except Exception as e:
         	return "failed"
 
+@app.route('/getsession',methods = ['POST', 'GET'])
+def get_session():
+    if request.method == 'POST':
+    	try:
+    		fn = request.form.get('session')
+    		if fn == "live":
+				mdb = mongoc.db
+				mcollection = mdb['SESSION']
+				session = mcollection.find({"_id":1},{"_id":0})
+				session = list(session)
+				return jsonify({"session":session})
+        except Exception as e:
+        	return "failed"
+
 
 if __name__ == '__main__':
 	net_auto_modul = net_auto.main_model()
