@@ -9,6 +9,8 @@ from flask_pymongo import PyMongo
 import glob
 import net_auto
 import shutil
+import pandas
+import random
 from threading import Thread
 
 
@@ -22,6 +24,7 @@ app = Flask(__name__,static_url_path='/static')
 app.config['MONGO_DBNAME'] = 'LIVE'
 app.config['MONGO_URI'] = 'mongodb://127.0.0.1:27017/LIVE'
 app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(),"input_file")
+app.config['TEMP_FOLDER'] = os.path.join(os.getcwd(),"temp_file")
 mongoc = PyMongo(app)
 
 
@@ -267,29 +270,60 @@ def get_job():
 		except Exception as e:
 			return jsonify({"status":"error"})
 
+@app.route('/getgroup',methods = ['POST', 'GET'])
+def get_group():
+	try:
+		status = {"status":"error"}
+		if request.method == 'POST':
+			fn = request.form.get('filename')
+			if fn != None:
+				filename = secure_filename(fn)
+				full_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+				data = get_xl_group(full_path)
+				if data != None:
+					return jsonify(data)
+				else:
+					return jsonify({"status":"error"})
+		return jsonify(status)
+	except Exception as e:
+		print "Get Group Error>"+str(e)
+		return jsonify({"status":"error"})
+
+
 @app.route('/new_job',methods = ['POST', 'GET'])
 def new_job():
 	global main_thread
 	status = {"status":"error"}
 	if request.method == 'POST':
 		try:
+			d_group = request.form.get('group')
 			fn = request.form.get('filename')
 			jn = request.form.get('jobname')
 			apr = request.form.get('apprentice')
 			try:
 				apr = int(apr)
 				if apr < 1:
-					apr = 5
+					apr = 1
 			except:
-				apr = 5
+				apr = 1
 			if fn == None or jn == None:
 				return jsonify(status)
+			jn = jn+"-"+str(datetime.datetime.now().strftime("%d-%B-%H:%M:%S"))
 			filename = secure_filename(fn)
-			full_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+			if d_group != "no":
+				#Create Tempravery file
+				full_path2 = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+				new_xl_file = filename+"_temp_"+jn.replace(":","-")+"_"+str(random.randrange(10,10000))+".xlsx"
+				new_xl_file = os.path.join(app.config['TEMP_FOLDER'], new_xl_file)
+				grp = excell_filter(json.loads(d_group),full_path2,new_xl_file)
+				full_path = new_xl_file
+				if grp != True:
+					return jsonify({"status":"error","type":"group error"})
+			elif d_group == "no":
+				full_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
 			if os.path.isfile(full_path):
 				# Schudle Job
 				if main_thread.isAlive() == False:
-					jn = jn+"-"+str(datetime.datetime.now().strftime("%d-%B-%H:%M:%S"))
 					main_thread = Thread(target=net_auto_modul.main_run,name = jn, args=(full_path,jn,apr,))
 					main_thread.start()
 					status = {"status":"Job Started"}
@@ -299,7 +333,7 @@ def new_job():
 				status = {"status":"InputFileNotFound"}
 			return jsonify(status)
 		except Exception as e:
-			print e
+			print "new_job>"+str(e)
 			return jsonify({"status":"error"})
 
 @app.route('/delete_input',methods = ['POST', 'GET'])
@@ -359,6 +393,7 @@ def rawdownload():
         except Exception as e:
         	return "failed"
 
+
 @app.route('/getsession',methods = ['POST', 'GET'])
 def get_session():
     if request.method == 'POST':
@@ -373,6 +408,68 @@ def get_session():
         except Exception as e:
         	return "failed"
 
+
+
+def get_xl_group(xl_file):
+    try:
+        xl = pandas.ExcelFile(xl_file)
+        df1 = xl.parse('input')
+        head = list(df1.columns.values)
+        nd = []
+        for index, row in df1.iterrows():
+        	gp = row.get("Group")
+        	le = row.get("Level")
+        	if gp != None and le != None:
+	        	g = str(gp).split(",")
+	        	l = str(le).split(",")
+	        	d = {"Group":g,"Level":l}
+	        	if d in nd:
+	        		#No need to insert duplicate data
+	        		pass
+	        	else:
+	        		nd.append(d)
+        return {"data":nd}
+    except Exception as e:
+    	print "get_xl_group Error>"+str(e)
+
+def excell_filter(d_group,xl_file,new_xl_file):
+    try:
+        xl = pandas.ExcelFile(xl_file)
+        df1 = xl.parse('input')
+        head = list(df1.columns.values)
+        head.remove("Group")
+        head.remove("Level")
+        nd = []
+        print d_group
+        for index, row in df1.iterrows():
+        	#row = list(row)
+        	g = str(row["Group"]).split(",")
+        	l = str(row["Level"]).split(",")
+        	row.pop("Group")
+        	row.pop("Level")
+        	for d in d_group:
+        		print ">>"
+        		if d.get("Group") in g and d.get("Level") in l:
+        			print "1>>"
+        			print index,row["IP"]
+        			print row
+        			if list(row) in nd:
+        				pass;
+        			else:
+        				nd.append(list(row))
+        				print "2>>"
+        	print "3>>"
+        if len(nd) == 0:
+        	return False
+        print nd
+        print new_xl_file
+        newdf = pandas.DataFrame(nd,columns=head)
+        writer = pandas.ExcelWriter(new_xl_file)
+        newdf.to_excel(writer, sheet_name='input',startrow=0,startcol=0,index = False)
+        writer.save()
+        return True
+    except Exception as e:
+        print ("Excell Filter Error >",e)
 
 if __name__ == '__main__':
 	net_auto_modul = net_auto.main_model()
