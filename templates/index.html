@@ -212,7 +212,7 @@
       
       <li class="active">
       <div style="float:left;margin-top:10px" class="btn-group">
-      <button type="button" class="btn btn-warning dropdown-toggle btn-xs " data-toggle="dropdown">
+      <button type="button" id="actionbtn" class="btn btn-warning dropdown-toggle btn-xs " data-toggle="dropdown">
       <span style="font-weight: bold;">Action</span>
       <span class="caret"></span></button>
       <ul class="dropdown-menu" role="menu">
@@ -516,6 +516,10 @@ $("#back").toggle();
 $("#play").toggle();
 $("#forw").toggle();
 $("#datetimepicker1").toggle();
+$("#actionbtn").toggle();
+$("#outtime").toggle();
+$("#load-status").toggle();
+$("#jobdesc").toggle();
 if(play_snap == true)
   {
 
@@ -535,7 +539,7 @@ $("#button_h").hide();
 $("#button2_h").hide();
 $("#inid").show();
 $("#outid").show();
-$("#outtime").show();
+//$("#outtime").show();
 }
 
 function back_snap(){
@@ -1038,16 +1042,16 @@ else
      //console.log(dinput);
 
      // Create option based on device name,ip and ID
+     //var divs = document.getElementById('device');
      for (var j in dinput) {
-        var s= document.getElementById('device');
-        s.options[s.options.length]= new Option(dinput[j].Hostname, dinput[j].IP);
-        var s= document.getElementById('device');
-        s.options[s.options.length]= new Option(dinput[j].IP, dinput[j].IP);
-        $('.selectpicker').selectpicker('refresh');
-  		//console.log(dinput[j].Hostname);
-
-  		}
-
+	$("#device").append(new Option(dinput[j].Hostname, dinput[j].IP));
+	$("#device").append(new Option(dinput[j].IP, dinput[j].IP));
+        //divs.options[divs.options.length]= new Option(dinput[j].Hostname, dinput[j].IP);
+        //divs.options[divs.options.length]= new Option(dinput[j].IP, dinput[j].IP);
+        //$('.selectpicker').selectpicker('refresh');
+  	//console.log(dinput[j].Hostname);
+}
+$('.selectpicker').selectpicker('refresh');
 
 }
 doutput = data["output"];
@@ -1094,7 +1098,6 @@ function process_in_out(din,dout)
  {
   
    
-   
    if(dout == 0) {dout = "0"}; // To Fix calculating length for number 
    if(din == 0) {din = "0"}; // To Fix calculating length for number 
 
@@ -1110,8 +1113,8 @@ function process_in_out(din,dout)
         var din_l = din.length;
 		    var fabobj = canvas.getObjects()
         $("#datetimepicker1").fadeIn(100).fadeOut(100).fadeIn(100);
-		for (var i = 0; i < dout_l; i++)
-		{
+	for (var i = 0; i < dout_l; i++)
+	{
         // Reading host by host
         console.log(dout[i].TD);
         $('#jobdesc').text(dout[i].JOBNAME);
@@ -1126,7 +1129,7 @@ function process_in_out(din,dout)
 		    hostOUT = dout[i].OUT;
         //Get Input from output
         for(var di = 0; di < din_l ; di++){if(din[di].ID == host_id ){dinone = din[di];break;}}
-        drawtable(dout[i],dinone);
+	drawtable(dout[i],dinone);
 			if ( typeof(hostOUT) == typeof(hostOUT))
 			{
 		    for (var ii = 0; ii < hostOUT.length; ii++)
@@ -1143,7 +1146,6 @@ function process_in_out(din,dout)
                 {
                  for ( var ij = 0 ; ij < fabid.length ; ij++)
                  {
-
                     scolor = "#ff471a"
                     var fabele = fabobj[fabid[ij]]
                     //console.log(fabele);
@@ -1183,6 +1185,10 @@ function process_in_out(din,dout)
 		}
 
  }
+// moved dtable.draw() from drawtable function.
+console.log("Drawing.....")
+dtable.draw();
+dtable.draw();
 }catch(err){console.log("process_in_out"+err)}
 }
 
@@ -1207,12 +1213,11 @@ get_up(h,t);
 function drawtable(dout,din){
 
 try{
-
 for(var ddout = 0; ddout < dout.OUT.length;ddout ++)
 {
 var a = dout.OUT[ddout].out;
 dtable.rows.add([[din.Hostname,din.IP,din.Monitoring_obj[ddout].monitor,din.Monitoring_obj[ddout].name,dout.OUT[ddout].score,JSON.stringify(a)]]);
-dtable.draw();
+//dtable.draw(); // moved to process_in_out function to increase perforemence
 }
 }catch(err){console.log("Draw Table Error"+err)}
 
