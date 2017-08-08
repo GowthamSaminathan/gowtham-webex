@@ -232,14 +232,23 @@ def upload_input():
     if request.method == 'POST':
     	try:
         	f = request.files['file']
+		print request.form
+		override = request.form.get('override')
         	filename = secure_filename(f.filename)
-        	jn = str(datetime.datetime.now().strftime("%d-%B-%H_%M_%S"))
-        	filename = jn+"-"+filename
-        	print os.path.join(app.config['UPLOAD_FOLDER'])
-        	f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        	return 'success'
+        	#jn = str(datetime.datetime.now().strftime("%d-%B-%H_%M_%S"))
+        	#filename = jn+"-"+filename
+        	check_file = os.path.join(app.config['UPLOAD_FOLDER'],filename)
+		file_status = os.path.isfile(check_file)
+		if file_status == True and override == "yes":
+        		f.save(check_file)
+			return 'success'
+		elif file_status == False:
+			f.save(check_file)
+			return 'success'
+                else:
+			return "File Exist"
         except Exception as e:
-        	print e
+        	print "upload_input Error>"+str(e)
         	return "failed"
 
 @app.route('/job',methods = ['POST', 'GET'])

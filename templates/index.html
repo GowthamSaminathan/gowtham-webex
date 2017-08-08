@@ -62,7 +62,6 @@
         <div  class="form-group">
           <label for="inputdefault">Input File</label>
          <select id="listinput2" class="form-control"  title="Select File" style="width:70%;">
-         
         </select>
         </div>
         <button id="downinput" type="button" class="btn btn-danger" onclick="down_input()">Download</button> 
@@ -95,9 +94,13 @@
           <form class="form-inline" id="inputform" action="upload_input">
           <div class="form-group">
             <label for="pwd">Upload XLSX file</label>
-            <input type="file" class="form-control" name="file">
+            <input id="infilename" type="file" class="form-control" name="file">
           </div>
             <button class="btn btn-default">Submit</button>
+           <div class="checkbox checkbox-danger">
+		<input id="overrideinput" type="checkbox" checked="">
+		<label for="overrideinputlabel">Override Existing File</label>
+	    </div>
           </form>
 
         </div>
@@ -318,11 +321,14 @@ console.log(settings);
 // Submitting input file to server
 $("#inputform").submit(function(e)
 {
- 
+    e.preventDefault(); //Prevent Default action.
+    try{
     var formObj = $(this);
     var formURL = formObj.attr("action");
     var formData = new FormData(this);
+    if($("#infilename").val() == ''){$("#upload_status").text("Please select file"); return "";}
     $("#upload_status").text("Uploading...");
+    if ($("#overrideinput").is(':checked') == true ){formData.append("override","yes")}
     $.ajax({
         url: formURL,
     type: 'POST',
@@ -333,9 +339,11 @@ $("#inputform").submit(function(e)
         processData:false,
     success: function(data, textStatus, jqXHR)
     {
+	if( data == "success"){
         $('#inputform').trigger("reset");
-        $("#upload_status").text("Upload Success");
-        console.log(data);
+	$('#overrideinput').prop('checked', false);
+        $("#upload_status").text("Upload Success");}else{$("#upload_status").text(data);}
+        console.log("Upload Failed : Responce : "+data);
     },
      error: function(jqXHR, textStatus, errorThrown) 
      {
@@ -345,9 +353,7 @@ $("#inputform").submit(function(e)
 
      }          
     });
-    e.preventDefault(); //Prevent Default action. 
-    
-}); 
+}catch(err){console.log("upload_error>"+err)}}); 
 
 
 
@@ -477,6 +483,7 @@ catch(err)
 function upload_input(){
 $("#uploadinput").modal({backdrop: "static"});
 $('#inputform').trigger("reset");
+$('#overrideinput').prop('checked', false);
 $("#upload_status").text("Please Select");
 }
 
@@ -1086,7 +1093,7 @@ function process_in_out(din,dout)
  try
  {
   
-   //console.log()
+   
    
    if(dout == 0) {dout = "0"}; // To Fix calculating length for number 
    if(din == 0) {din = "0"}; // To Fix calculating length for number 
