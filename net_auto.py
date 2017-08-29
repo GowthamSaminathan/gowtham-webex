@@ -100,6 +100,55 @@ class score_gen():
             print("score_me Error>"+str(e))
             return doutput
 
+    def mongo_search_score(self,INID,session,mdb):
+        try:
+            mcollection = mdb['INPUT']
+            all_data = mcollection.find({"INID":INID})
+            mdb_out = mdb['OUTPUT']
+            for single_input in all_data:
+                try:
+                    elements_input = single_input.get("Monitoring_obj")
+                    hostname = single_input.get("Hostname")
+                    ip = single_input.get("IP")
+                    input_id = single_input.get("ID")
+                    # Read elements for single hosts
+                    for elmt in elements_input:
+                        try:
+                            elmt_id = elmt.get("id")
+                            emon = elmt.get("monitor")
+                            etype = elmt.get("type")
+                            ename = elmt.get("name")
+                            elmt_rank = elmt.get("rank")
+                            #print elmt
+                            last_score = 100
+                            desc = ""
+                            for rank in elmt_rank:
+                                custom_query = rank.get("regex")
+                                score = rank.get("score")
+                                dafault_query = {"INID":INID,"SESSION":session,"ID":input_id,"OUT.id":elmt_id}
+                                # Adding "OUT.out" in key
+                                new_dict = {"OUT.out."+key: value for key, value in custom_query.items()}
+                                dafault_query.update(new_dict)
+                                #print dafault_query
+                                queryout = mdb_out.find_one(dafault_query,{"_id":0,"TD":0})
+                                #print queryout
+                                if queryout == None:
+                                    print "Issue Pattern Not matched"
+                                else:
+                                    print "Issue Pattern  Matched"
+                                    # Update very lowest score in rank pattern
+                                    if last_score > score:
+                                        last_score = score
+                                    #tmpdesc = hostname+" "+ip+" "+str(emon)+" "+str(etype)+" "+str(ename)+" "+str(custom_query)+" "+str(last_score)+" "+str(queryout.get("OUT"))
+                                    #desc = desc+"\n"+str(tmpdesc)
+                                    #print "Issue pattern matched > ",desc
+                                    mdb_out.update(dafault_query,{"$set": {"OUT.$.score":last_score,"OUT.$.note":'desc'}})
+                        except Exception as e:
+                            print ("mongo_search_score Error2>"+str(e))
+                except Exception as e:
+                    print ("mongo_search_score Error1>"+str(e))
+        except Exception as e:
+            print("mongo_search_score Error>"+str(e))
 
 ### PAGE 1 END ####
 
@@ -280,15 +329,22 @@ class main_model():
                             ID = jout2[1]
                             IP = jout2[2]
                             #INSERT OUTPUT TO DB
-                            dbdata = self.score_me(row,{"SESSION":int(session),"ID":int(ID),"OUT":jout,"TD":datetime.datetime.now(),"INID":INID,"JOBNAME":jobname})
+                            #dbdata = self.score_me(row,{"SESSION":int(session),"ID":int(ID),"OUT":jout,"TD":datetime.datetime.now(),"INID":INID,"JOBNAME":jobname})
+                            dbdata = {"SESSION":int(session),"ID":int(ID),"OUT":jout,"TD":datetime.datetime.now(),"INID":INID,"JOBNAME":jobname}
                             mcollection = self.mdb['OUTPUT']
                             mcollection.insert(dbdata)
+
+
                             #Update session table
                             mcollection = self.mdb['SESSION']
                             mcollection.update({"_id":1,"STATUS.IP":IP},{ "$set": { "STATUS.$.TYPE" : "Completed" } })
                         except Exception as e:
                             print("start_run trying Error>>"+str(e))
                 
+                #Start Scoring
+                print("Scoring Started")
+                self.mongo_search_score(INID,session,self.mdb)
+                print("Scoring Completed")
                 #UPDATE CURRENT SESSION
                 mcollection = self.mdb['SESSION']
                 mcollection.update({"_id":1},{"$set":{"SESSION":session}})
@@ -377,7 +433,7 @@ class main_model():
 
         # Insitate Score Me object
         scor = score_gen()
-        self.score_me = scor.score_me
+        self.mongo_search_score = scor.mongo_search_score
 
         print ("Starting...")
         self.start_run(filepath,jobname,apprentice)
