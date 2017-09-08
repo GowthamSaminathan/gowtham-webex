@@ -13,7 +13,7 @@
 
 <link rel="stylesheet" type="text/css" href="/static/bootstrap-datetimepicker.min.css" />
 <script type="text/javascript" src="/static/bootstrap-datetimepicker.min.js"></script>
-<script type="text/javascript" src="/static/fabric.min.js"></script>
+
 
 
 <link rel="stylesheet" type="text/css" href="/static/datatable_cdn/Bootstrap-3.3.7/css/bootstrap.min.css"/>
@@ -242,11 +242,14 @@
 
 <div class="container-fluid" >
   <div class="row">
+<div class="col-md-8">
+<table id="searchtable" class="table table-striped table-bordered dt-responsive nowrap"></table></div>
+
+<div class="col-md-4">
+<table id="oldjobs" class="table table-striped table-bordered dt-responsive nowrap"></table></div>
 
 
-<div class="col-md-12">
-<table id="searchtable" class="table table-striped table-bordered dt-responsive nowrap"></table>
-</div></div></div>
+</div></div>
 
 
 <style>
@@ -439,6 +442,22 @@ sesdata = [];
         ]
     } );
 
+var oldjobtable
+oldjobdata = []
+
+oldjobtable = $('#oldjobs').DataTable( {
+        data : oldjobdata,
+        "searching": false,
+        "scrollY":"200px",
+        "scrollCollapse":true,
+        "paging":false,
+        responsive: true,
+        dom: 'lrtip',
+        columns: [
+            { title: "JOBNAME" },
+            { title: "TIME" }
+        ]
+    } );
 
 //List input file in datatable
 
@@ -457,6 +476,31 @@ sesdata = [];
             
         ]
     } );*/
+
+
+//Get joblist based on time
+function get_oldjobs(tim,d_limit){
+
+his_data = {type:"history_list",time:tim,limit:d_limit}
+$.ajax({type: 'POST',url:"history",data:his_data,success:got_job,error:function (xhr, ajaxOptions, thrownError)
+  {console.log("Error > Getting old JOBS"); }})
+
+
+function got_job(data){
+console.log(data)
+if (data == "None" || data.length == 0 )
+{console.log("Now oldjob found");}
+else{
+oldjobtable.clear().draw();
+$.each(data, function (i,v) {
+oldjobtable.rows.add([[v.JOBNAME,v.TD]]);
+//oldjobtable.rows.add([[v.JOBNAME,v.INID,v.SESSION]]);
+});
+oldjobtable.draw();
+}
+}
+
+}
 
 // Add new job to server
 function send_run(){
@@ -663,6 +707,13 @@ $("#sestime").text("Started: "+ses["STARTDATE"]);
 
 function disp_session()
 {
+// Clear Previous status
+stable.clear().draw();
+$("#sesjobstatus").text("Please Wait...");
+$("#seshold").text("");
+$("#sesrunning").text("");
+$("#sescompleted").text("");
+$("#sestime").text("");
 
 $("#showsession").modal({backdrop: "static"});
   
@@ -730,9 +781,8 @@ function manage_files(data){
 
 
 /// #################################### LOGICAL FUNCTION  /////////////
-var in_update = 0;
-var out_update = 0;
-var dinput = 0;
+var INID = 0;
+var SESSION = 0;
 var doutput = 0;
 
 
@@ -743,17 +793,17 @@ try{
 
 new_update_required = false;
 history_lock = false;
-if (typeof(in_update) != "number" ) {in_update = 0}
-if (typeof(out_update) != "number" ) {out_update = 0}
-console.log("SENDING REQUEST: IN:"+in_update+" OUT:"+out_update)
+if (typeof(INID) != "number" ) {INID = 0}
+if (typeof(SESSION) != "number" ) {SESSION = 0}
+console.log("SENDING : INID:"+INID+" SESSION:"+SESSION)
 if (data_history != "live"){
 
 // GET History update from server
-get_post = {INID: in_update,SESSION : out_update,history : data_history, time : timestmp}
+get_post = {INID: INID,SESSION : SESSION,history : data_history, time : timestmp}
 
 }
 // GETTING LIVE UPDATE FROM SERVER
-else{ get_post = {INID: in_update,SESSION : out_update} }
+else{ get_post = {INID: INID,SESSION : SESSION} }
 
 $("#load-status").text("loading...");
 $.ajax({type: 'POST',url:"api",data:get_post,success:aj_post,error:function (xhr, ajaxOptions, thrownError)
@@ -765,14 +815,13 @@ new_update_required = true;
 $("#load-status").text("Updated");
 $("#load-status").fadeIn(150).fadeOut(150).fadeIn(150).fadeOut(250).fadeIn(250);
 if(data == "None"){console.log("RECEVING None");return "";}
-console.log("RECEVING REQUEST: IN:"+data["in_update"]+" OUT:"+data["out_update"]);
-$('#inid').text("INID: "+data["in_update"]);
-$('#outid').text("SNAP: "+data["out_update"]);
+console.log("RECEVING : INID:"+data["INID"]+" SESSION:"+data["SESSION"]);
+$('#inid').text("INID: "+data["INID"]);
+$('#outid').text("SNAP: "+data["SESSION"]);
 
-in_update = data["in_update"];
-out_update = data["out_update"];
+INID = data["INID"];
+SESSION = data["SESSION"];
 //New update received for INPUT
-dinput = data["input"];
 doutput = data["output"];
 process_in_out(doutput)
 new_update_required = true;
@@ -801,10 +850,13 @@ $.each(dout, function(index, value) {
     
     $.each(single_host.Objects, function(index, d) {
     // Read Single host data
+    if(d.score == undefined){d.score=""};if(d.out == undefined){d.out=""};
+    if(d.monitor == undefined){d.monitor=""};if(d.name == undefined){d.name=""};
     dtable.rows.add([[single_host.Hostname,single_host.IP,d.monitor,d.name,d.score,JSON.stringify(d.out)]]);
   });
 
 });
+get_oldjobs($('#datetimepicker1').val(),10);
 dtable.draw();
 dtable.draw();
 }
@@ -850,9 +902,9 @@ $('#outtime').fadeIn(150).fadeOut(150).fadeIn(150).fadeOut(250).fadeIn(250)
 }
 //Get update
 get_up();
-setInterval(get_up,4000);
-setInterval(job_status,3000);
-setInterval(get_session,4000);
+setInterval(get_up,4000); // Get JOB output from DB
+setInterval(job_status,3000); // Get running job status based on thread name ( not from DB)
+setInterval(get_session,4000); // Get Running JOB details
 </script>
 
 </body>

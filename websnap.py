@@ -71,7 +71,6 @@ def history():
 		try:
 				darray = []
 				result = request.form
-				print result
 				# connect to LIVE database
 				mdb = mongoc.db
 				start = result.get("time1")
@@ -90,12 +89,12 @@ def history():
 
 				elif result["type"] == "timerange":
 					mcollection = mdb['OUTPUT']
-					all_data = mcollection.find({"TD":{'$lt': end, '$gte': start}},{"_id":0,"SESSION":1,"ID":1,"OUT":1,"TD":1})
+					all_data = mcollection.find({"TD":{'$lt': end, '$gte': start}},{"_id":0,"Authentication":0})
 					darray.append(list(all_data))
 				
 				elif result["type"] == "session":
 						mcollection = mdb["OUTPUT"]
-						all_data = mcollection.find({"SESSION":int(result["session"]),"INID":int(result["input"])},{"_id":0,"SESSION":1,"ID":1,"OUT":1,"TD":1})
+						all_data = mcollection.find({"SESSION":int(result["session"]),"INID":int(result["input"])},{"_id":0,"Authentication":0})
 						darray.append(list(all_data))
 				
 				elif result["type"] == "sessionrange":
@@ -106,21 +105,28 @@ def history():
 				elif result["type"] == "back":
 					tim = result["time"]
 					mcollection = mdb['OUTPUT']
-					qr = mcollection.find({"TD":{"$lte":datetime.datetime.strptime(tim, "%d-%m-%Y %H:%M:%S")}},{"_id":0,"SESSION":1,"INID":1,"TD":1}).sort([("TD",-1)]).limit(1)
+					qr = mcollection.find({"TD":{"$lte":datetime.datetime.strptime(tim+".999999", "%d-%m-%Y %H:%M:%S.%f")}},{"_id":0,"Authentication":0}).sort([("TD",-1)]).limit(1)
 					qr = list(qr)
 					if len(qr) > 0:
 						qr = qr[0]
-						all_data = mcollection.find({"SESSION":qr.get("SESSION"),"INID":qr.get("INID")},{"_id":0,"SESSION":1,"ID":1,"OUT":1,"TD":1})
+						all_data = mcollection.find({"SESSION":qr.get("SESSION"),"INID":qr.get("INID")},{"_id":0,"Authentication":0})
 						darray.append(list(all_data))
+
+				elif result["type"] == "history_list":
+					tim = result["time"]
+					limit = int(result["limit"])
+					mcollection = mdb['HISTORY']
+					all_data = mcollection.find({"TD":{"$lte":datetime.datetime.strptime(tim+".999999", "%d-%m-%Y %H:%M:%S.%f")}},{"_id":0,"INID":1,"SESSION":1,"JOBNAME":1,"TD":1}).sort([("TD",-1)]).limit(limit)
+					darray = list(all_data)
 
 				elif result["type"] == "forward":
 					tim = result["time"]
 					mcollection = mdb['OUTPUT']
-					qr = mcollection.find({"TD":{"$gte":datetime.datetime.strptime(tim, "%d-%m-%Y %H:%M:%S")}},{"_id":0,"SESSION":1,"INID":1,"TD":1}).sort([("TD",1)]).limit(1)
+					qr = mcollection.find({"TD":{"$gte":datetime.datetime.strptime(tim, "%d-%m-%Y %H:%M:%S")}},{"_id":0}).sort([("TD",1)]).limit(1)
 					qr = list(qr)
 					if len(qr) > 0:
 						qr = qr[0]
-						all_data = mcollection.find({"SESSION":qr.get("SESSION"),"INID":qr.get("INID")},{"_id":0,"SESSION":1,"ID":1,"OUT":1,"TD":1})
+						all_data = mcollection.find({"SESSION":qr.get("SESSION"),"INID":qr.get("INID")},{"_id":0,"Authentication":0})
 						darray.append(list(all_data))
 
 				return jsonify(darray)
@@ -148,55 +154,39 @@ def result():
 	 draw = 0
 	 if request.method == 'POST':
 			result = request.form
-			in_update = int(result.get("INID"))
-			out_update = int(result.get("SESSION"))
+			INID = int(result.get("INID"))
+			SESSION = int(result.get("SESSION"))
 			history = result.get("history")
 
 			if history != None:
 				h_time = result.get("time")
 				mdb = mongoc.db
 				mcollection = mdb['OUTPUT']
-				iin_update = in_update
-				oout_update = out_update
-				
-				if (iin_update == 0 or oout_update == 0):
-					iin_update = -1
-					oout_update = -1
-				
+
 				if history == "back":
 					#find({"$and":[{"TD":{"$lte":datetime.datetime.fromtimestamp(float(h_time))}}]},{"_id":0,"SESSION":1,"INID":1,"TD":1}).sort([("TD",-1)]).limit(1)
-					qr = mcollection.find({ "$or" : [ { "INID" : {"$ne": int(iin_update)} }, { "SESSION" : {"$ne": int(oout_update)} } ] ,"TD":{"$lte":datetime.datetime.strptime(h_time, "%d-%m-%Y %H:%M:%S")}}).sort([("TD",-1)]).limit(1)
+					qr = mcollection.find({ "$or" : [ { "INID" : {"$ne": int(INID)} }, { "SESSION" : {"$ne": int(SESSION)} } ] ,"TD":{"$lte":datetime.datetime.strptime(h_time+".999999", "%d-%m-%Y %H:%M:%S.%f")}}).sort([("TD",-1)]).limit(1)
 					qr = list(qr)
 					if len(qr) > 0:
 						qr = qr[0]
-						INID = int(qr.get("INID"))
-						SESSION = int(qr.get("SESSION"))
-						dinput = sqlget_input(INID,GETNEW=False)
-						doutput = sqlget_output(SESSION,INID,LIVE=False)
-						in_update = INID
-						out_update = SESSION
+						NEW_INID = int(qr.get("INID"))
+						NEW_SESSION = int(qr.get("SESSION"))
+						doutput = sqlget_output(NEW_SESSION,NEW_INID,LIVE=False)
 					else:
 						return "None"
 				
 				elif history == "forward":
-					qr = mcollection.find({ "$or" : [ { "INID" : {"$ne": int(iin_update)} }, { "SESSION" : {"$ne": int(oout_update)} } ] ,"TD":{"$gte":datetime.datetime.strptime(h_time, "%d-%m-%Y %H:%M:%S")}}).sort([("TD",1)]).limit(1)
+					qr = mcollection.find({ "$or" : [ { "INID" : {"$ne": int(INID)} }, { "SESSION" : {"$ne": int(SESSION)} } ] ,"TD":{"$gte":datetime.datetime.strptime(h_time, "%d-%m-%Y %H:%M:%S")}}).sort([("TD",1)]).limit(1)
 					qr = list(qr)
 					if len(qr) > 0:
 						qr = qr[0]
-
-						INID = int(qr.get("INID"))
-						SESSION = int(qr.get("SESSION"))
-						dinput = sqlget_input(INID,GETNEW=False)
-						doutput = sqlget_output(SESSION,INID,LIVE=False)
-						in_update = INID
-						out_update = SESSION
+						NEW_INID = int(qr.get("INID"))
+						NEW_SESSION = int(qr.get("SESSION"))
+						doutput = sqlget_output(NEW_SESSION,NEW_INID,LIVE=False)
 					else:
 						return "None"
-
 				else:
-
 					return "None"
-
 			else:
 
 				#mongoc = pymongo.MongoClient('localhost', 27017)
@@ -204,25 +194,17 @@ def result():
 				mdb = mongoc.db
 				mcollection = mdb['SESSION']
 				sesout = mcollection.find_one({"_id":1})
-				INID = int(sesout.get("INID"))
-				SESSION = int(sesout.get("SESSION"))
+				NEW_INID = int(sesout.get("INID"))
+				NEW_SESSION = int(sesout.get("SESSION"))
 
-				if in_update == 0 or INID != int(in_update):
+				if INID != int(NEW_INID) or SESSION != NEW_SESSION:
 						# INPUT NEW UPDATE REQUIRED
-						in_update = INID
-						dinput = sqlget_input(INID,GETNEW=False)
+						doutput = sqlget_output(NEW_SESSION,NEW_INID,LIVE=False)
 				else:
 						# Client side INPUT is uptodate ( Not required to update input data )
-						dinput = 0
-				if out_update == 0 or SESSION != int(out_update):
-						doutput = sqlget_output(SESSION,INID,LIVE=False)
-						out_update = SESSION
-
-			if dinput != 0 and doutput != 0 or int(result.get("INID")) != int(in_update):
-				draw = open("LIVE_UPDATE.txt",'r').read()
+						doutput = 0
 			
-			
-			return jsonify({"input":dinput,"output": doutput,"in_update":in_update,"out_update":out_update,"draw":draw})
+			return jsonify({"output": doutput,"INID":NEW_INID,"SESSION":NEW_SESSION})
 			
 	 if request.method == 'GET':
 			return jsonify(sqlget_output("0"))

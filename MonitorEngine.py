@@ -228,7 +228,8 @@ class main_model():
         try:
             # start create DB function
             self.jobname = jobname
-            if self.mongdb("xls",input_file_path) == True:
+            TD = datetime.datetime.now()
+            if self.mongdb(TD,"xls",input_file_path) == True:
                 pass;
             else:
                 print("STOPPED")
@@ -259,7 +260,7 @@ class main_model():
                         try:
                             jout = future.result()
                             #INSERT OUTPUT TO DB
-                            jout.update({"SESSION":int(session),"TD":datetime.datetime.now(),"JOBNAME":jobname})
+                            jout.update({"SESSION":int(session),"TD":TD,"JOBNAME":jobname})
                             mcollection = self.mdb['OUTPUT']
                             mcollection.insert(jout)
 
@@ -277,6 +278,8 @@ class main_model():
                 #UPDATE CURRENT SESSION
                 mcollection = self.mdb['SESSION']
                 mcollection.update({"_id":1},{"$set":{"SESSION":session}})
+                mcollection = self.mdb['HISTORY']
+                mcollection.insert({"INID":int(INID),"SESSION":int(session),"TD":TD,"JOBNAME":jobname})
         except Exception as e:
             logger.error(str(e))
             print("start_run Error >"+str(e))
@@ -307,7 +310,7 @@ class main_model():
             logger.error(str(e))
             print("xls_input Error>"+str(e))
     
-    def mongdb(self,input="xls",filepath=None):
+    def mongdb(self,TD,input="xls",filepath=None):
         try:
             INID  = 1
             if input == "xls":
@@ -339,7 +342,7 @@ class main_model():
             # Add or Update new session in SESSION collection
             mcollection = self.mdb['SESSION']
             #print list(ses)
-            mcollection.update({"_id":1},{"_id":1,"INID":INID,"SESSION":0,"JOBNAME":self.jobname,"STATUS":list(ses),"STARTDATE":datetime.datetime.now()})
+            mcollection.update({"_id":1},{"_id":1,"INID":INID,"SESSION":0,"JOBNAME":self.jobname,"STATUS":list(ses),"STARTDATE":TD})
             print("SESSION UPDATED , INID = "+str(INID))
             
             #self.mongoc.close()
