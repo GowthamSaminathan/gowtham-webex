@@ -1,0 +1,286 @@
+2017-09-10 11:34:34,166 > INFO > INFO LOG
+2017-09-10 11:34:34,167 > ERROR > ERROR LOG
+2017-09-10 11:34:34,167 > DEBUG > DEBUG LOG
+2017-09-10 11:38:42,377 > INFO > INFO LOG
+2017-09-10 11:38:42,378 > ERROR > ERROR LOG
+2017-09-10 11:38:42,378 > DEBUG > DEBUG LOG
+2017-09-10 11:38:42,378 > ERROR > message
+Traceback (most recent call last):
+  File "/home/gow/network_snap/MonitorEngine.py", line 36, in <module>
+    1/0
+ZeroDivisionError: integer division or modulo by zero
+2017-09-10 12:14:51,823 > INFO > Starting MonitoringEngine
+2017-09-10 12:14:52,295 > INFO > Starting MonitoringEngine
+2017-09-10 12:15:23,050 > INFO > Connected to 'LIVE' database...
+2017-09-10 12:15:23,054 > INFO > Scoring Object Insiated...
+2017-09-10 12:15:23,055 > INFO > Starting Job:KOPILJOB-10-September-12:15:23
+2017-09-10 12:15:23,140 > INFO > SESSION UPDATED , INID = 67
+2017-09-10 12:15:23,140 > INFO > STARTING SESSION >1
+2017-09-10 12:15:23,142 > INFO > Apprentice>5
+2017-09-10 12:15:23,186 > INFO > Trying to Login:10.1.1.3
+2017-09-10 12:15:23,227 > INFO > Trying to Login:10.1.1.2
+2017-09-10 12:15:24,649 > INFO > Login Success :10.1.1.3:R2#
+2017-09-10 12:15:24,649 > DEBUG > single host object
+2017-09-10 12:15:24,650 > DEBUG > [{u'name': u'self', u'type': u'self_check', u'monitor': u'self', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'status': u'reachable'}, u'score': 100}], u'id': 1}, {u'name': u'Fa0/0', u'type': u'cis_sw_int', u'monitor': u'speed,duplex,bits,error', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'status': u'up'}, u'score': 100}], u'id': 2}]
+2017-09-10 12:15:24,717 > INFO > Login Success :10.1.1.2:R1#
+2017-09-10 12:15:24,717 > DEBUG > single host object
+2017-09-10 12:15:24,718 > DEBUG > [{u'name': u'self', u'type': u'self_check', u'monitor': u'self', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'status': u'reachable'}, u'score': 100}], u'id': 1}, {u'name': u'Fa0/0', u'type': u'cis_sw_int', u'monitor': u'speed,duplex,bits,error', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'status': u'up'}, u'score': 100}], u'id': 2}]
+2017-09-10 12:15:25,674 > INFO > Scoring Started
+2017-09-10 12:15:25,674 > ERROR > mongo_search_score
+Traceback (most recent call last):
+  File "/home/gow/network_snap/MonitorEngine.py", line 43, in mongo_search_score
+    logger.debug("Mongo search score for:"+str(INID,session))
+TypeError: str() takes at most 1 argument (2 given)
+2017-09-10 12:15:25,675 > INFO > Scoring Completed
+2017-09-10 12:18:20,995 > INFO > Starting MonitoringEngine
+2017-09-10 12:18:52,659 > INFO > Connected to 'LIVE' database...
+2017-09-10 12:18:52,661 > INFO > Scoring Object Insiated...
+2017-09-10 12:18:52,661 > INFO > Starting Job:POLICEJOB-10-September-12:18:52
+2017-09-10 12:18:52,719 > INFO > SESSION UPDATED , INID = 68
+2017-09-10 12:18:52,720 > INFO > STARTING SESSION >1
+2017-09-10 12:18:52,726 > INFO > Apprentice>5
+2017-09-10 12:18:52,757 > INFO > Trying to Login:10.1.1.3
+2017-09-10 12:18:53,039 > INFO > Trying to Login:10.1.1.2
+2017-09-10 12:18:54,439 > INFO > Login Success :10.1.1.3:R2#
+2017-09-10 12:18:54,439 > DEBUG > single host object
+2017-09-10 12:18:54,439 > DEBUG > [{u'name': u'self', u'type': u'self_check', u'monitor': u'self', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'status': u'reachable'}, u'score': 100}], u'id': 1}, {u'name': u'Fa0/0', u'type': u'cis_sw_int', u'monitor': u'speed,duplex,bits,error', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'status': u'up'}, u'score': 100}], u'id': 2}]
+2017-09-10 12:18:54,495 > INFO > Login Success :10.1.1.2:R1#
+2017-09-10 12:18:54,495 > DEBUG > single host object
+2017-09-10 12:18:54,495 > DEBUG > [{u'name': u'self', u'type': u'self_check', u'monitor': u'self', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'status': u'reachable'}, u'score': 100}], u'id': 1}, {u'name': u'Fa0/0', u'type': u'cis_sw_int', u'monitor': u'speed,duplex,bits,error', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'status': u'up'}, u'score': 100}], u'id': 2}]
+2017-09-10 12:18:55,427 > INFO > Scoring Started
+2017-09-10 12:18:55,427 > DEBUG > Mongo search score for:68 1
+2017-09-10 12:18:55,429 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'INID': 68, 'SESSION': 1, 'Objects.id': 1}
+2017-09-10 12:18:55,430 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-10 12:18:55,431 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'reachable', 'INID': 68, 'SESSION': 1, 'Objects.id': 1}
+2017-09-10 12:18:55,432 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-10 12:18:55,435 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'INID': 68, 'SESSION': 1, 'Objects.id': 2}
+2017-09-10 12:18:55,438 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-10 12:18:55,438 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'up', 'INID': 68, 'SESSION': 1, 'Objects.id': 2}
+2017-09-10 12:18:55,440 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-10 12:18:55,440 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'INID': 68, 'SESSION': 1, 'Objects.id': 1}
+2017-09-10 12:18:55,442 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-10 12:18:55,442 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'reachable', 'INID': 68, 'SESSION': 1, 'Objects.id': 1}
+2017-09-10 12:18:55,443 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-10 12:18:55,444 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'INID': 68, 'SESSION': 1, 'Objects.id': 2}
+2017-09-10 12:18:55,446 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-10 12:18:55,446 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'up', 'INID': 68, 'SESSION': 1, 'Objects.id': 2}
+2017-09-10 12:18:55,447 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-10 12:18:55,447 > INFO > Scoring Completed
+2017-09-10 12:30:40,439 > INFO > Starting MonitoringEngine
+2017-09-10 12:31:06,483 > INFO > Connected to 'LIVE' database...
+2017-09-10 12:31:06,484 > INFO > Scoring Object Insiated...
+2017-09-10 12:31:06,484 > INFO > Starting Job ===============> KOPIL-10-September-12:31:06
+2017-09-10 12:31:06,534 > INFO > SESSION UPDATED , INID = 69
+2017-09-10 12:31:06,534 > INFO > STARTING SESSION >1
+2017-09-10 12:31:06,576 > INFO > Apprentice>5
+2017-09-10 12:31:06,778 > INFO > Trying to Login:10.1.1.2
+2017-09-10 12:31:06,817 > INFO > Trying to Login:10.1.1.3
+2017-09-10 12:31:08,251 > INFO > Login Success :10.1.1.3:R2#
+2017-09-10 12:31:08,252 > DEBUG > single host object
+2017-09-10 12:31:08,252 > DEBUG > [{u'name': u'self', u'type': u'self_check', u'monitor': u'self', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'status': u'reachable'}, u'score': 100}], u'id': 1}, {u'name': u'Fa0/0', u'type': u'cis_sw_int', u'monitor': u'speed,duplex,bits,error', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'status': u'up'}, u'score': 100}], u'id': 2}]
+2017-09-10 12:31:08,384 > INFO > Login Success :10.1.1.2:R1#
+2017-09-10 12:31:08,385 > DEBUG > single host object
+2017-09-10 12:31:08,385 > DEBUG > [{u'name': u'self', u'type': u'self_check', u'monitor': u'self', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'status': u'reachable'}, u'score': 100}], u'id': 1}, {u'name': u'Fa0/0', u'type': u'cis_sw_int', u'monitor': u'speed,duplex,bits,error', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'status': u'up'}, u'score': 100}], u'id': 2}]
+2017-09-10 12:31:09,333 > INFO > Scoring Started
+2017-09-10 12:31:09,334 > DEBUG > Mongo search score for:69 1
+2017-09-10 12:31:09,336 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'INID': 69, 'SESSION': 1, 'Objects.id': 1}
+2017-09-10 12:31:09,337 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-10 12:31:09,338 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'reachable', 'INID': 69, 'SESSION': 1, 'Objects.id': 1}
+2017-09-10 12:31:09,339 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-10 12:31:09,340 > DEBUG > mongo_search_score > updating score >({u'Objects.out.status': u'reachable', 'INID': 69, 'SESSION': 1, 'Objects.id': 1}, {'$set': {'Objects.$.score': 100}})
+2017-09-10 12:31:09,341 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'INID': 69, 'SESSION': 1, 'Objects.id': 2}
+2017-09-10 12:31:09,343 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-10 12:31:09,343 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'up', 'INID': 69, 'SESSION': 1, 'Objects.id': 2}
+2017-09-10 12:31:09,344 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-10 12:31:09,345 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'INID': 69, 'SESSION': 1, 'Objects.id': 1}
+2017-09-10 12:31:09,346 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-10 12:31:09,346 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'reachable', 'INID': 69, 'SESSION': 1, 'Objects.id': 1}
+2017-09-10 12:31:09,348 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-10 12:31:09,348 > DEBUG > mongo_search_score > updating score >({u'Objects.out.status': u'reachable', 'INID': 69, 'SESSION': 1, 'Objects.id': 1}, {'$set': {'Objects.$.score': 100}})
+2017-09-10 12:31:09,349 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'INID': 69, 'SESSION': 1, 'Objects.id': 2}
+2017-09-10 12:31:09,351 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-10 12:31:09,351 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'up', 'INID': 69, 'SESSION': 1, 'Objects.id': 2}
+2017-09-10 12:31:09,353 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-10 12:31:09,353 > INFO > Scoring Completed
+2017-09-10 12:40:05,652 > INFO > Starting MonitoringEngine
+2017-09-10 12:40:22,264 > INFO > Connected to 'LIVE' database...
+2017-09-10 12:40:22,264 > INFO > Scoring Object Insiated...
+2017-09-10 12:40:22,265 > INFO > Starting Job ===============> POLI1-10-September-12:40:22
+2017-09-10 12:40:22,414 > INFO > SESSION UPDATED , INID = 70
+2017-09-10 12:40:22,414 > INFO > STARTING SESSION >1
+2017-09-10 12:40:22,415 > INFO > Apprentice>5
+2017-09-10 12:40:22,442 > INFO > Trying to Login:10.1.1.3
+2017-09-10 12:40:22,480 > INFO > Trying to Login:10.1.1.2
+2017-09-10 12:40:23,885 > INFO > Login Success :10.1.1.3:R2#
+2017-09-10 12:40:23,885 > DEBUG > single host object
+2017-09-10 12:40:23,885 > DEBUG > [{u'name': u'self', u'type': u'self_check', u'monitor': u'self', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'status': u'reachable'}, u'score': 100}], u'id': 1}, {u'name': u'Fa0/0', u'type': u'cis_sw_int', u'monitor': u'speed,duplex,bits,error', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'status': u'up'}, u'score': 100}], u'id': 2}]
+2017-09-10 12:40:23,947 > INFO > Login Success :10.1.1.2:R1#
+2017-09-10 12:40:23,947 > DEBUG > single host object
+2017-09-10 12:40:23,947 > DEBUG > [{u'name': u'self', u'type': u'self_check', u'monitor': u'self', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'status': u'reachable'}, u'score': 100}], u'id': 1}, {u'name': u'Fa0/0', u'type': u'cis_sw_int', u'monitor': u'speed,duplex,bits,error', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'status': u'up'}, u'score': 100}], u'id': 2}]
+2017-09-10 12:40:24,875 > INFO > Scoring Started
+2017-09-10 12:40:24,875 > DEBUG > Mongo search score for:70 1
+2017-09-10 12:40:24,877 > DEBUG > mongo_search_score > Starting score for > 10.1.1.3
+2017-09-10 12:40:24,878 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'IP': u'10.1.1.3', 'INID': 70, 'SESSION': 1, 'Objects.id': 1}
+2017-09-10 12:40:24,880 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-10 12:40:24,881 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'reachable', 'IP': u'10.1.1.3', 'INID': 70, 'SESSION': 1, 'Objects.id': 1}
+2017-09-10 12:40:24,884 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-10 12:40:24,885 > DEBUG > mongo_search_score > updating score >({u'Objects.out.status': u'reachable', 'IP': u'10.1.1.3', 'INID': 70, 'SESSION': 1, 'Objects.id': 1}, {'$set': {'Objects.$.score': 100}})
+2017-09-10 12:40:24,887 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'IP': u'10.1.1.3', 'INID': 70, 'SESSION': 1, 'Objects.id': 2}
+2017-09-10 12:40:24,890 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-10 12:40:24,891 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'up', 'IP': u'10.1.1.3', 'INID': 70, 'SESSION': 1, 'Objects.id': 2}
+2017-09-10 12:40:24,893 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-10 12:40:24,893 > DEBUG > mongo_search_score > Starting score for > 10.1.1.2
+2017-09-10 12:40:24,893 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'IP': u'10.1.1.2', 'INID': 70, 'SESSION': 1, 'Objects.id': 1}
+2017-09-10 12:40:24,895 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-10 12:40:24,896 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'reachable', 'IP': u'10.1.1.2', 'INID': 70, 'SESSION': 1, 'Objects.id': 1}
+2017-09-10 12:40:24,897 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-10 12:40:24,898 > DEBUG > mongo_search_score > updating score >({u'Objects.out.status': u'reachable', 'IP': u'10.1.1.2', 'INID': 70, 'SESSION': 1, 'Objects.id': 1}, {'$set': {'Objects.$.score': 100}})
+2017-09-10 12:40:24,899 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'IP': u'10.1.1.2', 'INID': 70, 'SESSION': 1, 'Objects.id': 2}
+2017-09-10 12:40:24,901 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-10 12:40:24,901 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'up', 'IP': u'10.1.1.2', 'INID': 70, 'SESSION': 1, 'Objects.id': 2}
+2017-09-10 12:40:24,902 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-10 12:40:24,902 > INFO > Scoring Completed
+2017-09-10 12:52:58,253 > INFO > Connected to 'LIVE' database...
+2017-09-10 12:52:58,254 > INFO > Scoring Object Insiated...
+2017-09-10 12:52:58,254 > INFO > Starting Job ===============> GOWTHAMJOB1-10-September-12:52:58
+2017-09-10 12:52:58,360 > INFO > SESSION UPDATED , INID = 71
+2017-09-10 12:52:58,362 > INFO > STARTING SESSION >1
+2017-09-10 12:52:58,364 > INFO > Apprentice>5
+2017-09-10 12:52:58,563 > INFO > Trying to Login:10.1.1.2
+2017-09-10 12:53:00,804 > INFO > Trying to Login:10.1.1.3
+2017-09-10 12:53:02,228 > INFO > Login Success :10.1.1.2:R1#
+2017-09-10 12:53:02,228 > DEBUG > single host object
+2017-09-10 12:53:02,228 > DEBUG > [{u'name': u'self', u'type': u'self_check', u'monitor': u'self', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'status': u'reachable'}, u'score': 100}], u'id': 1}, {u'name': u'Fa0/0', u'type': u'cis_sw_int', u'monitor': u'speed,duplex,bits,error', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'bits': u'/.*/'}, u'score': 100}], u'id': 2}]
+2017-09-10 12:53:02,234 > INFO > Login Success :10.1.1.3:R2#
+2017-09-10 12:53:02,234 > DEBUG > single host object
+2017-09-10 12:53:02,235 > DEBUG > [{u'name': u'self', u'type': u'self_check', u'monitor': u'self', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'status': u'reachable'}, u'score': 100}], u'id': 1}, {u'name': u'Fa0/0', u'type': u'cis_sw_int', u'monitor': u'speed,duplex,bits,error', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'bits': u'/.*/'}, u'score': 100}], u'id': 2}]
+2017-09-10 12:53:03,175 > INFO > Scoring Started
+2017-09-10 12:53:03,175 > DEBUG > Mongo search score for:71 1
+2017-09-10 12:53:03,179 > DEBUG > mongo_search_score > Starting score for > 10.1.1.2
+2017-09-10 12:53:03,179 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'IP': u'10.1.1.2', 'INID': 71, 'SESSION': 1, 'Objects.id': 1}
+2017-09-10 12:53:03,185 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-10 12:53:03,185 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'reachable', 'IP': u'10.1.1.2', 'INID': 71, 'SESSION': 1, 'Objects.id': 1}
+2017-09-10 12:53:03,188 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-10 12:53:03,188 > DEBUG > mongo_search_score > updating score >({u'Objects.out.status': u'reachable', 'IP': u'10.1.1.2', 'INID': 71, 'SESSION': 1, 'Objects.id': 1}, {'$set': {'Objects.$.score': 100}})
+2017-09-10 12:53:03,192 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'IP': u'10.1.1.2', 'INID': 71, 'SESSION': 1, 'Objects.id': 2}
+2017-09-10 12:53:03,194 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-10 12:53:03,194 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 71, 'SESSION': 1, u'Objects.out.bits': u'/.*/', 'Objects.id': 2}
+2017-09-10 12:53:03,196 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-10 12:53:03,196 > DEBUG > mongo_search_score > Starting score for > 10.1.1.3
+2017-09-10 12:53:03,196 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'IP': u'10.1.1.3', 'INID': 71, 'SESSION': 1, 'Objects.id': 1}
+2017-09-10 12:53:03,199 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-10 12:53:03,200 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'reachable', 'IP': u'10.1.1.3', 'INID': 71, 'SESSION': 1, 'Objects.id': 1}
+2017-09-10 12:53:03,211 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-10 12:53:03,211 > DEBUG > mongo_search_score > updating score >({u'Objects.out.status': u'reachable', 'IP': u'10.1.1.3', 'INID': 71, 'SESSION': 1, 'Objects.id': 1}, {'$set': {'Objects.$.score': 100}})
+2017-09-10 12:53:03,214 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'IP': u'10.1.1.3', 'INID': 71, 'SESSION': 1, 'Objects.id': 2}
+2017-09-10 12:53:03,219 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-10 12:53:03,219 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 71, 'SESSION': 1, u'Objects.out.bits': u'/.*/', 'Objects.id': 2}
+2017-09-10 12:53:03,223 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-10 12:53:03,224 > INFO > Scoring Completed
+2017-09-10 12:58:36,456 > INFO > Connected to 'LIVE' database...
+2017-09-10 12:58:36,456 > INFO > Scoring Object Insiated...
+2017-09-10 12:58:36,456 > INFO > Starting Job ===============> monho-10-September-12:58:36
+2017-09-10 12:58:36,652 > INFO > SESSION UPDATED , INID = 72
+2017-09-10 12:58:36,652 > INFO > STARTING SESSION >1
+2017-09-10 12:58:36,653 > INFO > Apprentice>5
+2017-09-10 12:58:36,702 > INFO > Trying to Login:10.1.1.2
+2017-09-10 12:58:36,749 > INFO > Trying to Login:10.1.1.3
+2017-09-10 12:58:38,165 > INFO > Login Success :10.1.1.2:R1#
+2017-09-10 12:58:38,165 > DEBUG > single host object
+2017-09-10 12:58:38,165 > DEBUG > [{u'name': u'self', u'type': u'self_check', u'monitor': u'self', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'status': u'reachable'}, u'score': 100}], u'id': 1}, {u'name': u'Fa0/0', u'type': u'cis_sw_int', u'monitor': u'speed,duplex,bits,error', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'bits': u'0|0'}, u'score': 100}], u'id': 2}]
+2017-09-10 12:58:38,214 > INFO > Login Success :10.1.1.3:R2#
+2017-09-10 12:58:38,214 > DEBUG > single host object
+2017-09-10 12:58:38,214 > DEBUG > [{u'name': u'self', u'type': u'self_check', u'monitor': u'self', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'status': u'reachable'}, u'score': 100}], u'id': 1}, {u'name': u'Fa0/0', u'type': u'cis_sw_int', u'monitor': u'speed,duplex,bits,error', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'bits': u'0|0'}, u'score': 100}], u'id': 2}]
+2017-09-10 12:58:39,116 > INFO > Scoring Started
+2017-09-10 12:58:39,116 > DEBUG > Mongo search score for:72 1
+2017-09-10 12:58:39,118 > DEBUG > mongo_search_score > Starting score for > 10.1.1.2
+2017-09-10 12:58:39,118 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'IP': u'10.1.1.2', 'INID': 72, 'SESSION': 1, 'Objects.id': 1}
+2017-09-10 12:58:39,119 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-10 12:58:39,119 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'reachable', 'IP': u'10.1.1.2', 'INID': 72, 'SESSION': 1, 'Objects.id': 1}
+2017-09-10 12:58:39,121 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-10 12:58:39,121 > DEBUG > mongo_search_score > updating score >({u'Objects.out.status': u'reachable', 'IP': u'10.1.1.2', 'INID': 72, 'SESSION': 1, 'Objects.id': 1}, {'$set': {'Objects.$.score': 100}})
+2017-09-10 12:58:39,125 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'IP': u'10.1.1.2', 'INID': 72, 'SESSION': 1, 'Objects.id': 2}
+2017-09-10 12:58:39,126 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-10 12:58:39,126 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 72, 'SESSION': 1, u'Objects.out.bits': u'0|0', 'Objects.id': 2}
+2017-09-10 12:58:39,128 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-10 12:58:39,128 > DEBUG > mongo_search_score > Starting score for > 10.1.1.3
+2017-09-10 12:58:39,128 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'IP': u'10.1.1.3', 'INID': 72, 'SESSION': 1, 'Objects.id': 1}
+2017-09-10 12:58:39,130 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-10 12:58:39,130 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'reachable', 'IP': u'10.1.1.3', 'INID': 72, 'SESSION': 1, 'Objects.id': 1}
+2017-09-10 12:58:39,134 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-10 12:58:39,135 > DEBUG > mongo_search_score > updating score >({u'Objects.out.status': u'reachable', 'IP': u'10.1.1.3', 'INID': 72, 'SESSION': 1, 'Objects.id': 1}, {'$set': {'Objects.$.score': 100}})
+2017-09-10 12:58:39,136 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'IP': u'10.1.1.3', 'INID': 72, 'SESSION': 1, 'Objects.id': 2}
+2017-09-10 12:58:39,138 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-10 12:58:39,138 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 72, 'SESSION': 1, u'Objects.out.bits': u'0|0', 'Objects.id': 2}
+2017-09-10 12:58:39,139 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-10 12:58:39,140 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.3', 'INID': 72, 'SESSION': 1, u'Objects.out.bits': u'0|0', 'Objects.id': 2}, {'$set': {'Objects.$.score': 100}})
+2017-09-10 12:58:39,141 > INFO > Scoring Completed
+2017-09-10 13:14:37,167 > INFO > Connected to 'LIVE' database...
+2017-09-10 13:14:37,167 > INFO > Scoring Object Insiated...
+2017-09-10 13:14:37,168 > INFO > Starting Job ===============> REGTEST-10-September-13:14:37
+2017-09-10 13:14:37,193 > ERROR > xls_input
+Traceback (most recent call last):
+  File "/home/gow/network_snap/MonitorEngine.py", line 306, in xls_input
+    a = {"id":elmt_id2,"type": row["type"] , "name": row["name"] , "monitor":row["monitor"], "rank": json.loads(row["rank"])}
+  File "/usr/lib/python2.7/json/__init__.py", line 338, in loads
+    return _default_decoder.decode(s)
+  File "/usr/lib/python2.7/json/decoder.py", line 366, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/usr/lib/python2.7/json/decoder.py", line 382, in raw_decode
+    obj, end = self.scan_once(s, idx)
+ValueError: Expecting property name enclosed in double quotes: line 1 column 58 (char 57)
+2017-09-10 13:14:37,352 > ERROR > No valid XLS input
+2017-09-10 13:14:37,352 > ERROR > STOPPED
+2017-09-10 13:17:13,833 > INFO > Connected to 'LIVE' database...
+2017-09-10 13:17:13,833 > INFO > Scoring Object Insiated...
+2017-09-10 13:17:13,833 > INFO > Starting Job ===============> Gowtham-10-September-13:17:13
+2017-09-10 13:17:13,875 > ERROR > mongdb
+Traceback (most recent call last):
+  File "/home/gow/network_snap/MonitorEngine.py", line 341, in mongdb
+    mcollection.insert(csv_data)
+  File "/usr/local/lib/python2.7/dist-packages/pymongo/collection.py", line 2469, in insert
+    check_keys, manipulate, write_concern)
+  File "/usr/local/lib/python2.7/dist-packages/pymongo/collection.py", line 610, in _insert
+    gen(), check_keys, self.__write_response_codec_options, bwc)
+  File "/usr/local/lib/python2.7/dist-packages/pymongo/message.py", line 782, in _do_batched_write_command
+    value = bson.BSON.encode(doc, check_keys, opts)
+  File "/usr/local/lib/python2.7/dist-packages/bson/__init__.py", line 976, in encode
+    return cls(_dict_to_bson(document, check_keys, codec_options))
+  File "/usr/local/lib/python2.7/dist-packages/bson/__init__.py", line 758, in _dict_to_bson
+    check_keys, opts))
+  File "/usr/local/lib/python2.7/dist-packages/bson/__init__.py", line 743, in _element_to_bson
+    return _name_value_to_bson(name, value, check_keys, opts)
+  File "/usr/local/lib/python2.7/dist-packages/bson/__init__.py", line 704, in _name_value_to_bson
+    return _ENCODERS[type(value)](name, value, check_keys, opts)
+  File "/usr/local/lib/python2.7/dist-packages/bson/__init__.py", line 510, in _encode_list
+    for item in value])
+  File "/usr/local/lib/python2.7/dist-packages/bson/__init__.py", line 704, in _name_value_to_bson
+    return _ENCODERS[type(value)](name, value, check_keys, opts)
+  File "/usr/local/lib/python2.7/dist-packages/bson/__init__.py", line 481, in _encode_mapping
+    for key, val in iteritems(value)])
+  File "/usr/local/lib/python2.7/dist-packages/bson/__init__.py", line 743, in _element_to_bson
+    return _name_value_to_bson(name, value, check_keys, opts)
+  File "/usr/local/lib/python2.7/dist-packages/bson/__init__.py", line 704, in _name_value_to_bson
+    return _ENCODERS[type(value)](name, value, check_keys, opts)
+  File "/usr/local/lib/python2.7/dist-packages/bson/__init__.py", line 510, in _encode_list
+    for item in value])
+  File "/usr/local/lib/python2.7/dist-packages/bson/__init__.py", line 704, in _name_value_to_bson
+    return _ENCODERS[type(value)](name, value, check_keys, opts)
+  File "/usr/local/lib/python2.7/dist-packages/bson/__init__.py", line 481, in _encode_mapping
+    for key, val in iteritems(value)])
+  File "/usr/local/lib/python2.7/dist-packages/bson/__init__.py", line 743, in _element_to_bson
+    return _name_value_to_bson(name, value, check_keys, opts)
+  File "/usr/local/lib/python2.7/dist-packages/bson/__init__.py", line 704, in _name_value_to_bson
+    return _ENCODERS[type(value)](name, value, check_keys, opts)
+  File "/usr/local/lib/python2.7/dist-packages/bson/__init__.py", line 481, in _encode_mapping
+    for key, val in iteritems(value)])
+  File "/usr/local/lib/python2.7/dist-packages/bson/__init__.py", line 743, in _element_to_bson
+    return _name_value_to_bson(name, value, check_keys, opts)
+  File "/usr/local/lib/python2.7/dist-packages/bson/__init__.py", line 704, in _name_value_to_bson
+    return _ENCODERS[type(value)](name, value, check_keys, opts)
+  File "/usr/local/lib/python2.7/dist-packages/bson/__init__.py", line 481, in _encode_mapping
+    for key, val in iteritems(value)])
+  File "/usr/local/lib/python2.7/dist-packages/bson/__init__.py", line 738, in _element_to_bson
+    raise InvalidDocument("key %r must not start with '$'" % (key,))
+InvalidDocument: key u'$regex' must not start with '$'
+2017-09-10 13:17:14,286 > ERROR > STOPPED
