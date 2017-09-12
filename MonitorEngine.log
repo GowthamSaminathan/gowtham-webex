@@ -284,3 +284,7 @@ Traceback (most recent call last):
     raise InvalidDocument("key %r must not start with '$'" % (key,))
 InvalidDocument: key u'$regex' must not start with '$'
 2017-09-10 13:17:14,286 > ERROR > STOPPED
+2017-09-12 13:10:57,204 > INFO > Starting MonitoringEngine
+2017-09-12 13:10:57,484 > INFO > Starting MonitoringEngine
+2017-09-12 13:23:34,299 > INFO > Starting MonitoringEngine
+2017-09-12 13:23:34,576 > INFO > Starting MonitoringEngine
