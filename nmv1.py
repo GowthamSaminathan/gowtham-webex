@@ -29,8 +29,6 @@ def cis_sw_int(ses,monobj):
 		out = {}
 		mon_ = monobj.get("monitor")
 		mon_ = mon_.split(",")
-		for m in mon_:
-			out.update({m:""})
 
 		type_ = monobj.get("type")
 		in_ = monobj.get("name")
@@ -41,48 +39,63 @@ def cis_sw_int(ses,monobj):
 		ses[0].sendline(cmd)
 		ses[0].expect([cmd,pxssh.TIMEOUT],timeout=5)
 		ses[0].expect([exp,pxssh.TIMEOUT],timeout=5)
-		data = str(ses[0].before)
-		if data.find("line protocol is up") == -1:
+		data = str(ses[0].before).lower()
+		if data.find("line protocol is up") == 0 or data.find("admin state is up") == 0:
 			# Interface down
+			out.update({"interface":"up"})
+		else:
 			return {"interface":"down"}
+
 		if "bits" in mon_:
 
 			redata = re.findall(r'input rate [0-9]+|output rate [0-9]+',data)
-
 			if len(redata) == 2:
 				irate = redata[0].replace('input rate ','')
 				orate = redata[1].replace('output rate ','')
-				rate = irate+"|"+orate
-				out.update({"bits":rate})
+				#rate = irate+"|"+orate
+				out.update({"inrate":irate,"outrate":orate})
 		
 		if "duplex" in mon_:
-			redata = re.findall(r'[a-zA-Z]+-duplex',data)
-			if len(redata) > 0:
-				out.update({"duplex":redata[0]})
+			if data.find("half") != -1:
+				out.update({"duplex":"Half"})
+			if data.find("full") != -1:
+				out.update({"duplex":"Full"})
 
 		if "speed" in mon_:
-			redata = re.findall(r'[0-9]+Mb/s',data)
+			redata = re.findall(r'[0-9]+.mb/s,',data)
+			
+			if len(redata) == 0:
+				redata = re.findall(r'[0-9]+.mbps,',data)
+			
 			if len(redata) > 0:
-				out.update({"speed":redata[0]})
+				redata = redata[0].strip()
+				out.update({"speed":redata})
+			
+			redata = re.findall(r'[0-9]+.gb/s',data)
+			if len(redata) > 0:
+				redata = redata.split("gb")[0]
+				redata = redata.strip()
+				redata = redata+"000"
+				out.update({"speed":redata})
+
 
 		err = ""
 		if "error" in mon_:
-			redata = re.findall(r'Total output drops: [0-9]+',data)
+			redata = re.findall(r'total output drops: [0-9]+',data)
 			if len(redata) == 1:
-				outdrop = redata[0].replace('Total output drops: ','')
-				err = "drop:"+outdrop
+				outdrop = redata[0].replace('total output drops: ','')
+				out.update({"outdrops":outdrop})
 
 			redata = re.findall(r'[0-9]+ input errors',data)
 			if len(redata) == 1:
 				inerror = redata[0].replace(' input errors','')
-				err = err+"|"+inerror
+				out.update({"inerror":inerror})
 
-			redata = re.findall(r'[0-9]+ CRC,',data)
+			redata = re.findall(r'[0-9]+ crc,',data)
 			if len(redata) == 1:
-				crcerror = redata[0].replace(' CRC,','')
-				err = err+"|"+crcerror
-				
-			out.update({"error":err})
+				crcerror = redata[0].replace(' crc,','')
+				out.update({"crc":crcerror})
+
 
 		return out
 	except Exception as e:

@@ -59,11 +59,13 @@ class score_gen():
                             #print rank
                             custom_query = rank.get("regex")
                             score = rank.get("score")
-                            dafault_query = {"INID":INID,"SESSION":session,"IP":IP,"Objects.id":elmt_id}
+                            dafault_query = {"INID":INID,"SESSION":session,"IP":IP}
                             #print custom_query
-                            new_dict = {"Objects"+".out."+key: value for key, value in custom_query.items()}
+                            new_dict = {"out."+key: value for key, value in custom_query.items()}
                             #print new_dict
-                            dafault_query.update(new_dict)
+                            new_dict.update({"id":elmt_id})
+                            elmts = {"$elemMatch":new_dict}
+                            dafault_query.update({'Objects':elmts})
                             logger.debug("mongo_search_score > searching DB for:"+str(dafault_query))
                             queryout = mdb_out.find_one(dafault_query,{"_id":0,"TD":0})
                             #print queryout

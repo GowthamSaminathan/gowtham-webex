@@ -1,0 +1,10 @@
+
+
+CTS_ABSB_DR_MUM_TATA#terminal length 0
+show interface bits,duplex,speed,error
+terminal length 0
+CTS_ABSB_DR_MUM_TATA#show interface bits,duplex,speed,error
+                                     ^
+% Invalid input detected at '^' marker.
+
+CTS_ABSB_DR_MUM_TATA#

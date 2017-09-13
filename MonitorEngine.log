@@ -288,3 +288,436 @@ InvalidDocument: key u'$regex' must not start with '$'
 2017-09-12 13:10:57,484 > INFO > Starting MonitoringEngine
 2017-09-12 13:23:34,299 > INFO > Starting MonitoringEngine
 2017-09-12 13:23:34,576 > INFO > Starting MonitoringEngine
+2017-09-12 13:53:44,793 > INFO > Starting MonitoringEngine
+2017-09-12 13:53:45,108 > INFO > Starting MonitoringEngine
+2017-09-12 17:06:44,816 > INFO > Starting MonitoringEngine
+2017-09-12 17:06:45,334 > INFO > Starting MonitoringEngine
+2017-09-12 17:08:07,202 > INFO > Connected to 'LIVE' database...
+2017-09-12 17:08:07,202 > INFO > Scoring Object Insiated...
+2017-09-12 17:08:07,202 > INFO > Starting Job ===============> Bank_interface-12-September-17:08:07
+2017-09-12 17:08:07,325 > INFO > SESSION UPDATED , INID = 5.0
+2017-09-12 17:08:07,325 > INFO > STARTING SESSION >1
+2017-09-12 17:08:07,328 > INFO > Apprentice>5
+2017-09-12 17:08:07,348 > INFO > Trying to Login:192.168.103.124
+2017-09-12 17:08:07,355 > INFO > Trying to Login:192.168.103.125
+2017-09-12 17:08:11,664 > INFO > Login Success :192.168.103.124:CTS_ABSB_DR_MUM_TATA#
+2017-09-12 17:08:11,664 > DEBUG > single host object
+2017-09-12 17:08:11,664 > DEBUG > [{u'name': u'self', u'type': u'self_check', u'monitor': u'self', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'status': u'reachable'}, u'score': 100}], u'id': 1}]
+2017-09-12 17:08:15,187 > INFO > Login Failed:192.168.103.125
+2017-09-12 17:08:15,187 > INFO > Failed >CTS_ABSB_DR_MUM_TATA 192.168.103.125
+2017-09-12 17:08:15,191 > INFO > Scoring Started
+2017-09-12 17:08:15,191 > DEBUG > Mongo search score for:5.0 1
+2017-09-12 17:08:15,192 > DEBUG > mongo_search_score > Starting score for > 192.168.103.124
+2017-09-12 17:08:15,192 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'IP': u'192.168.103.124', 'INID': 5.0, 'SESSION': 1, 'Objects.id': 1}
+2017-09-12 17:08:15,193 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-12 17:08:15,193 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'reachable', 'IP': u'192.168.103.124', 'INID': 5.0, 'SESSION': 1, 'Objects.id': 1}
+2017-09-12 17:08:15,194 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-12 17:08:15,194 > DEBUG > mongo_search_score > updating score >({u'Objects.out.status': u'reachable', 'IP': u'192.168.103.124', 'INID': 5.0, 'SESSION': 1, 'Objects.id': 1}, {'$set': {'Objects.$.score': 100}})
+2017-09-12 17:08:15,195 > DEBUG > mongo_search_score > Starting score for > 192.168.103.125
+2017-09-12 17:08:15,195 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'IP': u'192.168.103.125', 'INID': 5.0, 'SESSION': 1, 'Objects.id': None}
+2017-09-12 17:08:15,195 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-12 17:08:15,195 > DEBUG > mongo_search_score > updating score >({u'Objects.out.status': u'down', 'IP': u'192.168.103.125', 'INID': 5.0, 'SESSION': 1, 'Objects.id': None}, {'$set': {'Objects.$.score': 0}})
+2017-09-12 17:08:15,196 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'reachable', 'IP': u'192.168.103.125', 'INID': 5.0, 'SESSION': 1, 'Objects.id': None}
+2017-09-12 17:08:15,196 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-12 17:08:15,196 > INFO > Scoring Completed
+2017-09-12 17:09:06,741 > INFO > Connected to 'LIVE' database...
+2017-09-12 17:09:06,741 > INFO > Scoring Object Insiated...
+2017-09-12 17:09:06,741 > INFO > Starting Job ===============> BANK_interface-12-September-17:09:06
+2017-09-12 17:09:06,749 > INFO > SESSION UPDATED , INID = 6.0
+2017-09-12 17:09:06,749 > INFO > STARTING SESSION >1
+2017-09-12 17:09:06,750 > INFO > Apprentice>5
+2017-09-12 17:09:06,757 > INFO > Trying to Login:192.168.103.124
+2017-09-12 17:09:10,545 > INFO > Login Success :192.168.103.124:CTS_ABSB_DR_MUM_TATA#
+2017-09-12 17:09:10,546 > DEBUG > single host object
+2017-09-12 17:09:10,546 > DEBUG > [{u'name': u'self', u'type': u'self_check', u'monitor': u'self', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'status': u'reachable'}, u'score': 100}], u'id': 1}, {u'name': u'bits,duplex,speed,error', u'type': u'cis_sw_int', u'monitor': u'GigabitEthernet0/0', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'status': u'up'}, u'score': 100}], u'id': 2}]
+2017-09-12 17:09:11,279 > INFO > Scoring Started
+2017-09-12 17:09:11,279 > DEBUG > Mongo search score for:6.0 1
+2017-09-12 17:09:11,280 > DEBUG > mongo_search_score > Starting score for > 192.168.103.124
+2017-09-12 17:09:11,280 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'IP': u'192.168.103.124', 'INID': 6.0, 'SESSION': 1, 'Objects.id': 1}
+2017-09-12 17:09:11,281 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-12 17:09:11,281 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'reachable', 'IP': u'192.168.103.124', 'INID': 6.0, 'SESSION': 1, 'Objects.id': 1}
+2017-09-12 17:09:11,282 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-12 17:09:11,282 > DEBUG > mongo_search_score > updating score >({u'Objects.out.status': u'reachable', 'IP': u'192.168.103.124', 'INID': 6.0, 'SESSION': 1, 'Objects.id': 1}, {'$set': {'Objects.$.score': 100}})
+2017-09-12 17:09:11,283 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'IP': u'192.168.103.124', 'INID': 6.0, 'SESSION': 1, 'Objects.id': 2}
+2017-09-12 17:09:11,284 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-12 17:09:11,284 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'up', 'IP': u'192.168.103.124', 'INID': 6.0, 'SESSION': 1, 'Objects.id': 2}
+2017-09-12 17:09:11,284 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-12 17:09:11,284 > INFO > Scoring Completed
+2017-09-12 17:35:33,817 > INFO > Connected to 'LIVE' database...
+2017-09-12 17:35:33,817 > INFO > Scoring Object Insiated...
+2017-09-12 17:35:33,817 > INFO > Starting Job ===============> BANK_INTERFACE-12-September-17:35:33
+2017-09-12 17:35:33,824 > INFO > SESSION UPDATED , INID = 7.0
+2017-09-12 17:35:33,824 > INFO > STARTING SESSION >1
+2017-09-12 17:35:33,824 > INFO > Apprentice>5
+2017-09-12 17:35:33,831 > INFO > Trying to Login:192.168.103.124
+2017-09-12 17:35:37,509 > INFO > Login Success :192.168.103.124:CTS_ABSB_DR_MUM_TATA#
+2017-09-12 17:35:37,510 > DEBUG > single host object
+2017-09-12 17:35:37,510 > DEBUG > [{u'name': u'self', u'type': u'self_check', u'monitor': u'self', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'status': u'reachable'}, u'score': 100}], u'id': 1}, {u'name': u'GigabitEthernet0/0', u'type': u'cis_sw_int', u'monitor': u'bits,duplex,speed,error', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'status': u'up'}, u'score': 100}], u'id': 2}]
+2017-09-12 17:35:38,459 > INFO > Scoring Started
+2017-09-12 17:35:38,459 > DEBUG > Mongo search score for:7.0 1
+2017-09-12 17:35:38,460 > DEBUG > mongo_search_score > Starting score for > 192.168.103.124
+2017-09-12 17:35:38,460 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'IP': u'192.168.103.124', 'INID': 7.0, 'SESSION': 1, 'Objects.id': 1}
+2017-09-12 17:35:38,461 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-12 17:35:38,461 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'reachable', 'IP': u'192.168.103.124', 'INID': 7.0, 'SESSION': 1, 'Objects.id': 1}
+2017-09-12 17:35:38,462 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-12 17:35:38,462 > DEBUG > mongo_search_score > updating score >({u'Objects.out.status': u'reachable', 'IP': u'192.168.103.124', 'INID': 7.0, 'SESSION': 1, 'Objects.id': 1}, {'$set': {'Objects.$.score': 100}})
+2017-09-12 17:35:38,462 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'IP': u'192.168.103.124', 'INID': 7.0, 'SESSION': 1, 'Objects.id': 2}
+2017-09-12 17:35:38,463 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-12 17:35:38,463 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'up', 'IP': u'192.168.103.124', 'INID': 7.0, 'SESSION': 1, 'Objects.id': 2}
+2017-09-12 17:35:38,464 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-12 17:35:38,464 > INFO > Scoring Completed
+2017-09-12 17:37:14,555 > INFO > Starting MonitoringEngine
+2017-09-12 17:37:51,443 > INFO > Connected to 'LIVE' database...
+2017-09-12 17:37:51,443 > INFO > Scoring Object Insiated...
+2017-09-12 17:37:51,444 > INFO > Starting Job ===============> Interface_Test-12-September-17:37:51
+2017-09-12 17:37:51,453 > INFO > SESSION UPDATED , INID = 8.0
+2017-09-12 17:37:51,454 > INFO > STARTING SESSION >1
+2017-09-12 17:37:51,454 > INFO > Apprentice>5
+2017-09-12 17:37:51,458 > INFO > Trying to Login:192.168.103.124
+2017-09-12 17:37:55,251 > INFO > Login Success :192.168.103.124:CTS_ABSB_DR_MUM_TATA#
+2017-09-12 17:37:55,252 > DEBUG > single host object
+2017-09-12 17:37:55,252 > DEBUG > [{u'name': u'self', u'type': u'self_check', u'monitor': u'self', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'status': u'reachable'}, u'score': 100}], u'id': 1}, {u'name': u'GigabitEthernet0/0', u'type': u'cis_sw_int', u'monitor': u'bits,duplex,speed,error', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'status': u'up'}, u'score': 100}], u'id': 2}]
+2017-09-12 17:37:56,249 > INFO > Scoring Started
+2017-09-12 17:37:56,249 > DEBUG > Mongo search score for:8.0 1
+2017-09-12 17:37:56,250 > DEBUG > mongo_search_score > Starting score for > 192.168.103.124
+2017-09-12 17:37:56,250 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'IP': u'192.168.103.124', 'INID': 8.0, 'SESSION': 1, 'Objects.id': 1}
+2017-09-12 17:37:56,251 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-12 17:37:56,251 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'reachable', 'IP': u'192.168.103.124', 'INID': 8.0, 'SESSION': 1, 'Objects.id': 1}
+2017-09-12 17:37:56,252 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-12 17:37:56,252 > DEBUG > mongo_search_score > updating score >({u'Objects.out.status': u'reachable', 'IP': u'192.168.103.124', 'INID': 8.0, 'SESSION': 1, 'Objects.id': 1}, {'$set': {'Objects.$.score': 100}})
+2017-09-12 17:37:56,253 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'IP': u'192.168.103.124', 'INID': 8.0, 'SESSION': 1, 'Objects.id': 2}
+2017-09-12 17:37:56,254 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-12 17:37:56,254 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'up', 'IP': u'192.168.103.124', 'INID': 8.0, 'SESSION': 1, 'Objects.id': 2}
+2017-09-12 17:37:56,254 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-12 17:37:56,255 > INFO > Scoring Completed
+2017-09-12 18:08:15,820 > INFO > Starting MonitoringEngine
+2017-09-12 18:08:16,067 > INFO > Starting MonitoringEngine
+2017-09-12 18:08:31,896 > INFO > Connected to 'LIVE' database...
+2017-09-12 18:08:31,897 > INFO > Scoring Object Insiated...
+2017-09-12 18:08:31,899 > INFO > Starting Job ===============> Int-Bank-12-September-18:08:31
+2017-09-12 18:08:31,923 > INFO > SESSION UPDATED , INID = 9.0
+2017-09-12 18:08:31,923 > INFO > STARTING SESSION >1
+2017-09-12 18:08:31,925 > INFO > Apprentice>5
+2017-09-12 18:08:31,933 > INFO > Trying to Login:192.168.103.124
+2017-09-12 18:08:35,746 > INFO > Login Success :192.168.103.124:CTS_ABSB_DR_MUM_TATA#
+2017-09-12 18:08:35,747 > DEBUG > single host object
+2017-09-12 18:08:35,747 > DEBUG > [{u'name': u'self', u'type': u'self_check', u'monitor': u'self', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'status': u'reachable'}, u'score': 100}], u'id': 1}, {u'name': u'GigabitEthernet0/0', u'type': u'cis_sw_int', u'monitor': u'bits,duplex,speed,error', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'status': u'up'}, u'score': 100}], u'id': 2}]
+2017-09-12 18:08:36,886 > INFO > Scoring Started
+2017-09-12 18:08:36,886 > DEBUG > Mongo search score for:9.0 1
+2017-09-12 18:08:36,888 > DEBUG > mongo_search_score > Starting score for > 192.168.103.124
+2017-09-12 18:08:36,888 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'IP': u'192.168.103.124', 'INID': 9.0, 'SESSION': 1, 'Objects.id': 1}
+2017-09-12 18:08:36,888 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-12 18:08:36,888 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'reachable', 'IP': u'192.168.103.124', 'INID': 9.0, 'SESSION': 1, 'Objects.id': 1}
+2017-09-12 18:08:36,889 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-12 18:08:36,889 > DEBUG > mongo_search_score > updating score >({u'Objects.out.status': u'reachable', 'IP': u'192.168.103.124', 'INID': 9.0, 'SESSION': 1, 'Objects.id': 1}, {'$set': {'Objects.$.score': 100}})
+2017-09-12 18:08:36,890 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'IP': u'192.168.103.124', 'INID': 9.0, 'SESSION': 1, 'Objects.id': 2}
+2017-09-12 18:08:36,890 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-12 18:08:36,890 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'up', 'IP': u'192.168.103.124', 'INID': 9.0, 'SESSION': 1, 'Objects.id': 2}
+2017-09-12 18:08:36,891 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-12 18:08:36,891 > INFO > Scoring Completed
+2017-09-12 18:10:32,826 > INFO > Starting MonitoringEngine
+2017-09-12 18:10:51,293 > INFO > Connected to 'LIVE' database...
+2017-09-12 18:10:51,293 > INFO > Scoring Object Insiated...
+2017-09-12 18:10:51,294 > INFO > Starting Job ===============> Int-bank3-12-September-18:10:51
+2017-09-12 18:10:51,310 > INFO > SESSION UPDATED , INID = 10.0
+2017-09-12 18:10:51,311 > INFO > STARTING SESSION >1
+2017-09-12 18:10:51,313 > INFO > Apprentice>5
+2017-09-12 18:10:51,325 > INFO > Trying to Login:192.168.103.124
+2017-09-12 18:10:55,088 > INFO > Login Success :192.168.103.124:CTS_ABSB_DR_MUM_TATA#
+2017-09-12 18:10:55,089 > DEBUG > single host object
+2017-09-12 18:10:55,089 > DEBUG > [{u'name': u'self', u'type': u'self_check', u'monitor': u'self', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'status': u'reachable'}, u'score': 100}], u'id': 1}, {u'name': u'GigabitEthernet0/0', u'type': u'cis_sw_int', u'monitor': u'bits,duplex,speed,error', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'status': u'up'}, u'score': 100}], u'id': 2}]
+2017-09-12 18:10:56,066 > INFO > Scoring Started
+2017-09-12 18:10:56,066 > DEBUG > Mongo search score for:10.0 1
+2017-09-12 18:10:56,067 > DEBUG > mongo_search_score > Starting score for > 192.168.103.124
+2017-09-12 18:10:56,067 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'IP': u'192.168.103.124', 'INID': 10.0, 'SESSION': 1, 'Objects.id': 1}
+2017-09-12 18:10:56,068 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-12 18:10:56,068 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'reachable', 'IP': u'192.168.103.124', 'INID': 10.0, 'SESSION': 1, 'Objects.id': 1}
+2017-09-12 18:10:56,068 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-12 18:10:56,068 > DEBUG > mongo_search_score > updating score >({u'Objects.out.status': u'reachable', 'IP': u'192.168.103.124', 'INID': 10.0, 'SESSION': 1, 'Objects.id': 1}, {'$set': {'Objects.$.score': 100}})
+2017-09-12 18:10:56,069 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'IP': u'192.168.103.124', 'INID': 10.0, 'SESSION': 1, 'Objects.id': 2}
+2017-09-12 18:10:56,070 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-12 18:10:56,070 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'up', 'IP': u'192.168.103.124', 'INID': 10.0, 'SESSION': 1, 'Objects.id': 2}
+2017-09-12 18:10:56,070 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-12 18:10:56,071 > INFO > Scoring Completed
+2017-09-12 18:12:18,292 > INFO > Connected to 'LIVE' database...
+2017-09-12 18:12:18,292 > INFO > Scoring Object Insiated...
+2017-09-12 18:12:18,293 > INFO > Starting Job ===============> interface-test-12-September-18:12:18
+2017-09-12 18:12:18,310 > INFO > SESSION UPDATED , INID = 11.0
+2017-09-12 18:12:18,311 > INFO > STARTING SESSION >1
+2017-09-12 18:12:18,312 > INFO > Apprentice>5
+2017-09-12 18:12:18,321 > INFO > Trying to Login:192.168.103.124
+2017-09-12 18:12:22,135 > INFO > Login Success :192.168.103.124:CTS_ABSB_DR_MUM_TATA#
+2017-09-12 18:12:22,135 > DEBUG > single host object
+2017-09-12 18:12:22,136 > DEBUG > [{u'name': u'self', u'type': u'self_check', u'monitor': u'self', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'status': u'reachable'}, u'score': 100}], u'id': 1}, {u'name': u'GigabitEthernet0/0', u'type': u'cis_sw_int', u'monitor': u'bits,duplex,speed,error', u'rank': [{u'regex': {u'interface': u'down'}, u'score': 0}, {u'regex': {u'interface': u'up'}, u'score': 100}], u'id': 2}]
+2017-09-12 18:12:23,306 > INFO > Scoring Started
+2017-09-12 18:12:23,307 > DEBUG > Mongo search score for:11.0 1
+2017-09-12 18:12:23,310 > DEBUG > mongo_search_score > Starting score for > 192.168.103.124
+2017-09-12 18:12:23,311 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'IP': u'192.168.103.124', 'INID': 11.0, 'SESSION': 1, 'Objects.id': 1}
+2017-09-12 18:12:23,314 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-12 18:12:23,314 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'reachable', 'IP': u'192.168.103.124', 'INID': 11.0, 'SESSION': 1, 'Objects.id': 1}
+2017-09-12 18:12:23,316 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-12 18:12:23,317 > DEBUG > mongo_search_score > updating score >({u'Objects.out.status': u'reachable', 'IP': u'192.168.103.124', 'INID': 11.0, 'SESSION': 1, 'Objects.id': 1}, {'$set': {'Objects.$.score': 100}})
+2017-09-12 18:12:23,320 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.interface': u'down', 'IP': u'192.168.103.124', 'INID': 11.0, 'SESSION': 1, 'Objects.id': 2}
+2017-09-12 18:12:23,323 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-12 18:12:23,323 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.interface': u'up', 'IP': u'192.168.103.124', 'INID': 11.0, 'SESSION': 1, 'Objects.id': 2}
+2017-09-12 18:12:23,326 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-12 18:12:23,327 > DEBUG > mongo_search_score > updating score >({u'Objects.out.interface': u'up', 'IP': u'192.168.103.124', 'INID': 11.0, 'SESSION': 1, 'Objects.id': 2}, {'$set': {'Objects.$.score': 100}})
+2017-09-12 18:12:23,329 > INFO > Scoring Completed
+2017-09-12 18:31:03,815 > INFO > Connected to 'LIVE' database...
+2017-09-12 18:31:03,815 > INFO > Scoring Object Insiated...
+2017-09-12 18:31:03,816 > INFO > Starting Job ===============> New_Job-12-September-18:31:03
+2017-09-12 18:31:03,822 > INFO > SESSION UPDATED , INID = 12.0
+2017-09-12 18:31:03,823 > INFO > STARTING SESSION >1
+2017-09-12 18:31:03,823 > INFO > Apprentice>5
+2017-09-12 18:31:03,829 > INFO > Trying to Login:192.168.235.160
+2017-09-12 18:31:05,887 > INFO > Login Success :192.168.235.160:CTS_CITI_DR_DEL_AIR_C#
+2017-09-12 18:31:05,887 > DEBUG > single host object
+2017-09-12 18:31:05,887 > DEBUG > [{u'name': u'self', u'type': u'self_check', u'monitor': u'self', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'status': u'reachable'}, u'score': 100}], u'id': 1}, {u'name': u'GigabitEthernet0/0', u'type': u'cis_sw_int', u'monitor': u'bits,duplex,speed,error', u'rank': [{u'regex': {u'interface': u'down'}, u'score': 0}, {u'regex': {u'interface': u'up'}, u'score': 100}], u'id': 2}]
+2017-09-12 18:31:06,714 > INFO > Scoring Started
+2017-09-12 18:31:06,715 > DEBUG > Mongo search score for:12.0 1
+2017-09-12 18:31:06,715 > DEBUG > mongo_search_score > Starting score for > 192.168.235.160
+2017-09-12 18:31:06,716 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'IP': u'192.168.235.160', 'INID': 12.0, 'SESSION': 1, 'Objects.id': 1}
+2017-09-12 18:31:06,716 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-12 18:31:06,716 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'reachable', 'IP': u'192.168.235.160', 'INID': 12.0, 'SESSION': 1, 'Objects.id': 1}
+2017-09-12 18:31:06,717 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-12 18:31:06,717 > DEBUG > mongo_search_score > updating score >({u'Objects.out.status': u'reachable', 'IP': u'192.168.235.160', 'INID': 12.0, 'SESSION': 1, 'Objects.id': 1}, {'$set': {'Objects.$.score': 100}})
+2017-09-12 18:31:06,717 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.interface': u'down', 'IP': u'192.168.235.160', 'INID': 12.0, 'SESSION': 1, 'Objects.id': 2}
+2017-09-12 18:31:06,718 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-12 18:31:06,718 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.interface': u'up', 'IP': u'192.168.235.160', 'INID': 12.0, 'SESSION': 1, 'Objects.id': 2}
+2017-09-12 18:31:06,718 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-12 18:31:06,719 > DEBUG > mongo_search_score > updating score >({u'Objects.out.interface': u'up', 'IP': u'192.168.235.160', 'INID': 12.0, 'SESSION': 1, 'Objects.id': 2}, {'$set': {'Objects.$.score': 100}})
+2017-09-12 18:31:06,719 > INFO > Scoring Completed
+2017-09-12 18:38:47,336 > INFO > Starting MonitoringEngine
+2017-09-12 18:39:09,148 > INFO > Connected to 'LIVE' database...
+2017-09-12 18:39:09,148 > INFO > Scoring Object Insiated...
+2017-09-12 18:39:09,148 > INFO > Starting Job ===============> KOPL-12-September-18:39:09
+2017-09-12 18:39:09,155 > INFO > SESSION UPDATED , INID = 13.0
+2017-09-12 18:39:09,155 > INFO > STARTING SESSION >1
+2017-09-12 18:39:09,156 > INFO > Apprentice>5
+2017-09-12 18:39:09,163 > INFO > Trying to Login:192.168.235.160
+2017-09-12 18:39:11,200 > INFO > Login Success :192.168.235.160:CTS_CITI_DR_DEL_AIR_C#
+2017-09-12 18:39:11,200 > DEBUG > single host object
+2017-09-12 18:39:11,201 > DEBUG > [{u'name': u'self', u'type': u'self_check', u'monitor': u'self', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'status': u'reachable'}, u'score': 100}], u'id': 1}, {u'name': u'GigabitEthernet0/0', u'type': u'cis_sw_int', u'monitor': u'bits,duplex,speed,error', u'rank': [{u'regex': {u'interface': u'down'}, u'score': 0}, {u'regex': {u'interface': u'up'}, u'score': 100}], u'id': 2}]
+2017-09-12 18:39:12,031 > INFO > Scoring Started
+2017-09-12 18:39:12,031 > DEBUG > Mongo search score for:13.0 1
+2017-09-12 18:39:12,032 > DEBUG > mongo_search_score > Starting score for > 192.168.235.160
+2017-09-12 18:39:12,032 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'IP': u'192.168.235.160', 'INID': 13.0, 'SESSION': 1, 'Objects.id': 1}
+2017-09-12 18:39:12,033 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-12 18:39:12,033 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'reachable', 'IP': u'192.168.235.160', 'INID': 13.0, 'SESSION': 1, 'Objects.id': 1}
+2017-09-12 18:39:12,034 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-12 18:39:12,034 > DEBUG > mongo_search_score > updating score >({u'Objects.out.status': u'reachable', 'IP': u'192.168.235.160', 'INID': 13.0, 'SESSION': 1, 'Objects.id': 1}, {'$set': {'Objects.$.score': 100}})
+2017-09-12 18:39:12,034 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.interface': u'down', 'IP': u'192.168.235.160', 'INID': 13.0, 'SESSION': 1, 'Objects.id': 2}
+2017-09-12 18:39:12,035 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-12 18:39:12,035 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.interface': u'up', 'IP': u'192.168.235.160', 'INID': 13.0, 'SESSION': 1, 'Objects.id': 2}
+2017-09-12 18:39:12,035 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-12 18:39:12,035 > DEBUG > mongo_search_score > updating score >({u'Objects.out.interface': u'up', 'IP': u'192.168.235.160', 'INID': 13.0, 'SESSION': 1, 'Objects.id': 2}, {'$set': {'Objects.$.score': 100}})
+2017-09-12 18:39:12,036 > INFO > Scoring Completed
+2017-09-12 19:03:06,737 > INFO > Starting MonitoringEngine
+2017-09-12 19:03:26,766 > INFO > Connected to 'LIVE' database...
+2017-09-12 19:03:26,766 > INFO > Scoring Object Insiated...
+2017-09-12 19:03:26,766 > INFO > Starting Job ===============> POLI-12-September-19:03:26
+2017-09-12 19:03:26,774 > INFO > SESSION UPDATED , INID = 14.0
+2017-09-12 19:03:26,774 > INFO > STARTING SESSION >1
+2017-09-12 19:03:26,774 > INFO > Apprentice>5
+2017-09-12 19:03:26,780 > INFO > Trying to Login:192.168.235.160
+2017-09-12 19:03:28,859 > INFO > Login Success :192.168.235.160:CTS_CITI_DR_DEL_AIR_C#
+2017-09-12 19:03:28,860 > DEBUG > single host object
+2017-09-12 19:03:28,860 > DEBUG > [{u'name': u'self', u'type': u'self_check', u'monitor': u'self', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'status': u'reachable'}, u'score': 100}], u'id': 1}, {u'name': u'GigabitEthernet0/0', u'type': u'cis_sw_int', u'monitor': u'bits,duplex,speed,error', u'rank': [{u'regex': {u'interface': u'down'}, u'score': 0}, {u'regex': {u'interface': u'up'}, u'score': 100}], u'id': 2}]
+2017-09-12 19:03:29,692 > INFO > Scoring Started
+2017-09-12 19:03:29,692 > DEBUG > Mongo search score for:14.0 1
+2017-09-12 19:03:29,693 > DEBUG > mongo_search_score > Starting score for > 192.168.235.160
+2017-09-12 19:03:29,693 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'IP': u'192.168.235.160', 'INID': 14.0, 'SESSION': 1, 'Objects.id': 1}
+2017-09-12 19:03:29,694 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-12 19:03:29,694 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'reachable', 'IP': u'192.168.235.160', 'INID': 14.0, 'SESSION': 1, 'Objects.id': 1}
+2017-09-12 19:03:29,695 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-12 19:03:29,695 > DEBUG > mongo_search_score > updating score >({u'Objects.out.status': u'reachable', 'IP': u'192.168.235.160', 'INID': 14.0, 'SESSION': 1, 'Objects.id': 1}, {'$set': {'Objects.$.score': 100}})
+2017-09-12 19:03:29,695 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.interface': u'down', 'IP': u'192.168.235.160', 'INID': 14.0, 'SESSION': 1, 'Objects.id': 2}
+2017-09-12 19:03:29,696 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-12 19:03:29,696 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.interface': u'up', 'IP': u'192.168.235.160', 'INID': 14.0, 'SESSION': 1, 'Objects.id': 2}
+2017-09-12 19:03:29,697 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-12 19:03:29,697 > INFO > Scoring Completed
+2017-09-12 19:05:09,374 > INFO > Starting MonitoringEngine
+2017-09-12 19:05:19,317 > INFO > Connected to 'LIVE' database...
+2017-09-12 19:05:19,317 > INFO > Scoring Object Insiated...
+2017-09-12 19:05:19,317 > INFO > Starting Job ===============> Interface-12-September-19:05:19
+2017-09-12 19:05:19,325 > INFO > SESSION UPDATED , INID = 15.0
+2017-09-12 19:05:19,325 > INFO > STARTING SESSION >1
+2017-09-12 19:05:19,326 > INFO > Apprentice>5
+2017-09-12 19:05:19,331 > INFO > Trying to Login:192.168.235.160
+2017-09-12 19:05:21,376 > INFO > Login Success :192.168.235.160:CTS_CITI_DR_DEL_AIR_C#
+2017-09-12 19:05:21,376 > DEBUG > single host object
+2017-09-12 19:05:21,377 > DEBUG > [{u'name': u'self', u'type': u'self_check', u'monitor': u'self', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'status': u'reachable'}, u'score': 100}], u'id': 1}, {u'name': u'GigabitEthernet0/0', u'type': u'cis_sw_int', u'monitor': u'bits,duplex,speed,error', u'rank': [{u'regex': {u'interface': u'down'}, u'score': 0}, {u'regex': {u'interface': u'up'}, u'score': 100}], u'id': 2}]
+2017-09-12 19:05:22,203 > INFO > Scoring Started
+2017-09-12 19:05:22,203 > DEBUG > Mongo search score for:15.0 1
+2017-09-12 19:05:22,204 > DEBUG > mongo_search_score > Starting score for > 192.168.235.160
+2017-09-12 19:05:22,204 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'IP': u'192.168.235.160', 'INID': 15.0, 'SESSION': 1, 'Objects.id': 1}
+2017-09-12 19:05:22,205 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-12 19:05:22,205 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'reachable', 'IP': u'192.168.235.160', 'INID': 15.0, 'SESSION': 1, 'Objects.id': 1}
+2017-09-12 19:05:22,206 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-12 19:05:22,206 > DEBUG > mongo_search_score > updating score >({u'Objects.out.status': u'reachable', 'IP': u'192.168.235.160', 'INID': 15.0, 'SESSION': 1, 'Objects.id': 1}, {'$set': {'Objects.$.score': 100}})
+2017-09-12 19:05:22,206 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.interface': u'down', 'IP': u'192.168.235.160', 'INID': 15.0, 'SESSION': 1, 'Objects.id': 2}
+2017-09-12 19:05:22,207 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-12 19:05:22,207 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.interface': u'up', 'IP': u'192.168.235.160', 'INID': 15.0, 'SESSION': 1, 'Objects.id': 2}
+2017-09-12 19:05:22,208 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-12 19:05:22,208 > DEBUG > mongo_search_score > updating score >({u'Objects.out.interface': u'up', 'IP': u'192.168.235.160', 'INID': 15.0, 'SESSION': 1, 'Objects.id': 2}, {'$set': {'Objects.$.score': 100}})
+2017-09-12 19:05:22,208 > INFO > Scoring Completed
+2017-09-12 19:14:02,594 > INFO > Connected to 'LIVE' database...
+2017-09-12 19:14:02,595 > INFO > Scoring Object Insiated...
+2017-09-12 19:14:02,597 > INFO > Starting Job ===============> Switch-interface-12-September-19:14:02
+2017-09-12 19:14:02,621 > INFO > SESSION UPDATED , INID = 16.0
+2017-09-12 19:14:02,621 > INFO > STARTING SESSION >1
+2017-09-12 19:14:02,623 > INFO > Apprentice>5
+2017-09-12 19:14:02,637 > INFO > Trying to Login:192.168.234.142
+2017-09-12 19:14:19,419 > INFO > Not able to reach device:192.168.234.142
+2017-09-12 19:14:19,824 > INFO > Failed >CTS_CITI_DR_DEL_AIR_C 192.168.234.142
+2017-09-12 19:14:19,829 > INFO > Scoring Started
+2017-09-12 19:14:19,829 > DEBUG > Mongo search score for:16.0 1
+2017-09-12 19:14:19,830 > DEBUG > mongo_search_score > Starting score for > 192.168.234.142
+2017-09-12 19:14:19,830 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'IP': u'192.168.234.142', 'INID': 16.0, 'SESSION': 1, 'Objects.id': None}
+2017-09-12 19:14:19,831 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-12 19:14:19,831 > DEBUG > mongo_search_score > updating score >({u'Objects.out.status': u'down', 'IP': u'192.168.234.142', 'INID': 16.0, 'SESSION': 1, 'Objects.id': None}, {'$set': {'Objects.$.score': 0}})
+2017-09-12 19:14:19,831 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'reachable', 'IP': u'192.168.234.142', 'INID': 16.0, 'SESSION': 1, 'Objects.id': None}
+2017-09-12 19:14:19,832 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-12 19:14:19,832 > INFO > Scoring Completed
+2017-09-12 19:15:05,385 > INFO > Connected to 'LIVE' database...
+2017-09-12 19:15:05,385 > INFO > Scoring Object Insiated...
+2017-09-12 19:15:05,386 > INFO > Starting Job ===============> Switch_interface-12-September-19:15:05
+2017-09-12 19:15:05,409 > INFO > SESSION UPDATED , INID = 17.0
+2017-09-12 19:15:05,410 > INFO > STARTING SESSION >1
+2017-09-12 19:15:05,411 > INFO > Apprentice>5
+2017-09-12 19:15:05,421 > INFO > Trying to Login:192.168.233.142
+2017-09-12 19:15:08,219 > INFO > Login Success :192.168.233.142:CHN-DC-NOC-SW1#
+2017-09-12 19:15:08,219 > DEBUG > single host object
+2017-09-12 19:15:08,220 > DEBUG > [{u'name': u'self', u'type': u'self_check', u'monitor': u'self', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'status': u'reachable'}, u'score': 100}], u'id': 1}, {u'name': u'Gi1/0/6', u'type': u'cis_sw_int', u'monitor': u'bits,duplex,speed,error', u'rank': [{u'regex': {u'interface': u'down'}, u'score': 0}, {u'regex': {u'interface': u'up'}, u'score': 100}], u'id': 2}, {u'name': u'Gi1/0/10', u'type': u'cis_sw_int', u'monitor': u'bits,duplex,speed,error', u'rank': [{u'regex': {u'interface': u'down'}, u'score': 0}, {u'regex': {u'interface': u'up'}, u'score': 100}], u'id': 3}]
+2017-09-12 19:15:09,557 > INFO > Scoring Started
+2017-09-12 19:15:09,557 > DEBUG > Mongo search score for:17.0 1
+2017-09-12 19:15:09,559 > DEBUG > mongo_search_score > Starting score for > 192.168.233.142
+2017-09-12 19:15:09,559 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'IP': u'192.168.233.142', 'INID': 17.0, 'SESSION': 1, 'Objects.id': 1}
+2017-09-12 19:15:09,559 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-12 19:15:09,560 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'reachable', 'IP': u'192.168.233.142', 'INID': 17.0, 'SESSION': 1, 'Objects.id': 1}
+2017-09-12 19:15:09,560 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-12 19:15:09,560 > DEBUG > mongo_search_score > updating score >({u'Objects.out.status': u'reachable', 'IP': u'192.168.233.142', 'INID': 17.0, 'SESSION': 1, 'Objects.id': 1}, {'$set': {'Objects.$.score': 100}})
+2017-09-12 19:15:09,561 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.interface': u'down', 'IP': u'192.168.233.142', 'INID': 17.0, 'SESSION': 1, 'Objects.id': 2}
+2017-09-12 19:15:09,562 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-12 19:15:09,562 > DEBUG > mongo_search_score > updating score >({u'Objects.out.interface': u'down', 'IP': u'192.168.233.142', 'INID': 17.0, 'SESSION': 1, 'Objects.id': 2}, {'$set': {'Objects.$.score': 0}})
+2017-09-12 19:15:09,562 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.interface': u'up', 'IP': u'192.168.233.142', 'INID': 17.0, 'SESSION': 1, 'Objects.id': 2}
+2017-09-12 19:15:09,563 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-12 19:15:09,563 > DEBUG > mongo_search_score > updating score >({u'Objects.out.interface': u'up', 'IP': u'192.168.233.142', 'INID': 17.0, 'SESSION': 1, 'Objects.id': 2}, {'$set': {'Objects.$.score': 100}})
+2017-09-12 19:15:09,564 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.interface': u'down', 'IP': u'192.168.233.142', 'INID': 17.0, 'SESSION': 1, 'Objects.id': 3}
+2017-09-12 19:15:09,564 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-12 19:15:09,564 > DEBUG > mongo_search_score > updating score >({u'Objects.out.interface': u'down', 'IP': u'192.168.233.142', 'INID': 17.0, 'SESSION': 1, 'Objects.id': 3}, {'$set': {'Objects.$.score': 0}})
+2017-09-12 19:15:09,565 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.interface': u'up', 'IP': u'192.168.233.142', 'INID': 17.0, 'SESSION': 1, 'Objects.id': 3}
+2017-09-12 19:15:09,566 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-12 19:15:09,566 > DEBUG > mongo_search_score > updating score >({u'Objects.out.interface': u'up', 'IP': u'192.168.233.142', 'INID': 17.0, 'SESSION': 1, 'Objects.id': 3}, {'$set': {'Objects.$.score': 100}})
+2017-09-12 19:15:09,566 > INFO > Scoring Completed
+2017-09-12 19:18:15,115 > INFO > Connected to 'LIVE' database...
+2017-09-12 19:18:15,115 > INFO > Scoring Object Insiated...
+2017-09-12 19:18:15,116 > INFO > Starting Job ===============> Nexus_interface-12-September-19:18:15
+2017-09-12 19:18:15,134 > INFO > SESSION UPDATED , INID = 18.0
+2017-09-12 19:18:15,134 > INFO > STARTING SESSION >1
+2017-09-12 19:18:15,135 > INFO > Apprentice>5
+2017-09-12 19:18:15,141 > INFO > Trying to Login:192.168.106.11
+2017-09-12 19:18:18,102 > INFO > Login Success :192.168.106.11:NFSDR_NEXUS_9372_1_CRSW_CHN#
+2017-09-12 19:18:18,102 > DEBUG > single host object
+2017-09-12 19:18:18,102 > DEBUG > [{u'name': u'self', u'type': u'self_check', u'monitor': u'self', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'status': u'reachable'}, u'score': 100}], u'id': 1}, {u'name': u'Eth1/1', u'type': u'cis_sw_int', u'monitor': u'bits,duplex,speed,error', u'rank': [{u'regex': {u'interface': u'down'}, u'score': 0}, {u'regex': {u'interface': u'up'}, u'score': 100}], u'id': 2}, {u'name': u'Eth1/37', u'type': u'cis_sw_int', u'monitor': u'bits,duplex,speed,error', u'rank': [{u'regex': {u'interface': u'down'}, u'score': 0}, {u'regex': {u'interface': u'up'}, u'score': 100}], u'id': 3}, {u'name': u'Eth1/46', u'type': u'cis_sw_int', u'monitor': u'bits,duplex,speed,error', u'rank': [{u'regex': {u'interface': u'down'}, u'score': 0}, {u'regex': {u'interface': u'up'}, u'score': 100}], u'id': 4}]
+2017-09-12 19:18:19,013 > INFO > Scoring Started
+2017-09-12 19:18:19,013 > DEBUG > Mongo search score for:18.0 1
+2017-09-12 19:18:19,014 > DEBUG > mongo_search_score > Starting score for > 192.168.106.11
+2017-09-12 19:18:19,014 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'IP': u'192.168.106.11', 'INID': 18.0, 'SESSION': 1, 'Objects.id': 1}
+2017-09-12 19:18:19,014 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-12 19:18:19,015 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'reachable', 'IP': u'192.168.106.11', 'INID': 18.0, 'SESSION': 1, 'Objects.id': 1}
+2017-09-12 19:18:19,015 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-12 19:18:19,015 > DEBUG > mongo_search_score > updating score >({u'Objects.out.status': u'reachable', 'IP': u'192.168.106.11', 'INID': 18.0, 'SESSION': 1, 'Objects.id': 1}, {'$set': {'Objects.$.score': 100}})
+2017-09-12 19:18:19,016 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.interface': u'down', 'IP': u'192.168.106.11', 'INID': 18.0, 'SESSION': 1, 'Objects.id': 2}
+2017-09-12 19:18:19,017 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-12 19:18:19,017 > DEBUG > mongo_search_score > updating score >({u'Objects.out.interface': u'down', 'IP': u'192.168.106.11', 'INID': 18.0, 'SESSION': 1, 'Objects.id': 2}, {'$set': {'Objects.$.score': 0}})
+2017-09-12 19:18:19,017 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.interface': u'up', 'IP': u'192.168.106.11', 'INID': 18.0, 'SESSION': 1, 'Objects.id': 2}
+2017-09-12 19:18:19,018 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-12 19:18:19,018 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.interface': u'down', 'IP': u'192.168.106.11', 'INID': 18.0, 'SESSION': 1, 'Objects.id': 3}
+2017-09-12 19:18:19,019 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-12 19:18:19,019 > DEBUG > mongo_search_score > updating score >({u'Objects.out.interface': u'down', 'IP': u'192.168.106.11', 'INID': 18.0, 'SESSION': 1, 'Objects.id': 3}, {'$set': {'Objects.$.score': 0}})
+2017-09-12 19:18:19,019 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.interface': u'up', 'IP': u'192.168.106.11', 'INID': 18.0, 'SESSION': 1, 'Objects.id': 3}
+2017-09-12 19:18:19,020 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-12 19:18:19,020 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.interface': u'down', 'IP': u'192.168.106.11', 'INID': 18.0, 'SESSION': 1, 'Objects.id': 4}
+2017-09-12 19:18:19,020 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-12 19:18:19,021 > DEBUG > mongo_search_score > updating score >({u'Objects.out.interface': u'down', 'IP': u'192.168.106.11', 'INID': 18.0, 'SESSION': 1, 'Objects.id': 4}, {'$set': {'Objects.$.score': 0}})
+2017-09-12 19:18:19,021 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.interface': u'up', 'IP': u'192.168.106.11', 'INID': 18.0, 'SESSION': 1, 'Objects.id': 4}
+2017-09-12 19:18:19,022 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-12 19:18:19,022 > INFO > Scoring Completed
+2017-09-12 19:24:06,244 > INFO > Starting MonitoringEngine
+2017-09-12 19:40:46,676 > INFO > Starting MonitoringEngine
+2017-09-12 19:43:34,994 > INFO > Starting MonitoringEngine
+2017-09-12 19:44:56,958 > INFO > Starting MonitoringEngine
+2017-09-12 19:44:57,206 > INFO > Starting MonitoringEngine
+2017-09-12 19:45:08,739 > INFO > Connected to 'LIVE' database...
+2017-09-12 19:45:08,742 > INFO > Scoring Object Insiated...
+2017-09-12 19:45:08,743 > INFO > Starting Job ===============> Nexus2-12-September-19:45:08
+2017-09-12 19:45:08,774 > INFO > SESSION UPDATED , INID = 19.0
+2017-09-12 19:45:08,774 > INFO > STARTING SESSION >1
+2017-09-12 19:45:08,775 > INFO > Apprentice>5
+2017-09-12 19:45:08,783 > INFO > Trying to Login:192.168.106.11
+2017-09-12 19:45:10,768 > INFO > Login Success :192.168.106.11:NFSDR_NEXUS_9372_1_CRSW_CHN#
+2017-09-12 19:45:10,769 > DEBUG > single host object
+2017-09-12 19:45:10,769 > DEBUG > [{u'name': u'self', u'type': u'self_check', u'monitor': u'self', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'status': u'reachable'}, u'score': 100}], u'id': 1}, {u'name': u'Eth1/1', u'type': u'cis_sw_int', u'monitor': u'bits,duplex,speed,error', u'rank': [{u'regex': {u'interface': u'down'}, u'score': 0}, {u'regex': {u'interface': u'up'}, u'score': 100}], u'id': 2}, {u'name': u'Eth1/37', u'type': u'cis_sw_int', u'monitor': u'bits,duplex,speed,error', u'rank': [{u'regex': {u'interface': u'down'}, u'score': 0}, {u'regex': {u'interface': u'up'}, u'score': 100}], u'id': 3}, {u'name': u'Eth1/46', u'type': u'cis_sw_int', u'monitor': u'bits,duplex,speed,error', u'rank': [{u'regex': {u'interface': u'down'}, u'score': 0}, {u'regex': {u'interface': u'up'}, u'score': 100}], u'id': 4}]
+2017-09-12 19:45:11,697 > INFO > Scoring Started
+2017-09-12 19:45:11,697 > DEBUG > Mongo search score for:19.0 1
+2017-09-12 19:45:11,700 > DEBUG > mongo_search_score > Starting score for > 192.168.106.11
+2017-09-12 19:45:11,701 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'down', 'IP': u'192.168.106.11', 'INID': 19.0, 'SESSION': 1, 'Objects.id': 1}
+2017-09-12 19:45:11,703 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-12 19:45:11,704 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.status': u'reachable', 'IP': u'192.168.106.11', 'INID': 19.0, 'SESSION': 1, 'Objects.id': 1}
+2017-09-12 19:45:11,707 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-12 19:45:11,707 > DEBUG > mongo_search_score > updating score >({u'Objects.out.status': u'reachable', 'IP': u'192.168.106.11', 'INID': 19.0, 'SESSION': 1, 'Objects.id': 1}, {'$set': {'Objects.$.score': 100}})
+2017-09-12 19:45:11,710 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.interface': u'down', 'IP': u'192.168.106.11', 'INID': 19.0, 'SESSION': 1, 'Objects.id': 2}
+2017-09-12 19:45:11,713 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-12 19:45:11,713 > DEBUG > mongo_search_score > updating score >({u'Objects.out.interface': u'down', 'IP': u'192.168.106.11', 'INID': 19.0, 'SESSION': 1, 'Objects.id': 2}, {'$set': {'Objects.$.score': 0}})
+2017-09-12 19:45:11,715 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.interface': u'up', 'IP': u'192.168.106.11', 'INID': 19.0, 'SESSION': 1, 'Objects.id': 2}
+2017-09-12 19:45:11,718 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-12 19:45:11,719 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.interface': u'down', 'IP': u'192.168.106.11', 'INID': 19.0, 'SESSION': 1, 'Objects.id': 3}
+2017-09-12 19:45:11,721 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-12 19:45:11,722 > DEBUG > mongo_search_score > updating score >({u'Objects.out.interface': u'down', 'IP': u'192.168.106.11', 'INID': 19.0, 'SESSION': 1, 'Objects.id': 3}, {'$set': {'Objects.$.score': 0}})
+2017-09-12 19:45:11,724 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.interface': u'up', 'IP': u'192.168.106.11', 'INID': 19.0, 'SESSION': 1, 'Objects.id': 3}
+2017-09-12 19:45:11,728 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-12 19:45:11,728 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.interface': u'down', 'IP': u'192.168.106.11', 'INID': 19.0, 'SESSION': 1, 'Objects.id': 4}
+2017-09-12 19:45:11,731 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-12 19:45:11,731 > DEBUG > mongo_search_score > updating score >({u'Objects.out.interface': u'down', 'IP': u'192.168.106.11', 'INID': 19.0, 'SESSION': 1, 'Objects.id': 4}, {'$set': {'Objects.$.score': 0}})
+2017-09-12 19:45:11,734 > DEBUG > mongo_search_score > searching DB for:{u'Objects.out.interface': u'up', 'IP': u'192.168.106.11', 'INID': 19.0, 'SESSION': 1, 'Objects.id': 4}
+2017-09-12 19:45:11,736 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-12 19:45:11,736 > INFO > Scoring Completed
+2017-09-13 16:19:21,482 > INFO > Starting MonitoringEngine
+2017-09-13 16:19:21,510 > INFO > Manual Mode Running
+2017-09-13 16:19:28,815 > INFO > Starting MonitoringEngine
+2017-09-13 16:19:29,357 > INFO > Starting MonitoringEngine
+2017-09-13 16:19:56,025 > INFO > Connected to 'LIVE' database...
+2017-09-13 16:19:56,026 > INFO > Scoring Object Insiated...
+2017-09-13 16:19:56,027 > INFO > Starting Job ===============> NEX23456-13-September-16:19:56
+2017-09-13 16:19:56,225 > INFO > SESSION UPDATED , INID = 20.0
+2017-09-13 16:19:56,226 > INFO > STARTING SESSION >1
+2017-09-13 16:19:56,314 > INFO > Apprentice>5
+2017-09-13 16:19:56,336 > INFO > Trying to Login:192.168.106.11
+2017-09-13 16:19:58,414 > INFO > Login Success :192.168.106.11:NFSDR_NEXUS_9372_1_CRSW_CHN#
+2017-09-13 16:19:58,414 > DEBUG > single host object
+2017-09-13 16:19:58,415 > DEBUG > [{u'name': u'self', u'type': u'self_check', u'monitor': u'self', u'rank': [{u'regex': {u'status': u'down'}, u'score': 0}, {u'regex': {u'status': u'reachable'}, u'score': 100}], u'id': 1}, {u'name': u'Eth1/1', u'type': u'cis_sw_int', u'monitor': u'bits,duplex,speed,error', u'rank': [{u'regex': {u'interface': u'down'}, u'score': 0}, {u'regex': {u'interface': u'up'}, u'score': 100}], u'id': 2}, {u'name': u'Eth1/37', u'type': u'cis_sw_int', u'monitor': u'bits,duplex,speed,error', u'rank': [{u'regex': {u'interface': u'down'}, u'score': 0}, {u'regex': {u'interface': u'up'}, u'score': 100}], u'id': 3}, {u'name': u'Eth1/46', u'type': u'cis_sw_int', u'monitor': u'bits,duplex,speed,error', u'rank': [{u'regex': {u'interface': u'down'}, u'score': 0}, {u'regex': {u'interface': u'up'}, u'score': 100}], u'id': 4}]
+2017-09-13 16:19:59,436 > INFO > Scoring Started
+2017-09-13 16:19:59,437 > DEBUG > Mongo search score for:20.0 1
+2017-09-13 16:19:59,440 > DEBUG > mongo_search_score > Starting score for > 192.168.106.11
+2017-09-13 16:19:59,440 > DEBUG > mongo_search_score > searching DB for:{'IP': u'192.168.106.11', 'INID': 20.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 1}}}
+2017-09-13 16:19:59,443 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-13 16:19:59,443 > DEBUG > mongo_search_score > searching DB for:{'IP': u'192.168.106.11', 'INID': 20.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 1}}}
+2017-09-13 16:19:59,447 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-13 16:19:59,448 > DEBUG > mongo_search_score > updating score >({'IP': u'192.168.106.11', 'INID': 20.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 1}}}, {'$set': {'Objects.$.score': 100}})
+2017-09-13 16:19:59,451 > DEBUG > mongo_search_score > searching DB for:{'IP': u'192.168.106.11', 'INID': 20.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 2}}}
+2017-09-13 16:19:59,454 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-13 16:19:59,454 > DEBUG > mongo_search_score > updating score >({'IP': u'192.168.106.11', 'INID': 20.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 2}}}, {'$set': {'Objects.$.score': 0}})
+2017-09-13 16:19:59,457 > DEBUG > mongo_search_score > searching DB for:{'IP': u'192.168.106.11', 'INID': 20.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 2}}}
+2017-09-13 16:19:59,458 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-13 16:19:59,458 > DEBUG > mongo_search_score > searching DB for:{'IP': u'192.168.106.11', 'INID': 20.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 3}}}
+2017-09-13 16:19:59,459 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-13 16:19:59,459 > DEBUG > mongo_search_score > updating score >({'IP': u'192.168.106.11', 'INID': 20.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 3}}}, {'$set': {'Objects.$.score': 0}})
+2017-09-13 16:19:59,460 > DEBUG > mongo_search_score > searching DB for:{'IP': u'192.168.106.11', 'INID': 20.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 3}}}
+2017-09-13 16:19:59,461 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-13 16:19:59,462 > DEBUG > mongo_search_score > searching DB for:{'IP': u'192.168.106.11', 'INID': 20.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 4}}}
+2017-09-13 16:19:59,463 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-13 16:19:59,463 > DEBUG > mongo_search_score > updating score >({'IP': u'192.168.106.11', 'INID': 20.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 4}}}, {'$set': {'Objects.$.score': 0}})
+2017-09-13 16:19:59,464 > DEBUG > mongo_search_score > searching DB for:{'IP': u'192.168.106.11', 'INID': 20.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 4}}}
+2017-09-13 16:19:59,466 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-13 16:19:59,466 > INFO > Scoring Completed
