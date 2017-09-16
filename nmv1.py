@@ -3,14 +3,12 @@ from pexpect import pxssh
 import pexpect
 import getpass
 
-def raw(ses,monobj):
+def cis_raw(ses,monobj):
     try:
         out = {"result":"failed"}
-        mon = monobj.get("monitor")
-        mon = mon.split(",")
-            
-        type_ = monobj.get("type")
-        in_ = monobj.get("name")
+        mon = monobj.get("input")
+        mon = mon.get("cmd").split(",")
+
         exp = ses[1]
         ses[0].sendline("terminal length 0")
         for cmd in mon:
@@ -27,11 +25,10 @@ def cis_sw_int(ses,monobj):
 	# Monitor cisco switch interface : speed, duplex, error , bits 
 	try:
 		out = {}
-		mon_ = monobj.get("monitor")
+		x_input = monobj.get("input")
+		mon_ = x_input.get("check")
 		mon_ = mon_.split(",")
-
-		type_ = monobj.get("type")
-		in_ = monobj.get("name")
+		in_ = x_input.get("interface")
 
 		exp = ses[1]
 		cmd = "show interface "+in_
@@ -40,8 +37,7 @@ def cis_sw_int(ses,monobj):
 		ses[0].expect([cmd,pxssh.TIMEOUT],timeout=5)
 		ses[0].expect([exp,pxssh.TIMEOUT],timeout=5)
 		data = str(ses[0].before).lower()
-		if data.find("line protocol is up") == 0 or data.find("admin state is up") == 0:
-			# Interface down
+		if data.find("line protocol is up") != -1 or data.find("admin state is up") != -1:
 			out.update({"interface":"up"})
 		else:
 			return {"interface":"down"}

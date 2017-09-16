@@ -450,8 +450,8 @@ dataSet = [];
         data : dataSet,
         dom: 'lBfrtip',
         "createdRow": function( row, data, dataIndex){
-                if( data[4] ==  0){$(row).css({"background-color":"#ff0000",'color': '#ffffff','font-weight':'bold'});}
-                else if(data[4] ==  100){$(row).css({"background-color":"#1abc9c",'color': '#ffffff','font-weight':'bold'});}
+                if( data[2] ==  0){$(row).css({"background-color":"#ff0000",'color': '#ffffff','font-weight':'bold'});}
+                else if(data[2] ==  100){$(row).css({"background-color":"#1abc9c",'color': '#ffffff','font-weight':'bold'});}
                 else {$(row).css({"background-color":"#fdba04",'color': '#ffffff','font-weight':'bold'});}
               },
         lengthMenu: [
@@ -462,10 +462,9 @@ dataSet = [];
         columns: [
             { title: "Hostname" },
             { title: "IP" },
-            { title: "Monitor" },
-            { title: "name" },
             { title: "score" },
-            { title: "out" }
+            { title: "out" },
+            { title: "input" }
         ]
     } );
 
@@ -906,7 +905,7 @@ $.each(dout, function(index, value) {
     $.each(single_host.Objects, function(index, d) {
     // Read Single host data
     if(d.score == undefined){d.score="-"};if(d.out == undefined){d.out=""};
-    if(d.monitor == undefined){d.monitor=""};if(d.name == undefined){d.name=""};
+    if(d.input == undefined){d.input=""};
     if(d.score == 100){score_good = score_good+1}
     else if (d.score == 0){score_danger = score_danger+1}
     else{score_warning = score_warning+1 ;}
@@ -914,7 +913,7 @@ $.each(dout, function(index, value) {
         $('#warning-bar').text("Warning "+score_warning);
         $('#good-bar').text("Good "+score_good);
 
-    dtable.rows.add([[single_host.Hostname,single_host.IP,d.monitor,d.name,d.score,JSON.stringify(d.out)]]);
+    dtable.rows.add([[single_host.Hostname,single_host.IP,d.score,JSON.stringify(d.out),JSON.stringify(d.input)]]);
   });
 
 });

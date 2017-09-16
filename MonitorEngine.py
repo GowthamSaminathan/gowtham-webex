@@ -22,7 +22,7 @@ from concurrent.futures import as_completed
 
 logger =  logging.getLogger("Rotating Log")
 logger.setLevel(logging.DEBUG)
-handler = RotatingFileHandler(os.getcwd()+"/MonitorEngine.log",maxBytes=5000000,backupCount=100)
+handler = RotatingFileHandler(os.getcwd()+"/MonitorEngine.log",maxBytes=5000000,backupCount=25)
 formatter = logging.Formatter('%(asctime)s > %(levelname)s > %(message)s')
 handler.setFormatter(formatter)
 logger.addHandler(handler)
@@ -107,6 +107,7 @@ class main_model():
                     s = pxssh.pxssh(options={
                                     "StrictHostKeyChecking": "no",
                                     "UserKnownHostsFile": "/dev/null"},timeout=login_timeout)
+
                     s.login(hostname, username, password,auto_prompt_reset=False,login_timeout=login_timeout)
                     s.logfile = open(logpath+"_"+str(hostname)+".txt", "ab")
                     # Send enter to get router prompt to check login success
@@ -177,7 +178,7 @@ class main_model():
                 return ses
         return ses
 
-    def device_check(self,ses,Monitoring_obj):
+    def device_check(self,self_chk,Monitoring_obj):
         try:
             # Check Single devices based on JSON Object
             if Monitoring_obj == None :
@@ -185,12 +186,15 @@ class main_model():
                 return None
             logger.debug("single host object")
             logger.debug(str(Monitoring_obj))
+            ses = self_chk.get("ssh_session")
             for element in Monitoring_obj:
                 #Object found ; reading elements
-                et = element.get("type")
-                out = globals()[et](ses,element)
-                #print(out_)
-                element.update({"out":out})
+                # skip self_check
+                if element.get("id") != 0:
+                    et = element.get("function")
+                    out = globals()[et](ses,element)
+                    #print(out_)
+                    element.update({"out":out})
             
             return Monitoring_obj
         except Exception as e:
@@ -202,7 +206,6 @@ class main_model():
         ID = row2.get("ID")
         Hostname = row2.get("Hostname")
         IP = row2.get("IP")
-        Authentication = json.loads(row2.get("Authentication"))
         #Model = row2.get("Model")
         Monitoring_obj = row2.get("Objects")
         #Mode = row2.get("Mode")
@@ -217,14 +220,35 @@ class main_model():
         except Exception as e:
             logger.exception("single_host")
 
-        sess = self.get_ssh_ses(IP,[Authentication],timeout,dir_path)
-        jout = {}
-        if sess == None or type(sess) == str:
-            logger.info("Failed >"+str(Hostname)+" "+str(IP))
-            def_rnk = [{"regex":{"status":"down"},"score":0},{"regex":{"status":"reachable"},"score":100}]
-            jout = [{"monitor" : "self","type" : "self_check","name" : "self","rank":def_rnk,"score" : 0,"out":{"status":"down"}}]
+        sts = {}
+        for data in Monitoring_obj:
+                # Do self check first then do next .
+                if data.get("id") == 0:
+                    udata = data.get("input")
+                    uname = udata.get("username")
+                    passwd = udata.get("password")
+                    timeout = udata.get("timeout")
+                    auth = {"username":uname,"password":passwd}
+                    sess = self.get_ssh_ses(IP,[auth],timeout,dir_path)
+                    data.update({"input":{}})
+                    if sess == None or type(sess) == str:
+                        logger.info("Failed >"+str(Hostname)+" "+str(IP))
+                        reach_stat = {"status":"down"}
+                    else:
+                        reach_stat = {"status":"reachable"}
+                        data.update({"out":reach_stat})
+                        # Removing "input" for self ( prevent password , username in output)
+                        sts.update({"ssh_session":sess})
+
+                    data.update({"input":{}})
+                    sts.update(reach_stat)
+                    break;
+
+        if sts.get("status") == "reachable":
+            jout = self.device_check(sts, Monitoring_obj)
         else:
-            jout = self.device_check(sess , Monitoring_obj)
+            def_rnk = [{"regex":{"status":"down"},"score":0},{"regex":{"status":"reachable"},"score":100}]
+            jout = [{"id":0,"function" : "self_check","rank":def_rnk,"score" : 0,"out":{"status":"down"}}]
 
         # Update added 'out' in Objects Key
         row2.update({"Objects":jout})
@@ -269,13 +293,16 @@ class main_model():
                             jout.update({"SESSION":int(session),"TD":TD,"JOBNAME":jobname})
                             mcollection = self.mdb['OUTPUT']
                             mcollection.insert(jout)
+                        except Exception as e:
+                            logger.exception("start_run")
 
-
+                        try:
                             #Update session table
                             mcollection = self.mdb['SESSION']
                             mcollection.update({"_id":1,"STATUS.IP":jout.get("IP")},{ "$set": { "STATUS.$.TYPE" : "Completed" } })
                         except Exception as e:
-                            logger.exception("start_run")
+                            logger.exception("start_run db")
+                        
                 
                 #Start Scoring
                 logger.info("Scoring Started")
@@ -297,19 +324,24 @@ class main_model():
             df1 = xl.parse('input')
             IP = list(set((df1.get("IP"))))
             full_list = []
+            authentication = None
             for inx , i in enumerate(IP):
                 elmt_id = 0
                 local_list = []
                 xx = ""
                 for index, row in df1.iterrows():
                     if row["IP"] == i:
-                        elmt_id = elmt_id + 1
-                        elmt_id2 = elmt_id
-                        a = {"id":elmt_id2,"type": row["type"] , "name": row["name"] , "monitor":row["monitor"], "rank": json.loads(row["rank"])}
+                        if row["function"] == "self_check":
+                            # Set id zero for self check , and get authentication details
+                            elmt_id2 = 0
+                            authentication = row["input"]
+                        else:
+                            elmt_id = elmt_id + 1
+                            elmt_id2 = elmt_id
+                        a = {"id":elmt_id2, "function":row["function"],"input": json.loads(row["input"]),"rank": json.loads(row["rank"])}
                         local_list.append(a)
                         xx = row
-                full_list.append({"Hostname": str(xx["Hostname"]),"IP":str(xx["IP"]),"Authentication":xx["Authentication"],
-                    "timeout":int(xx["timeout"]),"Objects":local_list})
+                full_list.append({"Hostname": str(xx["Hostname"]),"IP":str(xx["IP"]),"Authentication":json.loads(authentication),"Objects":local_list})
             return full_list
         except Exception as e:
             logger.exception("xls_input")

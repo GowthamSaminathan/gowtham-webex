@@ -134,18 +134,6 @@ def history():
 				print "Error history >",e
 				return "None"
 
-@app.route('/update',methods = ['POST', 'GET'])
-def update():
-		try:
-				result = request.form
-				if request.method == 'POST':
-						if result["update"] != None:
-								open("LIVE_UPDATE.txt",'wb+').write(result["update"])
-								return "success"
-		except Exception as e:
-				print "Error update >",e
-				return "None"
-
 
 @app.route('/api',methods = ['POST', 'GET'])
 def result():
@@ -439,17 +427,12 @@ def excell_filter(d_group,xl_file,new_xl_file):
         	row.pop("Group")
         	row.pop("Level")
         	for d in d_group:
-        		print ">>"
         		if d.get("Group") in g and d.get("Level") in l:
-        			print "1>>"
-        			print index,row["IP"]
-        			print row
         			if list(row) in nd:
         				pass;
         			else:
         				nd.append(list(row))
-        				print "2>>"
-        	print "3>>"
+
         if len(nd) == 0:
         	return False
         print nd
