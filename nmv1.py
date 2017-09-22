@@ -21,6 +21,28 @@ def cis_raw(ses,monobj):
     except:
         return out
 
+def cpu_uti(s,monobj):
+    try:
+        out = {}
+        exp = s[1]
+        cmd = "sh processes cpu sorted | i one minute:"
+        #s[0].sendline("terminal length 0")
+        s[0].sendline(cmd)
+        s[0].expect([cmd,pxssh.TIMEOUT],timeout=5)
+        s[0].expect([exp,pxssh.TIMEOUT],timeout=5)
+        data = str(s[0].before)
+        #print data
+        #b = data.split("five minute:")[1]
+	b = data.split(";")[1].split(":")[1].strip()
+        if b != None or len(str(b)) > 0:
+           out.update({"CPU_One minute:":b})
+           return out
+        else:
+             return {"CPU_One minute:":""}
+    except Exception as e:
+        print("cpu_uti Error 1>"+str(e))
+
+
 def cis_sw_int(ses,monobj):
 	# Monitor cisco switch interface : speed, duplex, error , bits 
 	try:
@@ -32,24 +54,32 @@ def cis_sw_int(ses,monobj):
 
 		exp = ses[1]
 		cmd = "show interface "+in_
-		ses[0].sendline("terminal length 0")
+		#ses[0].sendline("terminal length 0")
 		ses[0].sendline(cmd)
 		ses[0].expect([cmd,pxssh.TIMEOUT],timeout=5)
 		ses[0].expect([exp,pxssh.TIMEOUT],timeout=5)
 		data = str(ses[0].before).lower()
+		
 		if data.find("line protocol is up") != -1 or data.find("admin state is up") != -1:
 			out.update({"interface":"up"})
 		else:
 			return {"interface":"down"}
 
 		if "bits" in mon_:
+			irate = ""
+			orate = ""
+			
+			redata = re.findall(r'input rate [0-9]+',data)
 
-			redata = re.findall(r'input rate [0-9]+|output rate [0-9]+',data)
-			if len(redata) == 2:
+			if len(redata) > 0:
 				irate = redata[0].replace('input rate ','')
-				orate = redata[1].replace('output rate ','')
+
+			redata = re.findall(r'output rate [0-9]+',data)
+			
+			if len(redata) > 0:
+				orate = redata[0].replace('output rate ','')
 				#rate = irate+"|"+orate
-				out.update({"inrate":irate,"outrate":orate})
+			out.update({"inrate":irate,"outrate":orate})
 		
 		if "duplex" in mon_:
 			if data.find("half") != -1:
@@ -69,27 +99,26 @@ def cis_sw_int(ses,monobj):
 			
 			redata = re.findall(r'[0-9]+.gb/s',data)
 			if len(redata) > 0:
-				redata = redata.split("gb")[0]
+				redata = redata[0].split("gb")[0]
 				redata = redata.strip()
-				redata = redata+"000"
+				redata = redata+"000"+"mb/s"
 				out.update({"speed":redata})
 
 
-		err = ""
 		if "error" in mon_:
 			redata = re.findall(r'total output drops: [0-9]+',data)
 			if len(redata) == 1:
 				outdrop = redata[0].replace('total output drops: ','')
 				out.update({"outdrops":outdrop})
 
-			redata = re.findall(r'[0-9]+ input errors',data)
+			redata = re.findall(r'[0-9]+ input error',data)
 			if len(redata) == 1:
-				inerror = redata[0].replace(' input errors','')
+				inerror = redata[0].replace(' input error','')
 				out.update({"inerror":inerror})
 
-			redata = re.findall(r'[0-9]+ crc,',data)
+			redata = re.findall(r'[0-9]+ crc',data)
 			if len(redata) == 1:
-				crcerror = redata[0].replace(' crc,','')
+				crcerror = redata[0].replace(' crc','')
 				out.update({"crc":crcerror})
 
 

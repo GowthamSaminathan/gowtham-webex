@@ -191,6 +191,8 @@ class main_model():
                 #Object found ; reading elements
                 # skip self_check
                 if element.get("id") != 0:
+                    # sleeping between commands
+                    time.sleep(0.2)
                     et = element.get("function")
                     out = globals()[et](ses,element)
                     #print(out_)
@@ -235,6 +237,11 @@ class main_model():
                         logger.info("Failed >"+str(Hostname)+" "+str(IP))
                         reach_stat = {"status":"down"}
                     else:
+                        try:
+                            if udata.get("type") == "cisco":
+                                sess[0].sendline("terminal length 0")
+                        except Exception as e:
+                            logger.exception("changing terminal length")
                         reach_stat = {"status":"reachable"}
                         data.update({"out":reach_stat})
                         # Removing "input" for self ( prevent password , username in output)

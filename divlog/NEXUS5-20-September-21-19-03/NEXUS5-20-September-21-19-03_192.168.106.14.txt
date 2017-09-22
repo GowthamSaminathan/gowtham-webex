@@ -1,0 +1,3203 @@
+
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# terminal length 0
+show interface Eth1/1
+terminal length 0
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth1/1
+Ethernet1/1 is up
+admin state is up, Dedicated Interface
+  Hardware: 1000/10000 Ethernet, address: 0081.c49f.c0ec (bia 0081.c49f.c0ec)
+  Description: ****Array LB****
+  MTU 1500 bytes, BW 10000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 10 Gb/s, media type is 10G
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Rate mode is dedicated
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 36week(s) 2day(s)
+  Last clearing of "show interface" counters never
+  13 interface resets
+  30 seconds input rate 2755640 bits/sec, 4384 packets/sec
+  30 seconds output rate 2200552 bits/sec, 3564 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 2.88 Mbps, 4.53 Kpps; output rate 2.30 Mbps, 3.67 Kpps
+  RX
+    28544878346 unicast packets  9530298 multicast packets  1826257 broadcast packets
+    28556234901 input packets  2235798402384 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    24069106461 unicast packets  292024562 multicast packets  231397004 broadcast packets
+    24592528027 output packets  1750389375432 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth1/16
+show interface Eth1/16
+Ethernet1/16 is up
+admin state is up, Dedicated Interface
+  Hardware: 1000/10000 Ethernet, address: 0081.c49f.c0fb (bia 0081.c49f.c0fb)
+  Description: ** CONNECTED TO SDWAN 10/1 **
+  MTU 1500 bytes, BW 10000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 10 Gb/s, media type is 10G
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Rate mode is dedicated
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 2week(s) 1day(s)
+  Last clearing of "show interface" counters never
+  2 interface resets
+  30 seconds input rate 0 bits/sec, 0 packets/sec
+  30 seconds output rate 480 bits/sec, 0 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 0 bps, 0 pps; output rate 200 bps, 0 pps
+  RX
+    59284 unicast packets  0 multicast packets  0 broadcast packets
+    59284 input packets  83471872 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    369654 unicast packets  2379323 multicast packets  45 broadcast packets
+    2749022 output packets  287932135 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth1/17
+show interface Eth1/17
+Ethernet1/17 is up
+admin state is up, Dedicated Interface
+  Belongs to Po13
+  Hardware: 1000/10000 Ethernet, address: 0081.c49f.c0fc (bia 0081.c49f.c0fc)
+  Description: **** CONNECTED TO SECONDARY ASA 5585 T0/6 ****
+  MTU 1500 bytes, BW 10000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 13/255, rxload 6/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is trunk
+  full-duplex, 10 Gb/s, media type is 10G
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Rate mode is dedicated
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 6week(s) 4day(s)
+  Last clearing of "show interface" counters 36w3d
+  6 interface resets
+  30 seconds input rate 264746016 bits/sec, 31988 packets/sec
+  30 seconds output rate 523716168 bits/sec, 54006 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 303.41 Mbps, 36.03 Kpps; output rate 478.82 Mbps, 50.26 Kpps
+  RX
+    375308495482 unicast packets  795700 multicast packets  1124641 broadcast packets
+    375310415823 input packets  357266189103265 bytes
+    624278 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    397211366665 unicast packets  253309800 multicast packets  201365568 broadcast packets
+    397666042033 output packets  406824507525321 bytes
+    3989839 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth1/18
+show interface Eth1/18
+Ethernet1/18 is up
+admin state is up, Dedicated Interface
+  Belongs to Po13
+  Hardware: 1000/10000 Ethernet, address: 0081.c49f.c0fd (bia 0081.c49f.c0fd)
+  Description: **** CONNECTED TO SECONDARY ASA 5585 T0/7 ****
+  MTU 1500 bytes, BW 10000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 2/255, rxload 8/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is trunk
+  full-duplex, 10 Gb/s, media type is 10G
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Rate mode is dedicated
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 6week(s) 4day(s)
+  Last clearing of "show interface" counters 36w3d
+  6 interface resets
+  30 seconds input rate 328938984 bits/sec, 40991 packets/sec
+  30 seconds output rate 83975952 bits/sec, 18174 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 250.17 Mbps, 32.88 Kpps; output rate 129.61 Mbps, 20.89 Kpps
+  RX
+    375880932364 unicast packets  795790 multicast packets  12539665 broadcast packets
+    375894267819 input packets  377507212335049 bytes
+    399974 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    393698408017 unicast packets  137390487 multicast packets  67590151 broadcast packets
+    393903388655 output packets  424371804067458 bytes
+    5051556 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth1/19
+show interface Eth1/19
+Ethernet1/19 is up
+admin state is up, Dedicated Interface
+  Hardware: 1000/10000 Ethernet, address: 0081.c49f.c0fe (bia 0081.c49f.c0fe)
+  Description: **** CONNECTED TO SECONDARY ASA 5585 T0/8 ****
+  MTU 1500 bytes, BW 10000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 4/255, rxload 3/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is trunk
+  full-duplex, 10 Gb/s, media type is 10G
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Rate mode is dedicated
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 6week(s) 4day(s)
+  Last clearing of "show interface" counters never
+  7 interface resets
+  30 seconds input rate 147906064 bits/sec, 20408 packets/sec
+  30 seconds output rate 191123048 bits/sec, 22474 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 427.45 Mbps, 53.69 Kpps; output rate 460.18 Mbps, 55.28 Kpps
+  RX
+    346482308124 unicast packets  0 multicast packets  18258437 broadcast packets
+    346500566561 input packets  241224892078929 bytes
+    172610 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    422318799060 unicast packets  172797959 multicast packets  24639821 broadcast packets
+    422516236840 output packets  405349777042268 bytes
+    48218437 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth1/20
+show interface Eth1/20
+Ethernet1/20 is up
+admin state is up, Dedicated Interface
+  Hardware: 1000/10000 Ethernet, address: 0081.c49f.c0ff (bia 0081.c49f.c0ff)
+  Description: **** CONNECTED TO SECONDARY ASA 5585 T0/9 ****
+  MTU 1500 bytes, BW 10000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is trunk
+  full-duplex, 10 Gb/s, media type is 10G
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Rate mode is dedicated
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 6week(s) 4day(s)
+  Last clearing of "show interface" counters never
+  6 interface resets
+  30 seconds input rate 10176872 bits/sec, 6178 packets/sec
+  30 seconds output rate 36828168 bits/sec, 6526 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 11.11 Mbps, 6.27 Kpps; output rate 37.65 Mbps, 6.60 Kpps
+  RX
+    107895572069 unicast packets  0 multicast packets  10944663 broadcast packets
+    107906516732 input packets  45954110890657 bytes
+    114754 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    93756538551 unicast packets  396478504 multicast packets  224682427 broadcast packets
+    94377699482 output packets  77440856849462 bytes
+    8327361 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth1/21
+show interface Eth1/21
+Ethernet1/21 is up
+admin state is up, Dedicated Interface
+  Hardware: 1000/10000 Ethernet, address: 0081.c49f.c100 (bia 0081.c49f.c100)
+  Description: **** CONNECTED TO SECONDARY ASA 5585 T1/7 ****
+  MTU 1500 bytes, BW 10000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is trunk
+  full-duplex, 10 Gb/s, media type is 10G
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Rate mode is dedicated
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 2week(s) 0day(s)
+  Last clearing of "show interface" counters never
+  4 interface resets
+  30 seconds input rate 544424 bits/sec, 43 packets/sec
+  30 seconds output rate 13544 bits/sec, 18 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 1.13 Mbps, 35 pps; output rate 23.75 Kbps, 14 pps
+  RX
+    1719902988 unicast packets  0 multicast packets  62 broadcast packets
+    1719903050 input packets  2460356785327 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    228698736 unicast packets  1759602 multicast packets  5 broadcast packets
+    230458343 output packets  16172894937 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth1/31
+show interface Eth1/31
+Ethernet1/31 is up
+admin state is up, Dedicated Interface
+  Hardware: 1000/10000 Ethernet, address: 0081.c49f.c10a (bia 0081.c49f.c10a)
+  MTU 1500 bytes, BW 10000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is trunk
+  full-duplex, 10 Gb/s, media type is 10G
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Rate mode is dedicated
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 3week(s) 6day(s)
+  Last clearing of "show interface" counters never
+  8 interface resets
+  30 seconds input rate 512 bits/sec, 1 packets/sec
+  30 seconds output rate 17432 bits/sec, 22 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 392 bps, 1 pps; output rate 15.73 Kbps, 18 pps
+  RX
+    56936 unicast packets  853986 multicast packets  1150627 broadcast packets
+    2061549 input packets  212863035 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    5727302 unicast packets  27551337 multicast packets  60499768 broadcast packets
+    93778407 output packets  9809033001 bytes
+    91475 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth1/32
+show interface Eth1/32
+Ethernet1/32 is up
+admin state is up, Dedicated Interface
+  Hardware: 1000/10000 Ethernet, address: 0081.c49f.c10b (bia 0081.c49f.c10b)
+  MTU 1500 bytes, BW 10000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is trunk
+  full-duplex, 10 Gb/s, media type is 10G
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Rate mode is dedicated
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 3week(s) 6day(s)
+  Last clearing of "show interface" counters never
+  8 interface resets
+  30 seconds input rate 32 bits/sec, 0 packets/sec
+  30 seconds output rate 17432 bits/sec, 22 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 24 bps, 0 pps; output rate 15.73 Kbps, 18 pps
+  RX
+    56936 unicast packets  853015 multicast packets  7 broadcast packets
+    909958 input packets  139159139 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    5605723 unicast packets  27538331 multicast packets  60471938 broadcast packets
+    93615992 output packets  9772571254 bytes
+    116728 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth1/33
+show interface Eth1/33
+Ethernet1/33 is up
+admin state is up, Dedicated Interface
+  Hardware: 1000/10000 Ethernet, address: 0081.c49f.c10c (bia 0081.c49f.c10c)
+  MTU 1500 bytes, BW 10000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is trunk
+  full-duplex, 10 Gb/s, media type is 10G
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Rate mode is dedicated
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 3week(s) 6day(s)
+  Last clearing of "show interface" counters never
+  11 interface resets
+  30 seconds input rate 496 bits/sec, 1 packets/sec
+  30 seconds output rate 17432 bits/sec, 22 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 312 bps, 1 pps; output rate 15.73 Kbps, 18 pps
+  RX
+    56936 unicast packets  852755 multicast packets  1150694 broadcast packets
+    2060385 input packets  212782096 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    5575464 unicast packets  27537348 multicast packets  60469399 broadcast packets
+    93582211 output packets  9757193915 bytes
+    116760 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth1/34
+show interface Eth1/34
+Ethernet1/34 is up
+admin state is up, Dedicated Interface
+  Hardware: 1000/10000 Ethernet, address: 0081.c49f.c10d (bia 0081.c49f.c10d)
+  MTU 1500 bytes, BW 10000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is trunk
+  full-duplex, 10 Gb/s, media type is 10G
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Rate mode is dedicated
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 3week(s) 6day(s)
+  Last clearing of "show interface" counters never
+  10 interface resets
+  30 seconds input rate 24 bits/sec, 0 packets/sec
+  30 seconds output rate 17608 bits/sec, 22 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 24 bps, 0 pps; output rate 15.71 Kbps, 18 pps
+  RX
+    56936 unicast packets  852384 multicast packets  15 broadcast packets
+    909335 input packets  139114049 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    5246966 unicast packets  27532363 multicast packets  60458484 broadcast packets
+    93237813 output packets  9588367687 bytes
+    115278 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth1/35
+show interface Eth1/35
+Ethernet1/35 is up
+admin state is up, Dedicated Interface
+  Hardware: 1000/10000 Ethernet, address: 0081.c49f.c10e (bia 0081.c49f.c10e)
+  MTU 1500 bytes, BW 10000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is trunk
+  full-duplex, 10 Gb/s, media type is 10G
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Rate mode is dedicated
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 3week(s) 6day(s)
+  Last clearing of "show interface" counters never
+  7 interface resets
+  30 seconds input rate 24 bits/sec, 0 packets/sec
+  30 seconds output rate 17664 bits/sec, 22 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 24 bps, 0 pps; output rate 15.73 Kbps, 19 pps
+  RX
+    213068 unicast packets  852972 multicast packets  42 broadcast packets
+    1066082 input packets  348712910 bytes
+    129478 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    5507138 unicast packets  27531042 multicast packets  60455456 broadcast packets
+    93493636 output packets  9732035469 bytes
+    123579 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth1/36
+show interface Eth1/36
+Ethernet1/36 is up
+admin state is up, Dedicated Interface
+  Hardware: 1000/10000 Ethernet, address: 0081.c49f.c10f (bia 0081.c49f.c10f)
+  MTU 1500 bytes, BW 10000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is trunk
+  full-duplex, 10 Gb/s, media type is 10G
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Rate mode is dedicated
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 3week(s) 6day(s)
+  Last clearing of "show interface" counters never
+  11 interface resets
+  30 seconds input rate 24 bits/sec, 0 packets/sec
+  30 seconds output rate 17608 bits/sec, 22 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 24 bps, 0 pps; output rate 15.71 Kbps, 18 pps
+  RX
+    56936 unicast packets  853494 multicast packets  9 broadcast packets
+    910439 input packets  139190716 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    5683216 unicast packets  27517397 multicast packets  60422714 broadcast packets
+    93623327 output packets  9851105823 bytes
+    117295 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth1/37
+show interface Eth1/37
+Ethernet1/37 is up
+admin state is up, Dedicated Interface
+  Hardware: 1000/10000 Ethernet, address: 0081.c49f.c110 (bia 0081.c49f.c110)
+  MTU 1500 bytes, BW 10000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is trunk
+  full-duplex, 10 Gb/s, media type is 10G
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Rate mode is dedicated
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 2week(s) 2day(s)
+  Last clearing of "show interface" counters never
+  18 interface resets
+  30 seconds input rate 24 bits/sec, 0 packets/sec
+  30 seconds output rate 17664 bits/sec, 22 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 24 bps, 0 pps; output rate 15.73 Kbps, 19 pps
+  RX
+    56936 unicast packets  122963 multicast packets  15 broadcast packets
+    179914 input packets  92341744 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    3265596 unicast packets  26929156 multicast packets  59149445 broadcast packets
+    89344197 output packets  8507148873 bytes
+    47649 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth1/38
+show interface Eth1/38
+Ethernet1/38 is up
+admin state is up, Dedicated Interface
+  Hardware: 1000/10000 Ethernet, address: 0081.c49f.c111 (bia 0081.c49f.c111)
+  MTU 1500 bytes, BW 10000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is trunk
+  full-duplex, 10 Gb/s, media type is 10G
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Rate mode is dedicated
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 3week(s) 6day(s)
+  Last clearing of "show interface" counters never
+  6 interface resets
+  30 seconds input rate 24 bits/sec, 0 packets/sec
+  30 seconds output rate 17616 bits/sec, 22 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 24 bps, 0 pps; output rate 15.70 Kbps, 18 pps
+  RX
+    56936 unicast packets  852868 multicast packets  11 broadcast packets
+    909815 input packets  139149408 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    5456753 unicast packets  27529772 multicast packets  60453064 broadcast packets
+    93439589 output packets  9706834065 bytes
+    115597 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth1/39
+show interface Eth1/39
+Ethernet1/39 is up
+admin state is up, Dedicated Interface
+  Hardware: 1000/10000 Ethernet, address: 0081.c49f.c112 (bia 0081.c49f.c112)
+  MTU 1500 bytes, BW 10000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is trunk
+  full-duplex, 10 Gb/s, media type is 10G
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Rate mode is dedicated
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 3week(s) 6day(s)
+  Last clearing of "show interface" counters never
+  10 interface resets
+  30 seconds input rate 24 bits/sec, 0 packets/sec
+  30 seconds output rate 17416 bits/sec, 22 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 24 bps, 0 pps; output rate 15.62 Kbps, 18 pps
+  RX
+    56936 unicast packets  852304 multicast packets  9 broadcast packets
+    909249 input packets  139111826 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    5280935 unicast packets  27501323 multicast packets  60388476 broadcast packets
+    93170734 output packets  9648146526 bytes
+    115412 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth1/40
+show interface Eth1/40
+Ethernet1/40 is up
+admin state is up, Dedicated Interface
+  Hardware: 1000/10000 Ethernet, address: 0081.c49f.c113 (bia 0081.c49f.c113)
+  MTU 1500 bytes, BW 10000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is trunk
+  full-duplex, 10 Gb/s, media type is 10G
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Rate mode is dedicated
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 2week(s) 2day(s)
+  Last clearing of "show interface" counters never
+  13 interface resets
+  30 seconds input rate 24 bits/sec, 0 packets/sec
+  30 seconds output rate 17416 bits/sec, 22 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 24 bps, 0 pps; output rate 15.62 Kbps, 18 pps
+  RX
+    70466 unicast packets  122961 multicast packets  33 broadcast packets
+    193460 input packets  109102366 bytes
+    10222 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    3516490 unicast packets  26931106 multicast packets  59153838 broadcast packets
+    89601434 output packets  8622993627 bytes
+    50779 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth1/41
+show interface Eth1/41
+Ethernet1/41 is up
+admin state is up, Dedicated Interface
+  Hardware: 1000/10000 Ethernet, address: 0081.c49f.c114 (bia 0081.c49f.c114)
+  MTU 1500 bytes, BW 10000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is trunk
+  full-duplex, 10 Gb/s, media type is 10G
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Rate mode is dedicated
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 2week(s) 2day(s)
+  Last clearing of "show interface" counters never
+  33 interface resets
+  30 seconds input rate 24 bits/sec, 0 packets/sec
+  30 seconds output rate 17424 bits/sec, 22 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 24 bps, 0 pps; output rate 15.66 Kbps, 19 pps
+  RX
+    56936 unicast packets  123044 multicast packets  3948 broadcast packets
+    183928 input packets  94573363 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    1 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    5252347 unicast packets  27528187 multicast packets  60444504 broadcast packets
+    93225038 output packets  9595883265 bytes
+    115248 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth1/42
+show interface Eth1/42
+Ethernet1/42 is up
+admin state is up, Dedicated Interface
+  Hardware: 1000/10000 Ethernet, address: 0081.c49f.c115 (bia 0081.c49f.c115)
+  MTU 1500 bytes, BW 10000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is trunk
+  full-duplex, 10 Gb/s, media type is 10G
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Rate mode is dedicated
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 2week(s) 2day(s)
+  Last clearing of "show interface" counters never
+  68 interface resets
+  30 seconds input rate 24 bits/sec, 0 packets/sec
+  30 seconds output rate 17416 bits/sec, 22 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 24 bps, 0 pps; output rate 15.62 Kbps, 18 pps
+  RX
+    69205 unicast packets  122805 multicast packets  27 broadcast packets
+    192037 input packets  107814241 bytes
+    9475 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    3512575 unicast packets  26912092 multicast packets  59108066 broadcast packets
+    89532733 output packets  8657891531 bytes
+    50490 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth1/43
+show interface Eth1/43
+Ethernet1/43 is up
+admin state is up, Dedicated Interface
+  Belongs to Po10
+  Hardware: 1000/10000 Ethernet, address: 0081.c49f.c116 (bia 0081.c49f.c116)
+  Description: **** CONNECTED TO FI SWITCH OF PRIVATE CLOUD ****
+  MTU 9216 bytes, BW 10000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is trunk
+  full-duplex, 10 Gb/s, media type is 10G
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Rate mode is dedicated
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 4week(s) 3day(s)
+  Last clearing of "show interface" counters 43w1d
+  42 interface resets
+  30 seconds input rate 10089152 bits/sec, 3101 packets/sec
+  30 seconds output rate 10210424 bits/sec, 4075 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 10.90 Mbps, 3.16 Kpps; output rate 10.60 Mbps, 4.05 Kpps
+  RX
+    42843042806 unicast packets  4235094 multicast packets  24947048 broadcast packets
+    42872224948 input packets  48316548025598 bytes
+    1660331398 jumbo packets  0 storm suppression packets
+    0 runts  319 giants  1340 CRC  0 no buffer
+    1659 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    49868087759 unicast packets  82646849 multicast packets  80168797 broadcast packets
+    50030903405 output packets  49954122219238 bytes
+    1379606896 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth1/44
+show interface Eth1/44
+Ethernet1/44 is up
+admin state is up, Dedicated Interface
+  Belongs to Po10
+  Hardware: 1000/10000 Ethernet, address: 0081.c49f.c117 (bia 0081.c49f.c117)
+  Description: **** CONNECTED TO FI SWITCH OF PRIVATE CLOUD ****
+  MTU 9216 bytes, BW 10000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is trunk
+  full-duplex, 10 Gb/s, media type is 10G
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Rate mode is dedicated
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 4week(s) 3day(s)
+  Last clearing of "show interface" counters 40w5d
+  41 interface resets
+  30 seconds input rate 11988896 bits/sec, 3289 packets/sec
+  30 seconds output rate 10466944 bits/sec, 3999 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 11.68 Mbps, 3.20 Kpps; output rate 10.73 Mbps, 3.93 Kpps
+  RX
+    39969857557 unicast packets  2370066 multicast packets  9843034 broadcast packets
+    39982070657 input packets  44583416900243 bytes
+    1856206856 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    49081360239 unicast packets  10062096 multicast packets  10806888 broadcast packets
+    49102229223 output packets  50259132757844 bytes
+    942369165 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth1/45
+show interface Eth1/45
+Ethernet1/45 is up
+admin state is up, Dedicated Interface
+  Belongs to Po10
+  Hardware: 1000/10000 Ethernet, address: 0081.c49f.c118 (bia 0081.c49f.c118)
+  Description: **** CONNECTED TO FI SWITCH OF PRIVATE CLOUD ****
+  MTU 9216 bytes, BW 10000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is trunk
+  full-duplex, 10 Gb/s, media type is 10G
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Rate mode is dedicated
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 4week(s) 3day(s)
+  Last clearing of "show interface" counters 40w5d
+  40 interface resets
+  30 seconds input rate 10781600 bits/sec, 3155 packets/sec
+  30 seconds output rate 12239360 bits/sec, 4124 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 10.57 Mbps, 3.03 Kpps; output rate 11.80 Mbps, 4.01 Kpps
+  RX
+    41876696202 unicast packets  2125405 multicast packets  3247591 broadcast packets
+    41882069198 input packets  46577699267749 bytes
+    1985096315 jumbo packets  0 storm suppression packets
+    0 runts  22 giants  0 CRC  0 no buffer
+    22 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    40554504237 unicast packets  14345609 multicast packets  109739311 broadcast packets
+    40678589157 output packets  39071321524915 bytes
+    1238413167 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth1/46
+show interface Eth1/46
+Ethernet1/46 is up
+admin state is up, Dedicated Interface
+  Belongs to Po11
+  Hardware: 1000/10000 Ethernet, address: 0081.c49f.c119 (bia 0081.c49f.c119)
+  Description: **** CONNECTED TO FI SWITCH OF PRIVATE CLOUD ****
+  MTU 9216 bytes, BW 10000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is trunk
+  full-duplex, 10 Gb/s, media type is 10G
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Rate mode is dedicated
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 4week(s) 3day(s)
+  Last clearing of "show interface" counters 43w1d
+  35 interface resets
+  30 seconds input rate 1868032 bits/sec, 449 packets/sec
+  30 seconds output rate 38729104 bits/sec, 3998 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 1.90 Mbps, 386 pps; output rate 38.52 Mbps, 3.89 Kpps
+  RX
+    77138399213 unicast packets  8552561 multicast packets  144383139 broadcast packets
+    77291334913 input packets  82272534760378 bytes
+    2004747268 jumbo packets  0 storm suppression packets
+    0 runts  229 giants  1077 CRC  0 no buffer
+    1306 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    149395971998 unicast packets  81734654 multicast packets  33578456 broadcast packets
+    149511285108 output packets  176874748807805 bytes
+    1607042043 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth1/47
+show interface Eth1/47
+Ethernet1/47 is up
+admin state is up, Dedicated Interface
+  Belongs to Po11
+  Hardware: 1000/10000 Ethernet, address: 0081.c49f.c11a (bia 0081.c49f.c11a)
+  Description: **** CONNECTED TO FI SWITCH OF PRIVATE CLOUD ****
+  MTU 9216 bytes, BW 10000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is trunk
+  full-duplex, 10 Gb/s, media type is 10G
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Rate mode is dedicated
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 4week(s) 3day(s)
+  Last clearing of "show interface" counters 40w5d
+  34 interface resets
+  30 seconds input rate 910392 bits/sec, 618 packets/sec
+  30 seconds output rate 7045264 bits/sec, 1249 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 970.55 Kbps, 421 pps; output rate 7.15 Mbps, 1.04 Kpps
+  RX
+    78451476509 unicast packets  2154974 multicast packets  23681872 broadcast packets
+    78477313355 input packets  85102701678583 bytes
+    2049541548 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  3245 CRC  0 no buffer
+    3319 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    155338953134 unicast packets  6511810 multicast packets  9148748 broadcast packets
+    155354613692 output packets  181608064675386 bytes
+    1686739781 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth1/48
+show interface Eth1/48
+Ethernet1/48 is up
+admin state is up, Dedicated Interface
+  Belongs to Po11
+  Hardware: 1000/10000 Ethernet, address: 0081.c49f.c11b (bia 0081.c49f.c11b)
+  Description: **** CONNECTED TO FI SWITCH OF PRIVATE CLOUD ****
+  MTU 9216 bytes, BW 10000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is trunk
+  full-duplex, 10 Gb/s, media type is 10G
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Rate mode is dedicated
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 4week(s) 3day(s)
+  Last clearing of "show interface" counters 40w5d
+  34 interface resets
+  30 seconds input rate 4795432 bits/sec, 746 packets/sec
+  30 seconds output rate 6484952 bits/sec, 1159 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 3.36 Mbps, 655 pps; output rate 6.11 Mbps, 997 pps
+  RX
+    81180886737 unicast packets  2053417 multicast packets  2972 broadcast packets
+    81182943126 input packets  86913807284055 bytes
+    1698708315 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  4 CRC  0 no buffer
+    4 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    160480056667 unicast packets  14788626 multicast packets  28531547 broadcast packets
+    160523376840 output packets  192466086601030 bytes
+    1459980229 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth2/1
+show interface Eth2/1
+Ethernet2/1 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c443.f5a4 (bia 0081.c443.f5a4)
+  Description: **** CONNECTED TO PRIVATE CLOUD OUT OF BAND MGMT ****
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 4week(s) 4day(s)
+  Last clearing of "show interface" counters never
+  12 interface resets
+  30 seconds input rate 64 bits/sec, 0 packets/sec
+  30 seconds output rate 3352 bits/sec, 2 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 24 bps, 0 pps; output rate 3.01 Kbps, 2 pps
+  RX
+    2028322 unicast packets  345746 multicast packets  6031 broadcast packets
+    2380099 input packets  454705769 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    1719914 unicast packets  255813 multicast packets  50795584 broadcast packets
+    52771311 output packets  8368773468 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth2/3
+show interface Eth2/3
+Ethernet2/3 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c443.f5a6 (bia 0081.c443.f5a6)
+  Description: **** CONNECTED TO PRIVATE CLOUD OUT OF BAND MGMT ****
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 4week(s) 4day(s)
+  Last clearing of "show interface" counters never
+  9 interface resets
+  30 seconds input rate 0 bits/sec, 0 packets/sec
+  30 seconds output rate 3352 bits/sec, 2 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 24 bps, 0 pps; output rate 3.03 Kbps, 2 pps
+  RX
+    21101313 unicast packets  24 multicast packets  271 broadcast packets
+    21101608 input packets  12350354361 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    17436882 unicast packets  255748 multicast packets  50801395 broadcast packets
+    68494025 output packets  13604999048 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth2/4
+show interface Eth2/4
+Ethernet2/4 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c443.f5a7 (bia 0081.c443.f5a7)
+  Description: **** CONNECTED TO PRIVATE CLOUD OUT OF BAND MGMT ****
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 7week(s) 4day(s)
+  Last clearing of "show interface" counters never
+  6 interface resets
+  30 seconds input rate 0 bits/sec, 0 packets/sec
+  30 seconds output rate 3352 bits/sec, 2 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 0 bps, 0 pps; output rate 3.01 Kbps, 2 pps
+  RX
+    2605547 unicast packets  17 multicast packets  712343 broadcast packets
+    3317907 input packets  2926070191 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    2208142 unicast packets  255680 multicast packets  50086328 broadcast packets
+    52550150 output packets  9681015105 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth2/5
+show interface Eth2/5
+Ethernet2/5 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c443.f5a8 (bia 0081.c443.f5a8)
+  Description: **** CONNECTED TO PRIVATE CLOUD OUT OF BAND MGMT ****
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 4week(s) 4day(s)
+  Last clearing of "show interface" counters never
+  9 interface resets
+  30 seconds input rate 0 bits/sec, 0 packets/sec
+  30 seconds output rate 3352 bits/sec, 2 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 24 bps, 0 pps; output rate 3.01 Kbps, 2 pps
+  RX
+    2734680 unicast packets  345736 multicast packets  427244 broadcast packets
+    3507660 input packets  663276673 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    2091693 unicast packets  255791 multicast packets  50372547 broadcast packets
+    52720031 output packets  8363159128 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth2/7
+show interface Eth2/7
+Ethernet2/7 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c443.f5aa (bia 0081.c443.f5aa)
+  Description: **** CONNECTED TO PRIVATE CLOUD OUT OF BAND MGMT ****
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 2week(s) 5day(s)
+  Last clearing of "show interface" counters never
+  17 interface resets
+  30 seconds input rate 0 bits/sec, 0 packets/sec
+  30 seconds output rate 0 bits/sec, 0 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 0 bps, 0 pps; output rate 240 bps, 0 pps
+  RX
+    0 unicast packets  0 multicast packets  0 broadcast packets
+    0 input packets  0 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    6018286 unicast packets  1067874 multicast packets  1902447 broadcast packets
+    8988607 output packets  7122118772 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth2/8
+show interface Eth2/8
+Ethernet2/8 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c443.f5ab (bia 0081.c443.f5ab)
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 2week(s) 5day(s)
+  Last clearing of "show interface" counters never
+  22 interface resets
+  30 seconds input rate 0 bits/sec, 0 packets/sec
+  30 seconds output rate 0 bits/sec, 0 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 0 bps, 0 pps; output rate 232 bps, 0 pps
+  RX
+    0 unicast packets  3753 multicast packets  32414 broadcast packets
+    36167 input packets  7723891 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    6018256 unicast packets  1064309 multicast packets  1869996 broadcast packets
+    8952561 output packets  7114347604 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth2/9
+show interface Eth2/9
+Ethernet2/9 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c443.f5ac (bia 0081.c443.f5ac)
+  Description: **** CONNECTED TO PRIVATE CLOUD OUT OF BAND MGMT ****
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 4week(s) 1day(s)
+  Last clearing of "show interface" counters never
+  2 interface resets
+  30 seconds input rate 3832 bits/sec, 1 packets/sec
+  30 seconds output rate 0 bits/sec, 0 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 2.80 Kbps, 2 pps; output rate 16 bps, 0 pps
+  RX
+    865763 unicast packets  27336 multicast packets  49286373 broadcast packets
+    50179472 input packets  8104472580 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    76546 unicast packets  235300 multicast packets  1519650 broadcast packets
+    1831496 output packets  172604015 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth2/12
+show interface Eth2/12
+Ethernet2/12 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c443.f5af (bia 0081.c443.f5af)
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 7week(s) 6day(s)
+  Last clearing of "show interface" counters never
+  7 interface resets
+  30 seconds input rate 0 bits/sec, 0 packets/sec
+  30 seconds output rate 104 bits/sec, 0 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 0 bps, 0 pps; output rate 120 bps, 0 pps
+  RX
+    243563 unicast packets  8 multicast packets  1377 broadcast packets
+    244948 input packets  143337585 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    1 Rx pause
+  TX
+    292527 unicast packets  817070 multicast packets  1678137 broadcast packets
+    2787734 output packets  308273543 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth2/13
+show interface Eth2/13
+Ethernet2/13 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c443.f5b0 (bia 0081.c443.f5b0)
+  Description: AEPS DB 03
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 09:18:51
+  Last clearing of "show interface" counters never
+  47 interface resets
+  30 seconds input rate 1376 bits/sec, 1 packets/sec
+  30 seconds output rate 2560 bits/sec, 1 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 272 bps, 0 pps; output rate 1.82 Kbps, 2 pps
+  RX
+    30218220 unicast packets  26382 multicast packets  231 broadcast packets
+    30244833 input packets  7555635903 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    51255769 unicast packets  33040902 multicast packets  14298313 broadcast packets
+    98594984 output packets  46921715458 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth2/14
+show interface Eth2/14
+Ethernet2/14 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c443.f5b1 (bia 0081.c443.f5b1)
+  Description: AEPS DB 04
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 09:12:05
+  Last clearing of "show interface" counters never
+  129 interface resets
+  30 seconds input rate 1384 bits/sec, 1 packets/sec
+  30 seconds output rate 2536 bits/sec, 1 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 280 bps, 0 pps; output rate 1.86 Kbps, 2 pps
+  RX
+    9905507 unicast packets  2002 multicast packets  326 broadcast packets
+    9907835 input packets  1260160803 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    33757770 unicast packets  26046038 multicast packets  14331901 broadcast packets
+    74135709 output packets  48067061486 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth2/16
+show interface Eth2/16
+Ethernet2/16 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c443.f5b3 (bia 0081.c443.f5b3)
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 3week(s) 0day(s)
+  Last clearing of "show interface" counters never
+  9 interface resets
+  30 seconds input rate 0 bits/sec, 0 packets/sec
+  30 seconds output rate 32 bits/sec, 0 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 0 bps, 0 pps; output rate 64 bps, 0 pps
+  RX
+    65948 unicast packets  155 multicast packets  1894 broadcast packets
+    67997 input packets  14871515 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    2 Rx pause
+  TX
+    289778 unicast packets  95640 multicast packets  803869 broadcast packets
+    1189287 output packets  242116680 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth2/18
+show interface Eth2/18
+Ethernet2/18 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c443.f5b5 (bia 0081.c443.f5b5)
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 3week(s) 0day(s)
+  Last clearing of "show interface" counters never
+  77 interface resets
+  30 seconds input rate 0 bits/sec, 0 packets/sec
+  30 seconds output rate 0 bits/sec, 0 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 712 bps, 0 pps; output rate 440 bps, 0 pps
+  RX
+    792719 unicast packets  108 multicast packets  90 broadcast packets
+    792917 input packets  152400769 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    4121383 unicast packets  227241 multicast packets  503902 broadcast packets
+    4852526 output packets  4502572872 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth2/19
+show interface Eth2/19
+Ethernet2/19 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c443.f5b6 (bia 0081.c443.f5b6)
+  Description: ***** Connected to USSD Server *****
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 3week(s) 0day(s)
+  Last clearing of "show interface" counters never
+  36 interface resets
+  30 seconds input rate 3763152 bits/sec, 679 packets/sec
+  30 seconds output rate 3506032 bits/sec, 1711 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 3.82 Mbps, 639 pps; output rate 3.52 Mbps, 1.67 Kpps
+  RX
+    3222187469 unicast packets  5644 multicast packets  620 broadcast packets
+    3222193733 input packets  2371098545315 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    9923001320 unicast packets  599057 multicast packets  1102257 broadcast packets
+    9924702634 output packets  5581465437287 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  453 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth2/20
+show interface Eth2/20
+Ethernet2/20 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c443.f5b7 (bia 0081.c443.f5b7)
+  Description: DRAC
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 9week(s) 3day(s)
+  Last clearing of "show interface" counters never
+  51 interface resets
+  30 seconds input rate 0 bits/sec, 0 packets/sec
+  30 seconds output rate 32 bits/sec, 0 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 0 bps, 0 pps; output rate 64 bps, 0 pps
+  RX
+    23349 unicast packets  34 multicast packets  1757 broadcast packets
+    25140 input packets  3209727 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    160812 unicast packets  95694 multicast packets  803851 broadcast packets
+    1060357 output packets  80970430 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth2/21
+show interface Eth2/21
+Ethernet2/21 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c443.f5b8 (bia 0081.c443.f5b8)
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 3week(s) 0day(s)
+  Last clearing of "show interface" counters never
+  5 interface resets
+  30 seconds input rate 0 bits/sec, 0 packets/sec
+  30 seconds output rate 16 bits/sec, 0 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 0 bps, 0 pps; output rate 64 bps, 0 pps
+  RX
+    101356 unicast packets  35 multicast packets  1702 broadcast packets
+    103093 input packets  62388723 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    2 Rx pause
+  TX
+    323935 unicast packets  95616 multicast packets  803831 broadcast packets
+    1223382 output packets  289033428 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth2/22
+show interface Eth2/22
+Ethernet2/22 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c443.f5b9 (bia 0081.c443.f5b9)
+  Description: DRAC
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 9week(s) 3day(s)
+  Last clearing of "show interface" counters never
+  2 interface resets
+  30 seconds input rate 0 bits/sec, 0 packets/sec
+  30 seconds output rate 16 bits/sec, 0 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 0 bps, 0 pps; output rate 64 bps, 0 pps
+  RX
+    214098 unicast packets  38 multicast packets  1699 broadcast packets
+    215835 input packets  100374865 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    320806 unicast packets  95590 multicast packets  803830 broadcast packets
+    1220226 output packets  138026836 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth2/23
+show interface Eth2/23
+Ethernet2/23 is up
+admin state is up, Dedicated Interface
+  Belongs to Po2
+  Hardware: 100/1000/10000 Ethernet, address: 0078.88ee.437f (bia 0081.c443.f5ba)
+  Description: *****TO-9508-2/23-ETH********
+  MTU 1500 bytes, BW 10000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  full-duplex, 10 Gb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 8week(s) 4day(s)
+  Last clearing of "show interface" counters never
+  4 interface resets
+  30 seconds input rate 0 bits/sec, 0 packets/sec
+  30 seconds output rate 0 bits/sec, 0 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 0 bps, 0 pps; output rate 0 bps, 0 pps
+  RX
+    13122 unicast packets  231315 multicast packets  0 broadcast packets
+    244437 input packets  69077733 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    13122 unicast packets  231313 multicast packets  0 broadcast packets
+    244435 output packets  67226639 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth2/24
+show interface Eth2/24
+Ethernet2/24 is up
+admin state is up, Dedicated Interface
+  Belongs to Po1
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c443.f5bb (bia 0081.c443.f5bb)
+  Description: *****TO-9508-2/24-ETH********
+  MTU 9216 bytes, BW 10000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is trunk
+  full-duplex, 10 Gb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 34week(s) 2day(s)
+  Last clearing of "show interface" counters never
+  1 interface resets
+  30 seconds input rate 56144080 bits/sec, 16972 packets/sec
+  30 seconds output rate 17754232 bits/sec, 3434 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 158.68 Mbps, 26.81 Kpps; output rate 24.53 Mbps, 3.96 Kpps
+  RX
+    449788003184 unicast packets  284042840 multicast packets  133707260 broadcast packets
+    450205753284 input packets  432048232869131 bytes
+    1585393334 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    99772274423 unicast packets  50155652 multicast packets  245154126 broadcast packets
+    100067584201 output packets  83023914458439 bytes
+    3664094895 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  7 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth2/27
+show interface Eth2/27
+Ethernet2/27 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c443.f5be (bia 0081.c443.f5be)
+  Description: UPI_APP_06
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 27week(s) 0day(s)
+  Last clearing of "show interface" counters never
+  17 interface resets
+  30 seconds input rate 2976 bits/sec, 5 packets/sec
+  30 seconds output rate 3880 bits/sec, 4 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 3.40 Kbps, 2 pps; output rate 4.32 Kbps, 2 pps
+  RX
+    10124466549 unicast packets  26 multicast packets  79689 broadcast packets
+    10124546264 input packets  4396539638813 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    10089703182 unicast packets  4914624 multicast packets  836674 broadcast packets
+    10095454480 output packets  3983763651948 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth2/30
+show interface Eth2/30
+Ethernet2/30 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c443.f5c1 (bia 0081.c443.f5c1)
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 18week(s) 5day(s)
+  Last clearing of "show interface" counters never
+  3 interface resets
+  30 seconds input rate 2744 bits/sec, 3 packets/sec
+  30 seconds output rate 3776 bits/sec, 3 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 2.85 Kbps, 2 pps; output rate 3.48 Kbps, 2 pps
+  RX
+    3980724495 unicast packets  10 multicast packets  46071 broadcast packets
+    3980770576 input packets  2196692463134 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    3598454936 unicast packets  4614127 multicast packets  832233 broadcast packets
+    3603901296 output packets  1689258468003 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  11515 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth2/33
+show interface Eth2/33
+Ethernet2/33 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c443.f5c4 (bia 0081.c443.f5c4)
+  Description: **** CONNECTED TO UPI APP-03 ****
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 10week(s) 6day(s)
+  Last clearing of "show interface" counters never
+  21 interface resets
+  30 seconds input rate 0 bits/sec, 0 packets/sec
+  30 seconds output rate 360 bits/sec, 0 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 0 bps, 0 pps; output rate 344 bps, 0 pps
+  RX
+    2072 unicast packets  3 multicast packets  3 broadcast packets
+    2078 input packets  1202806 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    806843 unicast packets  4908916 multicast packets  916075 broadcast packets
+    6631834 output packets  681895465 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth2/35
+show interface Eth2/35
+Ethernet2/35 is up
+admin state is up, Dedicated Interface
+  Belongs to Po6
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c443.f5c6 (bia 0081.c443.f5c6)
+  Description: **** CONNECTED TO NEXUS DMZ****
+  MTU 1500 bytes, BW 10000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is trunk
+  full-duplex, 10 Gb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 34week(s) 2day(s)
+  Last clearing of "show interface" counters never
+  1 interface resets
+  30 seconds input rate 2661592 bits/sec, 1488 packets/sec
+  30 seconds output rate 2815528 bits/sec, 710 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 2.70 Mbps, 1.44 Kpps; output rate 3.04 Mbps, 675 pps
+  RX
+    5995766534 unicast packets  231414 multicast packets  341515 broadcast packets
+    5996339463 input packets  1601991631184 bytes
+    105052600 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    2900011421 unicast packets  231393 multicast packets  572 broadcast packets
+    2900243386 output packets  1164996622782 bytes
+    81619805 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth2/36
+show interface Eth2/36
+Ethernet2/36 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c443.f5c7 (bia 0081.c443.f5c7)
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 6d20h
+  Last clearing of "show interface" counters never
+  29 interface resets
+  30 seconds input rate 0 bits/sec, 0 packets/sec
+  30 seconds output rate 0 bits/sec, 0 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 0 bps, 0 pps; output rate 0 bps, 0 pps
+  RX
+    27267 unicast packets  40 multicast packets  97 broadcast packets
+    27404 input packets  12010080 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    68771 unicast packets  227332 multicast packets  8186 broadcast packets
+    304289 output packets  114506950 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth2/37
+show interface Eth2/37
+Ethernet2/37 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c443.f5c8 (bia 0081.c443.f5c8)
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 6d20h
+  Last clearing of "show interface" counters never
+  25 interface resets
+  30 seconds input rate 2920 bits/sec, 1 packets/sec
+  30 seconds output rate 3576 bits/sec, 1 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 7.74 Kbps, 4 pps; output rate 4.67 Kbps, 1 pps
+  RX
+    108658469 unicast packets  119 multicast packets  313 broadcast packets
+    108658901 input packets  31823087481 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    93975207 unicast packets  227231 multicast packets  7997 broadcast packets
+    94210435 output packets  34679486589 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth2/38
+show interface Eth2/38
+Ethernet2/38 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c443.f5c9 (bia 0081.c443.f5c9)
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 2week(s) 6day(s)
+  Last clearing of "show interface" counters never
+  19 interface resets
+  30 seconds input rate 0 bits/sec, 0 packets/sec
+  30 seconds output rate 0 bits/sec, 0 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 0 bps, 0 pps; output rate 0 bps, 0 pps
+  RX
+    48080652766 unicast packets  810 multicast packets  60 broadcast packets
+    48080653636 input packets  52537907522508 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    23796609848 unicast packets  226476 multicast packets  8295 broadcast packets
+    23796844619 output packets  12924920790224 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  1561 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth2/40
+show interface Eth2/40
+Ethernet2/40 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c443.f5cb (bia 0081.c443.f5cb)
+  Description: ***** Connected to USSD Server *****
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 3week(s) 0day(s)
+  Last clearing of "show interface" counters never
+  62 interface resets
+  30 seconds input rate 0 bits/sec, 0 packets/sec
+  30 seconds output rate 0 bits/sec, 0 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 0 bps, 0 pps; output rate 184 bps, 0 pps
+  RX
+    12262079702 unicast packets  17549 multicast packets  69 broadcast packets
+    12262097320 input packets  14891549292722 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    5023198937 unicast packets  1024099 multicast packets  1852092 broadcast packets
+    5026075128 output packets  2502509354656 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  638 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth2/44
+show interface Eth2/44
+Ethernet2/44 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c443.f5cf (bia 0081.c443.f5cf)
+  Description: **** CONNECTED TO UPI_SW_A G0/24 ****
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is trunk
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 34week(s) 2day(s)
+  Last clearing of "show interface" counters never
+  1 interface resets
+  30 seconds input rate 3852704 bits/sec, 1103 packets/sec
+  30 seconds output rate 3199480 bits/sec, 1237 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 3.24 Mbps, 799 pps; output rate 2.65 Mbps, 882 pps
+  RX
+    17681208477 unicast packets  499442643 multicast packets  17644719 broadcast packets
+    18198295839 input packets  8776155827331 bytes
+    672140654 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    18887297693 unicast packets  15616260 multicast packets  3355321 broadcast packets
+    18906269274 output packets  6758193743571 bytes
+    4325600 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  436 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth2/45
+show interface Eth2/45
+Ethernet2/45 is up
+admin state is up, Dedicated Interface
+  Belongs to Po15
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c443.f5d0 (bia 0081.c443.f5d0)
+  Description: **** CONNECTED TO NFSDR_NEXUS_9372_2_CRSW_CHN E1/42 ****
+  MTU 1500 bytes, BW 10000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 18/255, rxload 7/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is trunk
+  full-duplex, 10 Gb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 34week(s) 2day(s)
+  Last clearing of "show interface" counters never
+  1 interface resets
+  30 seconds input rate 275290192 bits/sec, 39474 packets/sec
+  30 seconds output rate 729698888 bits/sec, 82626 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 302.67 Mbps, 42.45 Kpps; output rate 944.74 Mbps, 110.30 Kpps
+  RX
+    474840655089 unicast packets  47734809 multicast packets  45379465 broadcast packets
+    474933769363 input packets  503287337409077 bytes
+    1188670024 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    788157501746 unicast packets  959516 multicast packets  50893329 broadcast packets
+    788209354591 output packets  671897491530154 bytes
+    19821890500 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  2 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth2/46
+show interface Eth2/46
+Ethernet2/46 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c443.f5d1 (bia 0081.c443.f5d1)
+  Description: **** CONNECTED TO UPI APP-02 ****
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 10week(s) 5day(s)
+  Last clearing of "show interface" counters never
+  37 interface resets
+  30 seconds input rate 0 bits/sec, 0 packets/sec
+  30 seconds output rate 304 bits/sec, 0 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 0 bps, 0 pps; output rate 344 bps, 0 pps
+  RX
+    22016 unicast packets  3231 multicast packets  1914 broadcast packets
+    27161 input packets  30797246 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    811685 unicast packets  4598318 multicast packets  699871 broadcast packets
+    6109874 output packets  632717772 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth2/47
+show interface Eth2/47
+Ethernet2/47 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c443.f5d2 (bia 0081.c443.f5d2)
+  Description: **** CONNECTED TO UPI APP-01 ****
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 1week(s) 1day(s)
+  Last clearing of "show interface" counters never
+  20 interface resets
+  30 seconds input rate 0 bits/sec, 0 packets/sec
+  30 seconds output rate 304 bits/sec, 0 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 0 bps, 0 pps; output rate 344 bps, 0 pps
+  RX
+    21454 unicast packets  11 multicast packets  7 broadcast packets
+    21472 input packets  29774262 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    818264 unicast packets  4613665 multicast packets  878240 broadcast packets
+    6310169 output packets  646829401 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth2/48
+show interface Eth2/48
+Ethernet2/48 is up
+admin state is up, Dedicated Interface
+  Belongs to Po9
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c443.f5d3 (bia 0081.c443.f5d3)
+  Description: ****Uplink to 6509-Primary-1/1/47****
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 4/255, rxload 132/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is trunk
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 34week(s) 2day(s)
+  Last clearing of "show interface" counters never
+  1 interface resets
+  30 seconds input rate 517990352 bits/sec, 49242 packets/sec
+  30 seconds output rate 16971000 bits/sec, 19494 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 506.31 Mbps, 48.17 Kpps; output rate 16.36 Mbps, 19.00 Kpps
+  RX
+    579162863066 unicast packets  13250835 multicast packets  43912016 broadcast packets
+    579220025917 input packets  713010458346672 bytes
+    103781816 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    441171363790 unicast packets  15484240 multicast packets  71481326 broadcast packets
+    441258329356 output packets  372265196935615 bytes
+    2671787895 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  7744151 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth3/1
+show interface Eth3/1
+Ethernet3/1 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c4a0.3978 (bia 0081.c4a0.3978)
+  Description: ** CHEAEPSDB02 **
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 1week(s) 0day(s)
+  Last clearing of "show interface" counters never
+  22 interface resets
+  30 seconds input rate 0 bits/sec, 0 packets/sec
+  30 seconds output rate 3040 bits/sec, 2 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 0 bps, 0 pps; output rate 2.03 Kbps, 2 pps
+  RX
+    32904 unicast packets  166 multicast packets  189 broadcast packets
+    33259 input packets  46361986 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    132199 unicast packets  2488772 multicast packets  30798240 broadcast packets
+    33419211 output packets  3042814365 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth3/3
+show interface Eth3/3
+Ethernet3/3 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c4a0.397a (bia 0081.c4a0.397a)
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 2week(s) 2day(s)
+  Last clearing of "show interface" counters never
+  29 interface resets
+  30 seconds input rate 0 bits/sec, 0 packets/sec
+  30 seconds output rate 80 bits/sec, 0 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 0 bps, 0 pps; output rate 112 bps, 0 pps
+  RX
+    65115 unicast packets  59 multicast packets  702 broadcast packets
+    65876 input packets  70002668 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    10 Rx pause
+  TX
+    484262 unicast packets  20749571 multicast packets  71701854 broadcast packets
+    92935687 output packets  9585798972 bytes
+    15909 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth3/5
+show interface Eth3/5
+Ethernet3/5 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c4a0.397c (bia 0081.c4a0.397c)
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is trunk
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 3week(s) 6day(s)
+  Last clearing of "show interface" counters never
+  42 interface resets
+  30 seconds input rate 504 bits/sec, 0 packets/sec
+  30 seconds output rate 16448 bits/sec, 22 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 480 bps, 0 pps; output rate 15.45 Kbps, 18 pps
+  RX
+    5122383807 unicast packets  109 multicast packets  1754865 broadcast packets
+    5124138781 input packets  6955905230630 bytes
+    1366382190 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    1897628309 unicast packets  102403074 multicast packets  261703733 broadcast packets
+    2261735116 output packets  1516877510865 bytes
+    895570671 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  434167 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth3/6
+show interface Eth3/6
+Ethernet3/6 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c4a0.397d (bia 0081.c4a0.397d)
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is trunk
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 3week(s) 6day(s)
+  Last clearing of "show interface" counters never
+  51 interface resets
+  30 seconds input rate 848 bits/sec, 0 packets/sec
+  30 seconds output rate 16960 bits/sec, 21 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 129.47 Kbps, 15 pps; output rate 19.35 Kbps, 21 pps
+  RX
+    78244324 unicast packets  20 multicast packets  178571 broadcast packets
+    78422915 input packets  107611771733 bytes
+    68037674 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    27311350 unicast packets  102403879 multicast packets  262126586 broadcast packets
+    391841815 output packets  37821913361 bytes
+    894077 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  471821 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth3/7
+show interface Eth3/7
+Ethernet3/7 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c4a0.397e (bia 0081.c4a0.397e)
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 2/255, rxload 8/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 1week(s) 0day(s)
+  Last clearing of "show interface" counters never
+  87 interface resets
+  30 seconds input rate 32254712 bits/sec, 4679 packets/sec
+  30 seconds output rate 10310912 bits/sec, 4211 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 34.35 Mbps, 4.80 Kpps; output rate 10.27 Mbps, 4.21 Kpps
+  RX
+    26051476223 unicast packets  11279 multicast packets  4313 broadcast packets
+    26051491815 input packets  35184400983123 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    8666930077 unicast packets  4700555 multicast packets  43708923 broadcast packets
+    8715339555 output packets  4189352914942 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  1009 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth3/11
+show interface Eth3/11
+Ethernet3/11 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c4a0.3982 (bia 0081.c4a0.3982)
+  Description: **** connected to CHEITSSTRDB01-172.16.20.30 ****
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 1d02h
+  Last clearing of "show interface" counters never
+  85 interface resets
+  30 seconds input rate 0 bits/sec, 0 packets/sec
+  30 seconds output rate 1264 bits/sec, 1 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 0 bps, 0 pps; output rate 576 bps, 1 pps
+  RX
+    909306648 unicast packets  360998 multicast packets  6715 broadcast packets
+    909674361 input packets  451610009009 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    3158770 unicast packets  1049338 multicast packets  3191400 broadcast packets
+    7399508 output packets  4997048214 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  350 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth3/12
+show interface Eth3/12
+Ethernet3/12 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c4a0.3983 (bia 0081.c4a0.3983)
+  Description: **** connected to CHEITSSTAPP01-172.16.20.29 ****
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 2week(s) 5day(s)
+  Last clearing of "show interface" counters never
+  40 interface resets
+  30 seconds input rate 1504 bits/sec, 2 packets/sec
+  30 seconds output rate 1216 bits/sec, 1 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 1.46 Kbps, 1 pps; output rate 512 bps, 1 pps
+  RX
+    58923716 unicast packets  57236 multicast packets  977451 broadcast packets
+    59958403 input packets  64012718561 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    243015440 unicast packets  1067198 multicast packets  2220766 broadcast packets
+    246303404 output packets  39758406011 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth3/15
+show interface Eth3/15
+Ethernet3/15 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c4a0.3986 (bia 0081.c4a0.3986)
+  Description: ETC_DB
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 9week(s) 3day(s)
+  Last clearing of "show interface" counters never
+  2 interface resets
+  30 seconds input rate 29840 bits/sec, 20 packets/sec
+  30 seconds output rate 41288 bits/sec, 15 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 27.38 Kbps, 15 pps; output rate 38.16 Kbps, 10 pps
+  RX
+    449343385 unicast packets  381871 multicast packets  315 broadcast packets
+    449725571 input packets  45721308159 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    560421854 unicast packets  11 multicast packets  803 broadcast packets
+    560422668 output packets  699566720904 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth3/17
+show interface Eth3/17
+Ethernet3/17 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c4a0.3988 (bia 0081.c4a0.3988)
+  Description: ** NEW LB_2 UPI PORT3**
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 4week(s) 6day(s)
+  Last clearing of "show interface" counters never
+  9 interface resets
+  30 seconds input rate 0 bits/sec, 0 packets/sec
+  30 seconds output rate 272 bits/sec, 0 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 16 bps, 0 pps; output rate 336 bps, 0 pps
+  RX
+    34123 unicast packets  197533 multicast packets  10 broadcast packets
+    231666 input packets  70870668 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    834546 unicast packets  4765991 multicast packets  892183 broadcast packets
+    6492720 output packets  679620331 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth3/18
+show interface Eth3/18
+Ethernet3/18 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c4a0.3989 (bia 0081.c4a0.3989)
+  Description: UPI_APP_05
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 9week(s) 5day(s)
+  Last clearing of "show interface" counters never
+  230 interface resets
+  30 seconds input rate 13664 bits/sec, 17 packets/sec
+  30 seconds output rate 13264 bits/sec, 16 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 12.34 Kbps, 11 pps; output rate 12.34 Kbps, 10 pps
+  RX
+    7156520008 unicast packets  509 multicast packets  46019 broadcast packets
+    7156566536 input packets  2800465671710 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    6961583670 unicast packets  4398312 multicast packets  806646 broadcast packets
+    6966788628 output packets  2593236647530 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth3/23
+show interface Eth3/23
+Ethernet3/23 is up
+admin state is up, Dedicated Interface
+  Belongs to Po2
+  Hardware: 100/1000/10000 Ethernet, address: 0078.88ee.437f (bia 0081.c4a0.398e)
+  Description: *****TO-9508-3/23-ETH********
+  MTU 1500 bytes, BW 10000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  full-duplex, 10 Gb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 4week(s) 3day(s)
+  Last clearing of "show interface" counters 36w4d
+  421 interface resets
+  30 seconds input rate 0 bits/sec, 0 packets/sec
+  30 seconds output rate 0 bits/sec, 0 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 0 bps, 0 pps; output rate 0 bps, 0 pps
+  RX
+    5487 unicast packets  253909 multicast packets  0 broadcast packets
+    259396 input packets  75318425 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    5451 unicast packets  253943 multicast packets  0 broadcast packets
+    259394 output packets  75328464 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth3/24
+show interface Eth3/24
+Ethernet3/24 is up
+admin state is up, Dedicated Interface
+  Belongs to Po1
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c4a0.398f (bia 0081.c4a0.398f)
+  Description: ****TO-9508-3/24-ETH*****
+  MTU 9216 bytes, BW 10000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is trunk
+  full-duplex, 10 Gb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 42week(s) 4day(s)
+  Last clearing of "show interface" counters never
+  1 interface resets
+  30 seconds input rate 43869000 bits/sec, 12044 packets/sec
+  30 seconds output rate 22063368 bits/sec, 3909 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 180.26 Mbps, 30.37 Kpps; output rate 21.44 Mbps, 3.77 Kpps
+  RX
+    482744361081 unicast packets  935490852 multicast packets  425802623 broadcast packets
+    484105654556 input packets  454599116872743 bytes
+    4147287804 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    108663682673 unicast packets  645612299 multicast packets  201816233 broadcast packets
+    109511111205 output packets  90398293318786 bytes
+    3832095735 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  14 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth3/28
+show interface Eth3/28
+Ethernet3/28 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c4a0.3993 (bia 0081.c4a0.3993)
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 2week(s) 2day(s)
+  Last clearing of "show interface" counters never
+  21 interface resets
+  30 seconds input rate 0 bits/sec, 0 packets/sec
+  30 seconds output rate 3968 bits/sec, 1 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 0 bps, 0 pps; output rate 2.62 Kbps, 2 pps
+  RX
+    304345 unicast packets  31 multicast packets  526 broadcast packets
+    304902 input packets  135482787 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    9 Rx pause
+  TX
+    979000 unicast packets  171370 multicast packets  39590281 broadcast packets
+    40740651 output packets  7156335704 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth3/29
+show interface Eth3/29
+Ethernet3/29 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c4a0.3994 (bia 0081.c4a0.3994)
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 3week(s) 6day(s)
+  Last clearing of "show interface" counters never
+  62 interface resets
+  30 seconds input rate 0 bits/sec, 0 packets/sec
+  30 seconds output rate 3632 bits/sec, 1 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 0 bps, 0 pps; output rate 2.46 Kbps, 2 pps
+  RX
+    570037 unicast packets  3342 multicast packets  2333 broadcast packets
+    575712 input packets  234367544 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    15 Rx pause
+  TX
+    1539644 unicast packets  168197 multicast packets  37384534 broadcast packets
+    39092375 output packets  7431090615 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth3/43
+show interface Eth3/43
+Ethernet3/43 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c4a0.39a2 (bia 0081.c4a0.39a2)
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is trunk
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 3week(s) 6day(s)
+  Last clearing of "show interface" counters never
+  44 interface resets
+  30 seconds input rate 0 bits/sec, 0 packets/sec
+  30 seconds output rate 16072 bits/sec, 21 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 0 bps, 0 pps; output rate 15.58 Kbps, 18 pps
+  RX
+    56439 unicast packets  12 multicast packets  199 broadcast packets
+    56650 input packets  66280139 bytes
+    20156 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    9659977 unicast packets  102822848 multicast packets  262974604 broadcast packets
+    375457429 output packets  34384497881 bytes
+    231853 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  419115 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth3/45
+show interface Eth3/45
+Ethernet3/45 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c4a0.39a4 (bia 0081.c4a0.39a4)
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is trunk
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 3week(s) 6day(s)
+  Last clearing of "show interface" counters never
+  42 interface resets
+  30 seconds input rate 0 bits/sec, 0 packets/sec
+  30 seconds output rate 16072 bits/sec, 21 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 0 bps, 0 pps; output rate 15.58 Kbps, 18 pps
+  RX
+    2264334345 unicast packets  19 multicast packets  7583015 broadcast packets
+    2271917379 input packets  1257104990555 bytes
+    295357756 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    1703461146 unicast packets  102824271 multicast packets  255395661 broadcast packets
+    2061681078 output packets  629749709450 bytes
+    137798754 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  483147 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth4/1
+show interface Eth4/1
+Ethernet4/1 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c4a0.2c1c (bia 0081.c4a0.2c1c)
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 45week(s) 3day(s)
+  Last clearing of "show interface" counters never
+  1 interface resets
+  30 seconds input rate 184 bits/sec, 0 packets/sec
+  30 seconds output rate 168 bits/sec, 0 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 256 bps, 0 pps; output rate 240 bps, 0 pps
+  RX
+    4534116 unicast packets  343856 multicast packets  4 broadcast packets
+    4877976 input packets  1998585940 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    4565213 unicast packets  396397 multicast packets  2290819 broadcast packets
+    7252429 output packets  2117820753 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth4/2
+show interface Eth4/2
+Ethernet4/2 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c4a0.2c1d (bia 0081.c4a0.2c1d)
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 45week(s) 3day(s)
+  Last clearing of "show interface" counters never
+  1 interface resets
+  30 seconds input rate 184 bits/sec, 0 packets/sec
+  30 seconds output rate 168 bits/sec, 0 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 8 bps, 0 pps; output rate 984 bps, 0 pps
+  RX
+    3992233 unicast packets  343856 multicast packets  4 broadcast packets
+    4336093 input packets  1735823515 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    4164898 unicast packets  396397 multicast packets  2290819 broadcast packets
+    6852114 output packets  2025140893 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth4/45
+show interface Eth4/45
+Ethernet4/45 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c4a0.2c48 (bia 0081.c4a0.2c48)
+  Description: ** SDWAN MGMT **
+  MTU 1500 bytes, BW 100000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 100 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 29week(s) 0day(s)
+  Last clearing of "show interface" counters never
+  2 interface resets
+  30 seconds input rate 200 bits/sec, 0 packets/sec
+  30 seconds output rate 200 bits/sec, 0 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 128 bps, 0 pps; output rate 360 bps, 0 pps
+  RX
+    4390888 unicast packets  0 multicast packets  471 broadcast packets
+    4391359 input packets  1710361944 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    4485434 unicast packets  211168 multicast packets  2059119 broadcast packets
+    6755721 output packets  1351661999 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# show interface Eth4/46
+show interface Eth4/46
+Ethernet4/46 is up
+admin state is up, Dedicated Interface
+  Hardware: 100/1000/10000 Ethernet, address: 0081.c4a0.2c49 (bia 0081.c4a0.2c49)
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, medium is broadcast
+  Port mode is access
+  full-duplex, 1000 Mb/s
+  Beacon is turned off
+  Auto-Negotiation is turned on
+  Input flow-control is off, output flow-control is off
+  Auto-mdix is turned off
+  Switchport monitor is off 
+  EtherType is 0x8100 
+  EEE (efficient-ethernet) : n/a
+  Last link flapped 33week(s) 6day(s)
+  Last clearing of "show interface" counters never
+  34 interface resets
+  30 seconds input rate 1663280 bits/sec, 151 packets/sec
+  30 seconds output rate 131280 bits/sec, 88 packets/sec
+  Load-Interval #2: 5 minute (300 seconds)
+    input rate 1.36 Mbps, 69 pps; output rate 109.28 Kbps, 37 pps
+  RX
+    2736081239 unicast packets  35 multicast packets  3726 broadcast packets
+    2736085000 input packets  3672009222717 bytes
+    0 jumbo packets  0 storm suppression packets
+    0 runts  0 giants  0 CRC  0 no buffer
+    0 input error  0 short frame  0 overrun   0 underrun  0 ignored
+    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop
+    0 input with dribble  0 input discard
+    0 Rx pause
+  TX
+    1469592851 unicast packets  369732 multicast packets  2286267 broadcast packets
+    1472248850 output packets  281155653421 bytes
+    0 jumbo packets
+    0 output error  0 collision  0 deferred  0 late collision
+    0 lost carrier  0 no carrier  0 babble  0 output discard
+    0 Tx pause
+
+NFSDR_NEXUS_9508_2_CRSW_CHN# 
