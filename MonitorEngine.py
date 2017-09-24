@@ -261,7 +261,8 @@ class main_model():
         try:
             IP = host_objects.get("IP")
             try:
-                mongoc = pymongo.MongoClient('localhost', 27017)
+                # Unix Socket for quick process
+                mongoc = pymongo.MongoClient('/tmp/mongodb-27017.sock')
                 mdb = mongoc['LIVE']
                 mcollection = mdb['SESSION']
                 mcollection.update({"_id":1,"STATUS.IP":IP},{ "$set": { "STATUS.$.TYPE" : "Running" } })
@@ -418,6 +419,7 @@ class main_model():
     
     def main_run(self,filepath,jobname,apprentice):
         # connect to LIVE database
+        logger.info("Starting Job ===============> "+str(jobname))
         self.mongoc = pymongo.MongoClient('localhost', 27017)
         self.mdb = self.mongoc['LIVE']
         logger.info("Connected to 'LIVE' database...")
@@ -425,8 +427,6 @@ class main_model():
         # Insitate Score Me object
         scor = score_gen()
         self.mongo_search_score = scor.mongo_search_score
-
-        logger.info("Starting Job ===============> "+str(jobname))
         self.start_run(filepath,jobname,apprentice)
 
 
