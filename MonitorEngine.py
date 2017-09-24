@@ -138,20 +138,6 @@ class main_model():
                     logger.exception("login")
                     return "TIMEOUT"
             return return_typ
-
-    def clock(self,ses,a):
-        try:
-            #print("Clock function")
-            session = ses[0]
-            exp = ses[1]
-            session.sendline("show clock")
-            session.expect(["show clock",pxssh.TIMEOUT],timeout=5)
-            #session.before
-            session.expect([exp,pxssh.TIMEOUT],timeout=5)
-            v = session.before
-            return v.strip()
-        except Exception as e:
-            pass;
         
     def get_ssh_ses(self,IP,Authentication,timeout,dir_path):
         try:
@@ -178,88 +164,98 @@ class main_model():
                 return ses
         return ses
 
-    def device_check(self,self_chk,Monitoring_obj):
+    def self_check(self,IP,Hostname,dir_path,element):
         try:
-            # Check Single devices based on JSON Object
-            if Monitoring_obj == None :
-                # Objects Not Found
+            result = {}
+            einput = element.get("input")
+            username = einput.get("username")
+            password = einput.get("password")
+            timeout = einput.get("timeout")
+            etype = einput.get("type")
+            # Get SSH session
+            auth = {"username":username,"password":password}
+            sess = self.get_ssh_ses(IP,[auth],timeout,dir_path)
+            print type(sess)
+            if type(sess) == tuple :
+                # SSH login success
+                result.update({"status":"reachable"})
+                if etype == "cisco":
+                    sess[0].sendline("terminal length 0")
+            else:
+                # SSH login failed
+                logger.info("Failed >"+str(Hostname)+" "+str(IP)+" Reasion>"+str(sess))
+                if sess == "LOGINFAIL":
+                    result.update({"status":"Authentication Failed"})
+                else:
+                    result.update({"status":"timeout"}) 
+            #Get snmp session
+            return result,sess
+        except Exception as e:
+            logger.exception("self_check")
+
+    def device_check(self,host_objects,dir_path):
+        try:
+
+            Monitoring_obj = host_objects.get("Objects")
+            ID = host_objects.get("ID")
+            Hostname = host_objects.get("Hostname")
+            IP = host_objects.get("IP")
+
+            if Monitoring_obj == None:
+                logger.error("device_check None Objects")
                 return None
-            logger.debug("single host object")
-            logger.debug(str(Monitoring_obj))
-            ses = self_chk.get("ssh_session")
+
+            continue_next = False
+            Monitoring_obj = sorted(Monitoring_obj, key=lambda k: k['id'])
             for element in Monitoring_obj:
-                #Object found ; reading elements
-                # skip self_check
-                if element.get("id") != 0:
-                    # sleeping between commands
-                    time.sleep(0.2)
-                    et = element.get("function")
-                    out = globals()[et](ses,element)
-                    #print(out_)
-                    element.update({"out":out})
-            
+                    myid = element.get("id")
+                    # Self check
+                    if myid == 0:
+                        out_session = self.self_check(IP,Hostname,dir_path,element)
+                        if out_session != None:
+                            out = out_session[0]
+                            session = out_session[1]
+                            # Removing username and password
+                            element.update({"input":""})
+                            element.update({"out":out})
+                            if out.get("status") == "reachable":
+                                continue_next = True
+                            else:
+                                # Only return self element output (device down)
+                                return [element]
+                        else:
+                            logger.error("device_check self_check failed")
+                    elif continue_next == True:
+                        et = element.get("function")
+                        out = globals()[et](session,element)
+                        element.update({"out":out})
+
             return Monitoring_obj
         except Exception as e:
             logger.exception("device_check")
 
-    def single_host(self,row2,dir_path):
-        #Login and run
-        ID = Hostname = IP = Authentication = Monitoring_obj = timeout = None
-        ID = row2.get("ID")
-        Hostname = row2.get("Hostname")
-        IP = row2.get("IP")
-        #Model = row2.get("Model")
-        Monitoring_obj = row2.get("Objects")
-        #Mode = row2.get("Mode")
-        timeout = row2.get("timeout")
+    def single_host(self,host_objects,dir_path):
 
         try:
-            mongoc = pymongo.MongoClient('localhost', 27017)
-            mdb = mongoc['LIVE']
-            mcollection = mdb['SESSION']
-            mcollection.update({"_id":1,"STATUS.IP":IP},{ "$set": { "STATUS.$.TYPE" : "Running" } })
-            mongoc.close()
+            IP = host_objects.get("IP")
+            try:
+                mongoc = pymongo.MongoClient('localhost', 27017)
+                mdb = mongoc['LIVE']
+                mcollection = mdb['SESSION']
+                mcollection.update({"_id":1,"STATUS.IP":IP},{ "$set": { "STATUS.$.TYPE" : "Running" } })
+                mongoc.close()
+            except Exception as e:
+                logger.exception("single_host DB")
+
+            jout = self.device_check(host_objects,dir_path)
+            if type(jout) == None:
+                logger.error("single_host return non list objects")
+                jout = []
+            host_objects.update({"Objects":jout})
+            return host_objects
+        
         except Exception as e:
             logger.exception("single_host")
-
-        sts = {}
-        for data in Monitoring_obj:
-                # Do self check first then do next .
-                if data.get("id") == 0:
-                    udata = data.get("input")
-                    uname = udata.get("username")
-                    passwd = udata.get("password")
-                    timeout = udata.get("timeout")
-                    auth = {"username":uname,"password":passwd}
-                    sess = self.get_ssh_ses(IP,[auth],timeout,dir_path)
-                    data.update({"input":{}})
-                    if sess == None or type(sess) == str:
-                        logger.info("Failed >"+str(Hostname)+" "+str(IP))
-                        reach_stat = {"status":"down"}
-                    else:
-                        try:
-                            if udata.get("type") == "cisco":
-                                sess[0].sendline("terminal length 0")
-                        except Exception as e:
-                            logger.exception("changing terminal length")
-                        reach_stat = {"status":"reachable"}
-                        data.update({"out":reach_stat})
-                        # Removing "input" for self ( prevent password , username in output)
-                        sts.update({"ssh_session":sess})
-
-                    data.update({"input":{}})
-                    sts.update(reach_stat)
-                    break;
-
-        if sts.get("status") == "reachable":
-            jout = self.device_check(sts, Monitoring_obj)
-        else:
-            def_rnk = [{"regex":{"status":"down"},"score":0},{"regex":{"status":"reachable"},"score":100}]
-            jout = [{"id":0,"function" : "self_check","rank":def_rnk,"score" : 0,"out":{"status":"down"}}]
-
-        # Update added 'out' in Objects Key
-        row2.update({"Objects":jout})
-        return row2
 
     def start_run(self,input_file_path,jobname,apprentice = 5):
         try:
