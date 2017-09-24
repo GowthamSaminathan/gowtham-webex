@@ -53,11 +53,13 @@ class score_gen():
                     for mon_obj in mon_objects:
                         obj_index = obj_index + 1
                         ranks = mon_obj.get("rank")
+                        # Converting Test to JSON
+                        ranks = json.loads(ranks)
                         elmt_id = mon_obj.get("id")
                         last_score = 0
                         for rank in ranks:
                             #print rank
-                            custom_query = rank.get("regex")
+                            custom_query = rank.get("query")
                             score = rank.get("score")
                             dafault_query = {"INID":INID,"SESSION":session,"IP":IP}
                             #print custom_query
@@ -291,7 +293,7 @@ class main_model():
                 pass;
             else:
                 logger.error("STOPPED")
-                return
+                return None
             session = 0
             for y in range(1):
                 tim = time.strftime('%Y-%m-%d %H:%M:%S')
@@ -366,7 +368,7 @@ class main_model():
                         else:
                             elmt_id = elmt_id + 1
                             elmt_id2 = elmt_id
-                        a = {"id":elmt_id2, "function":row["function"],"input": json.loads(row["input"]),"rank": json.loads(row["rank"])}
+                        a = {"id":elmt_id2, "function":row["function"],"input": json.loads(row["input"]),"rank":row["rank"]}
                         local_list.append(a)
                         xx = row
                 full_list.append({"Hostname": str(xx["Hostname"]),"IP":str(xx["IP"]),"Authentication":json.loads(authentication),"Objects":local_list})
