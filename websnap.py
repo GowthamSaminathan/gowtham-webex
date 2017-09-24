@@ -233,18 +233,11 @@ def get_job():
 					status = {"status":"Running","jobname":main_thread.getName()}
 				else:
 					status = {"status":"Not Running","jobname":main_thread.getName()}
-			elif jn == "kill":
-				if main_thread.isAlive() == True:
-					jn = request.form.get('jobname')
-					job_name = main_thread.getName()
-					if jn == job_name:
-						pass;
-						# Killing is not possible in threading module
-						#main_thread.kill()
-					else:
-						status = {"status":"No Job Found","jobname":jn}
-				else:
-					status = {"status":"Not Running","jobname":main_thread.getName()}
+			elif typ == "skip":
+				mdb = mongoc.db
+				mcollection = mdb['SESSION']
+				mcollection.update({"_id":1},{ "$set": { "SKIP" : "yes"} })
+				status = {"status": "Skipping" }
 			return jsonify(status)
 		except Exception as e:
 			return jsonify({"status":"error"})
@@ -360,6 +353,7 @@ def rawdownload():
     if request.method == 'GET':
     	try:
     		rawfile = request.args.get('download')
+    		print rawfile
     		if rawfile != None:
     			rf = os.path.join(os.getcwd(),"divlog")
     			rawfile = rawfile.replace(":","-")
@@ -370,6 +364,7 @@ def rawdownload():
     				shutil.make_archive(fp,"zip",fp)
     			return send_file(fp+".zip", as_attachment=True)
         except Exception as e:
+        	print e
         	return "failed"
 
 

@@ -4510,3 +4510,436 @@ NameError: global name 'ses' is not defined
 2017-09-23 06:32:59,579 > INFO > Scoring Completed
 2017-09-23 06:33:38,321 > INFO > Starting MonitoringEngine
 2017-09-23 06:33:38,793 > INFO > Starting MonitoringEngine
+2017-09-23 22:33:27,438 > INFO > Starting MonitoringEngine
+2017-09-23 22:34:00,650 > INFO > Starting MonitoringEngine
+2017-09-24 00:31:34,494 > INFO > Starting MonitoringEngine
+2017-09-24 00:31:38,564 > INFO > Starting MonitoringEngine
+2017-09-24 00:32:03,064 > INFO > Connected to 'LIVE' database...
+2017-09-24 00:32:03,064 > INFO > Scoring Object Insiated...
+2017-09-24 00:32:03,064 > INFO > Starting Job ===============> KOPL1-24-September-00:32:03
+2017-09-24 00:32:04,015 > INFO > SESSION UPDATED , INID = 119
+2017-09-24 00:32:04,016 > INFO > STARTING SESSION >1
+2017-09-24 00:32:04,030 > INFO > Apprentice>5
+2017-09-24 00:32:04,409 > INFO > Trying to Login:10.1.1.3
+2017-09-24 00:32:05,106 > INFO > Trying to Login:10.1.1.2
+2017-09-24 00:32:21,890 > INFO > Not able to reach device:10.1.1.3
+2017-09-24 00:32:22,142 > INFO > Not able to reach device:10.1.1.2
+2017-09-24 00:32:22,294 > INFO > Failed >CHN_3 10.1.1.3 Reasion>TIMEOUT
+2017-09-24 00:32:22,560 > INFO > Failed >CHN_1 10.1.1.2 Reasion>TIMEOUT
+2017-09-24 00:32:22,566 > INFO > Scoring Started
+2017-09-24 00:32:22,566 > DEBUG > Mongo search score for:119 1
+2017-09-24 00:32:22,573 > DEBUG > mongo_search_score > Starting score for > 10.1.1.3
+2017-09-24 00:32:22,573 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 119, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-24 00:32:22,596 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 00:32:22,597 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 119, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-24 00:32:22,600 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 00:32:22,600 > DEBUG > mongo_search_score > Starting score for > 10.1.1.2
+2017-09-24 00:32:22,601 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 119, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-24 00:32:22,602 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 00:32:22,602 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 119, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-24 00:32:22,604 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 00:32:22,604 > INFO > Scoring Completed
+2017-09-24 00:33:28,637 > INFO > Starting MonitoringEngine
+2017-09-24 00:33:33,813 > INFO > Starting MonitoringEngine
+2017-09-24 00:33:37,303 > INFO > Starting MonitoringEngine
+2017-09-24 01:30:38,017 > INFO > Starting MonitoringEngine
+2017-09-24 01:31:22,595 > INFO > Connected to 'LIVE' database...
+2017-09-24 01:31:22,596 > INFO > Scoring Object Insiated...
+2017-09-24 01:31:22,596 > INFO > Starting Job ===============> TRJOB1-24-September-01:31:22
+2017-09-24 01:31:22,713 > INFO > SESSION UPDATED , INID = 120
+2017-09-24 01:31:22,715 > INFO > STARTING SESSION >1
+2017-09-24 01:31:22,733 > INFO > Apprentice>5
+2017-09-24 01:31:22,831 > ERROR > device_check skip check failed
+Traceback (most recent call last):
+  File "/home/gow/network_snap/MonitorEngine.py", line 214, in device_check
+    mcollection.update({"_id":1,"STATUS.IP":IP},{ "$set": { "STATUS.$.TYPE" : "Running: "+str(myid)+"/"+total_obj } })
+NameError: global name 'mcollection' is not defined
+2017-09-24 01:31:22,832 > ERROR > device_check skip check failed
+Traceback (most recent call last):
+  File "/home/gow/network_snap/MonitorEngine.py", line 214, in device_check
+    mcollection.update({"_id":1,"STATUS.IP":IP},{ "$set": { "STATUS.$.TYPE" : "Running: "+str(myid)+"/"+total_obj } })
+NameError: global name 'mcollection' is not defined
+2017-09-24 01:31:22,838 > INFO > Trying to Login:10.1.1.3
+2017-09-24 01:31:22,839 > INFO > Trying to Login:10.1.1.2
+2017-09-24 01:31:41,651 > INFO > Not able to reach device:10.1.1.3
+2017-09-24 01:31:41,666 > INFO > Not able to reach device:10.1.1.2
+2017-09-24 01:31:42,055 > INFO > Failed >CHN_3 10.1.1.3 Reasion>TIMEOUT
+2017-09-24 01:31:42,070 > INFO > Failed >CHN_1 10.1.1.2 Reasion>TIMEOUT
+2017-09-24 01:31:42,104 > INFO > Scoring Started
+2017-09-24 01:31:42,104 > DEBUG > Mongo search score for:120 1
+2017-09-24 01:31:42,106 > DEBUG > mongo_search_score > Starting score for > 10.1.1.3
+2017-09-24 01:31:42,106 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 120, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-24 01:31:42,108 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 01:31:42,108 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 120, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-24 01:31:42,109 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 01:31:42,109 > DEBUG > mongo_search_score > Starting score for > 10.1.1.2
+2017-09-24 01:31:42,110 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 120, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-24 01:31:42,111 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 01:31:42,111 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 120, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-24 01:31:42,113 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 01:31:42,113 > INFO > Scoring Completed
+2017-09-24 01:33:20,827 > INFO > Starting MonitoringEngine
+2017-09-24 01:33:33,007 > INFO > Connected to 'LIVE' database...
+2017-09-24 01:33:33,007 > INFO > Scoring Object Insiated...
+2017-09-24 01:33:33,007 > INFO > Starting Job ===============> TEST6-24-September-01:33:32
+2017-09-24 01:33:33,065 > INFO > SESSION UPDATED , INID = 121
+2017-09-24 01:33:33,066 > INFO > STARTING SESSION >1
+2017-09-24 01:33:33,070 > INFO > Apprentice>5
+2017-09-24 01:33:33,136 > INFO > Trying to Login:10.1.1.3
+2017-09-24 01:33:33,168 > INFO > Trying to Login:10.1.1.2
+2017-09-24 01:33:50,001 > INFO > Not able to reach device:10.1.1.3
+2017-09-24 01:33:50,006 > INFO > Not able to reach device:10.1.1.2
+2017-09-24 01:33:50,405 > INFO > Failed >CHN_3 10.1.1.3 Reasion>TIMEOUT
+2017-09-24 01:33:50,461 > INFO > Failed >CHN_1 10.1.1.2 Reasion>TIMEOUT
+2017-09-24 01:33:50,465 > INFO > Scoring Started
+2017-09-24 01:33:50,465 > DEBUG > Mongo search score for:121 1
+2017-09-24 01:33:50,467 > DEBUG > mongo_search_score > Starting score for > 10.1.1.3
+2017-09-24 01:33:50,467 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 121, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-24 01:33:50,469 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 01:33:50,469 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 121, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-24 01:33:50,470 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 01:33:50,470 > DEBUG > mongo_search_score > Starting score for > 10.1.1.2
+2017-09-24 01:33:50,471 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 121, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-24 01:33:50,472 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 01:33:50,472 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 121, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-24 01:33:50,474 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 01:33:50,474 > INFO > Scoring Completed
+2017-09-24 01:45:14,396 > INFO > Starting MonitoringEngine
+2017-09-24 01:45:44,536 > INFO > Starting MonitoringEngine
+2017-09-24 02:11:10,085 > INFO > Starting MonitoringEngine
+2017-09-24 02:11:59,160 > INFO > Connected to 'LIVE' database...
+2017-09-24 02:11:59,187 > INFO > Scoring Object Insiated...
+2017-09-24 02:11:59,187 > INFO > Starting Job ===============> JOBB4-24-September-02:11:59
+2017-09-24 02:11:59,283 > INFO > SESSION UPDATED , INID = 122
+2017-09-24 02:11:59,283 > INFO > STARTING SESSION >1
+2017-09-24 02:11:59,286 > INFO > Apprentice>5
+2017-09-24 02:11:59,326 > INFO > Trying to Login:10.1.1.3
+2017-09-24 02:11:59,327 > INFO > Trying to Login:10.1.1.2
+2017-09-24 02:12:21,861 > INFO > Not able to reach device:10.1.1.2
+2017-09-24 02:12:21,863 > INFO > Not able to reach device:10.1.1.3
+2017-09-24 02:12:22,267 > INFO > Failed >CHN_1 10.1.1.2 Reasion>TIMEOUT
+2017-09-24 02:12:22,366 > INFO > Failed >CHN_3 10.1.1.3 Reasion>TIMEOUT
+2017-09-24 02:12:23,894 > INFO > Scoring Started
+2017-09-24 02:12:23,895 > DEBUG > Mongo search score for:122 1
+2017-09-24 02:12:23,898 > DEBUG > mongo_search_score > Starting score for > 10.1.1.2
+2017-09-24 02:12:23,899 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 122, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-24 02:12:23,900 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 02:12:23,900 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 122, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-24 02:12:23,902 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 02:12:23,902 > DEBUG > mongo_search_score > Starting score for > 10.1.1.3
+2017-09-24 02:12:23,902 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 122, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-24 02:12:23,904 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 02:12:23,904 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 122, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-24 02:12:23,905 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 02:12:23,906 > INFO > Scoring Completed
+2017-09-24 02:52:38,025 > INFO > Starting MonitoringEngine
+2017-09-24 02:57:10,487 > INFO > Connected to 'LIVE' database...
+2017-09-24 02:57:10,487 > INFO > Scoring Object Insiated...
+2017-09-24 02:57:10,488 > INFO > Starting Job ===============> JOBBB6789-24-September-02:57:10
+2017-09-24 02:57:10,627 > INFO > SESSION UPDATED , INID = 123
+2017-09-24 02:57:10,627 > INFO > STARTING SESSION >1
+2017-09-24 02:57:10,657 > INFO > Apprentice>1
+2017-09-24 02:57:10,882 > INFO > Trying to Login:10.1.1.3
+2017-09-24 02:57:32,253 > INFO > Not able to reach device:10.1.1.3
+2017-09-24 02:57:32,657 > INFO > Failed >CHN_3 10.1.1.3 Reasion>TIMEOUT
+2017-09-24 02:57:32,699 > ERROR > SKIPPING RECEIVED FROM DB
+2017-09-24 02:57:32,704 > INFO > Scoring Started
+2017-09-24 02:57:32,704 > DEBUG > Mongo search score for:123 1
+2017-09-24 02:57:32,705 > DEBUG > mongo_search_score > Starting score for > 10.1.1.3
+2017-09-24 02:57:32,706 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 123, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-24 02:57:32,707 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 02:57:32,707 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 123, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-24 02:57:32,709 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 02:57:32,710 > DEBUG > mongo_search_score > Starting score for > 10.1.1.2
+2017-09-24 02:57:32,710 > ERROR > mongo_search_score
+Traceback (most recent call last):
+  File "/home/gow/network_snap/MonitorEngine.py", line 53, in mongo_search_score
+    for mon_obj in mon_objects:
+TypeError: 'NoneType' object is not iterable
+2017-09-24 02:57:32,711 > INFO > Scoring Completed
+2017-09-24 03:03:04,212 > INFO > Starting MonitoringEngine
+2017-09-24 03:03:38,934 > INFO > Connected to 'LIVE' database...
+2017-09-24 03:03:38,935 > INFO > Scoring Object Insiated...
+2017-09-24 03:03:38,935 > INFO > Starting Job ===============> MAMA1-24-September-03:03:38
+2017-09-24 03:03:38,994 > INFO > SESSION UPDATED , INID = 124
+2017-09-24 03:03:38,998 > INFO > STARTING SESSION >1
+2017-09-24 03:03:39,002 > INFO > Apprentice>1
+2017-09-24 03:03:39,080 > INFO > Trying to Login:10.1.1.3
+2017-09-24 03:03:55,897 > INFO > Not able to reach device:10.1.1.3
+2017-09-24 03:03:56,301 > INFO > Failed >CHN_3 10.1.1.3 Reasion>TIMEOUT
+2017-09-24 03:03:56,365 > ERROR > SKIPPING RECEIVED FROM DB
+2017-09-24 03:03:56,371 > INFO > Scoring Started
+2017-09-24 03:03:56,371 > DEBUG > Mongo search score for:124 1
+2017-09-24 03:03:56,373 > DEBUG > mongo_search_score > Starting score for > 10.1.1.3
+2017-09-24 03:03:56,373 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 124, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-24 03:03:56,374 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 03:03:56,375 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 124, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-24 03:03:56,376 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 03:03:56,376 > DEBUG > mongo_search_score > Starting score for > 10.1.1.2
+2017-09-24 03:03:56,376 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 124, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-24 03:03:56,378 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 03:03:56,378 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 124, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-24 03:03:56,379 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 03:03:56,380 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 124, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 1}}}
+2017-09-24 03:03:56,381 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 03:03:56,381 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 124, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 1}}}
+2017-09-24 03:03:56,383 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 03:03:56,383 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 124, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 2}}}
+2017-09-24 03:03:56,384 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 03:03:56,385 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 124, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 2}}}
+2017-09-24 03:03:56,386 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 03:03:56,386 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 124, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 3}}}
+2017-09-24 03:03:56,388 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 03:03:56,388 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 124, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 3}}}
+2017-09-24 03:03:56,390 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 03:03:56,390 > INFO > Scoring Completed
+2017-09-24 03:07:00,685 > INFO > Connected to 'LIVE' database...
+2017-09-24 03:07:00,686 > INFO > Scoring Object Insiated...
+2017-09-24 03:07:00,686 > INFO > Starting Job ===============> MOM2-24-September-03:07:00
+2017-09-24 03:07:00,792 > INFO > SESSION UPDATED , INID = 125
+2017-09-24 03:07:00,795 > INFO > STARTING SESSION >1
+2017-09-24 03:07:00,797 > INFO > Apprentice>1
+2017-09-24 03:07:00,846 > INFO > Trying to Login:10.1.1.3
+2017-09-24 03:07:17,701 > INFO > Not able to reach device:10.1.1.3
+2017-09-24 03:07:18,105 > INFO > Failed >CHN_3 10.1.1.3 Reasion>TIMEOUT
+2017-09-24 03:07:18,229 > INFO > Trying to Login:10.1.1.2
+2017-09-24 03:07:35,644 > INFO > Not able to reach device:10.1.1.2
+2017-09-24 03:07:36,048 > INFO > Failed >CHN_1 10.1.1.2 Reasion>TIMEOUT
+2017-09-24 03:07:36,119 > INFO > Scoring Started
+2017-09-24 03:07:36,119 > DEBUG > Mongo search score for:125 1
+2017-09-24 03:07:36,121 > DEBUG > mongo_search_score > Starting score for > 10.1.1.3
+2017-09-24 03:07:36,121 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 125, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-24 03:07:36,123 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 03:07:36,123 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 125, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-24 03:07:36,124 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 03:07:36,124 > DEBUG > mongo_search_score > Starting score for > 10.1.1.2
+2017-09-24 03:07:36,125 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 125, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-24 03:07:36,126 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 03:07:36,126 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 125, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-24 03:07:36,128 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 03:07:36,128 > INFO > Scoring Completed
+2017-09-24 03:18:36,468 > INFO > Connected to 'LIVE' database...
+2017-09-24 03:18:36,468 > INFO > Scoring Object Insiated...
+2017-09-24 03:18:36,468 > INFO > Starting Job ===============> MOMTEST1-24-September-03:18:36
+2017-09-24 03:18:36,566 > INFO > SESSION UPDATED , INID = 126
+2017-09-24 03:18:36,567 > INFO > STARTING SESSION >1
+2017-09-24 03:18:36,569 > INFO > Apprentice>5
+2017-09-24 03:18:36,628 > INFO > Trying to Login:10.1.1.3
+2017-09-24 03:18:37,045 > INFO > Trying to Login:10.1.1.2
+2017-09-24 03:18:38,759 > INFO > Login Success :10.1.1.3:R2#
+2017-09-24 03:18:38,970 > INFO > Login Success :10.1.1.2:R1#
+2017-09-24 03:18:50,408 > INFO > Scoring Started
+2017-09-24 03:18:50,408 > DEBUG > Mongo search score for:126 1
+2017-09-24 03:18:50,412 > DEBUG > mongo_search_score > Starting score for > 10.1.1.2
+2017-09-24 03:18:50,412 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 126, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-24 03:18:50,414 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 03:18:50,414 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 126, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-24 03:18:50,416 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-24 03:18:50,416 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.2', 'INID': 126, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}, {'$set': {'Objects.$.score': 100}})
+2017-09-24 03:18:50,418 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 126, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 1}}}
+2017-09-24 03:18:50,419 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 03:18:50,420 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 126, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 1}}}
+2017-09-24 03:18:50,421 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-24 03:18:50,422 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.2', 'INID': 126, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 1}}}, {'$set': {'Objects.$.score': 100}})
+2017-09-24 03:18:50,423 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 126, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 2}}}
+2017-09-24 03:18:50,426 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-24 03:18:50,426 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.2', 'INID': 126, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 2}}}, {'$set': {'Objects.$.score': 0}})
+2017-09-24 03:18:50,428 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 126, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 2}}}
+2017-09-24 03:18:50,429 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 03:18:50,429 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 126, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 3}}}
+2017-09-24 03:18:50,431 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 03:18:50,431 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 126, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 3}}}
+2017-09-24 03:18:50,433 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-24 03:18:50,433 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.2', 'INID': 126, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 3}}}, {'$set': {'Objects.$.score': 100}})
+2017-09-24 03:18:50,435 > DEBUG > mongo_search_score > Starting score for > 10.1.1.3
+2017-09-24 03:18:50,435 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 126, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-24 03:18:50,437 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 03:18:50,437 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 126, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-24 03:18:50,439 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-24 03:18:50,439 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.3', 'INID': 126, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}, {'$set': {'Objects.$.score': 100}})
+2017-09-24 03:18:50,440 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 126, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 1}}}
+2017-09-24 03:18:50,443 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 03:18:50,443 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 126, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 1}}}
+2017-09-24 03:18:50,445 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-24 03:18:50,445 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.3', 'INID': 126, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 1}}}, {'$set': {'Objects.$.score': 100}})
+2017-09-24 03:18:50,451 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 126, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 2}}}
+2017-09-24 03:18:50,455 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-24 03:18:50,455 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.3', 'INID': 126, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 2}}}, {'$set': {'Objects.$.score': 0}})
+2017-09-24 03:18:50,485 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 126, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 2}}}
+2017-09-24 03:18:50,486 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 03:18:50,487 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 126, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 3}}}
+2017-09-24 03:18:50,488 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 03:18:50,488 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 126, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 3}}}
+2017-09-24 03:18:50,491 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-24 03:18:50,491 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.3', 'INID': 126, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 3}}}, {'$set': {'Objects.$.score': 100}})
+2017-09-24 03:18:50,543 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 126, 'SESSION': 1, 'Objects': {'$elemMatch': {'id': 4, u'out.result': u'failed'}}}
+2017-09-24 03:18:50,545 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 03:18:50,545 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 126, 'SESSION': 1, 'Objects': {'$elemMatch': {'id': 4, u'out.result': u'success'}}}
+2017-09-24 03:18:50,547 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-24 03:18:50,548 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.3', 'INID': 126, 'SESSION': 1, 'Objects': {'$elemMatch': {'id': 4, u'out.result': u'success'}}}, {'$set': {'Objects.$.score': 100}})
+2017-09-24 03:18:50,551 > INFO > Scoring Completed
+2017-09-24 03:21:37,129 > INFO > Starting MonitoringEngine
+2017-09-24 03:21:52,712 > INFO > Connected to 'LIVE' database...
+2017-09-24 03:21:52,712 > INFO > Scoring Object Insiated...
+2017-09-24 03:21:52,712 > INFO > Starting Job ===============> Rtuiop12345-24-September-03:21:52
+2017-09-24 03:21:52,812 > INFO > SESSION UPDATED , INID = 127
+2017-09-24 03:21:52,813 > INFO > STARTING SESSION >1
+2017-09-24 03:21:52,830 > INFO > Apprentice>5
+2017-09-24 03:21:52,887 > INFO > Trying to Login:10.1.1.3
+2017-09-24 03:21:52,919 > INFO > Trying to Login:10.1.1.2
+2017-09-24 03:21:54,367 > INFO > Login Success :10.1.1.2:R1#
+2017-09-24 03:21:54,526 > INFO > Login Success :10.1.1.3:R2#
+2017-09-24 03:22:05,708 > INFO > Scoring Started
+2017-09-24 03:22:05,708 > DEBUG > Mongo search score for:127 1
+2017-09-24 03:22:05,710 > DEBUG > mongo_search_score > Starting score for > 10.1.1.2
+2017-09-24 03:22:05,710 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 127, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-24 03:22:05,712 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 03:22:05,712 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 127, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-24 03:22:05,714 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-24 03:22:05,714 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.2', 'INID': 127, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}, {'$set': {'Objects.$.score': 100}})
+2017-09-24 03:22:05,731 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 127, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 1}}}
+2017-09-24 03:22:05,734 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 03:22:05,735 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 127, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 1}}}
+2017-09-24 03:22:05,736 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-24 03:22:05,737 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.2', 'INID': 127, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 1}}}, {'$set': {'Objects.$.score': 100}})
+2017-09-24 03:22:05,738 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 127, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 2}}}
+2017-09-24 03:22:05,740 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-24 03:22:05,740 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.2', 'INID': 127, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 2}}}, {'$set': {'Objects.$.score': 0}})
+2017-09-24 03:22:05,742 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 127, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 2}}}
+2017-09-24 03:22:05,744 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 03:22:05,744 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 127, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 3}}}
+2017-09-24 03:22:05,746 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 03:22:05,746 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 127, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 3}}}
+2017-09-24 03:22:05,748 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-24 03:22:05,748 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.2', 'INID': 127, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 3}}}, {'$set': {'Objects.$.score': 100}})
+2017-09-24 03:22:05,751 > DEBUG > mongo_search_score > Starting score for > 10.1.1.3
+2017-09-24 03:22:05,752 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 127, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-24 03:22:05,753 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 03:22:05,753 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 127, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-24 03:22:05,755 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-24 03:22:05,755 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.3', 'INID': 127, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}, {'$set': {'Objects.$.score': 100}})
+2017-09-24 03:22:05,757 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 127, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 1}}}
+2017-09-24 03:22:05,758 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 03:22:05,759 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 127, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 1}}}
+2017-09-24 03:22:05,761 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-24 03:22:05,761 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.3', 'INID': 127, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 1}}}, {'$set': {'Objects.$.score': 100}})
+2017-09-24 03:22:05,762 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 127, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 2}}}
+2017-09-24 03:22:05,764 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-24 03:22:05,764 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.3', 'INID': 127, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 2}}}, {'$set': {'Objects.$.score': 0}})
+2017-09-24 03:22:05,766 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 127, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 2}}}
+2017-09-24 03:22:05,768 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 03:22:05,768 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 127, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 3}}}
+2017-09-24 03:22:05,770 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 03:22:05,770 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 127, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 3}}}
+2017-09-24 03:22:05,773 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-24 03:22:05,773 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.3', 'INID': 127, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 3}}}, {'$set': {'Objects.$.score': 100}})
+2017-09-24 03:22:05,775 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 127, 'SESSION': 1, 'Objects': {'$elemMatch': {'id': 4, u'out.result': u'failed'}}}
+2017-09-24 03:22:05,776 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 03:22:05,776 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 127, 'SESSION': 1, 'Objects': {'$elemMatch': {'id': 4, u'out.result': u'success'}}}
+2017-09-24 03:22:05,778 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-24 03:22:05,779 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.3', 'INID': 127, 'SESSION': 1, 'Objects': {'$elemMatch': {'id': 4, u'out.result': u'success'}}}, {'$set': {'Objects.$.score': 100}})
+2017-09-24 03:22:05,780 > INFO > Scoring Completed
+2017-09-24 04:01:22,399 > INFO > Starting MonitoringEngine
+2017-09-24 04:01:23,563 > INFO > Starting MonitoringEngine
+2017-09-24 04:03:09,349 > INFO > Starting MonitoringEngine
+2017-09-24 04:05:56,294 > INFO > Starting MonitoringEngine
+2017-09-24 04:08:53,347 > INFO > Starting MonitoringEngine
+2017-09-24 04:09:50,643 > INFO > Starting MonitoringEngine
+2017-09-24 05:35:10,298 > INFO > Connected to 'LIVE' database...
+2017-09-24 05:35:10,299 > INFO > Scoring Object Insiated...
+2017-09-24 05:35:10,299 > INFO > Starting Job ===============> MOKLP234-24-September-05:35:10
+2017-09-24 05:35:10,610 > INFO > SESSION UPDATED , INID = 128
+2017-09-24 05:35:10,611 > INFO > STARTING SESSION >1
+2017-09-24 05:35:10,655 > INFO > Apprentice>5
+2017-09-24 05:35:11,020 > INFO > Trying to Login:10.1.1.3
+2017-09-24 05:35:11,021 > INFO > Trying to Login:10.1.1.2
+2017-09-24 05:35:34,682 > INFO > Login Success :10.1.1.2:R1#
+2017-09-24 05:35:35,325 > INFO > SKIPPING RECEIVED FROM DB
+2017-09-24 05:35:44,522 > INFO > Not able to reach device:10.1.1.3
+2017-09-24 05:35:44,926 > INFO > Failed >CHN_3 10.1.1.3 Reasion>TIMEOUT
+2017-09-24 05:35:44,935 > INFO > Scoring Started
+2017-09-24 05:35:44,936 > DEBUG > Mongo search score for:128 1
+2017-09-24 05:35:44,942 > DEBUG > mongo_search_score > Starting score for > 10.1.1.2
+2017-09-24 05:35:44,942 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 128, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-24 05:35:44,944 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 05:35:44,944 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 128, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-24 05:35:44,946 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-24 05:35:44,946 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.2', 'INID': 128, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}, {'$set': {'Objects.$.score': 100}})
+2017-09-24 05:35:44,947 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 128, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 1}}}
+2017-09-24 05:35:44,951 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 05:35:44,952 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 128, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 1}}}
+2017-09-24 05:35:44,953 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 05:35:44,954 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 128, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 2}}}
+2017-09-24 05:35:44,955 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 05:35:44,955 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 128, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 2}}}
+2017-09-24 05:35:44,957 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 05:35:44,957 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 128, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 3}}}
+2017-09-24 05:35:44,959 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 05:35:44,959 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 128, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 3}}}
+2017-09-24 05:35:44,960 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 05:35:44,960 > DEBUG > mongo_search_score > Starting score for > 10.1.1.3
+2017-09-24 05:35:44,960 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 128, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-24 05:35:44,962 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 05:35:44,962 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 128, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-24 05:35:44,964 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 05:35:44,964 > INFO > Scoring Completed
+2017-09-24 05:38:10,357 > INFO > Connected to 'LIVE' database...
+2017-09-24 05:38:10,358 > INFO > Scoring Object Insiated...
+2017-09-24 05:38:10,363 > INFO > Starting Job ===============> JOBtest1-24-September-05:38:10
+2017-09-24 05:38:10,400 > INFO > SESSION UPDATED , INID = 129
+2017-09-24 05:38:10,400 > INFO > STARTING SESSION >1
+2017-09-24 05:38:10,419 > INFO > Apprentice>5
+2017-09-24 05:38:10,455 > INFO > Trying to Login:10.1.1.3
+2017-09-24 05:38:10,494 > INFO > Trying to Login:10.1.1.2
+2017-09-24 05:38:12,074 > INFO > Login Success :10.1.1.2:R1#
+2017-09-24 05:38:12,106 > INFO > Login Success :10.1.1.3:R2#
+2017-09-24 05:38:33,976 > INFO > Scoring Started
+2017-09-24 05:38:33,976 > DEBUG > Mongo search score for:129 1
+2017-09-24 05:38:33,979 > DEBUG > mongo_search_score > Starting score for > 10.1.1.2
+2017-09-24 05:38:33,979 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 129, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-24 05:38:33,981 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 05:38:33,981 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 129, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-24 05:38:33,983 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-24 05:38:33,983 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.2', 'INID': 129, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}, {'$set': {'Objects.$.score': 100}})
+2017-09-24 05:38:33,985 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 129, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 1}}}
+2017-09-24 05:38:33,988 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 05:38:33,988 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 129, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 1}}}
+2017-09-24 05:38:33,990 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-24 05:38:33,990 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.2', 'INID': 129, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 1}}}, {'$set': {'Objects.$.score': 100}})
+2017-09-24 05:38:33,991 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 129, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 2}}}
+2017-09-24 05:38:33,994 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-24 05:38:33,994 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.2', 'INID': 129, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 2}}}, {'$set': {'Objects.$.score': 0}})
+2017-09-24 05:38:34,000 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 129, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 2}}}
+2017-09-24 05:38:34,002 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 05:38:34,002 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 129, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 3}}}
+2017-09-24 05:38:34,004 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 05:38:34,004 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 129, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 3}}}
+2017-09-24 05:38:34,006 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-24 05:38:34,006 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.2', 'INID': 129, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 3}}}, {'$set': {'Objects.$.score': 100}})
+2017-09-24 05:38:34,008 > DEBUG > mongo_search_score > Starting score for > 10.1.1.3
+2017-09-24 05:38:34,008 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 129, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-24 05:38:34,009 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 05:38:34,009 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 129, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-24 05:38:34,011 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-24 05:38:34,011 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.3', 'INID': 129, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}, {'$set': {'Objects.$.score': 100}})
+2017-09-24 05:38:34,013 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 129, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 1}}}
+2017-09-24 05:38:34,014 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 05:38:34,015 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 129, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 1}}}
+2017-09-24 05:38:34,017 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-24 05:38:34,017 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.3', 'INID': 129, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 1}}}, {'$set': {'Objects.$.score': 100}})
+2017-09-24 05:38:34,019 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 129, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 2}}}
+2017-09-24 05:38:34,021 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-24 05:38:34,021 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.3', 'INID': 129, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 2}}}, {'$set': {'Objects.$.score': 0}})
+2017-09-24 05:38:34,036 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 129, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 2}}}
+2017-09-24 05:38:34,037 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 05:38:34,038 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 129, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 3}}}
+2017-09-24 05:38:34,039 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 05:38:34,039 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 129, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 3}}}
+2017-09-24 05:38:34,041 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-24 05:38:34,041 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.3', 'INID': 129, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 3}}}, {'$set': {'Objects.$.score': 100}})
+2017-09-24 05:38:34,043 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 129, 'SESSION': 1, 'Objects': {'$elemMatch': {'id': 4, u'out.result': u'failed'}}}
+2017-09-24 05:38:34,045 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-24 05:38:34,045 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 129, 'SESSION': 1, 'Objects': {'$elemMatch': {'id': 4, u'out.result': u'success'}}}
+2017-09-24 05:38:34,047 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-24 05:38:34,047 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.3', 'INID': 129, 'SESSION': 1, 'Objects': {'$elemMatch': {'id': 4, u'out.result': u'success'}}}, {'$set': {'Objects.$.score': 100}})
+2017-09-24 05:38:34,050 > INFO > Scoring Completed

@@ -175,7 +175,6 @@ class main_model():
             # Get SSH session
             auth = {"username":username,"password":password}
             sess = self.get_ssh_ses(IP,[auth],timeout,dir_path)
-            print type(sess)
             if type(sess) == tuple :
                 # SSH login success
                 result.update({"status":"reachable"})
@@ -193,7 +192,7 @@ class main_model():
         except Exception as e:
             logger.exception("self_check")
 
-    def device_check(self,host_objects,dir_path):
+    def device_check(self,host_objects,dir_path,mcollection):
         try:
 
             Monitoring_obj = host_objects.get("Objects")
@@ -207,8 +206,24 @@ class main_model():
 
             continue_next = False
             Monitoring_obj = sorted(Monitoring_obj, key=lambda k: k['id'])
+            total_obj = str(len(Monitoring_obj))
+            skip = None
+            running_job = 0
             for element in Monitoring_obj:
+                    running_job += 1
                     myid = element.get("id")
+                    try:
+                        mcollection.update({"_id":1,"STATUS.IP":IP},{ "$set": { "STATUS.$.STATUS" : "Tasks: "+str(running_job)+"/"+total_obj } })
+                        skip = mcollection.find_one({"_id":1,"SKIP":"yes"},{"SKIP":1})
+                    except Exception as e:
+                        logger.exception("device_check skip check failed")
+                    if skip != None:
+                        logger.info("SKIPPING RECEIVED FROM DB")
+                        try:
+                            mcollection.update({"_id":1,"STATUS.IP":IP},{ "$set": { "STATUS.$.STATUS" : "SKIPPED"} })
+                        except Exception as e:
+                            logger.exception("device_check updating DB failed for skipping")
+                        break;
                     # Self check
                     if myid == 0:
                         out_session = self.self_check(IP,Hostname,dir_path,element)
@@ -222,6 +237,10 @@ class main_model():
                                 continue_next = True
                             else:
                                 # Only return self element output (device down)
+                                try:
+                                   mcollection.update({"_id":1,"STATUS.IP":IP},{ "$set": { "STATUS.$.STATUS" :out.get("status")} })
+                                except Exception as e:
+                                    logger.exception("device_check updating DB failed for device")
                                 return [element]
                         else:
                             logger.error("device_check self_check failed")
@@ -231,6 +250,7 @@ class main_model():
                         element.update({"out":out})
 
             return Monitoring_obj
+
         except Exception as e:
             logger.exception("device_check")
 
@@ -243,14 +263,19 @@ class main_model():
                 mdb = mongoc['LIVE']
                 mcollection = mdb['SESSION']
                 mcollection.update({"_id":1,"STATUS.IP":IP},{ "$set": { "STATUS.$.TYPE" : "Running" } })
-                mongoc.close()
             except Exception as e:
                 logger.exception("single_host DB")
 
-            jout = self.device_check(host_objects,dir_path)
+            jout = self.device_check(host_objects,dir_path,mcollection)
             if type(jout) == None:
                 logger.error("single_host return non list objects")
                 jout = []
+
+            try:
+                mongoc.close()
+            except Exception as e:
+                logger.exception("single_host closing DB failed")
+
             host_objects.update({"Objects":jout})
             return host_objects
         

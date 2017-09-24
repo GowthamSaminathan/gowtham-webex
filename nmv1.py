@@ -1,7 +1,17 @@
+import logging
+from logging.handlers import RotatingFileHandler
 import re
 from pexpect import pxssh
 import pexpect
 import getpass
+import os
+
+logger =  logging.getLogger("Rotating Log nmv1")
+logger.setLevel(logging.DEBUG)
+handler = RotatingFileHandler(os.getcwd()+"/nmv1.log",maxBytes=5000000,backupCount=25)
+formatter = logging.Formatter('%(asctime)s > %(levelname)s > %(message)s')
+handler.setFormatter(formatter)
+logger.addHandler(handler)
 
 def cis_raw(ses,monobj):
     try:
@@ -18,10 +28,11 @@ def cis_raw(ses,monobj):
             #data = str(ses[0].before)
         out.update({"result":"success"})
         return out
-    except:
+    except Exception as e:
+    	logger.exception("cis_raw")
         return out
 
-def cpu_uti(s,monobj):
+def cis_cpu_uti(s,monobj):
     try:
         out = {}
         exp = s[1]
@@ -31,16 +42,14 @@ def cpu_uti(s,monobj):
         s[0].expect([cmd,pxssh.TIMEOUT],timeout=5)
         s[0].expect([exp,pxssh.TIMEOUT],timeout=5)
         data = str(s[0].before)
-        #print data
-        #b = data.split("five minute:")[1]
-	b = data.split(";")[1].split(":")[1].strip()
+        b = data.split(";")[1].split(":")[1].strip()
         if b != None or len(str(b)) > 0:
            out.update({"CPU_One minute:":b})
            return out
         else:
              return {"CPU_One minute:":""}
     except Exception as e:
-        print("cpu_uti Error 1>"+str(e))
+    	logger.exception("cpu_uti")
 
 
 def cis_sw_int(ses,monobj):
@@ -120,15 +129,10 @@ def cis_sw_int(ses,monobj):
 			if len(redata) == 1:
 				crcerror = redata[0].replace(' crc','')
 				out.update({"crc":crcerror})
-
-
 		return out
 	except Exception as e:
-		print("Error cis_sw_int"+str(e))
+		logger.exception("cis_sw_int")
 
-
-def self_check(ses,element):
-    return {"status":"reachable"}
 
 def cis_bgp(ses,monobj):
     try:
@@ -146,23 +150,21 @@ def cis_bgp(ses,monobj):
         ses[0].expect([cmd,pxssh.TIMEOUT],timeout=5)
         ses[0].expect([exp,pxssh.TIMEOUT],timeout=5)
         data = str(ses[0].before)
-	all_ot = []
+        all_ot = []
         for host in mon_:
             try:
                 ot=""
                 pos = data.find(host)
-                print host
                 if pos > -1:
                     n = filter(None,data[pos:].split("\n")[0].split(" "))
                     ot = {"neighbor":n[0].strip(),"AS":n[2].strip(),"uptime":n[-2].strip(),"received-prf":n[-1].strip()}
                     all_ot.append(ot)
             except Exception as e:
-                print("cis_bgp Error 2>"+str(e))
+    			logger.exception("cis_bgp Ex1")
             out.update({"BGP":all_ot})
-        print out
         return out
     except Exception as e:
-        print("cis_bgp Error 1>"+str(e))
+    	logger.exception("cis_bgp Ex2")
 
 
 if __name__ == "__main__":

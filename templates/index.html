@@ -190,7 +190,7 @@
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button id="skipalljobs" type="button" onclick="skipalljobs()" class="btn btn-danger">SKIP ALL JOBS</button>
         </div>
       </div>
       </div></div>
@@ -210,9 +210,9 @@
     <ul id="edit_me" class="nav navbar-nav">
       
       <li class="active">
-      <div style="float:left;margin-top:10px" class="btn-group">
-      <button type="button" id="actionbtn" class="btn btn-warning dropdown-toggle btn-xs " data-toggle="dropdown">
-      <span style="font-weight: bold;">Action</span>
+      <div style="float:left;margin:10px;width: 100%;" class="btn-group">
+      <button type="button" id="actionbtn" style="background-color: #5bc0de;border-color: #46b8da;height: 29px;width: 100px;"  class="btn btn-warning dropdown-toggle btn-xs " data-toggle="dropdown">
+      <span style="font-weight: bold;">ACTION</span>
       <span class="caret"></span></button>
       <ul class="dropdown-menu" role="menu">
       <li><a href="#" onclick="new_ses('group')">New Job</a></li>
@@ -223,7 +223,7 @@
       </ul>
       </div></li>
 
-      <li class="active"><h4><span id="outtime" class="label label-default">LASTSNAP</span></h4></li>
+      <li class="active"><h4 style="margin-top: 13px;"><span id="outtime" class="label label-default">LASTSNAP</span></h4></li>
       
      </ul>
 <div style="float:right;margin-top:10px">
@@ -459,12 +459,14 @@ dataSet = [];
                 if( data[2] ==  0){$(row).css({"background-color":"#ff0000",'color': '#ffffff','font-weight':'bold'});}
                 else if(data[2] ==  100){$(row).css({"background-color":"#1abc9c",'color': '#ffffff','font-weight':'bold'});}
                 else {$(row).css({"background-color":"#fdba04",'color': '#ffffff','font-weight':'bold'});}
+
+                if( data[0].search("JOBNAME:") ==  0){$(row).css({"background-color":"#597df2",'color': '#ffffff','font-weight':'bold'});}
               },
         lengthMenu: [
             [ 10, 50, 100, -1 ],
             [ '10', '50', '100', 'all' ]
         ],
-        buttons: ['copy','excel','pdf' , {text: 'RAW',action:downloadraw}],
+        buttons: ['copy',{extend: 'excel',title: function () {return $("#jobdesc").text()}},{extend: 'pdf',title: function () {return $("#jobdesc").text()} } , {text: 'RAW',action:downloadraw}],
         columns: [
             { title: "Hostname" },
             { title: "IP" },
@@ -739,13 +741,15 @@ one_stat = ses_status[stat]
 sip = one_stat["IP"];
 shost = one_stat["Hostname"];
 stype = one_stat["TYPE"];
+sstate = one_stat["STATUS"];
+if (sstate == undefined) {sstate=""}
 if (stype == undefined)
 {stype = "Hold";ses_hold = ses_hold + 1;}
 if (stype == "Completed"){ses_completed = ses_completed + 1;}
 if (stype == "Running"){ses_running = ses_running + 1;}
 if (mouse_down != true)
 {
-stable.rows.add([[shost,sip,stype]]);
+stable.rows.add([[shost,sip,stype+" "+sstate]]);
 stable.draw();
 }
 }
@@ -902,7 +906,7 @@ if(dout == 0) {dout = "0"} // To Fix calculating length for number
 else{
 dtable.clear().draw();
 $("#datetimepicker1").fadeIn(100).fadeOut(100).fadeIn(100);
-$('#jobdesc').text("JOBNAME: "+dout[0].JOBNAME);
+$('#jobdesc').text(dout[0].JOBNAME);
 $('#datetimepicker1').val(moment.utc(new Date(dout[0].TD)).format('DD-MM-YYYY HH:mm:ss'));
 $.each(dout, function(index, value) {
   // Ready Host by host
@@ -923,6 +927,13 @@ $.each(dout, function(index, value) {
   });
 
 });
+
+try {
+// Adding fooder
+dtable.draw();
+dtable.draw();
+jobinfo = "JOBNAME: "+dout[0].JOBNAME
+dtable.rows.add([[jobinfo,"","","",""]]);}catch(e){console.log(e)}
 get_oldjobs($('#datetimepicker1').val(),10);
 dtable.draw();
 dtable.draw();
@@ -979,6 +990,32 @@ $('#outtime').fadeIn(150).fadeOut(150).fadeIn(150).fadeOut(250).fadeIn(250)
 }
 }catch(err){console.log("job_status Error"+err)}
 }
+
+// SKIP RUNNING JOBS
+
+function skipalljobs(){
+try{
+
+  chk = confirm("Skipping is little slow process, Are You Sure to SKIP JOB ?");
+  if (chk == false){return false;}
+  console.log("SKIPPING JOB");
+$.ajax({type: 'POST',url:"job",data:{type:"skip"},success:skiprunjob,error:function (xhr, ajaxOptions, thrownError)
+  {console.log("Error > job_skipping"); }})
+
+function skiprunjob(data){ 
+jbn = $("#sesjobstatus").text()
+if (data["status"] == "Skipping"){
+$("#sesjobstatus").text("SKIPPING :"+jbn);
+}
+else{
+$("#sesjobstatus").text("SKIPPING FAILED : "+jbn);
+}
+}
+}catch(err){console.log("skipping job Error"+err)}
+}
+
+
+
 //Get update
 get_up();
 setInterval(get_up,4000); // Get JOB output from DB
