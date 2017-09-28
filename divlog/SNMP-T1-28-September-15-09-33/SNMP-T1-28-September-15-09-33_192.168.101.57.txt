@@ -1,0 +1,45 @@
+
+
+
+
+gowtham@CTS_TDCB_MUM_RCOM_J> 
+
+
+gowtham@CTS_TDCB_MUM_RCOM_J> 
+
+gowtham@CTS_TDCB_MUM_RCOM_J> show interface ge-0/0/0 | no-more
+show interfaces ge-0/0/0 | no-more 
+Physical interface: ge-0/0/0, Enabled, Physical link is Up
+  Interface index: 136, SNMP ifIndex: 514
+  Description: **To_TATA-WAN-LINK**
+  Link-level type: Ethernet, MTU: 1514, Link-mode: Full-duplex, Speed: 100mbps,
+  BPDU Error: None, MAC-REWRITE Error: None, Loopback: Disabled,
+  Source filtering: Disabled, Flow control: Disabled, Auto-negotiation: Enabled,
+  Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x0
+  Link flags     : None
+  CoS queues     : 8 supported, 8 maximum usable queues
+  Current address: 08:81:f4:cc:3c:80, Hardware address: 08:81:f4:cc:3c:80
+  Last flapped   : 2017-09-23 16:49:38 HMT (4d 16:50 ago)
+  Input rate     : 2832 bps (4 pps)
+  Output rate    : 8712 bps (6 pps)
+  Active alarms  : None
+  Active defects : None
+  Interface transmit statistics: Disabled
+
+  Logical interface ge-0/0/0.0 (Index 75) (SNMP ifIndex 516) 
+    Flags: SNMP-Traps 0x0 Encapsulation: ENET2
+    Input packets : 1221633 
+    Output packets: 1465483
+    Security: Zone: untrust
+    Allowed host-inbound traffic : bfd bgp dvmrp igmp ldp msdp nhrp ospf pgm
+    pim rip router-discovery rsvp sap vrrp dhcp tftp ike ping snmp snmp-trap
+    ssh telnet
+    Protocol inet, MTU: 1500
+      Flags: Sendbcast-pkt-to-re
+      Addresses, Flags: Is-Preferred Is-Primary
+        Destination: 192.168.88.240/30, Local: 192.168.88.242,
+        Broadcast: 192.168.88.243
+
+gowtham@CTS_TDCB_MUM_RCOM_J> 

@@ -1,0 +1,133 @@
+
+
+
+
+{primary:node0}
+gowtham@CTSDR_SRX3400_FRWL_HYDR> 
+
+
+{primary:node0}
+gowtham@CTSDR_SRX3400_FRWL_HYDR> 
+
+
+
+{primary:node0}
+gowtham@CTSDR_SRX3400_FRWL_HYDR> 
+
+
+{primary:node0}
+gowtham@CTSDR_SRX3400_FRWL_HYDR> 
+
+{primary:node0}
+gowtham@CTSDR_SRX3400_FRWL_HYDR> show interface ge-0/0/0 | no-more
+show interfaces ge-0/0/0 | no-more 
+Physical interface: ge-0/0/0, Enabled, Physical link is Up
+  Interface index: 158, SNMP ifIndex: 509
+  Link-level type: Ethernet, MTU: 1514, Link-mode: Full-duplex, Speed: 1000mbps,
+  BPDU Error: None, MAC-REWRITE Error: None, Loopback: Disabled,
+  Source filtering: Disabled, Flow control: Enabled, Auto-negotiation: Enabled,
+  Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x0
+  Link flags     : None
+  CoS queues     : 8 supported, 4 maximum usable queues
+  Schedulers     : 0
+  Current address: 00:10:db:ff:10:00, Hardware address: 54:e0:32:b3:cc:00
+  Last flapped   : 2017-08-07 21:06:58 IST (6w6d 23:32 ago)
+  Input rate     : 1112 bps (2 pps)
+  Output rate    : 0 bps (0 pps)
+  Active alarms  : None
+  Active defects : None
+  Interface transmit statistics: Disabled
+
+  Logical interface ge-0/0/0.0 (Index 122) (SNMP ifIndex 552)
+    Flags: SNMP-Traps 0x0 Encapsulation: ENET2
+    Input packets : 49901480719
+    Output packets: 54115012474
+    Security: Zone: Null
+    Protocol aenet, AE bundle: reth0.0   Link Index: 0
+
+{primary:node0}
+gowtham@CTSDR_SRX3400_FRWL_HYDR> 
+
+
+
+{primary:node0}
+gowtham@CTSDR_SRX3400_FRWL_HYDR> 
+
+
+{primary:node0}
+gowtham@CTSDR_SRX3400_FRWL_HYDR> 
+
+{primary:node0}
+gowtham@CTSDR_SRX3400_FRWL_HYDR> show interface ge-0/0/0 | no-more
+show interfaces ge-0/0/0 | no-more 
+Physical interface: ge-0/0/0, Enabled, Physical link is Up
+  Interface index: 158, SNMP ifIndex: 509
+  Link-level type: Ethernet, MTU: 1514, Link-mode: Full-duplex, Speed: 1000mbps,
+  BPDU Error: None, MAC-REWRITE Error: None, Loopback: Disabled,
+  Source filtering: Disabled, Flow control: Enabled, Auto-negotiation: Enabled,
+  Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x0
+  Link flags     : None
+  CoS queues     : 8 supported, 4 maximum usable queues
+  Schedulers     : 0
+  Current address: 00:10:db:ff:10:00, Hardware address: 54:e0:32:b3:cc:00
+  Last flapped   : 2017-08-07 21:06:58 IST (6w6d 23:33 ago)
+  Input rate     : 1032 bps (2 pps)
+  Output rate    : 0 bps (0 pps)
+  Active alarms  : None
+  Active defects : None
+  Interface transmit statistics: Disabled
+
+  Logical interface ge-0/0/0.0 (Index 122) (SNMP ifIndex 552)
+    Flags: SNMP-Traps 0x0 Encapsulation: ENET2
+    Input packets : 49901480822
+    Output packets: 54115012474
+    Security: Zone: Null
+    Protocol aenet, AE bundle: reth0.0   Link Index: 0
+
+{primary:node0}
+gowtham@CTSDR_SRX3400_FRWL_HYDR> 
+
+
+
+{primary:node0}
+gowtham@CTSDR_SRX3400_FRWL_HYDR> 
+
+
+{primary:node0}
+gowtham@CTSDR_SRX3400_FRWL_HYDR> 
+
+{primary:node0}
+gowtham@CTSDR_SRX3400_FRWL_HYDR> show interface ge-0/0/0 | no-more
+show interfaces ge-0/0/0 | no-more 
+Physical interface: ge-0/0/0, Enabled, Physical link is Up
+  Interface index: 158, SNMP ifIndex: 509
+  Link-level type: Ethernet, MTU: 1514, Link-mode: Full-duplex, Speed: 1000mbps,
+  BPDU Error: None, MAC-REWRITE Error: None, Loopback: Disabled,
+  Source filtering: Disabled, Flow control: Enabled, Auto-negotiation: Enabled,
+  Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x0
+  Link flags     : None
+  CoS queues     : 8 supported, 4 maximum usable queues
+  Schedulers     : 0
+  Current address: 00:10:db:ff:10:00, Hardware address: 54:e0:32:b3:cc:00
+  Last flapped   : 2017-08-07 21:06:58 IST (7w0d 18:16 ago)
+  Input rate     : 1144 bps (2 pps)
+  Output rate    : 0 bps (0 pps)
+  Active alarms  : None
+  Active defects : None
+  Interface transmit statistics: Disabled
+
+  Logical interface ge-0/0/0.0 (Index 122) (SNMP ifIndex 552)
+    Flags: SNMP-Traps 0x0 Encapsulation: ENET2
+    Input packets : 49901620324
+    Output packets: 54115012474
+    Security: Zone: Null
+    Protocol aenet, AE bundle: reth0.0   Link Index: 0
+
+{primary:node0}
+gowtham@CTSDR_SRX3400_FRWL_HYDR> 

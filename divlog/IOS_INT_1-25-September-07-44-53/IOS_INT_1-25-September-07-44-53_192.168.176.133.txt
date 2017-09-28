@@ -1,0 +1,36 @@
+
+
+NFSDR_CRSW_VSS_CHNN#terminal length 0
+show interface Gi1/2/23
+terminal length 0
+NFSDR_CRSW_VSS_CHNN#show interface Gi1/2/23
+GigabitEthernet1/2/23 is up, line protocol is up (connected)
+  Hardware is C6k 1000Mb 802.3, address is e05f.b974.21ae (bia e05f.b974.21ae)
+  Description: ## CONNECT TO CHEMISDB01 INT GE2 172.16.4.40 ##
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec, 
+     reliability 255/255, txload 25/255, rxload 1/255
+  Encapsulation ARPA, loopback not set
+  Keepalive set (10 sec)
+  Full-duplex, 1000Mb/s, media type is 10/100/1000BaseT
+  input flow-control is off, output flow-control is on 
+  Clock mode is auto
+  ARP type: ARPA, ARP Timeout 04:00:00
+  Last input never, output 00:00:42, output hang never
+  Last clearing of "show interface" counters 1y42w
+  Input queue: 0/2000/0/0 (size/max/drops/flushes); Total output drops: 404029
+  Queueing strategy: fifo
+  Output queue: 0/40 (size/max)
+  5 minute input rate 1333000 bits/sec, 2364 packets/sec
+  5 minute output rate 101482000 bits/sec, 8951 packets/sec
+     162856623859 packets input, 123293168412115 bytes, 0 no buffer
+     Received 65356840 broadcasts (10914812 multicasts)
+     0 runts, 0 giants, 0 throttles 
+     3 input errors, 2 CRC, 1 frame, 0 overrun, 0 ignored
+     0 watchdog, 0 multicast, 0 pause input
+     0 input packets with dribble condition detected
+     325798497620 packets output, 409058705728689 bytes, 0 underruns
+     0 output errors, 0 collisions, 2 interface resets
+     0 babbles, 0 late collision, 0 deferred
+     0 lost carrier, 0 no carrier, 0 PAUSE output
+     0 output buffer failures, 0 output buffers swapped out
+NFSDR_CRSW_VSS_CHNN#

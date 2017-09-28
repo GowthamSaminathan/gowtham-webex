@@ -1,0 +1,36 @@
+
+
+CHN_CTS_CORE_AIRTEL#terminal length 0
+show interface GigabitEthernet0/0/0
+terminal length 0
+CHN_CTS_CORE_AIRTEL#show interface GigabitEthernet0/0/0
+GigabitEthernet0/0/0 is up, line protocol is up 
+  Hardware is SPA-5X1GE-V2, address is 5475.d08a.2c00 (bia 5475.d08a.2c00)
+  Description: ##### LAN CONNECTIVITY ######
+  Internet address is 192.168.180.4/24
+  MTU 1500 bytes, BW 1000000 Kbit/sec, DLY 10 usec, 
+     reliability 255/255, txload 49/255, rxload 14/255
+  Encapsulation ARPA, loopback not set
+  Keepalive not supported 
+  Full Duplex, 1000Mbps, link type is auto, media type is T
+  output flow-control is on, input flow-control is on
+  ARP type: ARPA, ARP Timeout 04:00:00
+  Last input 00:00:01, output 00:00:38, output hang never
+  Last clearing of "show interface" counters 10w2d
+  Input queue: 0/375/0/0 (size/max/drops/flushes); Total output drops: 0
+  Queueing strategy: fifo
+  Output queue: 0/40 (size/max)
+  30 second input rate 57091000 bits/sec, 11263 packets/sec
+  30 second output rate 193284000 bits/sec, 26738 packets/sec
+     91580820038 packets input, 69655433678198 bytes, 0 no buffer
+     Received 3784 broadcasts (0 IP multicasts)
+     0 runts, 0 giants, 0 throttles 
+     0 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored
+     0 watchdog, 5687949 multicast, 0 pause input
+     183118556488 packets output, 146544038976036 bytes, 0 underruns
+     0 output errors, 0 collisions, 0 interface resets
+     0 unknown protocol drops
+     0 babbles, 0 late collision, 0 deferred
+     0 lost carrier, 0 no carrier, 0 pause output
+     0 output buffer failures, 0 output buffers swapped out
+CHN_CTS_CORE_AIRTEL#

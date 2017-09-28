@@ -1,0 +1,13 @@
+
+
+NFSDR_PRMT_PRY_FLR1_CHN# 
+
+NFSDR_PRMT_PRY_FLR1_CHN# 
+
+NFSDR_PRMT_PRY_FLR1_CHN# terminal length 0
+show interface eth0/0
+terminal length 0
+NFSDR_PRMT_PRY_FLR1_CHN# show interface eth0/0
+                                           ^
+Invalid interface format at '^' marker.
+NFSDR_PRMT_PRY_FLR1_CHN# 

@@ -19,6 +19,7 @@ from flask import jsonify
 from threading import Thread
 from concurrent.futures import ThreadPoolExecutor
 from concurrent.futures import as_completed
+import easysnmp
 
 logger =  logging.getLogger("Rotating Log")
 logger.setLevel(logging.DEBUG)
@@ -113,10 +114,20 @@ class main_model():
                     s.login(hostname, username, password,auto_prompt_reset=False,login_timeout=login_timeout)
                     s.logfile = open(logpath+"_"+str(hostname)+".txt", "ab")
                     # Send enter to get router prompt to check login success
-                    s.sendline('')
                     ex = ["#",">","\$",pexpect.TIMEOUT]
+
+                    s.sendline('')
                     # expecting cisco , juniper , fortigate prompt 
-                    match_ex = s.expect(ex,timeout=etimeout)
+                    s.expect(ex,timeout=etimeout)
+                    
+                    s.sendline('')
+                    # expecting cisco , juniper , fortigate prompt
+                    s.expect(["#",">","\$",pexpect.TIMEOUT],timeout=etimeout)
+                    
+                    s.sendline('')
+                    # expecting cisco , juniper , fortigate prompt
+                    match_ex = s.expect(["#",">","\$",pexpect.TIMEOUT],timeout=etimeout)
+
                     login_chk = s.before.strip()
                     if len(login_chk) > 0 and match_ex < 3:
                         host_name = login_chk.decode("utf-8")
@@ -169,28 +180,52 @@ class main_model():
     def self_check(self,IP,Hostname,dir_path,element):
         try:
             result = {}
-            einput = element.get("input")
-            username = einput.get("username")
-            password = einput.get("password")
-            timeout = einput.get("timeout")
-            etype = einput.get("type")
+            all_sessions = {"status":{}}
             # Get SSH session
-            auth = {"username":username,"password":password}
-            sess = self.get_ssh_ses(IP,[auth],timeout,dir_path)
-            if type(sess) == tuple :
-                # SSH login success
-                result.update({"status":"reachable"})
-                if etype == "cisco":
-                    sess[0].sendline("terminal length 0")
-            else:
-                # SSH login failed
-                logger.info("Failed >"+str(Hostname)+" "+str(IP)+" Reasion>"+str(sess))
-                if sess == "LOGINFAIL":
-                    result.update({"status":"Authentication Failed"})
-                else:
-                    result.update({"status":"timeout"}) 
-            #Get snmp session
-            return result,sess
+            einput = element.get("input")
+            check = einput.get("check")
+            
+            if "ssh" in check:
+                try:
+                    logger.info("getting ssh session")
+                    username = einput.get("username")
+                    password = einput.get("password")
+                    timeout = einput.get("timeout")
+                    etype = einput.get("type")
+                    auth = {"username":username,"password":password}
+                    sess = self.get_ssh_ses(IP,[auth],timeout,dir_path)
+                    if type(sess) == tuple :
+                        # SSH login success
+                        if etype == "cisco":
+                            sess[0].sendline("terminal length 0")
+                        result.update({"ssh":"reachable"})
+                        all_sessions.update({"ssh_session":sess})
+                    else:
+                        # SSH login failed
+                        logger.info("Failed >"+str(Hostname)+" "+str(IP)+" Reasion>"+str(sess))
+                        if sess == "LOGINFAIL":
+                            result.update({"ssh":"Authentication Failed"})
+                        else:
+                            result.update({"ssh":"timeout"}) 
+                    #Get snmp session
+                except:
+                    logger.exception("self_check")
+            
+            if "snmp" in check:
+                try:
+                    logger.info("getting snmp session")
+                    snmp_conf = einput.get("snmp")
+                    snmp_conf.update({"hostname":IP})
+                    logger.info(snmp_conf)
+                    session = easysnmp.Session(**snmp_conf)
+                    result.update({"snmp":"reachable"})
+                    all_sessions.update({"snmp_session":session})
+                    logger.info("getting snmp success")
+                except:
+                    logger.exception("self_check")
+            
+            all_sessions.update({"status":result})
+            return all_sessions
         except Exception as e:
             logger.exception("self_check")
 
@@ -230,17 +265,25 @@ class main_model():
                     if myid == 0:
                         out_session = self.self_check(IP,Hostname,dir_path,element)
                         if out_session != None:
-                            out = out_session[0]
-                            session = out_session[1]
+                            
+                            einput = element.get("input")
+                            check = einput.get("check")
+                            
                             # Removing username and password
                             element.update({"input":""})
-                            element.update({"out":out})
-                            if out.get("status") == "reachable":
-                                continue_next = True
-                            else:
+                            all_status = out_session.get("status")
+                            element.update({"out":all_status})
+                            # Check all required sessions are reachable else make continue_next as False
+                            for ses_chk in check:
+                                if all_status.get(ses_chk) == "reachable":
+                                    continue_next = True
+                                else:
+                                    continue_next = False
+                                    break;
+                            if continue_next != True:
                                 # Only return self element output (device down)
                                 try:
-                                   mcollection.update({"_id":1,"STATUS.IP":IP},{ "$set": { "STATUS.$.STATUS" :out.get("status")} })
+                                    mcollection.update({"_id":1,"STATUS.IP":IP},{ "$set": { "STATUS.$.STATUS" :all_status} })
                                 except Exception as e:
                                     logger.exception("device_check updating DB failed for device")
                                 return [element]
@@ -248,7 +291,7 @@ class main_model():
                             logger.error("device_check self_check failed")
                     elif continue_next == True:
                         et = element.get("function")
-                        out = globals()[et](session,element)
+                        out = globals()[et](out_session,element)
                         element.update({"out":out})
 
             return Monitoring_obj
