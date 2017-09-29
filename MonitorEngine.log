@@ -6155,3 +6155,1271 @@ TypeError: 'NoneType' object is not iterable
 2017-09-28 16:02:39,829 > DEBUG > mongo_search_score > searching DB for:{'IP': u'192.168.101.57', 'INID': 59.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.ig': u'up', 'id': 2}}}
 2017-09-28 16:02:39,830 > DEBUG > mongo_search_score > default_query > Pattern Not matched
 2017-09-28 16:02:39,830 > INFO > Scoring Completed
+2017-09-29 01:10:40,688 > INFO > Starting MonitoringEngine
+2017-09-29 01:10:42,758 > INFO > Starting MonitoringEngine
+2017-09-29 01:15:01,860 > INFO > Starting MonitoringEngine
+2017-09-29 01:15:02,269 > INFO > Starting MonitoringEngine
+2017-09-29 01:16:37,300 > INFO > Starting MonitoringEngine
+2017-09-29 01:16:37,704 > INFO > Starting MonitoringEngine
+2017-09-29 01:16:57,492 > INFO > Starting Job ===============> Test1-29-September-01:16:57
+2017-09-29 01:16:57,536 > INFO > Connected to 'LIVE' database...
+2017-09-29 01:16:57,537 > INFO > Scoring Object Insiated...
+2017-09-29 01:16:57,538 > ERROR > xls_input
+Traceback (most recent call last):
+  File "/home/networksnap/network_snap/MonitorEngine.py", line 396, in xls_input
+    xl = pandas.ExcelFile(filename)
+  File "/usr/local/lib/python2.7/dist-packages/pandas/io/excel.py", line 232, in __init__
+    import xlrd  # throw an ImportError if we need to
+ImportError: No module named xlrd
+2017-09-29 01:16:57,540 > ERROR > No valid XLS input
+2017-09-29 01:16:57,540 > ERROR > STOPPED
+2017-09-29 01:17:26,744 > INFO > Starting MonitoringEngine
+2017-09-29 01:17:27,184 > INFO > Starting MonitoringEngine
+2017-09-29 01:17:37,169 > INFO > Starting Job ===============> J1-29-September-01:17:37
+2017-09-29 01:17:37,176 > INFO > Connected to 'LIVE' database...
+2017-09-29 01:17:37,176 > INFO > Scoring Object Insiated...
+2017-09-29 01:17:37,906 > INFO > SESSION UPDATED , INID = 1.0
+2017-09-29 01:17:37,906 > INFO > STARTING SESSION >1
+2017-09-29 01:17:37,971 > INFO > Apprentice>5
+2017-09-29 01:17:37,978 > INFO > getting ssh session
+2017-09-29 01:17:37,978 > INFO > Trying to Login:192.168.233.142
+2017-09-29 01:17:37,993 > INFO > getting ssh session
+2017-09-29 01:17:37,993 > INFO > Trying to Login:192.168.101.57
+2017-09-29 01:17:38,008 > INFO > getting ssh session
+2017-09-29 01:17:38,008 > INFO > Trying to Login:192.168.106.11
+2017-09-29 01:17:59,772 > ERROR > login
+Traceback (most recent call last):
+  File "/home/networksnap/network_snap/MonitorEngine.py", line 125, in login
+    s.expect(["#",">","\$",pexpect.TIMEOUT],timeout=etimeout)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/spawnbase.py", line 321, in expect
+    timeout, searchwindowsize, async)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/spawnbase.py", line 345, in expect_list
+    return exp.expect_loop(timeout)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/expect.py", line 105, in expect_loop
+    return self.eof(e)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/expect.py", line 50, in eof
+    raise EOF(msg)
+EOF: End Of File (EOF). Exception style platform.
+<pexpect.pxssh.pxssh object at 0x7f88a43b8a10>
+command: /usr/bin/ssh
+args: [u'/usr/bin/ssh', u'-o', u'UserKnownHostsFile=/dev/null', u'-o', u'StrictHostKeyChecking=no', u'-q', u'-l', u'gowtham', u'192.168.233.142']
+buffer (last 100 chars): ''
+before (last 100 chars): '\r\n\r\n'
+after: <class 'pexpect.exceptions.EOF'>
+match: None
+match_index: None
+exitstatus: None
+flag_eof: True
+pid: 15696
+child_fd: 18
+closed: False
+timeout: 10
+delimiter: <class 'pexpect.exceptions.EOF'>
+logfile: <open file u'/home/networksnap/network_snap/divlog/J1-29-September-01-17-37/J1-29-September-01-17-37_192.168.233.142.txt', mode 'ab' at 0x7f88a4ae1d20>
+logfile_read: None
+logfile_send: None
+maxread: 2000
+ignorecase: False
+searchwindowsize: None
+delaybeforesend: 0.05
+delayafterclose: 0.1
+delayafterterminate: 0.1
+searcher: searcher_re:
+    0: re.compile("#")
+    1: re.compile(">")
+    2: re.compile("\$")
+    3: TIMEOUT
+2017-09-29 01:17:59,777 > ERROR > login
+Traceback (most recent call last):
+  File "/home/networksnap/network_snap/MonitorEngine.py", line 125, in login
+    s.expect(["#",">","\$",pexpect.TIMEOUT],timeout=etimeout)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/spawnbase.py", line 321, in expect
+    timeout, searchwindowsize, async)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/spawnbase.py", line 345, in expect_list
+    return exp.expect_loop(timeout)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/expect.py", line 105, in expect_loop
+    return self.eof(e)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/expect.py", line 50, in eof
+    raise EOF(msg)
+EOF: End Of File (EOF). Exception style platform.
+<pexpect.pxssh.pxssh object at 0x7f88a43b8f50>
+command: /usr/bin/ssh
+args: [u'/usr/bin/ssh', u'-o', u'UserKnownHostsFile=/dev/null', u'-o', u'StrictHostKeyChecking=no', u'-q', u'-l', u'gowtham', u'192.168.106.11']
+buffer (last 100 chars): ''
+before (last 100 chars): '\r\n\r\n'
+after: <class 'pexpect.exceptions.EOF'>
+match: None
+match_index: None
+exitstatus: None
+flag_eof: True
+pid: 15703
+child_fd: 24
+closed: False
+timeout: 10
+delimiter: <class 'pexpect.exceptions.EOF'>
+logfile: <open file u'/home/networksnap/network_snap/divlog/J1-29-September-01-17-37/J1-29-September-01-17-37_192.168.106.11.txt', mode 'ab' at 0x7f88a4ae1c90>
+logfile_read: None
+logfile_send: None
+maxread: 2000
+ignorecase: False
+searchwindowsize: None
+delaybeforesend: 0.05
+delayafterclose: 0.1
+delayafterterminate: 0.1
+searcher: searcher_re:
+    0: re.compile("#")
+    1: re.compile(">")
+    2: re.compile("\$")
+    3: TIMEOUT
+2017-09-29 01:17:59,777 > ERROR > login
+Traceback (most recent call last):
+  File "/home/networksnap/network_snap/MonitorEngine.py", line 125, in login
+    s.expect(["#",">","\$",pexpect.TIMEOUT],timeout=etimeout)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/spawnbase.py", line 321, in expect
+    timeout, searchwindowsize, async)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/spawnbase.py", line 345, in expect_list
+    return exp.expect_loop(timeout)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/expect.py", line 105, in expect_loop
+    return self.eof(e)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/expect.py", line 50, in eof
+    raise EOF(msg)
+EOF: End Of File (EOF). Exception style platform.
+<pexpect.pxssh.pxssh object at 0x7f88a433f350>
+command: /usr/bin/ssh
+args: [u'/usr/bin/ssh', u'-o', u'UserKnownHostsFile=/dev/null', u'-o', u'StrictHostKeyChecking=no', u'-q', u'-l', u'gowtham', u'192.168.101.57']
+buffer (last 100 chars): ''
+before (last 100 chars): '\r\n\r\n'
+after: <class 'pexpect.exceptions.EOF'>
+match: None
+match_index: None
+exitstatus: None
+flag_eof: True
+pid: 15704
+child_fd: 26
+closed: False
+timeout: 10
+delimiter: <class 'pexpect.exceptions.EOF'>
+logfile: <open file u'/home/networksnap/network_snap/divlog/J1-29-September-01-17-37/J1-29-September-01-17-37_192.168.101.57.txt', mode 'ab' at 0x7f88a4b07390>
+logfile_read: None
+logfile_send: None
+maxread: 2000
+ignorecase: False
+searchwindowsize: None
+delaybeforesend: 0.05
+delayafterclose: 0.1
+delayafterterminate: 0.1
+searcher: searcher_re:
+    0: re.compile("#")
+    1: re.compile(">")
+    2: re.compile("\$")
+    3: TIMEOUT
+2017-09-29 01:17:59,890 > INFO > Failed >CTS_TDCB_MUM_RCOM_J 192.168.101.57 Reasion>TIMEOUT
+2017-09-29 01:17:59,890 > INFO > getting snmp session
+2017-09-29 01:17:59,890 > INFO > {u'security_username': u'NPCI_CTS_NMSV3', u'auth_password': u'npcictsnms', u'version': 3, 'hostname': u'192.168.101.57', u'security_level': u'auth_without_privacy'}
+2017-09-29 01:17:59,908 > INFO > Failed >NEXUS 192.168.106.11 Reasion>TIMEOUT
+2017-09-29 01:17:59,908 > INFO > getting snmp session
+2017-09-29 01:17:59,908 > INFO > {u'security_username': u'NPCI_NFS_NMSV3', u'auth_password': u'npcinfsnms', u'version': 3, 'hostname': u'192.168.106.11', u'security_level': u'auth_without_privacy'}
+2017-09-29 01:17:59,925 > INFO > Failed >CHN-DC-NOC-SW1 192.168.233.142 Reasion>TIMEOUT
+2017-09-29 01:17:59,925 > INFO > getting snmp session
+2017-09-29 01:17:59,925 > INFO > {u'security_username': u'NPCI_CTS_NMSV3', u'auth_password': u'npcictsnms', u'version': 3, 'hostname': u'192.168.233.142', u'security_level': u'auth_without_privacy'}
+2017-09-29 01:17:59,942 > INFO > getting snmp success
+2017-09-29 01:17:59,943 > INFO > getting snmp success
+2017-09-29 01:17:59,948 > INFO > getting snmp success
+2017-09-29 01:17:59,962 > INFO > Scoring Started
+2017-09-29 01:17:59,962 > DEBUG > Mongo search score for:1.0 1
+2017-09-29 01:17:59,963 > DEBUG > mongo_search_score > Starting score for > 192.168.106.11
+2017-09-29 01:17:59,964 > DEBUG > mongo_search_score > searching DB for:{'IP': u'192.168.106.11', 'INID': 1.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-29 01:17:59,964 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 01:17:59,965 > DEBUG > mongo_search_score > searching DB for:{'IP': u'192.168.106.11', 'INID': 1.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-29 01:17:59,965 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 01:17:59,965 > DEBUG > mongo_search_score > Starting score for > 192.168.101.57
+2017-09-29 01:17:59,966 > DEBUG > mongo_search_score > searching DB for:{'IP': u'192.168.101.57', 'INID': 1.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-29 01:17:59,966 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 01:17:59,967 > DEBUG > mongo_search_score > searching DB for:{'IP': u'192.168.101.57', 'INID': 1.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-29 01:17:59,967 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 01:17:59,967 > DEBUG > mongo_search_score > Starting score for > 192.168.233.142
+2017-09-29 01:17:59,968 > DEBUG > mongo_search_score > searching DB for:{'IP': u'192.168.233.142', 'INID': 1.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-29 01:17:59,968 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 01:17:59,968 > DEBUG > mongo_search_score > searching DB for:{'IP': u'192.168.233.142', 'INID': 1.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-29 01:17:59,969 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 01:17:59,969 > INFO > Scoring Completed
+2017-09-29 01:29:05,042 > INFO > Starting Job ===============> Test1-29-September-01:29:05
+2017-09-29 01:29:05,051 > INFO > Connected to 'LIVE' database...
+2017-09-29 01:29:05,052 > INFO > Scoring Object Insiated...
+2017-09-29 01:29:05,176 > INFO > SESSION UPDATED , INID = 2.0
+2017-09-29 01:29:05,177 > INFO > STARTING SESSION >1
+2017-09-29 01:29:05,180 > INFO > Apprentice>5
+2017-09-29 01:29:05,284 > ERROR > self_check
+Traceback (most recent call last):
+  File "/home/networksnap/network_snap/MonitorEngine.py", line 188, in self_check
+    if "ssh" in check:
+TypeError: argument of type 'NoneType' is not iterable
+2017-09-29 01:29:05,284 > ERROR > device_check self_check failed
+2017-09-29 01:29:05,294 > ERROR > self_check
+Traceback (most recent call last):
+  File "/home/networksnap/network_snap/MonitorEngine.py", line 188, in self_check
+    if "ssh" in check:
+TypeError: argument of type 'NoneType' is not iterable
+2017-09-29 01:29:05,295 > ERROR > device_check self_check failed
+2017-09-29 01:29:05,320 > INFO > Scoring Started
+2017-09-29 01:29:05,320 > DEBUG > Mongo search score for:2.0 1
+2017-09-29 01:29:05,322 > DEBUG > mongo_search_score > Starting score for > 10.1.1.3
+2017-09-29 01:29:05,324 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 2.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-29 01:29:05,326 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 01:29:05,326 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 2.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-29 01:29:05,328 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 01:29:05,328 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 2.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 1}}}
+2017-09-29 01:29:05,333 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 01:29:05,333 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 2.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 1}}}
+2017-09-29 01:29:05,334 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 01:29:05,334 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 2.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 2}}}
+2017-09-29 01:29:05,335 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 01:29:05,335 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 2.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 2}}}
+2017-09-29 01:29:05,336 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 01:29:05,336 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 2.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 3}}}
+2017-09-29 01:29:05,337 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 01:29:05,337 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 2.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 3}}}
+2017-09-29 01:29:05,340 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 01:29:05,341 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 2.0, 'SESSION': 1, 'Objects': {'$elemMatch': {'id': 4, u'out.result': u'failed'}}}
+2017-09-29 01:29:05,342 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 01:29:05,342 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 2.0, 'SESSION': 1, 'Objects': {'$elemMatch': {'id': 4, u'out.result': u'success'}}}
+2017-09-29 01:29:05,343 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 01:29:05,344 > DEBUG > mongo_search_score > Starting score for > 10.1.1.2
+2017-09-29 01:29:05,345 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 2.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': {u'$ne': u'reachable'}, 'id': 0}}}
+2017-09-29 01:29:05,347 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-29 01:29:05,348 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.2', 'INID': 2.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': {u'$ne': u'reachable'}, 'id': 0}}}, {'$set': {'Objects.$.score': 0}})
+2017-09-29 01:29:05,351 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 2.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-29 01:29:05,352 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 01:29:05,352 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 2.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 1}}}
+2017-09-29 01:29:05,353 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 01:29:05,353 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 2.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 1}}}
+2017-09-29 01:29:05,354 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 01:29:05,354 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 2.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 2}}}
+2017-09-29 01:29:05,358 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 01:29:05,358 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 2.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 2}}}
+2017-09-29 01:29:05,359 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 01:29:05,360 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 2.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 3}}}
+2017-09-29 01:29:05,362 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 01:29:05,363 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 2.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'up', 'id': 3}}}
+2017-09-29 01:29:05,366 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 01:29:05,367 > INFO > Scoring Completed
+2017-09-29 01:35:47,818 > INFO > Starting Job ===============> t2-29-September-01:35:47
+2017-09-29 01:35:47,869 > INFO > Connected to 'LIVE' database...
+2017-09-29 01:35:47,869 > INFO > Scoring Object Insiated...
+2017-09-29 01:35:48,889 > INFO > SESSION UPDATED , INID = 3.0
+2017-09-29 01:35:48,890 > INFO > STARTING SESSION >1
+2017-09-29 01:35:48,891 > INFO > Apprentice>5
+2017-09-29 01:35:48,898 > INFO > getting ssh session
+2017-09-29 01:35:48,898 > INFO > Trying to Login:10.1.1.3
+2017-09-29 01:35:49,354 > INFO > getting ssh session
+2017-09-29 01:35:49,354 > INFO > Trying to Login:10.1.1.2
+2017-09-29 01:35:49,543 > INFO > Login Error>Could not establish connection to host:10.1.1.3
+2017-09-29 01:35:49,544 > INFO > Failed >CHN_2 10.1.1.3 Reasion>TIMEOUT
+2017-09-29 01:35:49,544 > INFO > getting snmp session
+2017-09-29 01:35:49,544 > INFO > {u'security_username': u'NPCI_NFS_NMSV3', u'auth_password': u'npcinfsnms', u'version': 3, 'hostname': u'10.1.1.3', u'security_level': u'auth_without_privacy'}
+2017-09-29 01:35:49,575 > INFO > Login Error>Could not establish connection to host:10.1.1.2
+2017-09-29 01:35:49,575 > INFO > Failed >CHN_1 10.1.1.2 Reasion>TIMEOUT
+2017-09-29 01:35:49,575 > INFO > getting snmp session
+2017-09-29 01:35:49,576 > INFO > {u'security_username': u'NPCI_NFS_NMSV3', u'auth_password': u'npcinfsnms', u'version': 3, 'hostname': u'10.1.1.2', u'security_level': u'auth_without_privacy'}
+2017-09-29 01:35:49,594 > INFO > getting snmp success
+2017-09-29 01:35:49,602 > INFO > getting snmp success
+2017-09-29 01:35:49,608 > INFO > Scoring Started
+2017-09-29 01:35:49,608 > DEBUG > Mongo search score for:3.0 1
+2017-09-29 01:35:49,610 > DEBUG > mongo_search_score > Starting score for > 10.1.1.3
+2017-09-29 01:35:49,610 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 3.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-29 01:35:49,611 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 01:35:49,611 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 3.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-29 01:35:49,612 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 01:35:49,612 > DEBUG > mongo_search_score > Starting score for > 10.1.1.2
+2017-09-29 01:35:49,613 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 3.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-29 01:35:49,614 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 01:35:49,614 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 3.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-29 01:35:49,616 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 01:35:49,617 > INFO > Scoring Completed
+2017-09-29 01:45:00,514 > INFO > Starting Job ===============> T4-29-September-01:45:00
+2017-09-29 01:45:00,518 > INFO > Connected to 'LIVE' database...
+2017-09-29 01:45:00,518 > INFO > Scoring Object Insiated...
+2017-09-29 01:45:01,409 > INFO > SESSION UPDATED , INID = 4.0
+2017-09-29 01:45:01,409 > INFO > STARTING SESSION >1
+2017-09-29 01:45:01,412 > INFO > Apprentice>5
+2017-09-29 01:45:01,420 > INFO > getting ssh session
+2017-09-29 01:45:01,420 > INFO > Trying to Login:10.1.1.3
+2017-09-29 01:45:01,593 > INFO > getting ssh session
+2017-09-29 01:45:01,593 > INFO > Trying to Login:10.1.1.2
+2017-09-29 01:45:03,326 > INFO > Login Success :10.1.1.2:R1#
+2017-09-29 01:45:03,378 > INFO > getting snmp session
+2017-09-29 01:45:03,379 > INFO > {u'security_username': u'NPCI_NFS_NMSV3', u'auth_password': u'npcinfsnms', u'version': 3, 'hostname': u'10.1.1.2', u'security_level': u'auth_without_privacy'}
+2017-09-29 01:45:03,402 > INFO > getting snmp success
+2017-09-29 01:45:03,403 > INFO > Login Success :10.1.1.3:R2#
+2017-09-29 01:45:03,454 > INFO > getting snmp session
+2017-09-29 01:45:03,455 > INFO > {u'security_username': u'NPCI_NFS_NMSV3', u'auth_password': u'npcinfsnms', u'version': 3, 'hostname': u'10.1.1.3', u'security_level': u'auth_without_privacy'}
+2017-09-29 01:45:03,481 > INFO > getting snmp success
+2017-09-29 01:45:04,447 > INFO > Scoring Started
+2017-09-29 01:45:04,448 > DEBUG > Mongo search score for:4.0 1
+2017-09-29 01:45:04,449 > DEBUG > mongo_search_score > Starting score for > 10.1.1.3
+2017-09-29 01:45:04,449 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 4.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-29 01:45:04,450 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 01:45:04,450 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 4.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-29 01:45:04,451 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 01:45:04,451 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 4.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 1}}}
+2017-09-29 01:45:04,452 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 01:45:04,452 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 4.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.ig': u'up', 'id': 1}}}
+2017-09-29 01:45:04,453 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 01:45:04,453 > DEBUG > mongo_search_score > Starting score for > 10.1.1.2
+2017-09-29 01:45:04,453 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 4.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-29 01:45:04,454 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 01:45:04,454 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 4.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-29 01:45:04,454 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 01:45:04,455 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 4.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 1}}}
+2017-09-29 01:45:04,456 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-29 01:45:04,456 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.2', 'INID': 4.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 1}}}, {'$set': {'Objects.$.score': 0}})
+2017-09-29 01:45:04,457 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 4.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.ig': u'up', 'id': 1}}}
+2017-09-29 01:45:04,458 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 01:45:04,458 > INFO > Scoring Completed
+2017-09-29 06:10:13,948 > INFO > Starting Job ===============> tyuio-29-September-06:10:13
+2017-09-29 06:10:29,377 > INFO > Connected to 'LIVE' database...
+2017-09-29 06:10:29,377 > INFO > Scoring Object Insiated...
+2017-09-29 06:11:34,646 > INFO > SESSION UPDATED , INID = 5.0
+2017-09-29 06:11:34,647 > INFO > STARTING SESSION >1
+2017-09-29 06:11:37,116 > INFO > Apprentice>5
+2017-09-29 06:22:11,755 > INFO > Starting MonitoringEngine
+2017-09-29 06:22:12,483 > INFO > Starting MonitoringEngine
+2017-09-29 06:47:08,760 > INFO > Starting MonitoringEngine
+2017-09-29 06:47:08,761 > INFO > Starting MonitoringEngine
+2017-09-29 06:47:09,599 > INFO > Starting MonitoringEngine
+2017-09-29 06:47:09,600 > INFO > Starting MonitoringEngine
+2017-09-29 07:04:16,798 > INFO > Starting MonitoringEngine
+2017-09-29 07:04:16,823 > INFO > Starting MonitoringEngine
+2017-09-29 07:04:17,795 > INFO > Starting MonitoringEngine
+2017-09-29 07:04:17,796 > INFO > Starting MonitoringEngine
+2017-09-29 07:05:03,292 > ERROR > get_xl_group
+Traceback (most recent call last):
+  File "websnap.py", line 399, in get_xl_group
+    xl = pandas.ExcelFile(xl_file)
+  File "/usr/local/lib/python3.5/dist-packages/pandas/io/excel.py", line 232, in __init__
+    import xlrd  # throw an ImportError if we need to
+ImportError: No module named 'xlrd'
+2017-09-29 07:05:08,012 > INFO > Starting Job ===============> Test89-29-September-07:05:08
+2017-09-29 07:05:08,021 > INFO > Connected to 'LIVE' database...
+2017-09-29 07:05:08,023 > INFO > Scoring Object Insiated...
+2017-09-29 07:05:08,024 > ERROR > xls_input
+Traceback (most recent call last):
+  File "/home/networksnap/network_snap/MonitorEngine.py", line 396, in xls_input
+    xl = pandas.ExcelFile(filename)
+  File "/usr/local/lib/python3.5/dist-packages/pandas/io/excel.py", line 232, in __init__
+    import xlrd  # throw an ImportError if we need to
+ImportError: No module named 'xlrd'
+2017-09-29 07:05:08,108 > ERROR > No valid XLS input
+2017-09-29 07:05:08,108 > ERROR > STOPPED
+2017-09-29 07:06:39,835 > INFO > Starting MonitoringEngine
+2017-09-29 07:06:39,836 > INFO > Starting MonitoringEngine
+2017-09-29 07:06:40,624 > INFO > Starting MonitoringEngine
+2017-09-29 07:06:40,625 > INFO > Starting MonitoringEngine
+2017-09-29 07:07:03,636 > INFO > Starting Job ===============> JIOP123-29-September-07:07:03
+2017-09-29 07:07:03,641 > INFO > Connected to 'LIVE' database...
+2017-09-29 07:07:03,641 > INFO > Scoring Object Insiated...
+2017-09-29 07:07:04,537 > INFO > SESSION UPDATED , INID = 6.0
+2017-09-29 07:07:04,537 > INFO > STARTING SESSION >1
+2017-09-29 07:07:04,549 > INFO > Apprentice>5
+2017-09-29 07:07:04,557 > INFO > getting ssh session
+2017-09-29 07:07:04,557 > INFO > Trying to Login:10.1.1.3
+2017-09-29 07:07:04,572 > INFO > getting ssh session
+2017-09-29 07:07:04,572 > INFO > Trying to Login:10.1.1.2
+2017-09-29 07:07:25,867 > ERROR > login
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.5/dist-packages/pexpect/spawnbase.py", line 150, in read_nonblocking
+    s = os.read(self.child_fd, size)
+OSError: [Errno 5] Input/output error
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.5/dist-packages/pexpect/expect.py", line 99, in expect_loop
+    incoming = spawn.read_nonblocking(spawn.maxread, timeout)
+  File "/usr/local/lib/python3.5/dist-packages/pexpect/pty_spawn.py", line 465, in read_nonblocking
+    return super(spawn, self).read_nonblocking(size)
+  File "/usr/local/lib/python3.5/dist-packages/pexpect/spawnbase.py", line 155, in read_nonblocking
+    raise EOF('End Of File (EOF). Exception style platform.')
+pexpect.exceptions.EOF: End Of File (EOF). Exception style platform.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/networksnap/network_snap/MonitorEngine.py", line 125, in login
+    s.expect(["#",">","\$",pexpect.TIMEOUT],timeout=etimeout)
+  File "/usr/local/lib/python3.5/dist-packages/pexpect/spawnbase.py", line 321, in expect
+    timeout, searchwindowsize, async)
+  File "/usr/local/lib/python3.5/dist-packages/pexpect/spawnbase.py", line 345, in expect_list
+    return exp.expect_loop(timeout)
+  File "/usr/local/lib/python3.5/dist-packages/pexpect/expect.py", line 105, in expect_loop
+    return self.eof(e)
+  File "/usr/local/lib/python3.5/dist-packages/pexpect/expect.py", line 50, in eof
+    raise EOF(msg)
+pexpect.exceptions.EOF: End Of File (EOF). Exception style platform.
+<pexpect.pxssh.pxssh object at 0x7f2fcbede5f8>
+command: /usr/bin/ssh
+args: ['/usr/bin/ssh', '-o', 'UserKnownHostsFile=/dev/null', '-o', 'StrictHostKeyChecking=no', '-q', '-l', 'cisco', '10.1.1.2']
+buffer (last 100 chars): b''
+before (last 100 chars): b'\r\n\r\n'
+after: <class 'pexpect.exceptions.EOF'>
+match: None
+match_index: None
+exitstatus: None
+flag_eof: True
+pid: 5486
+child_fd: 20
+closed: False
+timeout: 10
+delimiter: <class 'pexpect.exceptions.EOF'>
+logfile: <_io.BufferedWriter name='/home/networksnap/network_snap/divlog/JIOP123-29-September-07-07-03/JIOP123-29-September-07-07-03_10.1.1.2.txt'>
+logfile_read: None
+logfile_send: None
+maxread: 2000
+ignorecase: False
+searchwindowsize: None
+delaybeforesend: 0.05
+delayafterclose: 0.1
+delayafterterminate: 0.1
+searcher: searcher_re:
+    0: re.compile("b'#'")
+    1: re.compile("b'>'")
+    2: re.compile("b'\\$'")
+    3: TIMEOUT
+2017-09-29 07:07:25,868 > ERROR > login
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.5/dist-packages/pexpect/spawnbase.py", line 150, in read_nonblocking
+    s = os.read(self.child_fd, size)
+OSError: [Errno 5] Input/output error
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.5/dist-packages/pexpect/expect.py", line 99, in expect_loop
+    incoming = spawn.read_nonblocking(spawn.maxread, timeout)
+  File "/usr/local/lib/python3.5/dist-packages/pexpect/pty_spawn.py", line 465, in read_nonblocking
+    return super(spawn, self).read_nonblocking(size)
+  File "/usr/local/lib/python3.5/dist-packages/pexpect/spawnbase.py", line 155, in read_nonblocking
+    raise EOF('End Of File (EOF). Exception style platform.')
+pexpect.exceptions.EOF: End Of File (EOF). Exception style platform.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/networksnap/network_snap/MonitorEngine.py", line 125, in login
+    s.expect(["#",">","\$",pexpect.TIMEOUT],timeout=etimeout)
+  File "/usr/local/lib/python3.5/dist-packages/pexpect/spawnbase.py", line 321, in expect
+    timeout, searchwindowsize, async)
+  File "/usr/local/lib/python3.5/dist-packages/pexpect/spawnbase.py", line 345, in expect_list
+    return exp.expect_loop(timeout)
+  File "/usr/local/lib/python3.5/dist-packages/pexpect/expect.py", line 105, in expect_loop
+    return self.eof(e)
+  File "/usr/local/lib/python3.5/dist-packages/pexpect/expect.py", line 50, in eof
+    raise EOF(msg)
+pexpect.exceptions.EOF: End Of File (EOF). Exception style platform.
+<pexpect.pxssh.pxssh object at 0x7f2fcbede240>
+command: /usr/bin/ssh
+args: ['/usr/bin/ssh', '-o', 'UserKnownHostsFile=/dev/null', '-o', 'StrictHostKeyChecking=no', '-q', '-l', 'cisco', '10.1.1.3']
+buffer (last 100 chars): b''
+before (last 100 chars): b'\r\n\r\n'
+after: <class 'pexpect.exceptions.EOF'>
+match: None
+match_index: None
+exitstatus: None
+flag_eof: True
+pid: 5484
+child_fd: 17
+closed: False
+timeout: 10
+delimiter: <class 'pexpect.exceptions.EOF'>
+logfile: <_io.BufferedWriter name='/home/networksnap/network_snap/divlog/JIOP123-29-September-07-07-03/JIOP123-29-September-07-07-03_10.1.1.3.txt'>
+logfile_read: None
+logfile_send: None
+maxread: 2000
+ignorecase: False
+searchwindowsize: None
+delaybeforesend: 0.05
+delayafterclose: 0.1
+delayafterterminate: 0.1
+searcher: searcher_re:
+    0: re.compile("b'#'")
+    1: re.compile("b'>'")
+    2: re.compile("b'\\$'")
+    3: TIMEOUT
+2017-09-29 07:07:26,034 > INFO > Failed >CHN_1 10.1.1.2 Reasion>TIMEOUT
+2017-09-29 07:07:26,036 > INFO > getting snmp session
+2017-09-29 07:07:26,037 > INFO > {'auth_password': 'npcinfsnms', 'hostname': '10.1.1.2', 'security_username': 'NPCI_NFS_NMSV3', 'security_level': 'auth_without_privacy', 'version': 3}
+2017-09-29 07:07:26,038 > INFO > Failed >CHN_2 10.1.1.3 Reasion>TIMEOUT
+2017-09-29 07:07:26,089 > INFO > getting snmp session
+2017-09-29 07:07:26,089 > INFO > {'auth_password': 'npcinfsnms', 'hostname': '10.1.1.3', 'security_username': 'NPCI_NFS_NMSV3', 'security_level': 'auth_without_privacy', 'version': 3}
+2017-09-29 07:07:26,109 > INFO > getting snmp success
+2017-09-29 07:07:26,116 > INFO > getting snmp success
+2017-09-29 07:07:26,132 > INFO > Scoring Started
+2017-09-29 07:07:26,132 > DEBUG > Mongo search score for:6.0 1
+2017-09-29 07:07:26,133 > DEBUG > mongo_search_score > Starting score for > 10.1.1.2
+2017-09-29 07:07:26,133 > DEBUG > mongo_search_score > searching DB for:{'IP': '10.1.1.2', 'INID': 6.0, 'SESSION': 1, 'Objects': {'$elemMatch': {'id': 0, 'out.status': 'down'}}}
+2017-09-29 07:07:26,134 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 07:07:26,134 > DEBUG > mongo_search_score > searching DB for:{'IP': '10.1.1.2', 'INID': 6.0, 'SESSION': 1, 'Objects': {'$elemMatch': {'id': 0, 'out.status': 'reachable'}}}
+2017-09-29 07:07:26,135 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 07:07:26,135 > DEBUG > mongo_search_score > Starting score for > 10.1.1.3
+2017-09-29 07:07:26,135 > DEBUG > mongo_search_score > searching DB for:{'IP': '10.1.1.3', 'INID': 6.0, 'SESSION': 1, 'Objects': {'$elemMatch': {'id': 0, 'out.status': 'down'}}}
+2017-09-29 07:07:26,136 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 07:07:26,136 > DEBUG > mongo_search_score > searching DB for:{'IP': '10.1.1.3', 'INID': 6.0, 'SESSION': 1, 'Objects': {'$elemMatch': {'id': 0, 'out.status': 'reachable'}}}
+2017-09-29 07:07:26,137 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 07:07:26,137 > INFO > Scoring Completed
+2017-09-29 07:10:32,587 > INFO > Starting MonitoringEngine
+2017-09-29 07:10:51,006 > INFO > Starting Job ===============> MYTEST1-29-September-07:10:51
+2017-09-29 07:10:51,012 > INFO > Connected to 'LIVE' database...
+2017-09-29 07:10:51,012 > INFO > Scoring Object Insiated...
+2017-09-29 07:10:51,718 > INFO > SESSION UPDATED , INID = 7.0
+2017-09-29 07:10:51,718 > INFO > STARTING SESSION >1
+2017-09-29 07:10:51,719 > INFO > Apprentice>5
+2017-09-29 07:10:51,726 > INFO > getting ssh session
+2017-09-29 07:10:51,726 > INFO > Trying to Login:10.1.1.2
+2017-09-29 07:10:51,749 > INFO > getting ssh session
+2017-09-29 07:10:51,750 > INFO > Trying to Login:10.1.1.3
+2017-09-29 07:11:12,746 > ERROR > login
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.5/dist-packages/pexpect/spawnbase.py", line 150, in read_nonblocking
+    s = os.read(self.child_fd, size)
+OSError: [Errno 5] Input/output error
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.5/dist-packages/pexpect/expect.py", line 99, in expect_loop
+    incoming = spawn.read_nonblocking(spawn.maxread, timeout)
+  File "/usr/local/lib/python3.5/dist-packages/pexpect/pty_spawn.py", line 465, in read_nonblocking
+    return super(spawn, self).read_nonblocking(size)
+  File "/usr/local/lib/python3.5/dist-packages/pexpect/spawnbase.py", line 155, in read_nonblocking
+    raise EOF('End Of File (EOF). Exception style platform.')
+pexpect.exceptions.EOF: End Of File (EOF). Exception style platform.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/networksnap/network_snap/MonitorEngine.py", line 125, in login
+    s.expect(["#",">","\$",pexpect.TIMEOUT],timeout=etimeout)
+  File "/usr/local/lib/python3.5/dist-packages/pexpect/spawnbase.py", line 321, in expect
+    timeout, searchwindowsize, async)
+  File "/usr/local/lib/python3.5/dist-packages/pexpect/spawnbase.py", line 345, in expect_list
+    return exp.expect_loop(timeout)
+  File "/usr/local/lib/python3.5/dist-packages/pexpect/expect.py", line 105, in expect_loop
+    return self.eof(e)
+  File "/usr/local/lib/python3.5/dist-packages/pexpect/expect.py", line 50, in eof
+    raise EOF(msg)
+pexpect.exceptions.EOF: End Of File (EOF). Exception style platform.
+<pexpect.pxssh.pxssh object at 0x7fe6a8881278>
+command: /usr/bin/ssh
+args: ['/usr/bin/ssh', '-o', 'UserKnownHostsFile=/dev/null', '-o', 'StrictHostKeyChecking=no', '-q', '-l', 'cisco', '10.1.1.2']
+buffer (last 100 chars): b''
+before (last 100 chars): b'\r\n\r\n'
+after: <class 'pexpect.exceptions.EOF'>
+match: None
+match_index: None
+exitstatus: None
+flag_eof: True
+pid: 5523
+child_fd: 17
+closed: False
+timeout: 10
+delimiter: <class 'pexpect.exceptions.EOF'>
+logfile: <_io.BufferedWriter name='/home/networksnap/network_snap/divlog/MYTEST1-29-September-07-10-51/MYTEST1-29-September-07-10-51_10.1.1.2.txt'>
+logfile_read: None
+logfile_send: None
+maxread: 2000
+ignorecase: False
+searchwindowsize: None
+delaybeforesend: 0.05
+delayafterclose: 0.1
+delayafterterminate: 0.1
+searcher: searcher_re:
+    0: re.compile("b'#'")
+    1: re.compile("b'>'")
+    2: re.compile("b'\\$'")
+    3: TIMEOUT
+2017-09-29 07:11:12,774 > ERROR > login
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.5/dist-packages/pexpect/spawnbase.py", line 150, in read_nonblocking
+    s = os.read(self.child_fd, size)
+OSError: [Errno 5] Input/output error
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.5/dist-packages/pexpect/expect.py", line 99, in expect_loop
+    incoming = spawn.read_nonblocking(spawn.maxread, timeout)
+  File "/usr/local/lib/python3.5/dist-packages/pexpect/pty_spawn.py", line 465, in read_nonblocking
+    return super(spawn, self).read_nonblocking(size)
+  File "/usr/local/lib/python3.5/dist-packages/pexpect/spawnbase.py", line 155, in read_nonblocking
+    raise EOF('End Of File (EOF). Exception style platform.')
+pexpect.exceptions.EOF: End Of File (EOF). Exception style platform.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/networksnap/network_snap/MonitorEngine.py", line 125, in login
+    s.expect(["#",">","\$",pexpect.TIMEOUT],timeout=etimeout)
+  File "/usr/local/lib/python3.5/dist-packages/pexpect/spawnbase.py", line 321, in expect
+    timeout, searchwindowsize, async)
+  File "/usr/local/lib/python3.5/dist-packages/pexpect/spawnbase.py", line 345, in expect_list
+    return exp.expect_loop(timeout)
+  File "/usr/local/lib/python3.5/dist-packages/pexpect/expect.py", line 105, in expect_loop
+    return self.eof(e)
+  File "/usr/local/lib/python3.5/dist-packages/pexpect/expect.py", line 50, in eof
+    raise EOF(msg)
+pexpect.exceptions.EOF: End Of File (EOF). Exception style platform.
+<pexpect.pxssh.pxssh object at 0x7fe6a8881630>
+command: /usr/bin/ssh
+args: ['/usr/bin/ssh', '-o', 'UserKnownHostsFile=/dev/null', '-o', 'StrictHostKeyChecking=no', '-q', '-l', 'cisco', '10.1.1.3']
+buffer (last 100 chars): b''
+before (last 100 chars): b'\r\n\r\n'
+after: <class 'pexpect.exceptions.EOF'>
+match: None
+match_index: None
+exitstatus: None
+flag_eof: True
+pid: 5525
+child_fd: 19
+closed: False
+timeout: 10
+delimiter: <class 'pexpect.exceptions.EOF'>
+logfile: <_io.BufferedWriter name='/home/networksnap/network_snap/divlog/MYTEST1-29-September-07-10-51/MYTEST1-29-September-07-10-51_10.1.1.3.txt'>
+logfile_read: None
+logfile_send: None
+maxread: 2000
+ignorecase: False
+searchwindowsize: None
+delaybeforesend: 0.05
+delayafterclose: 0.1
+delayafterterminate: 0.1
+searcher: searcher_re:
+    0: re.compile("b'#'")
+    1: re.compile("b'>'")
+    2: re.compile("b'\\$'")
+    3: TIMEOUT
+2017-09-29 07:11:12,849 > INFO > Failed >CHN_1 10.1.1.2 Reasion>TIMEOUT
+2017-09-29 07:11:12,850 > INFO > getting snmp session
+2017-09-29 07:11:12,850 > INFO > {'security_level': 'auth_without_privacy', 'auth_password': 'npcinfsnms', 'hostname': '10.1.1.2', 'version': 3, 'security_username': 'NPCI_NFS_NMSV3'}
+2017-09-29 07:11:12,868 > INFO > getting snmp success
+2017-09-29 07:11:12,876 > INFO > Failed >CHN_2 10.1.1.3 Reasion>TIMEOUT
+2017-09-29 07:11:12,876 > INFO > getting snmp session
+2017-09-29 07:11:12,876 > INFO > {'security_level': 'auth_without_privacy', 'auth_password': 'npcinfsnms', 'hostname': '10.1.1.3', 'version': 3, 'security_username': 'NPCI_NFS_NMSV3'}
+2017-09-29 07:11:12,892 > INFO > getting snmp success
+2017-09-29 07:11:12,896 > INFO > Scoring Started
+2017-09-29 07:11:12,896 > DEBUG > Mongo search score for:7.0 1
+2017-09-29 07:11:12,897 > DEBUG > mongo_search_score > Starting score for > 10.1.1.2
+2017-09-29 07:11:12,897 > DEBUG > mongo_search_score > searching DB for:{'SESSION': 1, 'INID': 7.0, 'Objects': {'$elemMatch': {'out.status': 'down', 'id': 0}}, 'IP': '10.1.1.2'}
+2017-09-29 07:11:12,898 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 07:11:12,898 > DEBUG > mongo_search_score > searching DB for:{'SESSION': 1, 'INID': 7.0, 'Objects': {'$elemMatch': {'out.status': 'reachable', 'id': 0}}, 'IP': '10.1.1.2'}
+2017-09-29 07:11:12,899 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 07:11:12,899 > DEBUG > mongo_search_score > Starting score for > 10.1.1.3
+2017-09-29 07:11:12,899 > DEBUG > mongo_search_score > searching DB for:{'SESSION': 1, 'INID': 7.0, 'Objects': {'$elemMatch': {'out.status': 'down', 'id': 0}}, 'IP': '10.1.1.3'}
+2017-09-29 07:11:12,900 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 07:11:12,901 > DEBUG > mongo_search_score > searching DB for:{'SESSION': 1, 'INID': 7.0, 'Objects': {'$elemMatch': {'out.status': 'reachable', 'id': 0}}, 'IP': '10.1.1.3'}
+2017-09-29 07:11:12,902 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 07:11:12,903 > INFO > Scoring Completed
+2017-09-29 07:33:31,162 > INFO > Starting MonitoringEngine
+2017-09-29 07:33:31,804 > INFO > Starting MonitoringEngine
+2017-09-29 07:33:46,378 > INFO > Starting Job ===============> MNBV124-29-September-07:33:46
+2017-09-29 07:33:46,386 > INFO > Connected to 'LIVE' database...
+2017-09-29 07:33:46,387 > INFO > Scoring Object Insiated...
+2017-09-29 07:33:47,268 > INFO > SESSION UPDATED , INID = 8.0
+2017-09-29 07:33:47,268 > INFO > STARTING SESSION >1
+2017-09-29 07:33:47,295 > INFO > Apprentice>5
+2017-09-29 07:33:47,317 > INFO > getting ssh session
+2017-09-29 07:33:47,318 > INFO > Trying to Login:10.1.1.2
+2017-09-29 07:33:47,335 > INFO > getting ssh session
+2017-09-29 07:33:47,343 > INFO > Trying to Login:10.1.1.3
+2017-09-29 07:34:08,349 > ERROR > login
+Traceback (most recent call last):
+  File "/home/networksnap/network_snap/MonitorEngine.py", line 125, in login
+    s.expect(["#",">","\$",pexpect.TIMEOUT],timeout=etimeout)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/spawnbase.py", line 321, in expect
+    timeout, searchwindowsize, async)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/spawnbase.py", line 345, in expect_list
+    return exp.expect_loop(timeout)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/expect.py", line 105, in expect_loop
+    return self.eof(e)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/expect.py", line 50, in eof
+    raise EOF(msg)
+EOF: End Of File (EOF). Exception style platform.
+<pexpect.pxssh.pxssh object at 0x7f027c099210>
+command: /usr/bin/ssh
+args: [u'/usr/bin/ssh', u'-o', u'UserKnownHostsFile=/dev/null', u'-o', u'StrictHostKeyChecking=no', u'-q', u'-l', u'cisco', u'10.1.1.2']
+buffer (last 100 chars): ''
+before (last 100 chars): '\r\n\r\n'
+after: <class 'pexpect.exceptions.EOF'>
+match: None
+match_index: None
+exitstatus: None
+flag_eof: True
+pid: 5573
+child_fd: 22
+closed: False
+timeout: 10
+delimiter: <class 'pexpect.exceptions.EOF'>
+logfile: <open file u'/home/networksnap/network_snap/divlog/MNBV124-29-September-07-33-46/MNBV124-29-September-07-33-46_10.1.1.2.txt', mode 'ab' at 0x7f0276f8e540>
+logfile_read: None
+logfile_send: None
+maxread: 2000
+ignorecase: False
+searchwindowsize: None
+delaybeforesend: 0.05
+delayafterclose: 0.1
+delayafterterminate: 0.1
+searcher: searcher_re:
+    0: re.compile("#")
+    1: re.compile(">")
+    2: re.compile("\$")
+    3: TIMEOUT
+2017-09-29 07:34:08,418 > ERROR > login
+Traceback (most recent call last):
+  File "/home/networksnap/network_snap/MonitorEngine.py", line 125, in login
+    s.expect(["#",">","\$",pexpect.TIMEOUT],timeout=etimeout)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/spawnbase.py", line 321, in expect
+    timeout, searchwindowsize, async)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/spawnbase.py", line 345, in expect_list
+    return exp.expect_loop(timeout)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/expect.py", line 105, in expect_loop
+    return self.eof(e)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/expect.py", line 50, in eof
+    raise EOF(msg)
+EOF: End Of File (EOF). Exception style platform.
+<pexpect.pxssh.pxssh object at 0x7f027c093c90>
+command: /usr/bin/ssh
+args: [u'/usr/bin/ssh', u'-o', u'UserKnownHostsFile=/dev/null', u'-o', u'StrictHostKeyChecking=no', u'-q', u'-l', u'cisco', u'10.1.1.3']
+buffer (last 100 chars): ''
+before (last 100 chars): '\r\n\r\n'
+after: <class 'pexpect.exceptions.EOF'>
+match: None
+match_index: None
+exitstatus: None
+flag_eof: True
+pid: 5574
+child_fd: 23
+closed: False
+timeout: 10
+delimiter: <class 'pexpect.exceptions.EOF'>
+logfile: <open file u'/home/networksnap/network_snap/divlog/MNBV124-29-September-07-33-46/MNBV124-29-September-07-33-46_10.1.1.3.txt', mode 'ab' at 0x7f0276f8e5d0>
+logfile_read: None
+logfile_send: None
+maxread: 2000
+ignorecase: False
+searchwindowsize: None
+delaybeforesend: 0.05
+delayafterclose: 0.1
+delayafterterminate: 0.1
+searcher: searcher_re:
+    0: re.compile("#")
+    1: re.compile(">")
+    2: re.compile("\$")
+    3: TIMEOUT
+2017-09-29 07:34:08,478 > INFO > Failed >CHN_1 10.1.1.2 Reasion>TIMEOUT
+2017-09-29 07:34:08,478 > INFO > getting snmp session
+2017-09-29 07:34:08,478 > INFO > {u'security_username': u'NPCI_NFS_NMSV3', u'auth_password': u'npcinfsnms', u'version': 3, 'hostname': u'10.1.1.2', u'security_level': u'auth_without_privacy'}
+2017-09-29 07:34:08,496 > INFO > getting snmp success
+2017-09-29 07:34:08,520 > INFO > Failed >CHN_2 10.1.1.3 Reasion>TIMEOUT
+2017-09-29 07:34:08,520 > INFO > getting snmp session
+2017-09-29 07:34:08,520 > INFO > {u'security_username': u'NPCI_NFS_NMSV3', u'auth_password': u'npcinfsnms', u'version': 3, 'hostname': u'10.1.1.3', u'security_level': u'auth_without_privacy'}
+2017-09-29 07:34:08,542 > INFO > getting snmp success
+2017-09-29 07:34:08,549 > INFO > Scoring Started
+2017-09-29 07:34:08,549 > DEBUG > Mongo search score for:8.0 1
+2017-09-29 07:34:08,550 > DEBUG > mongo_search_score > Starting score for > 10.1.1.2
+2017-09-29 07:34:08,551 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 8.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-29 07:34:08,553 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 07:34:08,554 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 8.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-29 07:34:08,556 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 07:34:08,556 > DEBUG > mongo_search_score > Starting score for > 10.1.1.3
+2017-09-29 07:34:08,556 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 8.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-29 07:34:08,557 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 07:34:08,557 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 8.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-29 07:34:08,558 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 07:34:08,558 > INFO > Scoring Completed
+2017-09-29 07:52:10,372 > INFO > Starting MonitoringEngine
+2017-09-29 07:52:10,976 > INFO > Starting MonitoringEngine
+2017-09-29 07:52:47,997 > INFO > Starting Job ===============> KPLM36-29-September-07:52:47
+2017-09-29 07:52:48,006 > INFO > Connected to 'LIVE' database...
+2017-09-29 07:52:48,006 > INFO > Scoring Object Insiated...
+2017-09-29 07:52:48,926 > INFO > SESSION UPDATED , INID = 9.0
+2017-09-29 07:52:48,927 > INFO > STARTING SESSION >1
+2017-09-29 07:52:48,958 > INFO > Apprentice>5
+2017-09-29 07:52:48,985 > INFO > getting ssh session
+2017-09-29 07:52:48,985 > INFO > Trying to Login:10.1.1.3
+2017-09-29 07:52:49,067 > INFO > getting ssh session
+2017-09-29 07:52:49,067 > INFO > Trying to Login:10.1.1.2
+2017-09-29 07:53:10,344 > ERROR > login
+Traceback (most recent call last):
+  File "/home/networksnap/network_snap/MonitorEngine.py", line 125, in login
+    s.expect(["#",">","\$",pexpect.TIMEOUT],timeout=etimeout)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/spawnbase.py", line 321, in expect
+    timeout, searchwindowsize, async)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/spawnbase.py", line 345, in expect_list
+    return exp.expect_loop(timeout)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/expect.py", line 105, in expect_loop
+    return self.eof(e)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/expect.py", line 50, in eof
+    raise EOF(msg)
+EOF: End Of File (EOF). Exception style platform.
+<pexpect.pxssh.pxssh object at 0x7fd562396fd0>
+command: /usr/bin/ssh
+args: [u'/usr/bin/ssh', u'-o', u'UserKnownHostsFile=/dev/null', u'-o', u'StrictHostKeyChecking=no', u'-q', u'-l', u'cisco', u'10.1.1.3']
+buffer (last 100 chars): ''
+before (last 100 chars): '\r\n\r\n'
+after: <class 'pexpect.exceptions.EOF'>
+match: None
+match_index: None
+exitstatus: None
+flag_eof: True
+pid: 858
+child_fd: 20
+closed: False
+timeout: 10
+delimiter: <class 'pexpect.exceptions.EOF'>
+logfile: <open file u'/home/networksnap/network_snap/divlog/KPLM36-29-September-07-52-47/KPLM36-29-September-07-52-47_10.1.1.3.txt', mode 'ab' at 0x7fd562379270>
+logfile_read: None
+logfile_send: None
+maxread: 2000
+ignorecase: False
+searchwindowsize: None
+delaybeforesend: 0.05
+delayafterclose: 0.1
+delayafterterminate: 0.1
+searcher: searcher_re:
+    0: re.compile("#")
+    1: re.compile(">")
+    2: re.compile("\$")
+    3: TIMEOUT
+2017-09-29 07:53:10,349 > ERROR > login
+Traceback (most recent call last):
+  File "/home/networksnap/network_snap/MonitorEngine.py", line 125, in login
+    s.expect(["#",">","\$",pexpect.TIMEOUT],timeout=etimeout)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/spawnbase.py", line 321, in expect
+    timeout, searchwindowsize, async)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/spawnbase.py", line 345, in expect_list
+    return exp.expect_loop(timeout)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/expect.py", line 105, in expect_loop
+    return self.eof(e)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/expect.py", line 50, in eof
+    raise EOF(msg)
+EOF: End Of File (EOF). Exception style platform.
+<pexpect.pxssh.pxssh object at 0x7fd562b28550>
+command: /usr/bin/ssh
+args: [u'/usr/bin/ssh', u'-o', u'UserKnownHostsFile=/dev/null', u'-o', u'StrictHostKeyChecking=no', u'-q', u'-l', u'cisco', u'10.1.1.2']
+buffer (last 100 chars): ''
+before (last 100 chars): '\r\n\r\n'
+after: <class 'pexpect.exceptions.EOF'>
+match: None
+match_index: None
+exitstatus: None
+flag_eof: True
+pid: 862
+child_fd: 24
+closed: False
+timeout: 10
+delimiter: <class 'pexpect.exceptions.EOF'>
+logfile: <open file u'/home/networksnap/network_snap/divlog/KPLM36-29-September-07-52-47/KPLM36-29-September-07-52-47_10.1.1.2.txt', mode 'ab' at 0x7fd5623791e0>
+logfile_read: None
+logfile_send: None
+maxread: 2000
+ignorecase: False
+searchwindowsize: None
+delaybeforesend: 0.05
+delayafterclose: 0.1
+delayafterterminate: 0.1
+searcher: searcher_re:
+    0: re.compile("#")
+    1: re.compile(">")
+    2: re.compile("\$")
+    3: TIMEOUT
+2017-09-29 07:53:10,493 > INFO > Failed >CHN_1 10.1.1.2 Reasion>TIMEOUT
+2017-09-29 07:53:10,494 > INFO > getting snmp session
+2017-09-29 07:53:10,494 > INFO > {u'security_username': u'NPCI_NFS_NMSV3', u'auth_password': u'npcinfsnms', u'version': 3, 'hostname': u'10.1.1.2', u'security_level': u'auth_without_privacy'}
+2017-09-29 07:53:10,513 > INFO > Failed >CHN_2 10.1.1.3 Reasion>TIMEOUT
+2017-09-29 07:53:10,514 > INFO > getting snmp session
+2017-09-29 07:53:10,514 > INFO > {u'security_username': u'NPCI_NFS_NMSV3', u'auth_password': u'npcinfsnms', u'version': 3, 'hostname': u'10.1.1.3', u'security_level': u'auth_without_privacy'}
+2017-09-29 07:53:10,533 > INFO > getting snmp success
+2017-09-29 07:53:10,532 > INFO > getting snmp success
+2017-09-29 07:53:10,602 > INFO > Scoring Started
+2017-09-29 07:53:10,603 > DEBUG > Mongo search score for:9.0 1
+2017-09-29 07:53:10,603 > DEBUG > mongo_search_score > Starting score for > 10.1.1.2
+2017-09-29 07:53:10,604 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 9.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-29 07:53:10,605 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 07:53:10,605 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 9.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-29 07:53:10,606 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 07:53:10,606 > DEBUG > mongo_search_score > Starting score for > 10.1.1.3
+2017-09-29 07:53:10,607 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 9.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-29 07:53:10,610 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 07:53:10,610 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 9.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-29 07:53:10,611 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 07:53:10,611 > INFO > Scoring Completed
+2017-09-29 07:54:10,760 > INFO > Starting MonitoringEngine
+2017-09-29 07:54:47,213 > INFO > Starting Job ===============> OPLIKOP-29-September-07:54:47
+2017-09-29 07:54:47,219 > INFO > Connected to 'LIVE' database...
+2017-09-29 07:54:47,219 > INFO > Scoring Object Insiated...
+2017-09-29 07:54:48,088 > INFO > SESSION UPDATED , INID = 10.0
+2017-09-29 07:54:48,089 > INFO > STARTING SESSION >1
+2017-09-29 07:54:48,090 > INFO > Apprentice>5
+2017-09-29 07:54:48,100 > INFO > getting ssh session
+2017-09-29 07:54:48,100 > INFO > Trying to Login:10.1.1.3
+2017-09-29 07:54:48,170 > INFO > getting ssh session
+2017-09-29 07:54:48,171 > INFO > Trying to Login:10.1.1.2
+2017-09-29 07:55:09,176 > ERROR > login
+Traceback (most recent call last):
+  File "/home/networksnap/network_snap/MonitorEngine.py", line 125, in login
+    s.expect(["#",">","\$",pexpect.TIMEOUT],timeout=etimeout)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/spawnbase.py", line 321, in expect
+    timeout, searchwindowsize, async)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/spawnbase.py", line 345, in expect_list
+    return exp.expect_loop(timeout)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/expect.py", line 105, in expect_loop
+    return self.eof(e)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/expect.py", line 50, in eof
+    raise EOF(msg)
+EOF: End Of File (EOF). Exception style platform.
+<pexpect.pxssh.pxssh object at 0x7fd8ddebe3d0>
+command: /usr/bin/ssh
+args: [u'/usr/bin/ssh', u'-o', u'UserKnownHostsFile=/dev/null', u'-o', u'StrictHostKeyChecking=no', u'-q', u'-l', u'cisco', u'10.1.1.3']
+buffer (last 100 chars): ''
+before (last 100 chars): '\r\n\r\n'
+after: <class 'pexpect.exceptions.EOF'>
+match: None
+match_index: None
+exitstatus: None
+flag_eof: True
+pid: 921
+child_fd: 20
+closed: False
+timeout: 10
+delimiter: <class 'pexpect.exceptions.EOF'>
+logfile: <open file u'/home/networksnap/network_snap/divlog/OPLIKOP-29-September-07-54-47/OPLIKOP-29-September-07-54-47_10.1.1.3.txt', mode 'ab' at 0x7fd8dde55420>
+logfile_read: None
+logfile_send: None
+maxread: 2000
+ignorecase: False
+searchwindowsize: None
+delaybeforesend: 0.05
+delayafterclose: 0.1
+delayafterterminate: 0.1
+searcher: searcher_re:
+    0: re.compile("#")
+    1: re.compile(">")
+    2: re.compile("\$")
+    3: TIMEOUT
+2017-09-29 07:55:09,223 > ERROR > login
+Traceback (most recent call last):
+  File "/home/networksnap/network_snap/MonitorEngine.py", line 125, in login
+    s.expect(["#",">","\$",pexpect.TIMEOUT],timeout=etimeout)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/spawnbase.py", line 321, in expect
+    timeout, searchwindowsize, async)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/spawnbase.py", line 345, in expect_list
+    return exp.expect_loop(timeout)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/expect.py", line 105, in expect_loop
+    return self.eof(e)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/expect.py", line 50, in eof
+    raise EOF(msg)
+EOF: End Of File (EOF). Exception style platform.
+<pexpect.pxssh.pxssh object at 0x7fd8de610390>
+command: /usr/bin/ssh
+args: [u'/usr/bin/ssh', u'-o', u'UserKnownHostsFile=/dev/null', u'-o', u'StrictHostKeyChecking=no', u'-q', u'-l', u'cisco', u'10.1.1.2']
+buffer (last 100 chars): ''
+before (last 100 chars): '\r\n\r\n'
+after: <class 'pexpect.exceptions.EOF'>
+match: None
+match_index: None
+exitstatus: None
+flag_eof: True
+pid: 925
+child_fd: 23
+closed: False
+timeout: 10
+delimiter: <class 'pexpect.exceptions.EOF'>
+logfile: <open file u'/home/networksnap/network_snap/divlog/OPLIKOP-29-September-07-54-47/OPLIKOP-29-September-07-54-47_10.1.1.2.txt', mode 'ab' at 0x7fd8dde554b0>
+logfile_read: None
+logfile_send: None
+maxread: 2000
+ignorecase: False
+searchwindowsize: None
+delaybeforesend: 0.05
+delayafterclose: 0.1
+delayafterterminate: 0.1
+searcher: searcher_re:
+    0: re.compile("#")
+    1: re.compile(">")
+    2: re.compile("\$")
+    3: TIMEOUT
+2017-09-29 07:55:09,277 > INFO > Failed >CHN_2 10.1.1.3 Reasion>TIMEOUT
+2017-09-29 07:55:09,278 > INFO > getting snmp session
+2017-09-29 07:55:09,278 > INFO > {u'security_username': u'NPCI_NFS_NMSV3', u'auth_password': u'npcinfsnms', u'version': 3, 'hostname': u'10.1.1.3', u'security_level': u'auth_without_privacy'}
+2017-09-29 07:55:09,296 > INFO > getting snmp success
+2017-09-29 07:55:09,325 > INFO > Failed >CHN_1 10.1.1.2 Reasion>TIMEOUT
+2017-09-29 07:55:09,325 > INFO > getting snmp session
+2017-09-29 07:55:09,325 > INFO > {u'security_username': u'NPCI_NFS_NMSV3', u'auth_password': u'npcinfsnms', u'version': 3, 'hostname': u'10.1.1.2', u'security_level': u'auth_without_privacy'}
+2017-09-29 07:55:09,344 > INFO > getting snmp success
+2017-09-29 07:55:09,352 > INFO > Scoring Started
+2017-09-29 07:55:09,353 > DEBUG > Mongo search score for:10.0 1
+2017-09-29 07:55:09,353 > DEBUG > mongo_search_score > Starting score for > 10.1.1.3
+2017-09-29 07:55:09,354 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 10.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-29 07:55:09,354 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 07:55:09,355 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 10.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-29 07:55:09,355 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 07:55:09,355 > DEBUG > mongo_search_score > Starting score for > 10.1.1.2
+2017-09-29 07:55:09,355 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 10.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-29 07:55:09,356 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 07:55:09,356 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 10.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-29 07:55:09,357 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 07:55:09,357 > INFO > Scoring Completed
+2017-09-29 07:59:22,961 > INFO > Starting MonitoringEngine
+2017-09-29 07:59:55,874 > INFO > Starting Job ===============> RTOP1-29-September-07:59:55
+2017-09-29 07:59:55,878 > INFO > Connected to 'LIVE' database...
+2017-09-29 07:59:55,879 > INFO > Scoring Object Insiated...
+2017-09-29 07:59:56,705 > INFO > SESSION UPDATED , INID = 11.0
+2017-09-29 07:59:56,705 > INFO > STARTING SESSION >1
+2017-09-29 07:59:56,707 > INFO > Apprentice>5
+2017-09-29 07:59:56,714 > INFO > getting ssh session
+2017-09-29 07:59:56,714 > INFO > Trying to Login:10.1.1.3
+2017-09-29 07:59:56,733 > INFO > getting ssh session
+2017-09-29 07:59:56,733 > INFO > Trying to Login:10.1.1.2
+2017-09-29 08:00:17,743 > ERROR > login
+Traceback (most recent call last):
+  File "/home/networksnap/network_snap/MonitorEngine.py", line 125, in login
+    s.expect(["#",">","\$",pexpect.TIMEOUT],timeout=etimeout)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/spawnbase.py", line 321, in expect
+    timeout, searchwindowsize, async)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/spawnbase.py", line 345, in expect_list
+    return exp.expect_loop(timeout)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/expect.py", line 105, in expect_loop
+    return self.eof(e)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/expect.py", line 50, in eof
+    raise EOF(msg)
+EOF: End Of File (EOF). Exception style platform.
+<pexpect.pxssh.pxssh object at 0x7f6a74113c10>
+command: /usr/bin/ssh
+args: [u'/usr/bin/ssh', u'-o', u'UserKnownHostsFile=/dev/null', u'-o', u'StrictHostKeyChecking=no', u'-q', u'-l', u'cisco', u'10.1.1.3']
+buffer (last 100 chars): ''
+before (last 100 chars): '\r\n\r\n'
+after: <class 'pexpect.exceptions.EOF'>
+match: None
+match_index: None
+exitstatus: None
+flag_eof: True
+pid: 950
+child_fd: 20
+closed: False
+timeout: 10
+delimiter: <class 'pexpect.exceptions.EOF'>
+logfile: <open file u'/home/networksnap/network_snap/divlog/RTOP1-29-September-07-59-55/RTOP1-29-September-07-59-55_10.1.1.3.txt', mode 'ab' at 0x7f6a740e8300>
+logfile_read: None
+logfile_send: None
+maxread: 2000
+ignorecase: False
+searchwindowsize: None
+delaybeforesend: 0.05
+delayafterclose: 0.1
+delayafterterminate: 0.1
+searcher: searcher_re:
+    0: re.compile("#")
+    1: re.compile(">")
+    2: re.compile("\$")
+    3: TIMEOUT
+2017-09-29 08:00:17,755 > ERROR > login
+Traceback (most recent call last):
+  File "/home/networksnap/network_snap/MonitorEngine.py", line 125, in login
+    s.expect(["#",">","\$",pexpect.TIMEOUT],timeout=etimeout)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/spawnbase.py", line 321, in expect
+    timeout, searchwindowsize, async)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/spawnbase.py", line 345, in expect_list
+    return exp.expect_loop(timeout)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/expect.py", line 105, in expect_loop
+    return self.eof(e)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/expect.py", line 50, in eof
+    raise EOF(msg)
+EOF: End Of File (EOF). Exception style platform.
+<pexpect.pxssh.pxssh object at 0x7f6a74132250>
+command: /usr/bin/ssh
+args: [u'/usr/bin/ssh', u'-o', u'UserKnownHostsFile=/dev/null', u'-o', u'StrictHostKeyChecking=no', u'-q', u'-l', u'cisco', u'10.1.1.2']
+buffer (last 100 chars): ''
+before (last 100 chars): '\r\n\r\n'
+after: <class 'pexpect.exceptions.EOF'>
+match: None
+match_index: None
+exitstatus: None
+flag_eof: True
+pid: 954
+child_fd: 23
+closed: False
+timeout: 10
+delimiter: <class 'pexpect.exceptions.EOF'>
+logfile: <open file u'/home/networksnap/network_snap/divlog/RTOP1-29-September-07-59-55/RTOP1-29-September-07-59-55_10.1.1.2.txt', mode 'ab' at 0x7f6a740e8390>
+logfile_read: None
+logfile_send: None
+maxread: 2000
+ignorecase: False
+searchwindowsize: None
+delaybeforesend: 0.05
+delayafterclose: 0.1
+delayafterterminate: 0.1
+searcher: searcher_re:
+    0: re.compile("#")
+    1: re.compile(">")
+    2: re.compile("\$")
+    3: TIMEOUT
+2017-09-29 08:00:17,845 > INFO > Failed >CHN_2 10.1.1.3 Reasion>TIMEOUT
+2017-09-29 08:00:17,846 > INFO > getting snmp session
+2017-09-29 08:00:17,846 > INFO > {u'security_username': u'NPCI_NFS_NMSV3', u'auth_password': u'npcinfsnms', u'version': 3, 'hostname': u'10.1.1.3', u'security_level': u'auth_without_privacy'}
+2017-09-29 08:00:17,864 > INFO > Failed >CHN_1 10.1.1.2 Reasion>TIMEOUT
+2017-09-29 08:00:17,864 > INFO > getting snmp session
+2017-09-29 08:00:17,864 > INFO > {u'security_username': u'NPCI_NFS_NMSV3', u'auth_password': u'npcinfsnms', u'version': 3, 'hostname': u'10.1.1.2', u'security_level': u'auth_without_privacy'}
+2017-09-29 08:00:17,884 > INFO > getting snmp success
+2017-09-29 08:00:17,889 > INFO > getting snmp success
+2017-09-29 08:00:17,895 > INFO > Scoring Started
+2017-09-29 08:00:17,895 > DEBUG > Mongo search score for:11.0 1
+2017-09-29 08:00:17,896 > DEBUG > mongo_search_score > Starting score for > 10.1.1.3
+2017-09-29 08:00:17,896 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 11.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-29 08:00:17,897 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 08:00:17,898 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 11.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-29 08:00:17,899 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 08:00:17,900 > DEBUG > mongo_search_score > Starting score for > 10.1.1.2
+2017-09-29 08:00:17,900 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 11.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-29 08:00:17,903 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 08:00:17,903 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 11.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-29 08:00:17,905 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 08:00:17,905 > INFO > Scoring Completed
+2017-09-29 08:08:23,647 > INFO > Starting MonitoringEngine
+2017-09-29 08:49:35,040 > INFO > Starting MonitoringEngine
+2017-09-29 09:17:22,843 > INFO > Starting Job ===============> TTTTTT-29-September-09:17:22
+2017-09-29 09:17:22,849 > INFO > Connected to 'LIVE' database...
+2017-09-29 09:17:22,850 > INFO > Scoring Object Insiated...
+2017-09-29 09:17:23,582 > INFO > SESSION UPDATED , INID = 12.0
+2017-09-29 09:17:23,582 > INFO > STARTING SESSION >1
+2017-09-29 09:17:23,583 > INFO > Apprentice>5
+2017-09-29 09:17:23,836 > INFO > getting ssh session
+2017-09-29 09:17:23,836 > INFO > Trying to Login:10.1.1.2
+2017-09-29 09:17:33,477 > INFO > getting ssh session
+2017-09-29 09:17:33,478 > INFO > Trying to Login:10.1.1.3
+2017-09-29 09:17:45,420 > INFO > Login Success :10.1.1.2:R1#
+2017-09-29 09:17:45,471 > INFO > getting snmp session
+2017-09-29 09:17:45,472 > INFO > {u'security_username': u'NPCI_NFS_NMSV3', u'auth_password': u'npcinfsnms', u'version': 3, 'hostname': u'10.1.1.2', u'security_level': u'auth_without_privacy'}
+2017-09-29 09:17:45,488 > INFO > getting snmp success
+2017-09-29 09:18:02,472 > INFO > Not able to reach device:10.1.1.3
+2017-09-29 09:18:02,876 > INFO > Failed >CHN_2 10.1.1.3 Reasion>TIMEOUT
+2017-09-29 09:18:02,877 > INFO > getting snmp session
+2017-09-29 09:18:02,877 > INFO > {u'security_username': u'NPCI_NFS_NMSV3', u'auth_password': u'npcinfsnms', u'version': 3, 'hostname': u'10.1.1.3', u'security_level': u'auth_without_privacy'}
+2017-09-29 09:18:02,893 > INFO > getting snmp success
+2017-09-29 09:18:02,902 > INFO > Scoring Started
+2017-09-29 09:18:02,902 > DEBUG > Mongo search score for:12.0 1
+2017-09-29 09:18:02,903 > DEBUG > mongo_search_score > Starting score for > 10.1.1.2
+2017-09-29 09:18:02,903 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 12.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-29 09:18:02,904 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 09:18:02,904 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 12.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-29 09:18:02,905 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 09:18:02,905 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 12.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 1}}}
+2017-09-29 09:18:02,906 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-29 09:18:02,906 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.2', 'INID': 12.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 1}}}, {'$set': {'Objects.$.score': 0}})
+2017-09-29 09:18:02,907 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 12.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.ig': u'up', 'id': 1}}}
+2017-09-29 09:18:02,907 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 09:18:02,907 > DEBUG > mongo_search_score > Starting score for > 10.1.1.3
+2017-09-29 09:18:02,908 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 12.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-29 09:18:02,908 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 09:18:02,908 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 12.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-29 09:18:02,909 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 09:18:02,909 > INFO > Scoring Completed
+2017-09-29 09:22:24,309 > INFO > Starting Job ===============> J1-29-September-09:22:24
+2017-09-29 09:22:24,320 > INFO > Connected to 'LIVE' database...
+2017-09-29 09:22:24,321 > INFO > Scoring Object Insiated...
+2017-09-29 09:22:25,134 > INFO > SESSION UPDATED , INID = 13.0
+2017-09-29 09:22:25,135 > INFO > STARTING SESSION >1
+2017-09-29 09:22:25,154 > INFO > Apprentice>5
+2017-09-29 09:22:25,160 > INFO > getting ssh session
+2017-09-29 09:22:25,160 > INFO > Trying to Login:10.1.1.3
+2017-09-29 09:22:26,015 > INFO > getting ssh session
+2017-09-29 09:22:26,015 > INFO > Trying to Login:10.1.1.2
+2017-09-29 09:22:27,701 > INFO > Login Success :10.1.1.2:R1#
+2017-09-29 09:22:27,754 > INFO > getting snmp session
+2017-09-29 09:22:27,754 > INFO > {u'security_username': u'NPCI_NFS_NMSV3', u'auth_password': u'npcinfsnms', u'version': 3, 'hostname': u'10.1.1.2', u'security_level': u'auth_without_privacy'}
+2017-09-29 09:22:27,775 > INFO > getting snmp success
+2017-09-29 09:22:27,791 > INFO > Login Success :10.1.1.3:R2#
+2017-09-29 09:22:27,843 > INFO > getting snmp session
+2017-09-29 09:22:27,843 > INFO > {u'security_username': u'NPCI_NFS_NMSV3', u'auth_password': u'npcinfsnms', u'version': 3, 'hostname': u'10.1.1.3', u'security_level': u'auth_without_privacy'}
+2017-09-29 09:22:27,862 > INFO > getting snmp success
+2017-09-29 09:22:30,056 > INFO > Scoring Started
+2017-09-29 09:22:30,057 > DEBUG > Mongo search score for:13.0 1
+2017-09-29 09:22:30,057 > DEBUG > mongo_search_score > Starting score for > 10.1.1.2
+2017-09-29 09:22:30,058 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 13.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-29 09:22:30,058 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 09:22:30,059 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 13.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-29 09:22:30,059 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 09:22:30,059 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 13.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 1}}}
+2017-09-29 09:22:30,060 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-29 09:22:30,060 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.2', 'INID': 13.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 1}}}, {'$set': {'Objects.$.score': 0}})
+2017-09-29 09:22:30,061 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 13.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.ig': u'up', 'id': 1}}}
+2017-09-29 09:22:30,062 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 09:22:30,062 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 13.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 2}}}
+2017-09-29 09:22:30,063 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 09:22:30,063 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 13.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.ig': u'up', 'id': 2}}}
+2017-09-29 09:22:30,063 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 09:22:30,064 > DEBUG > mongo_search_score > Starting score for > 10.1.1.3
+2017-09-29 09:22:30,064 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 13.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-29 09:22:30,064 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 09:22:30,064 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 13.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-29 09:22:30,065 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 09:22:30,065 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 13.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 1}}}
+2017-09-29 09:22:30,066 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 09:22:30,066 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 13.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.ig': u'up', 'id': 1}}}
+2017-09-29 09:22:30,068 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 09:22:30,068 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 13.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 2}}}
+2017-09-29 09:22:30,069 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-29 09:22:30,070 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.3', 'INID': 13.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 2}}}, {'$set': {'Objects.$.score': 0}})
+2017-09-29 09:22:30,071 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 13.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.ig': u'up', 'id': 2}}}
+2017-09-29 09:22:30,072 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 09:22:30,072 > INFO > Scoring Completed
+2017-09-29 09:23:55,964 > INFO > Starting Job ===============> J2-29-September-09:23:55
+2017-09-29 09:23:55,968 > INFO > Connected to 'LIVE' database...
+2017-09-29 09:23:55,968 > INFO > Scoring Object Insiated...
+2017-09-29 09:23:56,724 > INFO > SESSION UPDATED , INID = 14.0
+2017-09-29 09:23:56,725 > INFO > STARTING SESSION >1
+2017-09-29 09:23:56,851 > INFO > Apprentice>5
+2017-09-29 09:23:56,857 > INFO > getting ssh session
+2017-09-29 09:23:56,857 > INFO > Trying to Login:10.1.1.3
+2017-09-29 09:23:56,876 > INFO > getting ssh session
+2017-09-29 09:23:56,877 > INFO > Trying to Login:10.1.1.2
+2017-09-29 09:23:58,497 > INFO > Login Success :10.1.1.3:R2#
+2017-09-29 09:23:58,549 > INFO > getting snmp session
+2017-09-29 09:23:58,549 > INFO > {u'security_username': u'NPCI_NFS_NMSV3', u'auth_password': u'npcinfsnms', u'version': 3, 'hostname': u'10.1.1.3', u'security_level': u'auth_without_privacy'}
+2017-09-29 09:23:58,568 > INFO > getting snmp success
+2017-09-29 09:23:58,596 > INFO > Login Success :10.1.1.2:R1#
+2017-09-29 09:23:58,648 > INFO > getting snmp session
+2017-09-29 09:23:58,648 > INFO > {u'security_username': u'NPCI_NFS_NMSV3', u'auth_password': u'npcinfsnms', u'version': 3, 'hostname': u'10.1.1.2', u'security_level': u'auth_without_privacy'}
+2017-09-29 09:23:58,672 > INFO > getting snmp success
+2017-09-29 09:23:59,829 > INFO > Scoring Started
+2017-09-29 09:23:59,829 > DEBUG > Mongo search score for:14.0 1
+2017-09-29 09:23:59,830 > DEBUG > mongo_search_score > Starting score for > 10.1.1.3
+2017-09-29 09:23:59,830 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 14.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-29 09:23:59,831 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 09:23:59,831 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 14.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-29 09:23:59,832 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 09:23:59,832 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 14.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 1}}}
+2017-09-29 09:23:59,833 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 09:23:59,833 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 14.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.ig': u'up', 'id': 1}}}
+2017-09-29 09:23:59,834 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 09:23:59,834 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 14.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 2}}}
+2017-09-29 09:23:59,835 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-29 09:23:59,835 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.3', 'INID': 14.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 2}}}, {'$set': {'Objects.$.score': 0}})
+2017-09-29 09:23:59,836 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 14.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.ig': u'up', 'id': 2}}}
+2017-09-29 09:23:59,836 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 09:23:59,837 > DEBUG > mongo_search_score > Starting score for > 10.1.1.2
+2017-09-29 09:23:59,837 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 14.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'down', 'id': 0}}}
+2017-09-29 09:23:59,837 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 09:23:59,838 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 14.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.status': u'reachable', 'id': 0}}}
+2017-09-29 09:23:59,838 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 09:23:59,838 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 14.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 1}}}
+2017-09-29 09:23:59,839 > DEBUG > mongo_search_score > default_query > Pattern Matched
+2017-09-29 09:23:59,839 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.2', 'INID': 14.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 1}}}, {'$set': {'Objects.$.score': 0}})
+2017-09-29 09:23:59,840 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 14.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.ig': u'up', 'id': 1}}}
+2017-09-29 09:23:59,841 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 09:23:59,841 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 14.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.interface': u'down', 'id': 2}}}
+2017-09-29 09:23:59,842 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 09:23:59,842 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 14.0, 'SESSION': 1, 'Objects': {'$elemMatch': {u'out.ig': u'up', 'id': 2}}}
+2017-09-29 09:23:59,843 > DEBUG > mongo_search_score > default_query > Pattern Not matched
+2017-09-29 09:23:59,843 > INFO > Scoring Completed
+2017-09-29 09:49:50,387 > INFO > Starting MonitoringEngine
+2017-09-29 09:49:51,057 > INFO > Starting MonitoringEngine

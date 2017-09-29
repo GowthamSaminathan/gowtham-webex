@@ -32,49 +32,48 @@ def snmp_sys_uptime(ses,monobj):
 				out.update({"result":"success","uptime":uptime})
 		return out
 	except Exception as e:
-		print e
 		logger.exception("snmp_sys_uptime")
 		return out	
 
 def cis_raw(ses,monobj):
-    try:
-    	ses = ses.get("ssh_session")
-        out = {"result":"failed"}
-        mon = monobj.get("input")
-        mon = mon.get("cmd").split(",")
+	try:
+		ses = ses.get("ssh_session")
+		out = {"result":"failed"}
+		mon = monobj.get("input")
+		mon = mon.get("cmd").split(",")
 
-        exp = ses[1]
-        ses[0].sendline("terminal length 0")
-        for cmd in mon:
-            ses[0].sendline(cmd)
-            ses[0].expect([cmd,pxssh.TIMEOUT])
-            ses[0].expect([exp,pxssh.TIMEOUT],timeout=300)
-            #data = str(ses[0].before)
-        out.update({"result":"success"})
-        return out
-    except Exception as e:
-    	logger.exception("cis_raw")
-        return out
+		exp = ses[1]
+		ses[0].sendline("terminal length 0")
+		for cmd in mon:
+			ses[0].sendline(cmd)
+			ses[0].expect([cmd,pxssh.TIMEOUT])
+			ses[0].expect([exp,pxssh.TIMEOUT],timeout=300)
+			#data = str(ses[0].before)
+		out.update({"result":"success"})
+		return out
+	except Exception as e:
+		logger.exception("cis_raw")
+		return out
 
 def cis_cpu_uti(ses,monobj):
-    try:
-    	ses = ses.get("ssh_session")
-        out = {}
-        exp = s[1]
-        cmd = "sh processes cpu sorted | i one minute:"
-        #s[0].sendline("terminal length 0")
-        ses[0].sendline(cmd)
-        ses[0].expect([cmd,pxssh.TIMEOUT],timeout=5)
-        ses[0].expect([exp,pxssh.TIMEOUT],timeout=5)
-        data = str(s[0].before)
-        b = data.split(";")[1].split(":")[1].strip()
-        if b != None or len(str(b)) > 0:
-           out.update({"CPU_One minute:":b})
-           return out
-        else:
-             return {"CPU_One minute:":""}
-    except Exception as e:
-    	logger.exception("cpu_uti")
+	try:
+		ses = ses.get("ssh_session")
+		out = {}
+		exp = s[1]
+		cmd = "sh processes cpu sorted | i one minute:"
+		#s[0].sendline("terminal length 0")
+		ses[0].sendline(cmd)
+		ses[0].expect([cmd,pxssh.TIMEOUT],timeout=5)
+		ses[0].expect([exp,pxssh.TIMEOUT],timeout=5)
+		data = str(s[0].before)
+		b = data.split(";")[1].split(":")[1].strip()
+		if b != None or len(str(b)) > 0:
+		   out.update({"CPU_One minute:":b})
+		   return out
+		else:
+			 return {"CPU_One minute:":""}
+	except Exception as e:
+		logger.exception("cpu_uti")
 
 
 def juniper_interface(ses,monobj):
@@ -313,37 +312,37 @@ def nexus_sw_int(ses,monobj):
 
 
 def cis_bgp(ses,monobj):
-    try:
-    	ses = ses.get("ssh_session")
-        out = {}
-        mon_ = monobj.get("monitor")
-        mon_ = mon_.split(",")
-        
-        type_ = monobj.get("type")
-        in_ = monobj.get("name")
+	try:
+		ses = ses.get("ssh_session")
+		out = {}
+		mon_ = monobj.get("monitor")
+		mon_ = mon_.split(",")
+		
+		type_ = monobj.get("type")
+		in_ = monobj.get("name")
 
-        exp = ses[1]
-        cmd = "show ip bgp summary "
-        ses[0].sendline("terminal length 0")
-        ses[0].sendline(cmd)
-        ses[0].expect([cmd,pxssh.TIMEOUT],timeout=5)
-        ses[0].expect([exp,pxssh.TIMEOUT],timeout=5)
-        data = str(ses[0].before)
-        all_ot = []
-        for host in mon_:
-            try:
-                ot=""
-                pos = data.find(host)
-                if pos > -1:
-                    n = filter(None,data[pos:].split("\n")[0].split(" "))
-                    ot = {"neighbor":n[0].strip(),"AS":n[2].strip(),"uptime":n[-2].strip(),"received-prf":n[-1].strip()}
-                    all_ot.append(ot)
-            except Exception as e:
-    			logger.exception("cis_bgp Ex1")
-            out.update({"BGP":all_ot})
-        return out
-    except Exception as e:
-    	logger.exception("cis_bgp Ex2")
+		exp = ses[1]
+		cmd = "show ip bgp summary "
+		ses[0].sendline("terminal length 0")
+		ses[0].sendline(cmd)
+		ses[0].expect([cmd,pxssh.TIMEOUT],timeout=5)
+		ses[0].expect([exp,pxssh.TIMEOUT],timeout=5)
+		data = str(ses[0].before)
+		all_ot = []
+		for host in mon_:
+			try:
+				ot=""
+				pos = data.find(host)
+				if pos > -1:
+					n = filter(None,data[pos:].split("\n")[0].split(" "))
+					ot = {"neighbor":n[0].strip(),"AS":n[2].strip(),"uptime":n[-2].strip(),"received-prf":n[-1].strip()}
+					all_ot.append(ot)
+			except Exception as e:
+				logger.exception("cis_bgp Ex1")
+			out.update({"BGP":all_ot})
+		return out
+	except Exception as e:
+		logger.exception("cis_bgp Ex2")
 
 
 if __name__ == "__main__":

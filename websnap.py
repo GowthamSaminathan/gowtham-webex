@@ -12,7 +12,19 @@ import shutil
 import pandas
 import random
 from threading import Thread
+import logging
+from logging.handlers import RotatingFileHandler
 
+
+logger =  logging.getLogger("Rotating Log websnap")
+logger.setLevel(logging.DEBUG)
+handler = RotatingFileHandler(os.getcwd()+"/Websnap.log",maxBytes=5000000,backupCount=25)
+formatter = logging.Formatter('%(asctime)s > %(levelname)s > %(message)s')
+handler.setFormatter(formatter)
+logger.addHandler(handler)
+#logger.propagate = False # DISABLE LOG STDOUT
+
+logger.info("Starting MonitoringEngine")
 
 # Create dummy thread
 global main_thread
@@ -43,7 +55,7 @@ def sqlget_input(INID=0,GETNEW=True):
 			all_data = mcollection.find({"INID":INID},{"_id":0})
 			return list(all_data)
 		except Exception as e:
-				print "Error sqlget_byid>",e
+				logger.exception("sqlget_input")
 
 def sqlget_output(SESSION=0,INID=0,LIVE=True):
 		try:
@@ -59,7 +71,7 @@ def sqlget_output(SESSION=0,INID=0,LIVE=True):
 				all_data = mcollection.find({"INID":INID,"SESSION":SESSION},{"_id":0})
 				return list(all_data)
 		except Exception as e:
-				print "Error sqlget_output",e
+				logger.exception("sqlget_output")
 
 
 @app.route('/')
@@ -131,7 +143,7 @@ def history():
 
 				return jsonify(darray)
 		except Exception as e:
-				print "Error history >",e
+				logger.exception("sqlget_output")
 				return "None"
 
 
@@ -199,27 +211,26 @@ def result():
 
 @app.route('/upload_input',methods = ['POST', 'GET'])
 def upload_input():
-    if request.method == 'POST':
-    	try:
-        	f = request.files['file']
-		print request.form
-		override = request.form.get('override')
-        	filename = secure_filename(f.filename)
-        	#jn = str(datetime.datetime.now().strftime("%d-%B-%H_%M_%S"))
-        	#filename = jn+"-"+filename
-        	check_file = os.path.join(app.config['UPLOAD_FOLDER'],filename)
-		file_status = os.path.isfile(check_file)
-		if file_status == True and override == "yes":
-        		f.save(check_file)
-			return 'success'
-		elif file_status == False:
-			f.save(check_file)
-			return 'success'
-                else:
-			return "File Exist"
-        except Exception as e:
-        	print "upload_input Error>"+str(e)
-        	return "failed"
+	if request.method == 'POST':
+		try:
+			f = request.files['file']
+			override = request.form.get('override')
+			filename = secure_filename(f.filename)
+			#jn = str(datetime.datetime.now().strftime("%d-%B-%H_%M_%S"))
+			#filename = jn+"-"+filename
+			check_file = os.path.join(app.config['UPLOAD_FOLDER'],filename)
+			file_status = os.path.isfile(check_file)
+			if file_status == True and override == "yes":
+				f.save(check_file)
+				return 'success'
+			elif file_status == False:
+				f.save(check_file)
+				return 'success'
+			else:
+				return "File Exist"
+		except Exception as e:
+			logger.exception("upload_input")
+			return "failed"
 
 @app.route('/job',methods = ['POST', 'GET'])
 def get_job():
@@ -258,7 +269,7 @@ def get_group():
 					return jsonify({"status":"error"})
 		return jsonify(status)
 	except Exception as e:
-		print "Get Group Error>"+str(e)
+		logger.exception("get_group")
 		return jsonify({"status":"error"})
 
 
@@ -305,140 +316,136 @@ def new_job():
 				status = {"status":"InputFileNotFound"}
 			return jsonify(status)
 		except Exception as e:
-			print "new_job>"+str(e)
+			logger.exception("new_job")
 			return jsonify({"status":"error"})
 
 @app.route('/delete_input',methods = ['POST', 'GET'])
 def delete_input():
-    if request.method == 'POST':
-    	try:
-    		status = {"status":"Not Deleted"}
-    		fn = request.form.get('filename')
-        	full_path = os.path.join(app.config['UPLOAD_FOLDER'], fn)
-        	try:
-        		os.remove(full_path)
-        		return jsonify({"status":"Deleted"})
-        	except:
-        		return jsonify(status)
-        except Exception as e:
-        	print e
-        	return "failed"
+	if request.method == 'POST':
+		try:
+			status = {"status":"Not Deleted"}
+			fn = request.form.get('filename')
+			full_path = os.path.join(app.config['UPLOAD_FOLDER'], fn)
+			try:
+				os.remove(full_path)
+				return jsonify({"status":"Deleted"})
+			except:
+				return jsonify(status)
+		except Exception as e:
+			logger.exception("delete_input")
+			return "failed"
 
 @app.route('/download_input',methods = ['POST', 'GET'])
 def download_input():
-    if request.method == 'GET':
-    	try:
-    		dfile = request.args.get('download')
-    		if dfile != None:
-    			rf = os.path.join(os.getcwd(),"input_file")
-    			fp = os.path.join(rf,dfile)
-    			return send_file(fp, as_attachment=True)
-        except Exception as e:
-        	return "failed"
+	if request.method == 'GET':
+		try:
+			dfile = request.args.get('download')
+			if dfile != None:
+				rf = os.path.join(os.getcwd(),"input_file")
+				fp = os.path.join(rf,dfile)
+				return send_file(fp, as_attachment=True)
+		except Exception as e:
+			return "failed"
 
 @app.route('/list_input',methods = ['POST', 'GET'])
 def list_input():
-    if request.method == 'POST':
-    	try:
-    		name = os.listdir(app.config['UPLOAD_FOLDER'])
-    		if len(name) > 0:
-    			return jsonify({"files":name})
-    		else:
-    			return "failed"
-        except Exception as e:
-        	return "failed"
+	if request.method == 'POST':
+		try:
+			name = os.listdir(app.config['UPLOAD_FOLDER'])
+			if len(name) > 0:
+				return jsonify({"files":name})
+			else:
+				return "failed"
+		except Exception as e:
+			return "failed"
 
 @app.route('/rawdownload',methods = ['POST', 'GET'])
 def rawdownload():
-    if request.method == 'GET':
-    	try:
-    		rawfile = request.args.get('download')
-    		print rawfile
-    		if rawfile != None:
-    			rf = os.path.join(os.getcwd(),"divlog")
-    			rawfile = rawfile.replace(":","-")
-    			fp = os.path.join(rf,rawfile)
-    			if os.path.isfile(fp+".zip") == True:
-    				pass;
-    			else:
-    				shutil.make_archive(fp,"zip",fp)
-    			return send_file(fp+".zip", as_attachment=True)
-        except Exception as e:
-        	print e
-        	return "failed"
+	if request.method == 'GET':
+		try:
+			rawfile = request.args.get('download')
+			if rawfile != None:
+				rf = os.path.join(os.getcwd(),"divlog")
+				rawfile = rawfile.replace(":","-")
+				fp = os.path.join(rf,rawfile)
+				if os.path.isfile(fp+".zip") == True:
+					pass;
+				else:
+					shutil.make_archive(fp,"zip",fp)
+				return send_file(fp+".zip", as_attachment=True)
+		except Exception as e:
+			logger.exception("rawdownload")
+			return "failed"
 
 
 @app.route('/getsession',methods = ['POST', 'GET'])
 def get_session():
-    if request.method == 'POST':
-    	try:
-    		fn = request.form.get('session')
-    		if fn == "live":
+	if request.method == 'POST':
+		try:
+			fn = request.form.get('session')
+			if fn == "live":
 				mdb = mongoc.db
 				mcollection = mdb['SESSION']
 				session = mcollection.find({"_id":1},{"_id":0})
 				session = list(session)
 				return jsonify({"session":session})
-        except Exception as e:
-        	return "failed"
+		except Exception as e:
+			return "failed"
 
 
 
 def get_xl_group(xl_file):
-    try:
-        xl = pandas.ExcelFile(xl_file)
-        df1 = xl.parse('input')
-        head = list(df1.columns.values)
-        nd = []
-        for index, row in df1.iterrows():
-        	gp = row.get("Group")
-        	le = row.get("Level")
-        	if gp != None and le != None:
-	        	g = str(gp).split(",")
-	        	l = str(le).split(",")
-	        	d = {"Group":g,"Level":l}
-	        	if d in nd:
-	        		#No need to insert duplicate data
-	        		pass
-	        	else:
-	        		nd.append(d)
-        return {"data":nd}
-    except Exception as e:
-    	print "get_xl_group Error>"+str(e)
+	try:
+		xl = pandas.ExcelFile(xl_file)
+		df1 = xl.parse('input')
+		head = list(df1.columns.values)
+		nd = []
+		for index, row in df1.iterrows():
+			gp = row.get("Group")
+			le = row.get("Level")
+			if gp != None and le != None:
+				g = str(gp).split(",")
+				l = str(le).split(",")
+				d = {"Group":g,"Level":l}
+				if d in nd:
+					#No need to insert duplicate data
+					pass
+				else:
+					nd.append(d)
+		return {"data":nd}
+	except Exception as e:
+		logger.exception("get_xl_group")
 
 def excell_filter(d_group,xl_file,new_xl_file):
-    try:
-        xl = pandas.ExcelFile(xl_file)
-        df1 = xl.parse('input')
-        head = list(df1.columns.values)
-        head.remove("Group")
-        head.remove("Level")
-        nd = []
-        print d_group
-        for index, row in df1.iterrows():
-        	#row = list(row)
-        	g = str(row["Group"]).split(",")
-        	l = str(row["Level"]).split(",")
-        	row.pop("Group")
-        	row.pop("Level")
-        	for d in d_group:
-        		if d.get("Group") in g and d.get("Level") in l:
-        			if list(row) in nd:
-        				pass;
-        			else:
-        				nd.append(list(row))
+	try:
+		xl = pandas.ExcelFile(xl_file)
+		df1 = xl.parse('input')
+		head = list(df1.columns.values)
+		head.remove("Group")
+		head.remove("Level")
+		nd = []
+		for index, row in df1.iterrows():
+			#row = list(row)
+			g = str(row["Group"]).split(",")
+			l = str(row["Level"]).split(",")
+			row.pop("Group")
+			row.pop("Level")
+			for d in d_group:
+				if d.get("Group") in g and d.get("Level") in l:
+					if list(row) in nd:
+						pass;
+					else:
+						nd.append(list(row))
 
-        if len(nd) == 0:
-        	return False
-        print nd
-        print new_xl_file
-        newdf = pandas.DataFrame(nd,columns=head)
-        writer = pandas.ExcelWriter(new_xl_file)
-        newdf.to_excel(writer, sheet_name='input',startrow=0,startcol=0,index = False)
-        writer.save()
-        return True
-    except Exception as e:
-        print ("Excell Filter Error >",e)
+		if len(nd) == 0:
+			return False
+		newdf = pandas.DataFrame(nd,columns=head)
+		writer = pandas.ExcelWriter(new_xl_file)
+		newdf.to_excel(writer, sheet_name='input',startrow=0,startcol=0,index = False)
+		writer.save()
+		return True
+	except Exception as e:
+		logger.exception("excell_filter")
 
 if __name__ == '__main__':
 	net_auto_modul = MonitorEngine.main_model()

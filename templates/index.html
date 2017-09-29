@@ -240,9 +240,9 @@
 
 </nav>
 
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-md-3 col-sm-4">
+        <div class="col-md-2 col-sm-2">
             <div class="progress red">
                 <span class="progress-left">
                     <span class="progress-bar"></span>
@@ -253,7 +253,7 @@
                 <div id="danger-bar" class="progress-value">Loading</div>
             </div>
         </div>
-        <div class="col-md-3 col-sm-4">
+        <div class="col-md-2 col-sm-2">
             <div class="progress yellow">
                 <span class="progress-left">
                     <span class="progress-bar"></span>
@@ -264,7 +264,7 @@
                 <div id="warning-bar" class="progress-value">Loading</div>
             </div>
         </div>
-        <div class="col-md-3 col-sm-4">
+        <div class="col-md-2 col-sm-2">
             <div class="progress green">
                 <span class="progress-left">
                     <span class="progress-bar"></span>
@@ -273,7 +273,12 @@
                     <span class="progress-bar"></span>
                 </span>
                 <div id="good-bar" class="progress-value">Loading</div>
-            </div>
+            </div></div>
+
+              <div class="col-md-6 col-sm-6">
+            <table id="oldjobs" class="table table-striped table-bordered dt-responsive nowrap"></table>
+          </div>
+
         </div>
     </div>
 </div>
@@ -284,18 +289,12 @@
   <div class="row">
     <br/>
 
-<div class="col-md-8">
+<div class="col-md-12">
   <h4><span id="jobdesc" class="label label-primary">JOBNAME</span>
   <span id="inid" class="label label-info">INID</span>
   <span id="outid" class="label label-default">SNAPSHOT</span>
   </h4>
 <table id="searchtable" class="table table-striped table-bordered dt-responsive nowrap"></table></div>
-
-<div class="col-md-4">
-  <h4><span id="tophistory" class="label label-default" style="display: block;">Top History</span></h4>
-<table id="oldjobs" class="table table-striped table-bordered dt-responsive nowrap"></table></div>
-
-
 </div></div>
 
 
@@ -456,9 +455,9 @@ dataSet = [];
         data : dataSet,
         dom: 'lBfrtip',
         "createdRow": function( row, data, dataIndex){
-                if( data[2] ==  0){$(row).css({"background-color":"#ff0000",'color': '#ffffff','font-weight':'bold'});}
-                else if(data[2] ==  100){$(row).css({"background-color":"#1abc9c",'color': '#ffffff','font-weight':'bold'});}
-                else {$(row).css({"background-color":"#fdba04",'color': '#ffffff','font-weight':'bold'});}
+                if( data[2] ==  0){$(row).css({"background-color":"#ff0000",'color': '#ffffff','font-weight':'bold',"font-size": "12px"});}
+                else if(data[2] ==  100){$(row).css({"background-color":"#1abc9c",'color': '#ffffff','font-weight':'bold',"font-size": "12px"});}
+                else {$(row).css({"background-color":"#fdba04",'color': '#ffffff','font-weight':'bold',"font-size": "12px"});}
 
                 if( data[0].search("JOBNAME:") ==  0){$(row).css({"background-color":"#597df2",'color': '#ffffff','font-weight':'bold'});}
               },
@@ -483,7 +482,8 @@ sesdata = [];
     stable = $('#sessiontable').DataTable( {
         data : sesdata,
         "searching": false,
-        "scrollY":"200px",
+        "scrollY":"500px",
+        "scrollX": false,
         "scrollCollapse":true,
         "paging":false,
         responsive: true,
@@ -507,13 +507,14 @@ oldjobtable = $('#oldjobs').DataTable( {
                     return data;
                 }
             }],
-        "scrollY":"200px",
+        "scrollY":'100px',
         "scrollCollapse":true,
         "paging":false,
+        "order": [[ 0, "desc" ]],
         responsive: true,
-        dom: 'lrftip',
+        dom: 'lrtip',
         columns: [
-             { title: "TIME" },
+             { title: "JOB HISTORY" },
             { title: "JOBNAME" }
             
         ]
@@ -749,7 +750,7 @@ if (stype == "Completed"){ses_completed = ses_completed + 1;}
 if (stype == "Running"){ses_running = ses_running + 1;}
 if (mouse_down != true)
 {
-stable.rows.add([[shost,sip,stype+" "+sstate]]);
+stable.rows.add([[shost,sip,stype+" : "+JSON.stringify(sstate)]]);
 stable.draw();
 }
 }
@@ -874,7 +875,7 @@ function aj_post(data)
 {
 new_update_required = true;
 $("#load-status").text("Updated");
-$("#load-status").fadeIn(150).fadeOut(150).fadeIn(150).fadeOut(250).fadeIn(250);
+$("#load-status").fadeOut(150).fadeIn(150);
 if(data == "None"){console.log("RECEVING None");return "";}
 console.log("RECEVING : INID:"+data["INID"]+" SESSION:"+data["SESSION"]);
 $('#inid').text("INID: "+data["INID"]);
@@ -905,7 +906,7 @@ if(dout == 0) {dout = "0"} // To Fix calculating length for number
 //clear Table for new update
 else{
 dtable.clear().draw();
-$("#datetimepicker1").fadeIn(100).fadeOut(100).fadeIn(100);
+$("#datetimepicker1").fadeOut(150).fadeIn(150);
 $('#jobdesc').text(dout[0].JOBNAME);
 $('#datetimepicker1').val(moment.utc(new Date(dout[0].TD)).format('DD-MM-YYYY HH:mm:ss'));
 $.each(dout, function(index, value) {
@@ -927,17 +928,9 @@ $.each(dout, function(index, value) {
   });
 
 });
-
-try {
-// Adding fooder
-dtable.draw();
-dtable.draw();
-jobinfo = "JOBNAME: "+dout[0].JOBNAME
-dtable.rows.add([[jobinfo,"","","",""]]);}catch(e){console.log(e)}
 get_oldjobs($('#datetimepicker1').val(),10);
 dtable.draw();
 dtable.draw();
-
 }
 
 }catch(err){console.log("process_in_out"+err)}
@@ -983,7 +976,7 @@ if (data["status"] == "Running"){
 $('#outtime').text(data["status"]+":"+data["jobname"]);}else{
 
 $('#outtime').text("Last Job:"+data["jobname"]);
-$('#outtime').fadeIn(150).fadeOut(150).fadeIn(150).fadeOut(250).fadeIn(250)
+$('#outtime').fadeOut(150).fadeIn(150);
 }
 
 
