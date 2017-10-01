@@ -57,7 +57,8 @@ class score_gen():
 						# Converting Test to JSON
 						ranks = json.loads(ranks)
 						elmt_id = mon_obj.get("id")
-						last_score = 0
+						last_score = 100
+						note = ""
 						for rank in ranks:
 							#print rank
 							custom_query = rank.get("query")
@@ -73,18 +74,24 @@ class score_gen():
 							queryout = mdb_out.find_one(dafault_query,{"_id":0,"TD":0})
 							#print queryout
 							if queryout == None:
-								logger.debug("mongo_search_score > default_query > Pattern Not matched")
+								logger.debug("mongo_search_score > Pattern Not matched")
 							else:
-								logger.debug("mongo_search_score > default_query > Pattern Matched")
+								# For adding issue note
+								if score != 100:
+									if type(rank.get("query")) == dict:
+										for k,v in rank.get("query").iteritems():
+											note = note + str(k) + ","
+
+								logger.debug("mongo_search_score > Pattern Matched")
 								# Update very lowest score in rank pattern
-								if last_score < score:
+								if last_score >= score:
 									last_score = score
-								#tmpdesc = hostname+" "+ip+" "+str(emon)+" "+str(etype)+" "+str(ename)+" "+str(custom_query)+" "+str(last_score)+" "+str(queryout.get("OUT"))
-								#desc = desc+"\n"+str(tmpdesc)
-								#print "Issue pattern matched > ",desc
-								d = dafault_query,{"$set": {"Objects.$"+".score":last_score}}
-								logger.debug("mongo_search_score > updating score >"+str(d))
-								mdb_out.update(dafault_query,{"$set": {"Objects.$"+".score":last_score}})
+									#tmpdesc = hostname+" "+ip+" "+str(emon)+" "+str(etype)+" "+str(ename)+" "+str(custom_query)+" "+str(last_score)+" "+str(queryout.get("OUT"))
+									#desc = desc+"\n"+str(tmpdesc)
+									#print "Issue pattern matched > ",desc
+									d = dafault_query,{"$set": {"Objects.$"+".score":last_score}}
+									logger.debug("mongo_search_score > updating score >"+str(d))
+									mdb_out.update(dafault_query,{"$set": {"Objects.$"+".score":last_score,"Objects.$"+".note":note}})
 				except Exception as e:
 					logger.exception("mongo_search_score")
 		except Exception as e:
