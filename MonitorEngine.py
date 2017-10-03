@@ -20,6 +20,7 @@ from threading import Thread
 from concurrent.futures import ThreadPoolExecutor
 from concurrent.futures import as_completed
 import easysnmp
+import yaml
 
 logger =  logging.getLogger("Rotating Log")
 logger.setLevel(logging.DEBUG)
@@ -427,13 +428,53 @@ class main_model():
 		except Exception as e:
 			logger.exception("xls_input")
 	
+	def yaml_compiler(self,file_path):
+		try:
+			fp = open(file_path)
+			jsn = yaml.load(fp)
+			jsn = jsn.get("networksnap")
+			
+			if jsn == None:
+				logger.error("Not a valid YAML : 'networksnap' missing")
+				return None
+			
+			if type(jsn) != list or len(jsn) < 1 :
+				logger.error("Not a valid YAML : 'required one or more flow'")
+				return None
+			
+			for obj in jsn:
+				all_obj = obj.get("Objects")
+				if obj.get("IP") == None:
+					logger.error("Not a valid YAML : 'IP' Missed")
+					return None
+				if all_obj == None or type(all_obj) != list or len(all_obj) < 1:
+					logger.error("Not a valid YAML : 'Objects' missing")
+					return None
+				
+				# Setting Object ID
+				objid = 0
+				for one_obj in all_obj:
+					#Change rank "JSON" to STRING ( because mondodb not accept $ carecter in key)
+					one_obj.update({"rank":json.dumps(one_obj.get("rank"))})
+					if one_obj.get("function") == "self_check":
+						one_obj.update({"id":0})
+					else:
+						objid = objid + 1
+						one_obj.update({"id":objid})
+
+			return jsn
+		except Exception as e:
+			logger.exception("yaml_compiler")
+
 	def mongdb(self,TD,input="xls",filepath=None):
 		try:
 			INID  = 1
 			if input == "xls":
-				csv_data = self.xls_input(filepath)
+				#csv_data = self.xls_input(filepath)
+				csv_data = self.yaml_compiler(filepath)
+				print csv_data
 				if csv_data == None or len(csv_data) == 0:
-					logger.error("No valid XLS input")
+					logger.error("No valid input file")
 					return None
 			else:
 				return None
@@ -483,5 +524,5 @@ class main_model():
 if __name__ == '__main__':
 	pass;
 	logger.info("Manual Mode Running")
-	#m = main_model()
-	#m.main_run("/home/gow/network_snap/input_file/06-August-08_41_07-GNS.xlsx","TESTTTT",5)
+	m = main_model()
+	m.main_run("test.yaml","YAML-TEST",101)

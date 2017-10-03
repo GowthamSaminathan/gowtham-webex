@@ -38,7 +38,7 @@ def snmp_sys_uptime(ses,monobj):
 def cis_raw(ses,monobj):
 	try:
 		ses = ses.get("ssh_session")
-		out = {"result":"failed"}
+		out = {"log":"failed"}
 		mon = monobj.get("input")
 		mon = mon.get("cmd").split(",")
 
@@ -49,7 +49,7 @@ def cis_raw(ses,monobj):
 			ses[0].expect([cmd,pxssh.TIMEOUT])
 			ses[0].expect([exp,pxssh.TIMEOUT],timeout=300)
 			#data = str(ses[0].before)
-		out.update({"result":"success"})
+		out.update({"log":"success"})
 		return out
 	except Exception as e:
 		logger.exception("cis_raw")
@@ -68,10 +68,10 @@ def cis_cpu_uti(ses,monobj):
 		data = str(s[0].before)
 		b = data.split(";")[1].split(":")[1].strip()
 		if b != None or len(str(b)) > 0:
-		   out.update({"CPU_One minute:":b})
+		   out.update({"CPU":b})
 		   return out
 		else:
-			 return {"CPU_One minute:":""}
+			 return {"CPU":""}
 	except Exception as e:
 		logger.exception("cpu_uti")
 
@@ -113,7 +113,7 @@ def juniper_interface(ses,monobj):
 			if redata:
 				orate = redata.group(0).split(":")[1].replace(" ","")
 
-			out.update({"inrate":irate,"outrate":orate})
+			out.update({"input rate":int(irate),"output rate":int(orate)})
 		
 		if "duplex" in mon_:
 			if data.find("half") != -1:
@@ -137,7 +137,7 @@ def juniper_interface(ses,monobj):
 				error = err.group(0).split(",")[0].replace("bpdu error: ","")
 				if error == "none":
 					error = "0"
-				out.update({"error":error})
+				out.update({"error":int(error)})
 		return out
 	except Exception as e:
 		logger.exception("juniper_interface")
@@ -181,7 +181,7 @@ def cis_sw_int(ses,monobj):
 			if len(redata) > 0:
 				orate = redata[0].replace('output rate ','')
 				#rate = irate+"|"+orate
-			out.update({"inrate":irate,"outrate":orate})
+			out.update({"input rate":int(irate),"output rate":int(orate)})
 		
 		if "duplex" in mon_:
 			if data.find("half") != -1:
@@ -213,17 +213,17 @@ def cis_sw_int(ses,monobj):
 			redata = re.findall(r'total output drops: [0-9]+',data)
 			if len(redata) == 1:
 				outdrop = redata[0].replace('total output drops: ','')
-				out.update({"outdrops":outdrop})
+				out.update({"output drops":int(outdrop)})
 
 			redata = re.findall(r'[0-9]+ input error',data)
 			if len(redata) == 1:
 				inerror = redata[0].replace(' input error','')
-				out.update({"inerror":inerror})
+				out.update({"input error":int(inerror)})
 
 			redata = re.findall(r'[0-9]+ crc',data)
 			if len(redata) == 1:
 				crcerror = redata[0].replace(' crc','')
-				out.update({"crc":crcerror})
+				out.update({"crc":int(crcerror)})
 		return out
 	except Exception as e:
 		logger.exception("cis_sw_int")
@@ -266,7 +266,7 @@ def nexus_sw_int(ses,monobj):
 			if len(redata) > 0:
 				orate = redata[0].replace('seconds output rate ','')
 				#rate = irate+"|"+orate
-			out.update({"inrate":irate,"outrate":orate})
+			out.update({"input rate":int(irate),"output rate":int(orate)})
 		
 		if "duplex" in mon_:
 			if data.find("half") != -1:
@@ -295,17 +295,17 @@ def nexus_sw_int(ses,monobj):
 			redata = re.findall(r'[0-9]+ output error',data)
 			if len(redata) == 1:
 				outerror = redata[0].replace(' output error','')
-				out.update({"outdrops":outerror})
+				out.update({"output drops":int(outerror)})
 
 			redata = re.findall(r'[0-9]+ input error',data)
 			if len(redata) == 1:
 				inerror = redata[0].replace(' input error','')
-				out.update({"inerror":inerror})
+				out.update({"input error":int(inerror)})
 
 			redata = re.findall(r'[0-9]+ crc',data)
 			if len(redata) == 1:
 				crcerror = redata[0].replace(' crc','')
-				out.update({"crc":crcerror})
+				out.update({"crc":int(crcerror)})
 		return out
 	except Exception as e:
 		logger.exception("nexus_sw_int")
@@ -315,7 +315,8 @@ def cis_bgp(ses,monobj):
 	try:
 		ses = ses.get("ssh_session")
 		out = {}
-		mon_ = monobj.get("monitor")
+		monobj = monobj.get("input")
+		mon_ = monobj.get("neighbor")
 		mon_ = mon_.split(",")
 		
 		type_ = monobj.get("type")
