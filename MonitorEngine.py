@@ -470,8 +470,8 @@ class main_model():
 		try:
 			INID  = 1
 			if input == "xls":
-				#csv_data = self.xls_input(filepath)
-				csv_data = self.yaml_compiler(filepath)
+				csv_data = self.xls_input(filepath)
+				#csv_data = self.yaml_compiler(filepath)
 				print csv_data
 				if csv_data == None or len(csv_data) == 0:
 					logger.error("No valid input file")
@@ -524,5 +524,5 @@ class main_model():
 if __name__ == '__main__':
 	pass;
 	logger.info("Manual Mode Running")
-	m = main_model()
-	m.main_run("test.yaml","YAML-TEST",101)
+	#m = main_model()
+	#m.main_run("test.yaml","YAML-TEST",101)
