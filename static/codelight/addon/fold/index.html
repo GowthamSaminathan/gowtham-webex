@@ -50,6 +50,16 @@
 <script src="/static/codelight/addon/lint/yaml-lint.js"></script>
 <script src="/static/codelight/addon/display/autorefresh.js"></script>
 
+<script src="/static/codelight/addon/fold/brace-fold.js"></script>
+<script src="/static/codelight/addon/fold/comment-fold.js"></script>
+<script src="/static/codelight/addon/fold/foldcode.js"></script>
+<script src="/static/codelight/addon/fold/foldgutter.js"></script>
+<script src="/static/codelight/addon/fold/indent-fold.js"></script>
+<script src="/static/codelight/addon/fold/markdown-fold.js"></script>
+<script src="/static/codelight/addon/fold/xml-fold.js"></script>
+
+<link rel="stylesheet" href="/static/codelight/addon/fold/foldgutter.css" />
+
 <link rel="stylesheet" type="text/css" href="/static/select2.css">
 <script type="text/javascript" src="/static/select2.min.js"></script>
 
@@ -79,7 +89,7 @@
         
         </div>
         <div class="modal-body">
-        <textarea id="yamltxt"> </textarea>
+        <textarea id="yamltxt" style="width:auto;height:95%;"> </textarea>
          <!-- <table id="listinput" class="display"></table> -->
         </div>
         <div class="modal-footer">
@@ -355,7 +365,8 @@ html body {background-color: rgba(240, 240, 240,1.00);}
     autorefrsh:true,
     theme: "rubyblue",
     mode: "text/x-yaml",
-    gutters: ["CodeMirror-lint-markers"],
+    foldGutter: true,
+    gutters: ["CodeMirror-lint-markers","CodeMirror-linenumbers", "CodeMirror-foldgutter"],
     lint: true
   });
   editor.refresh();
