@@ -1,8 +1,0 @@
-
-
-NFSDR_PRMT_PRMY_CHNN#terminal length 0
-sh processes cpu sorted | i one minute:
-terminal length 0
-NFSDR_PRMT_PRMY_CHNN#sh processes cpu sorted | i one minute:
-CPU utilization for five seconds: 23%/0%; one minute: 11%; five minutes: 10%
-NFSDR_PRMT_PRMY_CHNN#

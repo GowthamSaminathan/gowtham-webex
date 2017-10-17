@@ -1,8 +1,0 @@
-
-
-NFSDR_CRSW_VSS_CHNN#terminal length 0
-sh processes cpu sorted | i one minute:
-terminal length 0
-NFSDR_CRSW_VSS_CHNN#sh processes cpu sorted | i one minute:
-CPU utilization for five seconds: 17%/8%; one minute: 10%; five minutes: 11%
-NFSDR_CRSW_VSS_CHNN#

@@ -1,22 +1,0 @@
-
-
-
-
-gowtham@CTS_TDCB_MUM_RCOM_J> 
-
-
-gowtham@CTS_TDCB_MUM_RCOM_J> terminal length 0
-
-
-gowtham@CTS_TDCB_MUM_RCOM_J> show interface ge-0/0/0 | no-more
-terminal
-                             ^
-unknown command.
-gowtham@CTS_TDCB_MUM_RCOM_J> terminal   length
-                             ^
-unknown command.
-gowtham@CTS_TDCB_MUM_RCOM_J> terminallength   0
-                             ^
-unknown command.
-
-gowtham@CTS_TDCB_MUM_RCOM_J> 
