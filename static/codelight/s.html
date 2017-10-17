@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<textarea id="yamltxt"> </textarea>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="http://127.0.0.1/code/lib/codemirror.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/3.10.0/js-yaml.min.js"></script>
+<link rel="stylesheet" href="http://127.0.0.1/code/lib/codemirror.css" />
+<script src="http://127.0.0.1/code/mode/yaml/yaml.js"></script>
+<link rel="stylesheet" href="http://127.0.0.1/code/theme/rubyblue.css" />
+<link rel="stylesheet" href="http://127.0.0.1/code/addon/lint/lint.css" />
+<script src="http://127.0.0.1/code/addon/lint/lint.js"></script>
+<script src="http://127.0.0.1/code/addon/lint/yaml-lint.js"></script>
+<script>
+  var editor = CodeMirror.fromTextArea(yamltxt, {
+    lineNumbers: true,
+    theme: "rubyblue",
+    lint: {
+	        globalstrict: true,
+	        strict: true
+      }
+  });
+</script>
+
+
+
+</body>
+</html>
