@@ -144,7 +144,7 @@ def juniper_interface(ses,monobj):
 
 
 
-def cis_sw_int(ses,monobj):
+def cisco_switch(ses,monobj):
 	# Monitor cisco switch interface : speed, duplex, error , bits 
 	try:
 		ses = ses.get("ssh_session")

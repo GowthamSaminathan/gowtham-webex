@@ -106,6 +106,27 @@ class main_model():
 		#Saving ssh session
 		self.ssh_ses = {}
 
+	def get_credentials_from_yaml(self,credential_file):
+		try:
+			fp = open(credential_file)
+			jsn = yaml.load(fp)
+			error = []
+			all_ip = {}
+			for j in jsn:
+				gips = j.get("ip")
+				if gips != None:
+					gips = gips.split(" ")
+					for gip in gips:
+						if all_ip.get(gip) != None:
+							# Duplicate IP found
+							error.append("Duplicate IP:"+str(gip))
+						else:
+							new_dic = dict(j)
+							new_dic.pop("ip")
+							all_ip.update({gip:new_dic})
+			return all_ip
+		except Exception as e:
+			logger.exception("get_credentials")
 	def login(self,hostname='',auth=[],logpath="default_log.txt",login_timeout=10,etimeout=6):
 		# Login to NPCI device , "enable" password check disabled because of aaa conf in NPCI
 		if len(auth) > 0:
@@ -185,7 +206,7 @@ class main_model():
 				return ses
 		return ses
 
-	def self_check(self,IP,Hostname,dir_path,element):
+	def self_check(self,IP,Hostname,dir_path,element,my_credentials):
 		try:
 			result = {}
 			all_sessions = {"status":{}}
@@ -196,8 +217,9 @@ class main_model():
 			if "ssh" in check:
 				try:
 					logger.info("getting ssh session")
-					username = einput.get("username")
-					password = einput.get("password")
+					ssh_auth = my_credentials.get("ssh")
+					username = ssh_auth.get("username")
+					password = ssh_auth.get("password")
 					timeout = einput.get("timeout")
 					etype = einput.get("type")
 					auth = {"username":username,"password":password}
@@ -222,7 +244,7 @@ class main_model():
 			if "snmp" in check:
 				try:
 					logger.info("getting snmp session")
-					snmp_conf = einput.get("snmp")
+					snmp_conf = my_credentials.get("snmp")
 					snmp_conf.update({"hostname":IP})
 					logger.info(snmp_conf)
 					session = easysnmp.Session(**snmp_conf)
@@ -271,7 +293,12 @@ class main_model():
 						break;
 					# Self check
 					if myid == 0:
-						out_session = self.self_check(IP,Hostname,dir_path,element)
+						my_credentials = self.credentials.get(IP)
+						if my_credentials == None:
+							logger.error("credential not found for:"+str(IP))
+							out_session = None
+						else:
+							out_session = self.self_check(IP,Hostname,dir_path,element,my_credentials)
 						if out_session != None:
 							
 							einput = element.get("input")
@@ -298,9 +325,13 @@ class main_model():
 						else:
 							logger.error("device_check self_check failed")
 					elif continue_next == True:
-						et = element.get("function")
-						out = globals()[et](out_session,element)
-						element.update({"out":out})
+						try:
+							et = element.get("function")
+							out = globals()[et](out_session,element)
+							element.update({"out":out})
+						except Exception as e:
+							logger.exception("device_check")
+							element.update({"out":"Error: function not present: "+str(et)})
 
 			return Monitoring_obj
 
@@ -336,6 +367,18 @@ class main_model():
 		except Exception as e:
 			logger.exception("single_host")
 
+	def get_support_files(self,input_file_path):
+		
+		try:
+			fils = {"credential_file":None,"score_file":"default"}
+			fp = open(input_file_path)
+			jsn = yaml.load(fp)
+			fils.update({"credential_file":jsn.get("credential")})
+			fils.update({"score_file":jsn.get("score")})
+			return fils
+		except Exception as e:
+			logger.exception("get_support_files")
+
 	def start_run(self,input_file_path,jobname,apprentice = 5):
 		try:
 			# start create DB function
@@ -344,9 +387,24 @@ class main_model():
 			if self.mongdb(TD,"xls",input_file_path) == True:
 				pass;
 			else:
-				logger.error("STOPPED")
+				logger.error("INPUT FILE ERROR")
 				return None
 			session = 0
+			
+			# Get Supporting files
+			fils = self.get_support_files(input_file_path)
+			credential_file_path = fils.get("credential_file")
+			score_file_path = fils.get("score_file")
+			if credential_file_path == None:
+				logger.error("CREDENTIAL FILE NOT FOUND")
+				return None
+			default_path = os.path.join(os.getcwd(),"input_file")
+			credential_file_path = os.path.join(default_path,credential_file_path)
+			self.credentials = self.get_credentials_from_yaml(credential_file_path)
+			
+			if self.credentials == None:
+				logger.error("CREDENTIAL FILE ERROR")
+				return None
 			for y in range(1):
 				tim = time.strftime('%Y-%m-%d %H:%M:%S')
 				session = session + 1
@@ -470,9 +528,8 @@ class main_model():
 		try:
 			INID  = 1
 			if input == "xls":
-				csv_data = self.xls_input(filepath)
-				#csv_data = self.yaml_compiler(filepath)
-				print csv_data
+				#csv_data = self.xls_input(filepath)
+				csv_data = self.yaml_compiler(filepath)
 				if csv_data == None or len(csv_data) == 0:
 					logger.error("No valid input file")
 					return None
