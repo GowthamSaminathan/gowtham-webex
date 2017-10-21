@@ -117,16 +117,17 @@ class main_model():
 				if gips != None:
 					gips = gips.split(" ")
 					for gip in gips:
-						if all_ip.get(gip) != None:
-							# Duplicate IP found
-							error.append("Duplicate IP:"+str(gip))
-						else:
-							new_dic = dict(j)
-							new_dic.pop("ip")
-							all_ip.update({gip:new_dic})
+						check_dup_dic = dict(j)
+						new_dic = dict(j)
+						new_dic.pop("ip")
+						all_ip.update({gip:new_dic})
+				else:
+					logger.warning("get_credentials_from_yaml : ip not found for: "+str(j))
+			
 			return all_ip
 		except Exception as e:
 			logger.exception("get_credentials")
+	
 	def login(self,hostname='',auth=[],logpath="default_log.txt",login_timeout=10,etimeout=6):
 		# Login to NPCI device , "enable" password check disabled because of aaa conf in NPCI
 		if len(auth) > 0:

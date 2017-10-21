@@ -296,3 +296,9 @@ Traceback (most recent call last):
     raise XLRDError('Unsupported format, or corrupt file: ' + msg)
 XLRDError: Unsupported format, or corrupt file: Expected BOF record; found '---\ncred'
 2017-10-19 12:11:55,831 > INFO > Starting MonitoringEngine
+2017-10-21 11:10:00,965 > INFO > Starting MonitoringEngine
+2017-10-21 11:10:02,714 > INFO > Starting MonitoringEngine
+2017-10-21 11:54:29,848 > INFO > Starting MonitoringEngine
+2017-10-21 11:54:34,969 > INFO > Starting MonitoringEngine
+2017-10-21 11:54:43,240 > INFO > Starting MonitoringEngine
+2017-10-21 11:56:49,422 > INFO > Starting MonitoringEngine
