@@ -1,0 +1,24 @@
+---
+- function: self_check
+  querys:
+   - Q: {ssh: {$ne: reachable}}
+     score: 0
+   - Q: {ssh: reachable}
+     score: 100
+  host: 
+   10.1.1.1
+   10.1.1.2
+   10.1.1.3
+   all
+
+- function: raw
+  querys:
+   - Q: {result: success}
+     score: 20
+   - Q: {result: failed}
+     score: 10
+  host: 
+   10.1.1.1
+   10.1.1.2
+   10.1.1.3
+   all

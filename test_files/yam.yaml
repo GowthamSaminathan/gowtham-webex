@@ -1,31 +1,28 @@
 ---
-- cisco:
-  ip:
-   10.1.1.1
-   10.1.1.3
-   10.1.1.4
-   10.1.1.6
-   10.1.1.7
-   10.1.1.8
-   10.1.1.9
-  snmp:
-    auth_password: npcinfsnms
-    security_username: NPCI_NFS_NMSV3
-    security_level: auth_without_privacy
-    version: 3
-  ssh:
-    username: cisco
-    password: cisco
-- juniper:
-  ipp:
+- function: self_check
+  
+  querys:
+   - Q: {ssh: reachable}
+     score: 20
+   - Q: {interface: failed}
+     score: 10
+  
+  host: 
    10.1.1.1
    10.1.1.2
-  snmp:
-    auth_password: npcinfsnms
-    security_username: NPCI_NFS_NMSV3
-    security_level: auth_without_privacy
-    version: 3
-  ssh:
-    username: cisco
-    password: cisco
-...
+   10.1.1.3
+   all
+
+- function: raw
+
+  querys:
+   - Q: {result: failed}
+     score: 50
+   - Q: {result: success}
+     score: 10
+
+  host: 
+   10.1.1.1
+   10.1.1.2
+   10.1.1.3
+   all

@@ -665,3 +665,92 @@ AttributeError: 'NoneType' object has no attribute 'update'
 2017-10-21 11:54:34,964 > INFO > Starting MonitoringEngine
 2017-10-21 11:54:43,235 > INFO > Starting MonitoringEngine
 2017-10-21 11:56:49,416 > INFO > Starting MonitoringEngine
+2017-10-21 12:06:08,129 > INFO > Starting MonitoringEngine
+2017-10-21 12:06:37,626 > INFO > Starting MonitoringEngine
+2017-10-21 18:40:32,335 > INFO > Starting MonitoringEngine
+2017-10-21 18:40:34,844 > INFO > Starting MonitoringEngine
+2017-10-21 18:44:56,224 > INFO > Starting Job ===============> JOB1_TEST-21-October-18:44:56
+2017-10-21 18:44:56,227 > INFO > Connected to 'LIVE' database...
+2017-10-21 18:44:56,227 > INFO > Scoring Object Insiated...
+2017-10-21 18:44:57,297 > INFO > SESSION UPDATED , INID = 93.0
+2017-10-21 18:44:57,339 > INFO > STARTING SESSION >1
+2017-10-21 18:44:57,379 > INFO > Apprentice>5
+2017-10-21 18:44:58,249 > INFO > getting ssh session
+2017-10-21 18:44:58,250 > INFO > Trying to Login:10.1.1.2
+2017-10-21 18:45:27,570 > INFO > Not able to reach device:10.1.1.2
+2017-10-21 18:45:27,977 > INFO > Failed >CHN_1 10.1.1.2 Reasion>TIMEOUT
+2017-10-21 18:45:27,978 > INFO > getting snmp session
+2017-10-21 18:45:27,979 > INFO > {'security_username': 'NPCI_NFS_NMSV3', 'auth_password': 'npcinfsnms', 'version': 3, 'hostname': u'10.1.1.2', 'security_level': 'auth_without_privacy'}
+2017-10-21 18:45:28,014 > INFO > getting snmp success
+2017-10-21 18:45:28,019 > INFO > Scoring Started
+2017-10-21 18:45:28,025 > DEBUG > Mongo search score for:93.0 1
+2017-10-21 18:45:28,027 > DEBUG > mongo_search_score > Starting score for > 10.1.1.2
+2017-10-21 18:45:28,027 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 93.0, 'SESSION': 1, 'Objects': {'$elemMatch': {'out.ssh': 'reachable', 'id': 0}}}
+2017-10-21 18:45:28,030 > DEBUG > mongo_search_score > Pattern Not matched
+2017-10-21 18:45:28,031 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 93.0, 'SESSION': 1, 'Objects': {'$elemMatch': {'out.interface': 'failed', 'id': 0}}}
+2017-10-21 18:45:28,033 > DEBUG > mongo_search_score > Pattern Not matched
+2017-10-21 18:45:28,034 > INFO > Scoring Completed
+2017-10-21 18:46:51,636 > INFO > Starting Job ===============> JOB_TEST2-21-October-18:46:51
+2017-10-21 18:46:51,647 > INFO > Connected to 'LIVE' database...
+2017-10-21 18:46:51,649 > INFO > Scoring Object Insiated...
+2017-10-21 18:46:51,686 > INFO > SESSION UPDATED , INID = 94.0
+2017-10-21 18:46:51,702 > INFO > STARTING SESSION >1
+2017-10-21 18:46:51,706 > INFO > Apprentice>5
+2017-10-21 18:46:51,715 > INFO > getting ssh session
+2017-10-21 18:46:51,715 > INFO > Trying to Login:10.1.1.2
+2017-10-21 18:47:20,638 > INFO > Not able to reach device:10.1.1.2
+2017-10-21 18:47:21,049 > INFO > Failed >CHN_1 10.1.1.2 Reasion>TIMEOUT
+2017-10-21 18:47:21,050 > INFO > getting snmp session
+2017-10-21 18:47:21,052 > INFO > {'security_username': 'NPCI_NFS_NMSV3', 'auth_password': 'npcinfsnms', 'version': 3, 'hostname': u'10.1.1.2', 'security_level': 'auth_without_privacy'}
+2017-10-21 18:47:21,092 > INFO > getting snmp success
+2017-10-21 18:47:21,098 > INFO > Scoring Started
+2017-10-21 18:47:21,383 > DEBUG > Mongo search score for:94.0 1
+2017-10-21 18:47:21,389 > DEBUG > mongo_search_score > Starting score for > 10.1.1.2
+2017-10-21 18:47:21,391 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 94.0, 'SESSION': 1, 'Objects': {'$elemMatch': {'out.ssh': 'reachable', 'id': 0}}}
+2017-10-21 18:47:21,400 > DEBUG > mongo_search_score > Pattern Not matched
+2017-10-21 18:47:21,402 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 94.0, 'SESSION': 1, 'Objects': {'$elemMatch': {'out.interface': 'failed', 'id': 0}}}
+2017-10-21 18:47:21,412 > DEBUG > mongo_search_score > Pattern Not matched
+2017-10-21 18:47:21,414 > INFO > Scoring Completed
+2017-10-21 18:49:05,920 > INFO > Starting Job ===============> JOB156-21-October-18:49:05
+2017-10-21 18:49:05,925 > INFO > Connected to 'LIVE' database...
+2017-10-21 18:49:05,926 > INFO > Scoring Object Insiated...
+2017-10-21 18:49:05,962 > INFO > SESSION UPDATED , INID = 95.0
+2017-10-21 18:49:05,978 > INFO > STARTING SESSION >1
+2017-10-21 18:49:05,982 > INFO > Apprentice>5
+2017-10-21 18:49:05,989 > INFO > getting ssh session
+2017-10-21 18:49:05,989 > INFO > Trying to Login:10.1.1.2
+2017-10-21 18:49:34,908 > INFO > Not able to reach device:10.1.1.2
+2017-10-21 18:49:35,317 > INFO > Failed >CHN_1 10.1.1.2 Reasion>TIMEOUT
+2017-10-21 18:49:35,318 > INFO > getting snmp session
+2017-10-21 18:49:35,320 > INFO > {'security_username': 'NPCI_NFS_NMSV3', 'auth_password': 'npcinfsnms', 'version': 3, 'hostname': u'10.1.1.2', 'security_level': 'auth_without_privacy'}
+2017-10-21 18:49:35,367 > INFO > getting snmp success
+2017-10-21 18:49:35,373 > INFO > Scoring Started
+2017-10-21 18:49:35,848 > DEBUG > Mongo search score for:95.0 1
+2017-10-21 18:49:35,853 > DEBUG > mongo_search_score > Starting score for > 10.1.1.2
+2017-10-21 18:49:35,855 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 95.0, 'SESSION': 1, 'Objects': {'$elemMatch': {'out.ssh': 'reachable', 'id': 0}}}
+2017-10-21 18:49:35,862 > DEBUG > mongo_search_score > Pattern Not matched
+2017-10-21 18:49:35,863 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 95.0, 'SESSION': 1, 'Objects': {'$elemMatch': {'out.ssh': 'failed', 'id': 0}}}
+2017-10-21 18:49:35,869 > DEBUG > mongo_search_score > Pattern Not matched
+2017-10-21 18:49:35,870 > INFO > Scoring Completed
+2017-10-21 18:53:06,441 > INFO > Starting Job ===============> JOB678-21-October-18:53:06
+2017-10-21 18:53:06,444 > INFO > Connected to 'LIVE' database...
+2017-10-21 18:53:06,445 > INFO > Scoring Object Insiated...
+2017-10-21 18:53:06,459 > INFO > SESSION UPDATED , INID = 96.0
+2017-10-21 18:53:06,475 > INFO > STARTING SESSION >1
+2017-10-21 18:53:06,479 > INFO > Apprentice>5
+2017-10-21 18:53:06,487 > INFO > getting ssh session
+2017-10-21 18:53:06,488 > INFO > Trying to Login:10.1.1.2
+2017-10-21 18:53:35,444 > INFO > Not able to reach device:10.1.1.2
+2017-10-21 18:53:35,855 > INFO > Failed >CHN_1 10.1.1.2 Reasion>TIMEOUT
+2017-10-21 18:53:35,857 > INFO > getting snmp session
+2017-10-21 18:53:35,859 > INFO > {'security_username': 'NPCI_NFS_NMSV3', 'auth_password': 'npcinfsnms', 'version': 3, 'hostname': u'10.1.1.2', 'security_level': 'auth_without_privacy'}
+2017-10-21 18:53:35,895 > INFO > getting snmp success
+2017-10-21 18:53:35,902 > INFO > Scoring Started
+2017-10-21 18:53:35,994 > DEBUG > Mongo search score for:96.0 1
+2017-10-21 18:53:35,998 > DEBUG > mongo_search_score > Starting score for > 10.1.1.2
+2017-10-21 18:53:35,999 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 96.0, 'SESSION': 1, 'Objects': {'$elemMatch': {'out.ssh': {'$ne': 'reachable'}, 'id': 0}}}
+2017-10-21 18:53:36,006 > DEBUG > mongo_search_score > Pattern Matched
+2017-10-21 18:53:36,007 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.2', 'INID': 96.0, 'SESSION': 1, 'Objects': {'$elemMatch': {'out.ssh': {'$ne': 'reachable'}, 'id': 0}}}, {'$set': {'Objects.$.score': 0}})
+2017-10-21 18:53:36,012 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 96.0, 'SESSION': 1, 'Objects': {'$elemMatch': {'out.ssh': 'reachable', 'id': 0}}}
+2017-10-21 18:53:36,018 > DEBUG > mongo_search_score > Pattern Not matched
+2017-10-21 18:53:36,019 > INFO > Scoring Completed

@@ -39,8 +39,31 @@ class score_gen():
 
 	def __init__(self):
 		logger.info("Scoring Object Insiated...")
+
+	def get_querys_from_json(self,score_jsn,ip,function):
+		try:
+			jsn = score_jsn
+			if jsn == None:
+				logger.exception("get_querys_from_yaml > None JSON")
+				return None
+			all_list = []
+			for data in jsn:
+				if data.get("function") == function:
+					# Function matched with YAML file
+					host_list = data.get("host")
+					if  host_list != None:
+						host_list = host_list.split(" ")
+						for host in host_list:
+							if host == ip or host == "all":
+								# Host Matched with YAML file
+								for d in data.get("querys"):
+									all_list.append(d)
+								break;
+			return all_list
+		except Exception as e:
+			logger.exception("get_querys_from_yaml")
 	
-	def mongo_search_score(self,INID,session,mdb):
+	def mongo_search_score(self,INID,session,mdb,score_jsn):
 		try:
 			logger.debug("Mongo search score for:"+str(str(INID)+" "+str(session)))
 			mdb_out = mdb['OUTPUT']
@@ -54,15 +77,21 @@ class score_gen():
 					obj_index = -1
 					for mon_obj in mon_objects:
 						obj_index = obj_index + 1
-						ranks = mon_obj.get("rank")
+						#ranks = mon_obj.get("rank")
 						# Converting Test to JSON
-						ranks = json.loads(ranks)
+						#ranks = json.loads(ranks)
 						elmt_id = mon_obj.get("id")
 						last_score = 100
 						note = ""
+						function = mon_obj.get("function")
+						ranks = self.get_querys_from_json(score_jsn,IP,function)
+						if type(ranks) != list:
+							pass;
+							logger.error("mongo_search_score > QUERY not found in YAML for:"+str(IP)+":"+str(function))
 						for rank in ranks:
 							#print rank
-							custom_query = rank.get("query")
+							#custom_query = json.loads(rank.get("Q"))
+							custom_query = rank.get("Q")
 							score = rank.get("score")
 							dafault_query = {"INID":INID,"SESSION":session,"IP":IP}
 							#print custom_query
@@ -79,17 +108,14 @@ class score_gen():
 							else:
 								# For adding issue note
 								if score != 100:
-									if type(rank.get("query")) == dict:
-										for k,v in rank.get("query").iteritems():
+									if type(rank.get("Q")) == dict:
+										for k,v in rank.get("Q").iteritems():
 											note = note + str(k) + ","
 
 								logger.debug("mongo_search_score > Pattern Matched")
 								# Update very lowest score in rank pattern
 								if last_score >= score:
 									last_score = score
-									#tmpdesc = hostname+" "+ip+" "+str(emon)+" "+str(etype)+" "+str(ename)+" "+str(custom_query)+" "+str(last_score)+" "+str(queryout.get("OUT"))
-									#desc = desc+"\n"+str(tmpdesc)
-									#print "Issue pattern matched > ",desc
 									d = dafault_query,{"$set": {"Objects.$"+".score":last_score}}
 									logger.debug("mongo_search_score > updating score >"+str(d))
 									mdb_out.update(dafault_query,{"$set": {"Objects.$"+".score":last_score,"Objects.$"+".note":note}})
@@ -127,7 +153,7 @@ class main_model():
 			return all_ip
 		except Exception as e:
 			logger.exception("get_credentials")
-	
+
 	def login(self,hostname='',auth=[],logpath="default_log.txt",login_timeout=10,etimeout=6):
 		# Login to NPCI device , "enable" password check disabled because of aaa conf in NPCI
 		if len(auth) > 0:
@@ -399,9 +425,15 @@ class main_model():
 			if credential_file_path == None:
 				logger.error("CREDENTIAL FILE NOT FOUND")
 				return None
+			
+			if score_file_path == None:
+				logger.error("SCORE FILE NOT FOUND")
+				return None
+
 			default_path = os.path.join(os.getcwd(),"input_file")
 			credential_file_path = os.path.join(default_path,credential_file_path)
 			self.credentials = self.get_credentials_from_yaml(credential_file_path)
+
 			
 			if self.credentials == None:
 				logger.error("CREDENTIAL FILE ERROR")
@@ -446,9 +478,15 @@ class main_model():
 						
 				
 				#Start Scoring
-				logger.info("Scoring Started")
-				self.mongo_search_score(INID,session,self.mdb)
-				logger.info("Scoring Completed")
+				try:
+					logger.info("Scoring Started")
+					score_file_path = os.path.join(default_path,score_file_path)
+					fp = open(score_file_path)
+					score_jsn = yaml.load(fp)
+					self.mongo_search_score(INID,session,self.mdb,score_jsn)
+					logger.info("Scoring Completed")
+				except Exception as e:
+					logger.exception("start_run")
 				#UPDATE CURRENT SESSION
 				mcollection = self.mdb['SESSION']
 				mcollection.update({"_id":1},{"$set":{"SESSION":session}})
