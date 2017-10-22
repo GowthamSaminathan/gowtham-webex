@@ -389,3 +389,5 @@ Traceback (most recent call last):
   File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 1265, in bof_error
     raise XLRDError('Unsupported format, or corrupt file: ' + msg)
 XLRDError: Unsupported format, or corrupt file: Expected BOF record; found '---\ncred'
+2017-10-22 03:05:49,526 > INFO > Starting MonitoringEngine
+2017-10-22 03:05:50,011 > INFO > Starting MonitoringEngine

@@ -633,7 +633,8 @@ sesdata = [];
         columns: [
             { title: "Hostname" },
             { title: "IP" },
-            { title: "STATUS" }
+            { title: "Status" },
+            { title: "Note" }
         ]
     } );
 
@@ -892,7 +893,7 @@ if (stype == "Completed"){ses_completed = ses_completed + 1;}
 if (stype == "Running"){ses_running = ses_running + 1;}
 if (mouse_down != true)
 {
-stable.rows.add([[shost,sip,stype+" : "+JSON.stringify(sstate)]]);
+stable.rows.add([[shost,sip,stype,JSON.stringify(sstate)]]);
 stable.draw();
 }
 }

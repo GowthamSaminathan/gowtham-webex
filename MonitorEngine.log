@@ -783,3 +783,5 @@ AttributeError: 'NoneType' object has no attribute 'update'
 2017-10-22 02:53:30,983 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 58.0, 'SESSION': 1, 'Objects': {'$elemMatch': {'out.ssh': 'reachable', 'id': 0}}}
 2017-10-22 02:53:30,984 > DEBUG > mongo_search_score > Pattern Not matched
 2017-10-22 02:53:30,984 > INFO > Scoring Completed
+2017-10-22 03:05:49,525 > INFO > Starting MonitoringEngine
+2017-10-22 03:05:50,010 > INFO > Starting MonitoringEngine
