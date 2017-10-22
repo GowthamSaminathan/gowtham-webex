@@ -146,10 +146,35 @@ class main_model():
 						check_dup_dic = dict(j)
 						new_dic = dict(j)
 						new_dic.pop("ip")
-						all_ip.update({gip:new_dic})
+						# Update from multiple field
+						old_update = all_ip.get(gip)
+						if type(old_update) == dict:
+							# This is not first cretential for IP , updating with OLD.
+							new_dic.update(old_update)
+							all_ip.update({gip:new_dic})
+						else:
+							# This is first cretential for IP
+							all_ip.update({gip:new_dic})
 				else:
 					logger.warning("get_credentials_from_yaml : ip not found for: "+str(j))
 			
+			# Getting authentication from "all" and update it to all ip
+			for j in jsn:
+				gips = j.get("ip")
+				if gips != None:
+					gips = gips.split(" ")
+					if "all" in gips:
+						new_dic = dict(j)
+						new_dic.pop("ip")
+						all_auth_type = list(new_dic.keys())
+						all_ip_key = list(all_ip.keys())
+						for single_ip in all_ip_key:
+							single_ip_data = all_ip.get(single_ip)
+							for single_auth in all_auth_type:
+								new_auth = single_ip_data.get(single_auth)
+								if new_auth == None:
+									single_ip_data.update({single_auth:new_dic.get(single_auth)})
+									all_ip.update({single_ip:single_ip_data})
 			return all_ip
 		except Exception as e:
 			logger.exception("get_credentials")
@@ -321,6 +346,9 @@ class main_model():
 					# Self check
 					if myid == 0:
 						my_credentials = self.credentials.get(IP)
+						if my_credentials == None:
+							my_credentials = self.credentials.get("all")
+							logger.info("Special gredential not found , Getting Default gredential "+str(IP))
 						if my_credentials == None:
 							logger.error("credential not found for:"+str(IP))
 							out_session = None

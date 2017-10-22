@@ -1,5 +1,5 @@
 ---
-credential: auth
+credential: default_auth
 score: default_score
 networksnap:
 - Hostname: CHN_1
@@ -12,56 +12,11 @@ networksnap:
       check:
       - snmp
       - ssh
-    rank:
-    - query:
-        ssh:
-          "$ne": reachable
-      score: 0
-    - query:
-        snmp:
-          "$ne": reachable
-      score: 0
-    - query:
-        ssh: reachable
-      score: 100
-    - query:
-        snmp: reachable
-      score: 100
   - function: cisco_switch
     input:
       interface: fa0/1
       check: bits,duplex,speed,error
-    rank:
-    - query:
-        ssh:
-          $ne: reachable
-        score: 0
-    - query:
-        snmp:
-          "$ne": reachable
-        score: 0
-    - query:
-        ssh: reachable
-        score: 100
-    - query:
-        snmp: reachable
-        score: 100
   - function: cisco_switch
     input:
       interface: fa0/0
       check: bits,duplex,speed,error
-    rank:
-    - query:
-        ssh:
-          $ne: reachable
-        score: 0
-    - query:
-        snmp:
-          "$ne": reachable
-        score: 0
-    - query:
-        ssh: reachable
-        score: 100
-    - query:
-        snmp: reachable
-        score: 100

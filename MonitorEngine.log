@@ -754,3 +754,32 @@ AttributeError: 'NoneType' object has no attribute 'update'
 2017-10-21 18:53:36,012 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 96.0, 'SESSION': 1, 'Objects': {'$elemMatch': {'out.ssh': 'reachable', 'id': 0}}}
 2017-10-21 18:53:36,018 > DEBUG > mongo_search_score > Pattern Not matched
 2017-10-21 18:53:36,019 > INFO > Scoring Completed
+2017-10-21 08:49:35,931 > INFO > Starting MonitoringEngine
+2017-10-21 08:49:36,627 > INFO > Starting MonitoringEngine
+2017-10-21 08:50:19,891 > INFO > Starting MonitoringEngine
+2017-10-21 08:50:20,294 > INFO > Starting MonitoringEngine
+2017-10-21 10:54:28,387 > INFO > Starting MonitoringEngine
+2017-10-21 10:54:29,020 > INFO > Starting MonitoringEngine
+2017-10-22 02:47:50,939 > INFO > Starting MonitoringEngine
+2017-10-22 02:47:52,065 > INFO > Starting MonitoringEngine
+2017-10-22 02:53:05,731 > INFO > Starting Job ===============> Sunday_Test1-22-October-02:53:05
+2017-10-22 02:53:05,853 > INFO > Connected to 'LIVE' database...
+2017-10-22 02:53:05,853 > INFO > Scoring Object Insiated...
+2017-10-22 02:53:06,660 > INFO > SESSION UPDATED , INID = 58.0
+2017-10-22 02:53:06,668 > INFO > STARTING SESSION >1
+2017-10-22 02:53:06,678 > INFO > Apprentice>5
+2017-10-22 02:53:06,805 > INFO > getting ssh session
+2017-10-22 02:53:06,805 > INFO > Trying to Login:10.1.1.2
+2017-10-22 02:53:30,871 > INFO > Failed >CHN_1 10.1.1.2 Reasion>TIMEOUT
+2017-10-22 02:53:30,871 > INFO > getting snmp session
+2017-10-22 02:53:30,871 > INFO > {'security_username': 'NPCI_NFS_NMSV3', 'auth_password': 'npcinfsnms', 'version': 3, 'hostname': u'10.1.1.2', 'security_level': 'auth_without_privacy'}
+2017-10-22 02:53:30,901 > INFO > getting snmp success
+2017-10-22 02:53:30,928 > INFO > Scoring Started
+2017-10-22 02:53:30,930 > DEBUG > Mongo search score for:58.0 1
+2017-10-22 02:53:30,932 > DEBUG > mongo_search_score > Starting score for > 10.1.1.2
+2017-10-22 02:53:30,932 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 58.0, 'SESSION': 1, 'Objects': {'$elemMatch': {'out.ssh': {'$ne': 'reachable'}, 'id': 0}}}
+2017-10-22 02:53:30,982 > DEBUG > mongo_search_score > Pattern Matched
+2017-10-22 02:53:30,982 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.2', 'INID': 58.0, 'SESSION': 1, 'Objects': {'$elemMatch': {'out.ssh': {'$ne': 'reachable'}, 'id': 0}}}, {'$set': {'Objects.$.score': 0}})
+2017-10-22 02:53:30,983 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 58.0, 'SESSION': 1, 'Objects': {'$elemMatch': {'out.ssh': 'reachable', 'id': 0}}}
+2017-10-22 02:53:30,984 > DEBUG > mongo_search_score > Pattern Not matched
+2017-10-22 02:53:30,984 > INFO > Scoring Completed

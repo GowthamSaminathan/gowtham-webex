@@ -1,0 +1,27 @@
+---
+- ip:
+   10.1.1.1
+   10.1.1.200
+  snmp:
+    auth_password: npcinfsnms
+    security_username: NPCI_NFS_NMSV3
+    security_level: auth_without_privacy
+    version: 3
+  ssh:
+    username: cisco123
+    password: cisco123
+- ip: 
+   10.1.1.20
+   all
+  run: runnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+- ip: all
+  ssh:
+    username: cisco
+    password: cisco
+  snmp:
+    auth_password: npcinfsnms
+    security_username: NPCI_NFS_NMSV3
+    security_level: auth_without_privacy
+    version: 3
+
+...
