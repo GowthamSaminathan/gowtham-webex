@@ -3,6 +3,24 @@ credential: default_auth
 score: default_score
 networksnap:
 - Hostname: CHN_1
+  IP: 10.1.1.1
+  Objects:
+  - function: self_check
+    input:
+      timeout: 10
+      type: cisco
+      check:
+      - snmp
+      - ssh
+  - function: cisco_switch
+    input:
+      interface: fa0/1
+      check: bits,duplex,speed,error
+  - function: cisco_switch
+    input:
+      interface: fa0/0
+      check: bits,duplex,speed,error
+- Hostname: CHN_2
   IP: 10.1.1.2
   Objects:
   - function: self_check

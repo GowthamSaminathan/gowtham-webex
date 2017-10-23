@@ -1,55 +1,53 @@
 ---
 
 - function: snmp_sys_uptime
-  querys: 
-  - Q: {result: {$ne: success}}
+  querys:
+  - Q: {result: {$ne:success}}
     score: 0
-  - Q: {result: success,uptime: {$lt: 86400}}
+  - Q: {result:success,uptime: {$lt:86400}}
     score: 10
-  - Q: {result: success,uptime: {$gt: 86400}}
+  - Q: {result:success,uptime: {$gt:86400}}
     score: 100
   host: all
 
 - function: cisco_switch
-  querys: 
-  - Q: {interface: {$ne: up}}
+  querys:
+  - Q: {interface: {$ne:up}}
     score: 0
   - Q: {interface: up}
     score: 100
   - Q: {duplex: Half}
     score: 10
-  - Q: {duplex: "100mbs"}
+  - Q: {duplex: "100mb/s"}
     score: 10
-  - Q: {duplex: "10mbs"}
-    score: 5
-  - Q: {output drops: {$gt: 0}}
+  - Q: {output drops: {$gt:0}}
     score: 20
-  - Q: {input error: {$gt: 0}}
+  - Q: {input error: {$gt:0}}
     score: 20
-  - Q: {crc: {$gt: 0}}
+  - Q: {crc: {$gt:0}}
     score: 20
   host: all
 
 - function: nexus_sw_int
-  querys: 
-  - Q: {interface: {$ne: up}}
+  querys:
+  - Q: {interface: {$ne:up}}
     score: 0
   - Q: {interface: up}
     score: 100
   - Q: {duplex: Half}
     score: 10
-  - Q: {duplex: "100mbps"}
+  - Q: {duplex: "100mb/s"}
     score: 10
-  - Q: {output drops: {$gt: 0}}
+  - Q: {output drops: {$gt:0}}
     score: 20
-  - Q: {input error: {$gt: 0}}
+  - Q: {input error: {$gt:0}}
     score: 20
-  - Q: {crc: {$gt: 0}}
+  - Q: {crc: {$gt:0}}
     score: 20
   host: all
 
 - function: self_check
-  querys: 
+  querys:
    - Q: {ssh: {$ne: reachable}}
      score: 0
    - Q: {ssh: reachable}
@@ -57,8 +55,8 @@
   host: all
 
 - function: raw
-  querys: 
+  querys:
   - Q: {result: success}
     score: 100
-  - Q: {result: {$ne: success}}
+  - Q: {result: {$ne:success}}
     score: 0

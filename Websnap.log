@@ -391,3 +391,71 @@ Traceback (most recent call last):
 XLRDError: Unsupported format, or corrupt file: Expected BOF record; found '---\ncred'
 2017-10-22 03:05:49,526 > INFO > Starting MonitoringEngine
 2017-10-22 03:05:50,011 > INFO > Starting MonitoringEngine
+2017-10-22 03:08:30,032 > INFO > Starting MonitoringEngine
+2017-10-22 03:08:30,478 > INFO > Starting MonitoringEngine
+2017-10-22 05:22:31,779 > INFO > Starting MonitoringEngine
+2017-10-22 05:37:47,330 > INFO > Starting MonitoringEngine
+2017-10-22 06:36:32,336 > ERROR > get_xl_group
+Traceback (most recent call last):
+  File "websnap.py", line 399, in get_xl_group
+    xl = pandas.ExcelFile(xl_file)
+  File "/usr/local/lib/python2.7/dist-packages/pandas/io/excel.py", line 260, in __init__
+    self.book = xlrd.open_workbook(io)
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/__init__.py", line 162, in open_workbook
+    ragged_rows=ragged_rows,
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 91, in open_workbook_xls
+    biff_version = bk.getbof(XL_WORKBOOK_GLOBALS)
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 1271, in getbof
+    bof_error('Expected BOF record; found %r' % self.mem[savpos:savpos+8])
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 1265, in bof_error
+    raise XLRDError('Unsupported format, or corrupt file: ' + msg)
+XLRDError: Unsupported format, or corrupt file: Expected BOF record; found '---\ncred'
+2017-10-22 07:24:59,806 > ERROR > get_xl_group
+Traceback (most recent call last):
+  File "websnap.py", line 399, in get_xl_group
+    xl = pandas.ExcelFile(xl_file)
+  File "/usr/local/lib/python2.7/dist-packages/pandas/io/excel.py", line 260, in __init__
+    self.book = xlrd.open_workbook(io)
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/__init__.py", line 162, in open_workbook
+    ragged_rows=ragged_rows,
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 91, in open_workbook_xls
+    biff_version = bk.getbof(XL_WORKBOOK_GLOBALS)
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 1271, in getbof
+    bof_error('Expected BOF record; found %r' % self.mem[savpos:savpos+8])
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 1265, in bof_error
+    raise XLRDError('Unsupported format, or corrupt file: ' + msg)
+XLRDError: Unsupported format, or corrupt file: Expected BOF record; found '---\ncred'
+2017-10-22 07:31:37,402 > ERROR > get_xl_group
+Traceback (most recent call last):
+  File "websnap.py", line 399, in get_xl_group
+    xl = pandas.ExcelFile(xl_file)
+  File "/usr/local/lib/python2.7/dist-packages/pandas/io/excel.py", line 260, in __init__
+    self.book = xlrd.open_workbook(io)
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/__init__.py", line 162, in open_workbook
+    ragged_rows=ragged_rows,
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 91, in open_workbook_xls
+    biff_version = bk.getbof(XL_WORKBOOK_GLOBALS)
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 1271, in getbof
+    bof_error('Expected BOF record; found %r' % self.mem[savpos:savpos+8])
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 1265, in bof_error
+    raise XLRDError('Unsupported format, or corrupt file: ' + msg)
+XLRDError: Unsupported format, or corrupt file: Expected BOF record; found '---\ncred'
+2017-10-22 07:33:42,354 > INFO > Starting MonitoringEngine
+2017-10-22 07:34:00,966 > INFO > Starting MonitoringEngine
+2017-10-22 07:34:04,606 > INFO > Starting MonitoringEngine
+2017-10-22 07:34:32,660 > INFO > Starting MonitoringEngine
+2017-10-22 07:35:13,693 > ERROR > get_xl_group
+Traceback (most recent call last):
+  File "websnap.py", line 399, in get_xl_group
+    xl = pandas.ExcelFile(xl_file)
+  File "/usr/local/lib/python2.7/dist-packages/pandas/io/excel.py", line 260, in __init__
+    self.book = xlrd.open_workbook(io)
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/__init__.py", line 162, in open_workbook
+    ragged_rows=ragged_rows,
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 91, in open_workbook_xls
+    biff_version = bk.getbof(XL_WORKBOOK_GLOBALS)
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 1271, in getbof
+    bof_error('Expected BOF record; found %r' % self.mem[savpos:savpos+8])
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 1265, in bof_error
+    raise XLRDError('Unsupported format, or corrupt file: ' + msg)
+XLRDError: Unsupported format, or corrupt file: Expected BOF record; found '---\ncred'

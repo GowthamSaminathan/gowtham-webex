@@ -17,6 +17,7 @@ logger.addHandler(handler)
 
 def snmp_sys_uptime(ses,monobj):
 	try:
+		# Uptime in seconds
 		out = {"result":"failed"}
 		ses = ses.get("snmp_session")
 		uptime = ses.get('.1.3.6.1.2.1.1.3.0').value
@@ -205,7 +206,7 @@ def cisco_switch(ses,monobj):
 			if len(redata) > 0:
 				redata = redata[0].split("gb")[0]
 				redata = redata.strip()
-				redata = redata+"000"+"mb/s"
+				redata = redata+"000"+"mbps"
 				out.update({"speed":redata})
 
 
@@ -280,13 +281,13 @@ def nexus_sw_int(ses,monobj):
 			if spd:
 				spd = spd.group(0).replace("duplex, ","")
 				spd = spd.replace(" mb/s","")
-				speed = spd+"mb/s"
+				speed = spd+"mbps"
 			else:
 				spd = re.search(r'duplex, [0-9]+.gb/s',data)
 				if spd:
 					spd = spd.group(0).replace("duplex, ","")
 					spd = spd.replace(" gb/s","")
-					speed = spd+"000"+"mb/s"
+					speed = spd+"000"+"mbps"
 			out.update({"speed":speed})
 
 

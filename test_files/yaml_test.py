@@ -9,6 +9,10 @@ mongoc = pymongo.MongoClient('/tmp/mongodb-27017.sock')
 mdb = mongoc['LIVE']
 
 
+fp = open("default_score")
+jsn = yaml.load(fp)
+
+
 def get_credentials_from_yaml(credential_file):
 	try:
 		fp = open(credential_file)
