@@ -567,18 +567,13 @@ $("#mergelocal").on('change', function() {
       dynamicTyping: true,
       complete: function(results)
 {
+    console.log("Finished:", results);
     try
     {
     js_data = results.data
     yaml_data = editor.getValue();
-    js_yam = {"js":JSON.stringify(js_data),"yaml":yaml_data}
-    $.ajax({url: "merge_js_yaml",data:js_yam,type: 'POST',success: function(data){
-    
-    if (data.data != undefined)
-    {
-      editor.setValue(data.data);
-      $("#manage_status2").text("Merged Success");
-    }else{$("#manage_status2").text("Merged Failed:"+data);console.log(data)}
+    js_yam = {"js":js_data,"yaml":yaml_data}
+    $.ajax({url: "merge_js_yaml",data:js_yam,type: 'post',success: function(data){
     
     
 

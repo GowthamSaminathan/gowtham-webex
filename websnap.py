@@ -2,6 +2,7 @@ from flask import Flask, render_template, request , send_file
 from flask import jsonify
 from werkzeug.utils import secure_filename
 import json
+import yaml
 import os,time
 #import pymongo
 import datetime
@@ -393,6 +394,58 @@ def get_session():
 			return "failed"
 
 
+@app.route('/merge_js_yaml',methods = ['POST', 'GET'])
+def merge_js_yaml():
+	if request.method == 'POST':
+		try:
+			js_data = request.form.get('js')
+			yaml_data = request.form.get('yaml')
+			if js_data == None:
+				logger.info("merge_js_yaml > no csv data found")
+				return "no csv data found"
+			else:
+				js_data = json.loads(js_data)
+				# Merging json and yaml
+				yaml_js = yaml.load(yaml_data)
+				netsnap = yaml_js.get("networksnap")
+				if netsnap == None or type(netsnap) != list:
+					return jsonify({"error":"Not valid job file => networksnap not found"})
+
+				for js in js_data:
+					js_ip = js.get("IP")
+					js_host = str(js.get("Hostname"))
+					js_fun = js.get("function")
+					js_inp = js.get("input")
+					if js_ip == None or js_fun == None or js_inp == None:
+						logger.info("merge_js_yaml > Some data missed in JS , skipping")
+						continue;
+					for ns in netsnap:
+						objects = ns.get("Objects")
+						host_ip = ns.get("IP")
+						new_entry = True
+						if objects == None or host_ip == None:
+							return jsonify({"error":"object not found for IP "+str(host_ip)})
+						if host_ip == js_ip:
+							new_entry = False
+							# host already exist need to merge functions
+							fun = js.get("function")
+							inp = js.get("input")
+							objects.append({"function":fun,"input":inp})
+							ns.update({"Objects":objects})
+							break;
+					if new_entry == True:
+						# no existing host found need add new host
+						new_obj = {"Objects":[{"function":js_fun,"input":js_inp}],"IP":js_ip,"Hostname":js_host}
+						netsnap.append(new_obj)
+
+
+				yaml_js.update({"networksnap":netsnap})
+				yaml_js =  yaml.safe_dump(yaml_js)
+				return jsonify({"data":yaml_js})
+
+		except Exception as e:
+			logger.exception("merge_js_yaml")
+			return "failed"
 
 def get_xl_group(xl_file):
 	try:
