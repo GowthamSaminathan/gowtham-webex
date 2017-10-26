@@ -499,3 +499,7 @@ XLRDError: Unsupported format, or corrupt file: Expected BOF record; found '---\
 2017-10-25 13:21:54,361 > INFO > Starting MonitoringEngine
 2017-10-25 13:22:36,068 > INFO > merge_js_yaml > Some data missed in JS , skipping
 2017-10-25 13:23:09,752 > INFO > Starting MonitoringEngine
+2017-10-26 19:37:58,892 > INFO > Starting MonitoringEngine
+2017-10-26 19:37:59,727 > INFO > Starting MonitoringEngine
+2017-10-26 20:04:02,195 > INFO > merge_js_yaml > Some data missed in JS , skipping
+2017-10-26 20:07:05,296 > INFO > merge_js_yaml > Some data missed in JS , skipping

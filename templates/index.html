@@ -55,6 +55,8 @@
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.3.6/papaparse.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/esprima/2.7.3/esprima.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/3.10.0/js-yaml.min.js"></script>
 
 
 </head>
@@ -77,6 +79,7 @@
          <select id="listinput3" class="form-control"  title="Select File" style="width: 15%;display:inline;font-size:14px;margin-right:5px;">
         </select>
         <button id="openfile" type="button" class="btn btn-danger btn-xs" onclick="open_file()" style="display:inline;margin-right:5px;">Open</button>
+        <button id="openfile" type="button" class="btn btn-danger btn-xs" onclick="csv_view()" style="display:inline;margin-right:5px;">CSV view</button>
         <button id="openfile" type="button" class="btn btn-danger btn-xs" onclick="upload_local_csv()" style="display:inline;margin-right:5px;">CSV Merge</button>
         <input type="file" id="mergelocal" style="display:none">
         <span id="manage_status2" class="label label-warning"></span>
@@ -552,6 +555,18 @@ $(function(){
 }
 
 
+function csv_view()
+{
+try {
+      yaml_data = editor.getValue();
+      csv_doc = jsyaml.safeLoad(yaml_data);
+      console.log(csv_doc);
+} catch (e) 
+{
+      console.log(e);
+}}
+
+
 // Merge CSV file to YAML
 function upload_local_csv()
 {
@@ -578,6 +593,7 @@ $("#mergelocal").on('change', function() {
     {
       editor.setValue(data.data);
       $("#manage_status2").text("Merged Success");
+
     }else{$("#manage_status2").text("Merged Failed:"+data);console.log(data)}
     
     
