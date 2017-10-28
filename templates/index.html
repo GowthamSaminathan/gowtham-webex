@@ -78,9 +78,9 @@
         <button id="savefile" type="button" class="btn btn-primary btn-xs" onclick="save_file()" style="margin-right:15px;">Save</button>
          <select id="listinput3" class="form-control"  title="Select File" style="width: 15%;display:inline;font-size:14px;margin-right:5px;">
         </select>
-        <button id="openfile" type="button" class="btn btn-danger btn-xs" onclick="open_file()" style="display:inline;margin-right:5px;">Open</button>
-        <button id="openfile" type="button" class="btn btn-danger btn-xs" onclick="csv_view()" style="display:inline;margin-right:5px;">CSV view</button>
-        <button id="openfile" type="button" class="btn btn-danger btn-xs" onclick="upload_local_csv()" style="display:inline;margin-right:5px;">CSV Merge</button>
+        <button id="openyaml" type="button" class="btn btn-danger btn-xs" onclick="open_file()" style="display:inline;margin-right:5px;">Open Yaml</button>
+        <button id="viewfun" type="button" class="btn btn-danger btn-xs" onclick="csv_view()" style="display:inline;margin-right:5px;">View Functions</button>
+        <button id="opencsv" type="button" class="btn btn-danger btn-xs" onclick="upload_local_csv()" style="display:inline;margin-right:5px;">Open CSV</button>
         <input type="file" id="mergelocal" style="display:none">
         <span id="manage_status2" class="label label-warning"></span>
         </div>
@@ -93,6 +93,26 @@
 
 
 
+
+<!-- Get CSV  DATA -->
+  <div class="modal fade" id="showcsv" role="dialog">
+    <div class="modal-dialog modal-lg">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <button id="mergecsv" type="button" class="btn btn-danger btn-xs" onclick="merge_csv_yaml()" style="display:inline;margin-right:5px;">Merge with Yaml</button>
+          <span id="csvstatus" class="label label-warning">Loading Function & Input ...</span>
+        </div>
+        <div class="modal-body">
+        <table id="yamltable" class="table table-striped table-bordered dt-responsive nowrap"></table>
+
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+      </div></div>
 
 
 
@@ -142,7 +162,7 @@
 
           <form class="form-inline" id="inputform" action="upload_input">
           <div class="form-group">
-            <label for="pwd">Upload XLSX file</label>
+            <label for="pwd">Upload YAML file</label>
             <input id="infilename" type="file" class="form-control" name="file">
           </div>
             <button class="btn btn-default">Submit</button>
@@ -554,18 +574,58 @@ $(function(){
 }catch(err){console.log("opening file failed :"+err);$("#manage_status2").text("opening file failed");}
 }
 
-
 function csv_view()
 {
 try {
-      yaml_data = editor.getValue();
-      csv_doc = jsyaml.safeLoad(yaml_data);
+
+yaml_data = editor.getValue();
+csv_doc = jsyaml.safeLoad(yaml_data);
+display_csv_table(csv_doc);
+
+}catch (e) {   console.log("csv_view "+e);$("manage_status2").text("csv view failed")    }
+
+
+}
+
+// Display YAML to Table
+function display_csv_table(csv_doc)
+{
+try {
+      $('#mergecsv').hide();
+      $("#csvstatus").text("Loadind...")
+      $("#showcsv").modal({backdrop: "static"});
+      yamltable.clear().draw();
       console.log(csv_doc);
+      all_host_list = csv_doc.networksnap
+      $.each( all_host_list, function( index, value )
+      {
+           
+      yamltable.draw();
+      $.each( value.Objects, function( index, hvalue )
+      { 
+
+        console.log(value.Hostname+" "+value.IP+" "+hvalue.function+" "+JSON.stringify(hvalue.input))
+        if (value.Hostname == undefined) {value.Hostname = ""}
+        if (value.IP == undefined) {value.IP = ""}
+        if (hvalue.function == undefined) {hvalue.function = ""}
+        if (hvalue.input == undefined) {hvalue.input = ""}
+        yamltable.rows.add([[ value.Hostname,value.IP,hvalue.function,JSON.stringify(hvalue.input)  ]]);
+
+      });
+
+      });
+      yamltable.draw();
+      yfname = $("#listinput3").val();
+      $("#csvstatus").text("File: "+yfname)
+
 } catch (e) 
 {
+      $("#csvstatus").text("Failed to view")
       console.log(e);
 }}
 
+// Reset file name , if same file is selected
+$("#mergelocal").on('click', function() { this.value = null;} );
 
 // Merge CSV file to YAML
 function upload_local_csv()
@@ -574,17 +634,68 @@ function upload_local_csv()
 
 }
 
+// Display local CSV to Table
+function display_csv_table_data(data)
+{
+try {
+      $('#mergecsv').show();
+      $("#csvstatus").text("Loadind...")
+      $("#showcsv").modal({backdrop: "static"});
+      yamltable.clear().draw();
+      all_host_list = data
+           
+      yamltable.draw();
+      $.each( all_host_list, function( index, hvalue )
+      { 
 
+        if (hvalue.Hostname == undefined) {hvalue.Hostname = ""}
+        if (hvalue.IP == undefined) {hvalue.IP = ""}
+        if (hvalue.function == undefined) {hvalue.function = ""}
+        if (hvalue.input == undefined) {hvalue.input = ""}
+        yamltable.rows.add([[ hvalue.Hostname,hvalue.IP,hvalue.function,JSON.stringify(hvalue.input)  ]]);
+
+      });
+      yamltable.draw();
+      yfname = $("#listinput3").val();
+      $("#csvstatus").text("Merge With: "+yfname)
+
+} catch (e) 
+{
+      $("#csvstatus").text("Failed to view CSV")
+      console.log(e);
+}}
+
+
+
+
+var local_csv_val = ""
 $("#mergelocal").on('change', function() {
+    local_csv_val = ""
     var file = this.files[0];
     Papa.parse(file, {
-      header: true,
-      dynamicTyping: true,
-      complete: function(results)
-{
+    header: true,
+    dynamicTyping: true,
+    complete: function(results)
+    {
+      local_csv_val = results.data
+      console.log(local_csv_val)
+      display_csv_table_data(local_csv_val)
+
+    }
+
+
+})});
+
+
+function merge_csv_yaml() {
     try
     {
-    js_data = results.data
+    yfname = $("#listinput3").val();
+    chk = confirm("Are You Sure to Merge table functions with "+yfname);
+    if (chk == false){return false;}
+    $("#csvstatus").text("Uploading Date to Server....");
+    if (local_csv_val == "" || local_csv_val == undefined ) {$("#csvstatus").text("Merged Failed: No valid CSV found"); return "";}
+    js_data = local_csv_val;
     yaml_data = editor.getValue();
     js_yam = {"js":JSON.stringify(js_data),"yaml":yaml_data}
     $.ajax({url: "merge_js_yaml",data:js_yam,type: 'POST',success: function(data){
@@ -592,20 +703,19 @@ $("#mergelocal").on('change', function() {
     if (data.data != undefined)
     {
       editor.setValue(data.data);
-      $("#manage_status2").text("Merged Success");
+      $("#csvstatus").text("Merged Success");
 
-    }else{$("#manage_status2").text("Merged Failed:"+data);console.log(data)}
+    }else{$("#csvstatus").text("Merged Failed:");console.log(data)}
     
     
 
     },error: function(XMLHttpRequest, textStatus, errorThrown) {console.log("merge server error:"+textStatus)}  });
     }catch(err){console.log("upload_local_csv server error :"+err)}
 
-}
+};
 
-});
 
-});
+
 
 function merge_from_file(){
 try{
@@ -712,6 +822,30 @@ sesdata = [];
             { title: "Note" }
         ]
     } );
+
+
+
+var yamltable;
+yamldata = [];
+
+    yamltable = $('#yamltable').DataTable( {
+        data : yamldata,
+        "responsive": true,
+        "scrollCollapse":true,
+        "paging":false,
+        "searching": true,
+        "scrollX":"300px",
+        responsive: true,
+        dom: 'lBfrtip',
+        buttons: ['copy','csv'],
+        columns: [
+            { title: "Hostname" },
+            { title: "IP" },
+            { title: "function" },
+            { title: "input" }
+        ]
+    } );
+
 
 var oldjobtable
 oldjobdata = []

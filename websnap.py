@@ -416,7 +416,7 @@ def merge_js_yaml():
 					js_host = str(js.get("Hostname"))
 					js_fun = js.get("function")
 					js_inp = js.get("input")
-					if js_ip == None or js_fun == None or js_inp == None:
+					if js_ip == None or js_ip == "" or js_fun == None or js_inp == None:
 						logger.info("merge_js_yaml > Some data missed in JS , skipping")
 						continue;
 					for ns in netsnap:

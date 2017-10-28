@@ -503,3 +503,84 @@ XLRDError: Unsupported format, or corrupt file: Expected BOF record; found '---\
 2017-10-26 19:37:59,727 > INFO > Starting MonitoringEngine
 2017-10-26 20:04:02,195 > INFO > merge_js_yaml > Some data missed in JS , skipping
 2017-10-26 20:07:05,296 > INFO > merge_js_yaml > Some data missed in JS , skipping
+2017-10-27 20:21:00,598 > INFO > Starting MonitoringEngine
+2017-10-27 20:21:01,293 > INFO > Starting MonitoringEngine
+2017-10-27 20:21:28,470 > INFO > Starting MonitoringEngine
+2017-10-27 20:21:28,865 > INFO > Starting MonitoringEngine
+2017-10-27 20:22:30,215 > INFO > merge_js_yaml > Some data missed in JS , skipping
+2017-10-27 20:23:27,309 > INFO > merge_js_yaml > Some data missed in JS , skipping
+2017-10-27 20:24:16,495 > INFO > merge_js_yaml > Some data missed in JS , skipping
+2017-10-27 20:26:05,070 > INFO > merge_js_yaml > Some data missed in JS , skipping
+2017-10-27 20:26:43,267 > INFO > merge_js_yaml > Some data missed in JS , skipping
+2017-10-27 20:29:19,705 > INFO > merge_js_yaml > Some data missed in JS , skipping
+2017-10-27 20:44:11,966 > INFO > merge_js_yaml > Some data missed in JS , skipping
+2017-10-27 20:57:52,057 > INFO > merge_js_yaml > Some data missed in JS , skipping
+2017-10-27 21:10:44,772 > INFO > merge_js_yaml > Some data missed in JS , skipping
+2017-10-27 21:19:54,037 > INFO > merge_js_yaml > Some data missed in JS , skipping
+2017-10-27 21:20:06,416 > INFO > merge_js_yaml > Some data missed in JS , skipping
+2017-10-28 01:22:17,023 > INFO > Starting MonitoringEngine
+2017-10-28 01:22:18,485 > INFO > Starting MonitoringEngine
+2017-10-28 02:20:53,503 > INFO > merge_js_yaml > Some data missed in JS , skipping
+2017-10-28 04:23:47,879 > ERROR > merge_js_yaml
+Traceback (most recent call last):
+  File "websnap.py", line 410, in merge_js_yaml
+    netsnap = yaml_js.get("networksnap")
+AttributeError: 'NoneType' object has no attribute 'get'
+2017-10-28 04:25:44,816 > ERROR > merge_js_yaml
+Traceback (most recent call last):
+  File "websnap.py", line 410, in merge_js_yaml
+    netsnap = yaml_js.get("networksnap")
+AttributeError: 'NoneType' object has no attribute 'get'
+2017-10-28 04:28:49,405 > ERROR > merge_js_yaml
+Traceback (most recent call last):
+  File "websnap.py", line 410, in merge_js_yaml
+    netsnap = yaml_js.get("networksnap")
+AttributeError: 'NoneType' object has no attribute 'get'
+2017-10-28 05:09:44,491 > ERROR > merge_js_yaml
+Traceback (most recent call last):
+  File "websnap.py", line 410, in merge_js_yaml
+    netsnap = yaml_js.get("networksnap")
+AttributeError: 'list' object has no attribute 'get'
+2017-10-28 05:15:31,097 > INFO > Starting MonitoringEngine
+2017-10-28 05:16:02,161 > INFO > Starting MonitoringEngine
+2017-10-28 05:16:08,135 > INFO > Starting MonitoringEngine
+2017-10-28 05:16:35,895 > INFO > merge_js_yaml > Some data missed in JS , skipping
+2017-10-28 05:17:16,476 > ERROR > get_xl_group
+Traceback (most recent call last):
+  File "websnap.py", line 452, in get_xl_group
+    xl = pandas.ExcelFile(xl_file)
+  File "/usr/local/lib/python2.7/dist-packages/pandas/io/excel.py", line 260, in __init__
+    self.book = xlrd.open_workbook(io)
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/__init__.py", line 162, in open_workbook
+    ragged_rows=ragged_rows,
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 91, in open_workbook_xls
+    biff_version = bk.getbof(XL_WORKBOOK_GLOBALS)
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 1271, in getbof
+    bof_error('Expected BOF record; found %r' % self.mem[savpos:savpos+8])
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 1265, in bof_error
+    raise XLRDError('Unsupported format, or corrupt file: ' + msg)
+XLRDError: Unsupported format, or corrupt file: Expected BOF record; found 'credenti'
+2017-10-28 05:23:54,246 > INFO > Starting MonitoringEngine
+2017-10-28 05:24:08,272 > INFO > Starting MonitoringEngine
+2017-10-28 05:24:12,254 > INFO > Starting MonitoringEngine
+2017-10-28 05:24:16,213 > INFO > Starting MonitoringEngine
+2017-10-28 05:25:46,390 > INFO > Starting MonitoringEngine
+2017-10-28 05:25:53,375 > INFO > Starting MonitoringEngine
+2017-10-28 05:26:12,360 > INFO > Starting MonitoringEngine
+2017-10-28 05:26:16,372 > INFO > Starting MonitoringEngine
+2017-10-28 05:26:24,204 > ERROR > get_xl_group
+Traceback (most recent call last):
+  File "websnap.py", line 452, in get_xl_group
+    xl = pandas.ExcelFile(xl_file)
+  File "/usr/local/lib/python2.7/dist-packages/pandas/io/excel.py", line 260, in __init__
+    self.book = xlrd.open_workbook(io)
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/__init__.py", line 162, in open_workbook
+    ragged_rows=ragged_rows,
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 91, in open_workbook_xls
+    biff_version = bk.getbof(XL_WORKBOOK_GLOBALS)
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 1271, in getbof
+    bof_error('Expected BOF record; found %r' % self.mem[savpos:savpos+8])
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 1265, in bof_error
+    raise XLRDError('Unsupported format, or corrupt file: ' + msg)
+XLRDError: Unsupported format, or corrupt file: Expected BOF record; found 'credenti'
+2017-10-28 05:28:44,187 > INFO > Starting MonitoringEngine

@@ -379,6 +379,12 @@ class main_model():
 								return [element]
 						else:
 							logger.error("device_check self_check failed")
+							continue_next = False
+							try:
+								mcollection.update({"_id":1,"STATUS.IP":IP},{ "$set": { "STATUS.$.STATUS" :"self check failed"} })
+							except Exception as e:
+								logger.exception("device_check updating DB failed for device")
+							break;
 					elif continue_next == True:
 						try:
 							et = element.get("function")
