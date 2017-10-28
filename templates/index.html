@@ -95,7 +95,7 @@
 
 
 <!-- Get CSV  DATA -->
-  <div class="modal fade" id="showcsv" role="dialog">
+  <div class="modal fade" id="showcsv" role="dialog" style="z-index:100000;">
     <div class="modal-dialog modal-lg">
     
       <!-- Modal content-->
@@ -197,28 +197,29 @@
         <div class="modal-body">
         <div id="inputrun" class="form-group">
           <label for="inputdefault">Input File</label>
-         <select id="listinput" class="form-control"  title="Select File" style="width:70%;">
+         <select id="listinput" class="form-control"  title="Select File" style="width:50%;">
         </select>
+        <span class="form-group">
+        <button id="viewyamlrun" type="button" class="btn btn-danger" onclick="viewyamlrun()" >View</button>
+        </span>
         </div>
-
-        
           <label id="groupselect_lab" for="inputdefault">Group & Run Level</label>
         
         <div class="form-group">
-        <select multiple id="groupselect" style="width:70%;">
+        <select multiple id="groupselect" style="width:50%;">
           
         </select></div>
         
 
         <div class="form-group">
         <label for="inputdefault">Job Name</label>
-          <input class="form-control" id="jobname" type="text" style="width:70%;">
+          <input class="form-control" id="jobname" type="text" style="width:50%;">
         </div>
         <div class="form-group">
         <label for="inputdefault">Number of Apprentice(s)</label>
-          <input class="form-control" id="apprentice" type="text" value=5 style="width:70%;">
+        <input class="form-control" id="apprentice" type="text" value=5 style="width:50%;">
         </div>
-        <button id="newrun" type="button" class="btn btn-danger" onclick="send_run()">Run</button>  
+        <button id="newrun" type="button" class="btn btn-danger" onclick="send_run()">Run</button> 
   
          <!-- <table id="listinput" class="display"></table> -->
          
@@ -546,7 +547,7 @@ window.open('rawdownload?download='+job_name, '_blank');
 
 }
 
-// Open YAML file from server
+// Open YAML file from server display it into editor
 function open_file(){
 try{
 fname_down = $("#listinput3").val();
@@ -574,13 +575,44 @@ $(function(){
 }catch(err){console.log("opening file failed :"+err);$("#manage_status2").text("opening file failed");}
 }
 
+
+// Open YAML file from server display it into table
+function viewyamlrun(){
+try{
+fname_down = $("#listinput").val();
+if (fname_down == "Select File"){$("#newrun_status").text("Please select file");return;}
+$("#newrun_status").text("Loaing file from server...");
+fname_down = 'download_input?download='+fname_down
+$(function(){
+    $.ajax({
+        url: fname_down,
+        async: true,   // asynchronous request? (synchronous requests are discouraged...)
+        cache: false,   // with this, you can force the browser to not make cache of the retrieved data
+        dataType: "text",  // jQuery will infer this, but you can set explicitly
+        success: function( data, textStatus, jqXHR ) {
+            csv_doc = jsyaml.safeLoad(data);
+            $("#newrun_status").text("success");
+            console.log("Received Input file");
+            yfname = $("#listinput").val();
+            display_csv_table(csv_doc,yfname)
+        }
+    });
+});
+
+}catch(err){console.log("opening file failed :"+err);$("#newrun_status").text("opening file failed");}
+}
+
+
+
+
 function csv_view()
 {
 try {
 
 yaml_data = editor.getValue();
 csv_doc = jsyaml.safeLoad(yaml_data);
-display_csv_table(csv_doc);
+yfname = $("#listinput3").val();
+display_csv_table(csv_doc,yfname);
 
 }catch (e) {   console.log("csv_view "+e);$("manage_status2").text("csv view failed")    }
 
@@ -588,7 +620,7 @@ display_csv_table(csv_doc);
 }
 
 // Display YAML to Table
-function display_csv_table(csv_doc)
+function display_csv_table(csv_doc,yfname)
 {
 try {
       $('#mergecsv').hide();
@@ -615,7 +647,6 @@ try {
 
       });
       yamltable.draw();
-      yfname = $("#listinput3").val();
       $("#csvstatus").text("File: "+yfname)
 
 } catch (e) 
@@ -830,12 +861,11 @@ yamldata = [];
 
     yamltable = $('#yamltable').DataTable( {
         data : yamldata,
-        "responsive": true,
+        responsive: true,
+        "scrollY":"300px",
         "scrollCollapse":true,
         "paging":false,
-        "searching": true,
-        "scrollX":"300px",
-        responsive: true,
+        data : dataSet,
         dom: 'lBfrtip',
         buttons: ['copy','csv'],
         columns: [
