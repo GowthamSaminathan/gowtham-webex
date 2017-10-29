@@ -1,4 +1,3 @@
-from nmv1 import *
 import json
 import csv
 import datetime
@@ -7,24 +6,24 @@ import os.path
 import logging
 from logging.handlers import RotatingFileHandler
 import shutil
-from pexpect import pxssh
-import pexpect
 import getpass
 import ast
-import pymongo
 import re
+import pymongo
 import pandas
 from flask import Flask, render_template, request
 from flask import jsonify
-from threading import Thread
+import pexpect
+from pexpect import pxssh
 from concurrent.futures import ThreadPoolExecutor
 from concurrent.futures import as_completed
 import easysnmp
 import yaml
+from nmv1 import *
 
-logger =  logging.getLogger("Rotating Log")
+logger = logging.getLogger("Rotating Log")
 logger.setLevel(logging.DEBUG)
-handler = RotatingFileHandler(os.getcwd()+"/MonitorEngine.log",maxBytes=5000000,backupCount=25)
+handler = RotatingFileHandler(os.getcwd()+"/MonitorEngine.log", maxBytes=5000000, backupCount=25)
 formatter = logging.Formatter('%(asctime)s > %(levelname)s > %(message)s')
 handler.setFormatter(formatter)
 logger.addHandler(handler)
@@ -35,624 +34,605 @@ logger.info("Starting MonitoringEngine")
 app = Flask(__name__)
 
 ### PAGE 1 START ####
-class score_gen():
+class score_gen(object):
 
-	def __init__(self):
-		logger.info("Scoring Object Insiated...")
+    def __init__(self):
+        logger.info("Scoring Object Insiated...")
 
-	def get_querys_from_json(self,score_jsn,ip,function):
-		try:
-			jsn = score_jsn
-			if jsn == None:
-				logger.exception("get_querys_from_yaml > None JSON")
-				return None
-			all_list = []
-			for data in jsn:
-				if data.get("function") == function:
-					# Function matched with YAML file
-					host_list = data.get("host")
-					if  host_list != None:
-						host_list = host_list.split(" ")
-						for host in host_list:
-							if host == ip or host == "all":
-								# Host Matched with YAML file
-								for d in data.get("querys"):
-									all_list.append(d)
-								break;
-			return all_list
-		except Exception as e:
-			logger.exception("get_querys_from_yaml")
-	
-	def mongo_search_score(self,INID,session,mdb,score_jsn):
-		try:
-			logger.debug("Mongo search score for:"+str(str(INID)+" "+str(session)))
-			mdb_out = mdb['OUTPUT']
-			all_data = mdb_out.find({"INID":INID,"SESSION":session})
-			for single_host in all_data:
-				try:
-					#print single_host
-					IP = single_host.get("IP")
-					logger.debug("mongo_search_score > Starting score for > "+str(IP))
-					mon_objects = single_host.get("Objects")
-					obj_index = -1
-					for mon_obj in mon_objects:
-						obj_index = obj_index + 1
-						#ranks = mon_obj.get("rank")
-						# Converting Test to JSON
-						#ranks = json.loads(ranks)
-						elmt_id = mon_obj.get("id")
-						last_score = 100
-						note = ""
-						function = mon_obj.get("function")
-						ranks = self.get_querys_from_json(score_jsn,IP,function)
-						if type(ranks) != list:
-							pass;
-							logger.error("mongo_search_score > QUERY not found in YAML for:"+str(IP)+":"+str(function))
-						for rank in ranks:
-							#print rank
-							#custom_query = json.loads(rank.get("Q"))
-							custom_query = rank.get("Q")
-							score = rank.get("score")
-							dafault_query = {"INID":INID,"SESSION":session,"IP":IP}
-							#print custom_query
-							new_dict = {"out."+key: value for key, value in custom_query.items()}
-							#print new_dict
-							new_dict.update({"id":elmt_id})
-							elmts = {"$elemMatch":new_dict}
-							dafault_query.update({'Objects':elmts})
-							logger.debug("mongo_search_score > searching DB for:"+str(dafault_query))
-							queryout = mdb_out.find_one(dafault_query,{"_id":0,"TD":0})
-							#print queryout
-							if queryout == None:
-								logger.debug("mongo_search_score > Pattern Not matched")
-							else:
-								# For adding issue note
-								if score != 100:
-									if type(rank.get("Q")) == dict:
-										for k,v in rank.get("Q").iteritems():
-											note = note + str(k) + ","
+    def get_querys_from_json(self, score_jsn, ip, function):
+        try:
+            jsn = score_jsn
+            if jsn == None:
+                logger.exception("get_querys_from_yaml > None JSON")
+                return None
+            all_list = []
+            for data in jsn:
+                if data.get("function") == function:
+                    # Function matched with YAML file
+                    host_list = data.get("host")
+                    if  host_list != None:
+                        host_list = host_list.split(" ")
+                        for host in host_list:
+                            if host == ip or host == "all":
+                                # Host Matched with YAML file
+                                for d in data.get("querys"):
+                                    all_list.append(d)
+                                break
+            return all_list
+        except Exception:
+            logger.exception("get_querys_from_yaml")
 
-								logger.debug("mongo_search_score > Pattern Matched")
-								# Update very lowest score in rank pattern
-								if last_score >= score:
-									last_score = score
-									d = dafault_query,{"$set": {"Objects.$"+".score":last_score}}
-									logger.debug("mongo_search_score > updating score >"+str(d))
-									mdb_out.update(dafault_query,{"$set": {"Objects.$"+".score":last_score,"Objects.$"+".note":note}})
-				except Exception as e:
-					logger.exception("mongo_search_score")
-		except Exception as e:
-			logger.exception("mongo_search_score")
+    def mongo_search_score(self, INID, session, mdb, score_jsn):
+        try:
+            logger.debug("Mongo search score for:"+str(str(INID)+" "+str(session)))
+            mdb_out = mdb['OUTPUT']
+            all_data = mdb_out.find({"INID":INID, "SESSION":session})
+            for single_host in all_data:
+                try:
+                    #print single_host
+                    IP = single_host.get("IP")
+                    logger.debug("mongo_search_score > Starting score for > "+str(IP))
+                    mon_objects = single_host.get("Objects")
+                    obj_index = -1
+                    for mon_obj in mon_objects:
+                        obj_index = obj_index + 1
+                        #ranks = mon_obj.get("rank")
+                        # Converting Test to JSON
+                        #ranks = json.loads(ranks)
+                        elmt_id = mon_obj.get("id")
+                        last_score = 100
+                        note = ""
+                        function = mon_obj.get("function")
+                        ranks = self.get_querys_from_json(score_jsn, IP, function)
+                        if type(ranks) != list:
+                            logger.error("mongo_search_score > QUERY not found in YAML for:" + str(IP) + ":" + str(function))
+                        for rank in ranks:
+                            #print rank
+                            #custom_query = json.loads(rank.get("Q"))
+                            custom_query = rank.get("Q")
+                            score = rank.get("score")
+                            dafault_query = {"INID":INID, "SESSION":session, "IP":IP}
+                            #print custom_query
+                            new_dict = {"out."+key: value for key, value in custom_query.items()}
+                            #print new_dict
+                            new_dict.update({"id":elmt_id})
+                            elmts = {"$elemMatch":new_dict}
+                            dafault_query.update({'Objects':elmts})
+                            logger.debug("mongo_search_score > searching DB for:"+str(dafault_query))
+                            queryout = mdb_out.find_one(dafault_query, {"_id":0, "TD":0})
+                            #print queryout
+                            if queryout == None:
+                                logger.debug("mongo_search_score > Pattern Not matched")
+                            else:
+                                # For adding issue note
+                                if score != 100:
+                                    if type(rank.get("Q")) == dict:
+                                        for matched_type in rank.get("Q"):
+                                            note = note + str(matched_type) + ","
+
+                                logger.debug("mongo_search_score > Pattern Matched")
+                                # Update very lowest score in rank pattern
+                                if last_score >= score:
+                                    last_score = score
+                                    d = dafault_query, {"$set": {"Objects.$"+".score":last_score}}
+                                    logger.debug("mongo_search_score > updating score >"+str(d))
+                                    mdb_out.update(dafault_query, {"$set": {"Objects.$"+".score":last_score, "Objects.$"+".note":note}})
+                except Exception:
+                    logger.exception("mongo_search_score")
+        except Exception:
+            logger.exception("mongo_search_score")
 
 ### PAGE 1 END ####
 
 class main_model():
 
-	def __init__(self):
-		#Saving ssh session
-		self.ssh_ses = {}
+    def __init__(self):
+        #Saving ssh session
+        self.ssh_ses = {}
 
-	def get_credentials_from_yaml(self,credential_file):
-		try:
-			fp = open(credential_file)
-			jsn = yaml.load(fp)
-			error = []
-			all_ip = {}
-			for j in jsn:
-				gips = j.get("ip")
-				if gips != None:
-					gips = gips.split(" ")
-					for gip in gips:
-						check_dup_dic = dict(j)
-						new_dic = dict(j)
-						new_dic.pop("ip")
-						# Update from multiple field
-						old_update = all_ip.get(gip)
-						if type(old_update) == dict:
-							# This is not first cretential for IP , updating with OLD.
-							new_dic.update(old_update)
-							all_ip.update({gip:new_dic})
-						else:
-							# This is first cretential for IP
-							all_ip.update({gip:new_dic})
-				else:
-					logger.warning("get_credentials_from_yaml : ip not found for: "+str(j))
-			
-			# Getting authentication from "all" and update it to all ip
-			for j in jsn:
-				gips = j.get("ip")
-				if gips != None:
-					gips = gips.split(" ")
-					if "all" in gips:
-						new_dic = dict(j)
-						new_dic.pop("ip")
-						all_auth_type = list(new_dic.keys())
-						all_ip_key = list(all_ip.keys())
-						for single_ip in all_ip_key:
-							single_ip_data = all_ip.get(single_ip)
-							for single_auth in all_auth_type:
-								new_auth = single_ip_data.get(single_auth)
-								if new_auth == None:
-									single_ip_data.update({single_auth:new_dic.get(single_auth)})
-									all_ip.update({single_ip:single_ip_data})
-			return all_ip
-		except Exception as e:
-			logger.exception("get_credentials")
+    def get_credentials_from_yaml(self, credential_file):
+        try:
+            fp = open(credential_file)
+            jsn = yaml.load(fp)
+            all_ip = {}
+            for j in jsn:
+                gips = j.get("ip")
+                if gips != None:
+                    gips = gips.split(" ")
+                    for gip in gips:
+                        new_dic = dict(j)
+                        new_dic.pop("ip")
+                        # Update from multiple field
+                        old_update = all_ip.get(gip)
+                        if type(old_update) == dict:
+                            # This is not first cretential for IP , updating with OLD.
+                            new_dic.update(old_update)
+                            all_ip.update({gip:new_dic})
+                        else:
+                            # This is first cretential for IP
+                            all_ip.update({gip:new_dic})
+                else:
+                    logger.warning("get_credentials_from_yaml : ip not found for: "+str(j))
+    
+            # Getting authentication from "all" and update it to all ip
+            for j in jsn:
+                gips = j.get("ip")
+                if gips != None:
+                    gips = gips.split(" ")
+                    if "all" in gips:
+                        new_dic = dict(j)
+                        new_dic.pop("ip")
+                        all_auth_type = list(new_dic.keys())
+                        all_ip_key = list(all_ip.keys())
+                        for single_ip in all_ip_key:
+                            single_ip_data = all_ip.get(single_ip)
+                            for single_auth in all_auth_type:
+                                new_auth = single_ip_data.get(single_auth)
+                                if new_auth == None:
+                                    single_ip_data.update({single_auth:new_dic.get(single_auth)})
+                                    all_ip.update({single_ip:single_ip_data})
+            return all_ip
+        except Exception:
+            logger.exception("get_credentials")
 
-	def login(self,hostname='',auth=[],logpath="default_log.txt",login_timeout=10,etimeout=6):
-		# Login to NPCI device , "enable" password check disabled because of aaa conf in NPCI
-		if len(auth) > 0:
-			for au in auth:
-				logger.info("Trying to Login:"+hostname)
-				return_typ = None
-				username = au.get("username")
-				password = au.get("password")
-				try:
-					s = pxssh.pxssh(options={
-									"StrictHostKeyChecking": "no",
-									"UserKnownHostsFile": "/dev/null"},timeout=login_timeout)
+    def login(self, hostname='', auth=[], logpath="default_log.txt", login_timeout=10, etimeout=6):
+        # Login to NPCI device , "enable" password check disabled because of aaa conf in NPCI
+        if len(auth) > 0:
+            for au in auth:
+                logger.info("Trying to Login:"+hostname)
+                return_typ = None
+                username = au.get("username")
+                password = au.get("password")
+                try:
+                    s = pxssh.pxssh(options={"StrictHostKeyChecking": "no","UserKnownHostsFile": "/dev/null"}, timeout=login_timeout)
+                    s.login(hostname, username, password, auto_prompt_reset=False, login_timeout=login_timeout)
+                    s.logfile = open(logpath+"_"+str(hostname)+".txt", "ab")
+                    # Send enter to get router prompt to check login success
+                    ex = ["#", r">", r"\$", pexpect.TIMEOUT]
+                    s.sendline('')
+                    # expecting cisco , juniper , fortigate prompt 
+                    s.expect(ex, timeout=etimeout)
+                    s.sendline('')
+                    # expecting cisco , juniper , fortigate prompt
+                    s.expect(["#", ">", "\$", pexpect.TIMEOUT], timeout=etimeout)
+                    s.sendline('')
+                    # expecting cisco ,  juniper ,  fortigate prompt
+                    match_ex = s.expect(["#", ">", "\$", pexpect.TIMEOUT], timeout=etimeout)
 
-					s.login(hostname, username, password,auto_prompt_reset=False,login_timeout=login_timeout)
-					s.logfile = open(logpath+"_"+str(hostname)+".txt", "ab")
-					# Send enter to get router prompt to check login success
-					ex = ["#",">","\$",pexpect.TIMEOUT]
+                    login_chk = s.before.strip()
+                    if len(login_chk) > 0 and match_ex < 3:
+                        host_name = login_chk.decode("utf-8")
+                        aftr = s.after
+                        if type(aftr) == str:
+                            host_name = host_name+aftr.strip().decode("utf-8")
+                        logger.info("Login Success :"+hostname+":"+host_name)
+                        return s, host_name
+                    else:
+                        logger.info("Not able to reach device:"+hostname)
+                    return "TIMEOUT"
+                except pxssh.ExceptionPxssh as e:
+                    err = str(e)
+                    if err.find("password refused") != -1:
+                        #logger.info("Login Failed:"+hostname)
+                        return_typ = "LOGINFAIL"
+                    else:
+                        logger.info("Login Error>"+err+":"+hostname)
+                        return "TIMEOUT"
+                except Exception:
+                    #logger.exception("login")
+                    return "TIMEOUT"
+            return return_typ
+    
+    def get_ssh_ses(self, IP, Authentication, timeout, dir_path):
+        try:
+            #ses = self.ssh_ses.get(IP)  # Not required to store session
+            ses = None
+            live_ses = False
+            if ses == None:
+                #print("SSH SESSION NOT FOUND FOR "+str(IP))
+                live_ses = False
+            else:
+                # Check ssh session
+                if len(ses) == 2:
+                    # Previous session is valid ,  Checking Live
+                    ses[0].sendline()
+                    if ses[0].expect([ses[1], pxssh.TIMEOUT], timeout=20) == 0:
+                        live_ses = True
+        except Exception:
+            live_ses = False
+        if live_ses != True:
+            ses = self.login(IP, Authentication, dir_path)
+            if type(ses) != str and ses != None:
+                #self.ssh_ses.update({IP:ses}) # Not required to store session
+                return ses
+        return ses
 
-					s.sendline('')
-					# expecting cisco , juniper , fortigate prompt 
-					s.expect(ex,timeout=etimeout)
-					
-					s.sendline('')
-					# expecting cisco , juniper , fortigate prompt
-					s.expect(["#",">","\$",pexpect.TIMEOUT],timeout=etimeout)
-					
-					s.sendline('')
-					# expecting cisco , juniper , fortigate prompt
-					match_ex = s.expect(["#",">","\$",pexpect.TIMEOUT],timeout=etimeout)
+    def self_check(self, IP, Hostname, dir_path, element, my_credentials):
+        try:
+            result = {}
+            all_sessions = {"status":{}}
+            # Get SSH session
+            einput = element.get("input")
+            check = einput.get("check")
+            
+            if "ssh" in check:
+                try:
+                    logger.info("getting ssh session")
+                    ssh_auth = my_credentials.get("ssh")
+                    username = ssh_auth.get("username")
+                    password = ssh_auth.get("password")
+                    timeout = einput.get("timeout")
+                    etype = einput.get("type")
+                    auth = {"username":username, "password":password}
+                    sess = self.get_ssh_ses(IP, [auth], timeout, dir_path)
+                    if type(sess) == tuple:
+                        # SSH login success
+                        if etype == "cisco":
+                            sess[0].sendline("terminal length 0")
+                        result.update({"ssh":"reachable"})
+                        all_sessions.update({"ssh_session":sess})
+                    else:
+                        # SSH login failed
+                        logger.info("Failed >"+str(Hostname)+" "+str(IP)+" Reasion>"+str(sess))
+                        if sess == "LOGINFAIL":
+                            result.update({"ssh":"Authentication Failed"})
+                        else:
+                            result.update({"ssh":"timeout"}) 
+                    #Get snmp session
+                except:
+                    logger.exception("self_check")
+    
+            if "snmp" in check:
+                try:
+                    logger.info("getting snmp session")
+                    snmp_conf = my_credentials.get("snmp")
+                    snmp_conf.update({"hostname":IP})
+                    logger.info(snmp_conf)
+                    session = easysnmp.Session(**snmp_conf)
+                    result.update({"snmp":"reachable"})
+                    all_sessions.update({"snmp_session":session})
+                    logger.info("getting snmp success")
+                except:
+                    logger.exception("self_check")
+    
+            all_sessions.update({"status":result})
+            return all_sessions
+        except Exception:
+            logger.exception("self_check")
 
-					login_chk = s.before.strip()
-					if len(login_chk) > 0 and match_ex < 3:
-						host_name = login_chk.decode("utf-8")
-						aftr = s.after
-						if type(aftr) == str:
-							host_name = host_name+aftr.strip().decode("utf-8")
-						logger.info("Login Success :"+hostname+":"+host_name)
-						return s,host_name
-					else:
-						logger.info("Not able to reach device:"+hostname)
-					return "TIMEOUT"
-				except pxssh.ExceptionPxssh as e:
-					err = str(e)
-					if err.find("password refused") != -1:
-						#logger.info("Login Failed:"+hostname)
-						return_typ = "LOGINFAIL"
-					else:
-						logger.info("Login Error>"+err+":"+hostname)
-						return "TIMEOUT"
-				except Exception as e:
-					#logger.exception("login")
-					return "TIMEOUT"
-			return return_typ
-		
-	def get_ssh_ses(self,IP,Authentication,timeout,dir_path):
-		try:
-			#ses = self.ssh_ses.get(IP)  # Not required to store session
-			ses = None
-			live_ses = False
-			if ses == None:
-				#print("SSH SESSION NOT FOUND FOR "+str(IP))
-				live_ses = False
-			else:
-				# Check ssh session
-				if len(ses) == 2:
-					# Previous session is valid , Checking Live
-					ses[0].sendline()
-					if ses[0].expect([ses[1],pxssh.TIMEOUT],timeout=20) == 0:
-						live_ses = True
-		except:
-			live_ses = False
+    def device_check(self, host_objects, dir_path, mcollection):
+        try:
 
-		if live_ses != True:
-			ses = self.login(IP,Authentication,dir_path)
-			if type(ses) != str and ses != None:
-				#self.ssh_ses.update({IP:ses}) # Not required to store session
-				return ses
-		return ses
+            Monitoring_obj = host_objects.get("Objects")
+            ID = host_objects.get("ID")
+            Hostname = host_objects.get("Hostname")
+            IP = host_objects.get("IP")
 
-	def self_check(self,IP,Hostname,dir_path,element,my_credentials):
-		try:
-			result = {}
-			all_sessions = {"status":{}}
-			# Get SSH session
-			einput = element.get("input")
-			check = einput.get("check")
-			
-			if "ssh" in check:
-				try:
-					logger.info("getting ssh session")
-					ssh_auth = my_credentials.get("ssh")
-					username = ssh_auth.get("username")
-					password = ssh_auth.get("password")
-					timeout = einput.get("timeout")
-					etype = einput.get("type")
-					auth = {"username":username,"password":password}
-					sess = self.get_ssh_ses(IP,[auth],timeout,dir_path)
-					if type(sess) == tuple :
-						# SSH login success
-						if etype == "cisco":
-							sess[0].sendline("terminal length 0")
-						result.update({"ssh":"reachable"})
-						all_sessions.update({"ssh_session":sess})
-					else:
-						# SSH login failed
-						logger.info("Failed >"+str(Hostname)+" "+str(IP)+" Reasion>"+str(sess))
-						if sess == "LOGINFAIL":
-							result.update({"ssh":"Authentication Failed"})
-						else:
-							result.update({"ssh":"timeout"}) 
-					#Get snmp session
-				except:
-					logger.exception("self_check")
-			
-			if "snmp" in check:
-				try:
-					logger.info("getting snmp session")
-					snmp_conf = my_credentials.get("snmp")
-					snmp_conf.update({"hostname":IP})
-					logger.info(snmp_conf)
-					session = easysnmp.Session(**snmp_conf)
-					result.update({"snmp":"reachable"})
-					all_sessions.update({"snmp_session":session})
-					logger.info("getting snmp success")
-				except:
-					logger.exception("self_check")
-			
-			all_sessions.update({"status":result})
-			return all_sessions
-		except Exception as e:
-			logger.exception("self_check")
+            if Monitoring_obj == None:
+                logger.error("device_check None Objects")
+                return None
 
-	def device_check(self,host_objects,dir_path,mcollection):
-		try:
+            continue_next = False
+            Monitoring_obj = sorted(Monitoring_obj,  key=lambda k: k['id'])
+            total_obj = str(len(Monitoring_obj))
+            skip = None
+            running_job = 0
+            for element in Monitoring_obj:
+                running_job += 1
+                myid = element.get("id")
+                try:
+                    mcollection.update({"_id":1, "STATUS.IP":IP}, {"$set": {"STATUS.$.STATUS" : "Tasks: "+str(running_job)+"/"+total_obj }})
+                    skip = mcollection.find_one({"_id":1, "SKIP":"yes"}, {"SKIP":1})
+                except Exception:
+                    logger.exception("device_check skip check failed")
+                if skip != None:
+                    logger.info("SKIPPING RECEIVED FROM DB")
+                    try:
+                        mcollection.update({"_id":1, "STATUS.IP":IP}, {"$set": {"STATUS.$.STATUS" : "SKIPPED"}})
+                    except Exception:
+                        logger.exception("device_check updating DB failed for skipping")
+                    break
+                # Self check
+                if myid == 0:
+                    my_credentials = self.credentials.get(IP)
+                    if my_credentials == None:
+                        my_credentials = self.credentials.get("all")
+                        logger.info("Special gredential not found , Getting Default gredential "+str(IP))
+                    if my_credentials == None:
+                        logger.error("credential not found for:"+str(IP))
+                        out_session = None
+                    else:
+                        out_session = self.self_check(IP, Hostname, dir_path, element, my_credentials)
+                    if out_session != None:
+                            
+                        einput = element.get("input")
+                        check = einput.get("check")
+                        
+                        #element.update({"input":""}) # Removing username and password
+                        all_status = out_session.get("status")
+                        element.update({"out":all_status})
+                        # Check all required sessions are reachable else make continue_next as False
+                        for ses_chk in check:
+                            if all_status.get(ses_chk) == "reachable":
+                                continue_next = True
+                            else:
+                                continue_next = False
+                                break
+                        if continue_next != True:
+                            # Only return self element output (device down)
+                            try:
+                                mcollection.update({"_id":1, "STATUS.IP":IP}, {"$set": { "STATUS.$.STATUS" :all_status}})
+                            except Exception:
+                                logger.exception("device_check updating DB failed for device")
+                            return [element]
+                    else:
+                        logger.error("device_check self_check failed")
+                        continue_next = False
+                        try:
+                            mcollection.update({"_id":1, "STATUS.IP":IP}, {"$set": {"STATUS.$.STATUS" :"self check failed"}})
+                        except Exception:
+                            logger.exception("device_check updating DB failed for device")
+                        break
+                elif continue_next == True:
+                    try:
+                        et = element.get("function")
+                        logger.debug("Starting function: "+str(et)+":"+str(IP)+" element:"+str(element))
+                        out = globals()[et](out_session, element)
+                        element.update({"out":out})
+                    except Exception:
+                        logger.exception("device_check")
+                        element.update({"out":"Error: function not present: "+str(et)})
 
-			Monitoring_obj = host_objects.get("Objects")
-			ID = host_objects.get("ID")
-			Hostname = host_objects.get("Hostname")
-			IP = host_objects.get("IP")
+            return Monitoring_obj
 
-			if Monitoring_obj == None:
-				logger.error("device_check None Objects")
-				return None
+        except Exception:
+            logger.exception("device_check")
 
-			continue_next = False
-			Monitoring_obj = sorted(Monitoring_obj, key=lambda k: k['id'])
-			total_obj = str(len(Monitoring_obj))
-			skip = None
-			running_job = 0
-			for element in Monitoring_obj:
-					running_job += 1
-					myid = element.get("id")
-					try:
-						mcollection.update({"_id":1,"STATUS.IP":IP},{ "$set": { "STATUS.$.STATUS" : "Tasks: "+str(running_job)+"/"+total_obj } })
-						skip = mcollection.find_one({"_id":1,"SKIP":"yes"},{"SKIP":1})
-					except Exception as e:
-						logger.exception("device_check skip check failed")
-					if skip != None:
-						logger.info("SKIPPING RECEIVED FROM DB")
-						try:
-							mcollection.update({"_id":1,"STATUS.IP":IP},{ "$set": { "STATUS.$.STATUS" : "SKIPPED"} })
-						except Exception as e:
-							logger.exception("device_check updating DB failed for skipping")
-						break;
-					# Self check
-					if myid == 0:
-						my_credentials = self.credentials.get(IP)
-						if my_credentials == None:
-							my_credentials = self.credentials.get("all")
-							logger.info("Special gredential not found , Getting Default gredential "+str(IP))
-						if my_credentials == None:
-							logger.error("credential not found for:"+str(IP))
-							out_session = None
-						else:
-							out_session = self.self_check(IP,Hostname,dir_path,element,my_credentials)
-						if out_session != None:
-							
-							einput = element.get("input")
-							check = einput.get("check")
-							
-							#element.update({"input":""}) # Removing username and password
-							all_status = out_session.get("status")
-							element.update({"out":all_status})
-							# Check all required sessions are reachable else make continue_next as False
-							for ses_chk in check:
-								if all_status.get(ses_chk) == "reachable":
-									continue_next = True
-								else:
-									continue_next = False
-									break;
-							if continue_next != True:
-								# Only return self element output (device down)
-								try:
-									mcollection.update({"_id":1,"STATUS.IP":IP},{ "$set": { "STATUS.$.STATUS" :all_status} })
-								except Exception as e:
-									logger.exception("device_check updating DB failed for device")
-								return [element]
-						else:
-							logger.error("device_check self_check failed")
-							continue_next = False
-							try:
-								mcollection.update({"_id":1,"STATUS.IP":IP},{ "$set": { "STATUS.$.STATUS" :"self check failed"} })
-							except Exception as e:
-								logger.exception("device_check updating DB failed for device")
-							break;
-					elif continue_next == True:
-						try:
-							et = element.get("function")
-							logger.debug("Starting function: "+str(et)+":"+str(IP)+" element:"+str(element))
-							out = globals()[et](out_session,element)
-							element.update({"out":out})
-						except Exception as e:
-							logger.exception("device_check")
-							element.update({"out":"Error: function not present: "+str(et)})
+    def single_host(self, host_objects, dir_path):
 
-			return Monitoring_obj
+        try:
+            IP = host_objects.get("IP")
+            try:
+                # Unix Socket for quick process
+                mongoc = pymongo.MongoClient('/tmp/mongodb-27017.sock')
+                mdb = mongoc['LIVE']
+                mcollection = mdb['SESSION']
+                mcollection.update({"_id":1, "STATUS.IP":IP}, {"$set": {"STATUS.$.TYPE" : "Running"}})
+            except Exception:
+                logger.exception("single_host DB")
 
-		except Exception as e:
-			logger.exception("device_check")
+            jout = self.device_check(host_objects, dir_path, mcollection)
+            if type(jout) == None:
+                logger.error("single_host return non list objects")
+                jout = []
 
-	def single_host(self,host_objects,dir_path):
+            try:
+                mongoc.close()
+            except Exception:
+                logger.exception("single_host closing DB failed")
 
-		try:
-			IP = host_objects.get("IP")
-			try:
-				# Unix Socket for quick process
-				mongoc = pymongo.MongoClient('/tmp/mongodb-27017.sock')
-				mdb = mongoc['LIVE']
-				mcollection = mdb['SESSION']
-				mcollection.update({"_id":1,"STATUS.IP":IP},{ "$set": { "STATUS.$.TYPE" : "Running" } })
-			except Exception as e:
-				logger.exception("single_host DB")
+            host_objects.update({"Objects":jout})
+            return host_objects
+    
+        except Exception:
+            logger.exception("single_host")
 
-			jout = self.device_check(host_objects,dir_path,mcollection)
-			if type(jout) == None:
-				logger.error("single_host return non list objects")
-				jout = []
+    def get_support_files(self, input_file_path):
+            
+        try:
+            fils = {"credential_file":None, "score_file":"default"}
+            fp = open(input_file_path)
+            jsn = yaml.load(fp)
+            fils.update({"credential_file":jsn.get("credential")})
+            fils.update({"score_file":jsn.get("score")})
+            return fils
+        except Exception:
+            logger.exception("get_support_files")
 
-			try:
-				mongoc.close()
-			except Exception as e:
-				logger.exception("single_host closing DB failed")
+    def start_run(self, input_file_path, jobname, apprentice=5):
+        try:
+            # start create DB function
+            self.jobname = jobname
+            TD = datetime.datetime.now()
+            if self.mongdb(TD, "xls", input_file_path) == True:
+                pass
+            else:
+                logger.error("INPUT FILE ERROR")
+                return None
+            session = 0
+            # Get Supporting files
+            fils = self.get_support_files(input_file_path)
+            credential_file_path = fils.get("credential_file")
+            score_file_path = fils.get("score_file")
+            if credential_file_path == None:
+                logger.error("CREDENTIAL FILE NOT FOUND")
+                return None
+            if score_file_path == None:
+                logger.error("SCORE FILE NOT FOUND")
+                return None
+            default_path = os.path.join(os.getcwd(), "input_file")
+            credential_file_path = os.path.join(default_path, credential_file_path)
+            self.credentials = self.get_credentials_from_yaml(credential_file_path)
+            if self.credentials == None:
+                logger.error("CREDENTIAL FILE ERROR")
+                return None
+            for y in range(1):
+                tim = time.strftime('%Y-%m-%d %H:%M:%S')
+                session = session + 1
+                logger.info("STARTING SESSION >"+str(session))
+                mcollection = self.mdb['SESSION']
+                sesout = mcollection.find_one({"_id":1})
+                INID = sesout.get("INID")
 
-			host_objects.update({"Objects":jout})
-			return host_objects
-		
-		except Exception as e:
-			logger.exception("single_host")
+                #Get INPUT based on INID
+                mcollection = self.mdb['INPUT']
+                all_data = mcollection.find({"INID":INID})
+                jobname = jobname.replace(":", "-")
+                dir_path = os.path.join(os.getcwd(), "divlog")
+                dir_path = os.path.join(dir_path, jobname)
+                if not os.path.exists(dir_path):
+                    os.makedirs(dir_path)
+                dir_path = os.path.join(dir_path, jobname)
+                logger.info("Apprentice>"+str(apprentice))
+                # Share work to threads
+                with ThreadPoolExecutor(max_workers=apprentice) as executor:
+                    futures = [executor.submit(self.single_host, row, dir_path) for row in all_data]
+                    for future in as_completed(futures):
+                        try:
+                            jout = future.result()
+                            #INSERT OUTPUT TO DB
+                            jout.update({"SESSION":int(session), "TD":TD, "JOBNAME":jobname})
+                            mcollection = self.mdb['OUTPUT']
+                            mcollection.insert(jout)
+                        except Exception:
+                            logger.exception("start_run")
 
-	def get_support_files(self,input_file_path):
-		
-		try:
-			fils = {"credential_file":None,"score_file":"default"}
-			fp = open(input_file_path)
-			jsn = yaml.load(fp)
-			fils.update({"credential_file":jsn.get("credential")})
-			fils.update({"score_file":jsn.get("score")})
-			return fils
-		except Exception as e:
-			logger.exception("get_support_files")
+                        try:
+                            #Update session table
+                            mcollection = self.mdb['SESSION']
+                            mcollection.update({"_id":1, "STATUS.IP":jout.get("IP")}, 
+                                {"$set": {"STATUS.$.TYPE" : "Completed"}})
+                        except Exception:
+                            logger.exception("start_run db")
+                #Start Scoring
+                try:
+                    logger.info("Scoring Started")
+                    score_file_path = os.path.join(default_path, score_file_path)
+                    fp = open(score_file_path)
+                    score_jsn = yaml.load(fp)
+                    self.mongo_search_score(INID, session, self.mdb, score_jsn)
+                    logger.info("Scoring Completed")
+                except Exception:
+                    logger.exception("start_run")
+                #UPDATE CURRENT SESSION
+                mcollection = self.mdb['SESSION']
+                mcollection.update({"_id":1}, {"$set":{"SESSION":session}})
+                mcollection = self.mdb['HISTORY']
+                mcollection.insert({"INID":int(INID), "SESSION":int(session), "TD":TD, "JOBNAME":jobname})
+        except Exception:
+            logger.exception("start_run")
 
-	def start_run(self,input_file_path,jobname,apprentice = 5):
-		try:
-			# start create DB function
-			self.jobname = jobname
-			TD = datetime.datetime.now()
-			if self.mongdb(TD,"xls",input_file_path) == True:
-				pass;
-			else:
-				logger.error("INPUT FILE ERROR")
-				return None
-			session = 0
-			
-			# Get Supporting files
-			fils = self.get_support_files(input_file_path)
-			credential_file_path = fils.get("credential_file")
-			score_file_path = fils.get("score_file")
-			if credential_file_path == None:
-				logger.error("CREDENTIAL FILE NOT FOUND")
-				return None
-			
-			if score_file_path == None:
-				logger.error("SCORE FILE NOT FOUND")
-				return None
+    def xls_input(self, filename):
+        # Ready XLS input file and formate to JSON for inserting to MongoDB
+        try:
+            xl = pandas.ExcelFile(filename)
+            # Ready 'input' worksheet
+            df1 = xl.parse('input')
+            IP = list(set((df1.get("IP"))))
+            full_list = []
+            authentication = None
+            for inx, i in enumerate(IP):
+                elmt_id = 0
+                local_list = []
+                xx = ""
+                for index, row in df1.iterrows():
+                    if row["IP"] == i:
+                        if row["function"] == "self_check":
+                            # Set id zero for self check , and get authentication details
+                            elmt_id2 = 0
+                            authentication = row["input"]
+                        else:
+                            elmt_id = elmt_id + 1
+                            elmt_id2 = elmt_id
+                        a = {"id":elmt_id2, "function":row["function"],
+                         "input": json.loads(row["input"]), "rank":row["rank"]}
+                        local_list.append(a)
+                        xx = row
+                full_list.append({"Hostname": str(xx["Hostname"]), "IP":str(xx["IP"]),
+                 "Authentication":json.loads(authentication), "Objects":local_list})
+            return full_list
+        except Exception:
+            logger.exception("xls_input")
 
-			default_path = os.path.join(os.getcwd(),"input_file")
-			credential_file_path = os.path.join(default_path,credential_file_path)
-			self.credentials = self.get_credentials_from_yaml(credential_file_path)
+    def yaml_compiler(self, file_path):
+        try:
+            fp = open(file_path)
+            jsn = yaml.load(fp)
+            jsn = jsn.get("networksnap")
+            
+            if jsn == None:
+                logger.error("Not a valid YAML : 'networksnap' missing")
+                return None
+        
+            if type(jsn)!= list or len(jsn) < 1:
+                logger.error("Not a valid YAML : 'required one or more flow'")
+                return None
+        
+            for obj in jsn:
+                all_obj = obj.get("Objects")
+                if obj.get("IP") == None:
+                    logger.error("Not a valid YAML : 'IP' Missed")
+                    return None
+                if all_obj == None or type(all_obj) != list or len(all_obj) < 1:
+                    logger.error("Not a valid YAML : 'Objects' missing")
+                    return None
+            
+                # Setting Object ID
+                objid = 0
+                for one_obj in all_obj:
+                    #Change rank "JSON" to STRING ( because mondodb not accept $ carecter in key)
+                    #one_obj.update({"rank":json.dumps(one_obj.get("rank"))})
+                    if one_obj.get("function") == "self_check":
+                        one_obj.update({"id":0})
+                    else:
+                        objid = objid + 1
+                        one_obj.update({"id":objid})
 
-			
-			if self.credentials == None:
-				logger.error("CREDENTIAL FILE ERROR")
-				return None
-			for y in range(1):
-				tim = time.strftime('%Y-%m-%d %H:%M:%S')
-				session = session + 1
-				logger.info("STARTING SESSION >"+str(session))
-				mcollection = self.mdb['SESSION']
-				sesout = mcollection.find_one({"_id":1})
-				INID = sesout.get("INID")
+            return jsn
+        except Exception:
+            logger.exception("yaml_compiler")
 
-				#Get INPUT based on INID
-				mcollection = self.mdb['INPUT']
-				all_data = mcollection.find({"INID":INID})
-				jobname = jobname.replace(":","-")
-				dir_path = os.path.join(os.getcwd(),"divlog")
-				dir_path = os.path.join(dir_path,jobname)
-				if not os.path.exists(dir_path):
-					os.makedirs(dir_path)
-				dir_path = os.path.join(dir_path,jobname)
-				logger.info("Apprentice>"+str(apprentice))
-				# Share work to threads
-				with ThreadPoolExecutor(max_workers=apprentice) as executor:
-					futures = [executor.submit(self.single_host, row,dir_path) for row in all_data]
-					for future in as_completed(futures):
-						try:
-							jout = future.result()
-							#INSERT OUTPUT TO DB
-							jout.update({"SESSION":int(session),"TD":TD,"JOBNAME":jobname})
-							mcollection = self.mdb['OUTPUT']
-							mcollection.insert(jout)
-						except Exception as e:
-							logger.exception("start_run")
+    def mongdb(self, TD, input="xls", filepath=None):
+        try:
+            INID  = 1
+            if input == "xls":
+                #csv_data = self.xls_input(filepath)
+                csv_data = self.yaml_compiler(filepath)
+                if csv_data == None or len(csv_data) == 0:
+                    logger.error("No valid input file")
+                    return None
+            else:
+                return None
+                #csv_data = list(csv.DictReader(open('input.csv')))
+            #Get INID from SESSION
+            mcollection = self.mdb['SESSION']
+            session = (list(mcollection.find()))
+            if len(session) > 0:
+                INID = session[0].get("INID")
+                if INID != None:
+                    INID = INID+1
+            # ADD INID in INPUT collection
+            for d in csv_data:
+                # Json loads used to convert string to array object
+                d.update({"INID":INID, "Objects":d.get("Objects")})
+            mcollection = self.mdb['INPUT']
+            mcollection.insert(csv_data)
+            ses = mcollection.find({"INID":INID}, {"Hostname":1, "IP":1, "_id":0})
+            # Add or Update new session in SESSION collection
+            mcollection = self.mdb['SESSION']
+            #print list(ses)
+            mcollection.update({"_id":1}, {"_id":1, "INID":INID, "SESSION":0, 
+                "JOBNAME":self.jobname, "STATUS":list(ses), "STARTDATE":TD})
+            logger.info("SESSION UPDATED , INID = "+str(INID))
+            #self.mongoc.close()
+            return True
+        except Exception:
+            logger.exception("mongdb")
 
-						try:
-							#Update session table
-							mcollection = self.mdb['SESSION']
-							mcollection.update({"_id":1,"STATUS.IP":jout.get("IP")},{ "$set": { "STATUS.$.TYPE" : "Completed" } })
-						except Exception as e:
-							logger.exception("start_run db")
-						
-				
-				#Start Scoring
-				try:
-					logger.info("Scoring Started")
-					score_file_path = os.path.join(default_path,score_file_path)
-					fp = open(score_file_path)
-					score_jsn = yaml.load(fp)
-					self.mongo_search_score(INID,session,self.mdb,score_jsn)
-					logger.info("Scoring Completed")
-				except Exception as e:
-					logger.exception("start_run")
-				#UPDATE CURRENT SESSION
-				mcollection = self.mdb['SESSION']
-				mcollection.update({"_id":1},{"$set":{"SESSION":session}})
-				mcollection = self.mdb['HISTORY']
-				mcollection.insert({"INID":int(INID),"SESSION":int(session),"TD":TD,"JOBNAME":jobname})
-		except Exception as e:
-			logger.exception("start_run")
+    def main_run(self, filepath, jobname, apprentice):
+        # connect to LIVE database
+        logger.info("Starting Job ===============> "+str(jobname))
+        self.mongoc = pymongo.MongoClient('localhost', 27017)
+        self.mdb = self.mongoc['LIVE']
+        logger.info("Connected to 'LIVE' database...")
 
-	def xls_input(self,filename):
-		# Ready XLS input file and formate to JSON for inserting to MongoDB
-		try:
-			xl = pandas.ExcelFile(filename)
-			# Ready 'input' worksheet
-			df1 = xl.parse('input')
-			IP = list(set((df1.get("IP"))))
-			full_list = []
-			authentication = None
-			for inx , i in enumerate(IP):
-				elmt_id = 0
-				local_list = []
-				xx = ""
-				for index, row in df1.iterrows():
-					if row["IP"] == i:
-						if row["function"] == "self_check":
-							# Set id zero for self check , and get authentication details
-							elmt_id2 = 0
-							authentication = row["input"]
-						else:
-							elmt_id = elmt_id + 1
-							elmt_id2 = elmt_id
-						a = {"id":elmt_id2, "function":row["function"],"input": json.loads(row["input"]),"rank":row["rank"]}
-						local_list.append(a)
-						xx = row
-				full_list.append({"Hostname": str(xx["Hostname"]),"IP":str(xx["IP"]),"Authentication":json.loads(authentication),"Objects":local_list})
-			return full_list
-		except Exception as e:
-			logger.exception("xls_input")
-	
-	def yaml_compiler(self,file_path):
-		try:
-			fp = open(file_path)
-			jsn = yaml.load(fp)
-			jsn = jsn.get("networksnap")
-			
-			if jsn == None:
-				logger.error("Not a valid YAML : 'networksnap' missing")
-				return None
-			
-			if type(jsn) != list or len(jsn) < 1 :
-				logger.error("Not a valid YAML : 'required one or more flow'")
-				return None
-			
-			for obj in jsn:
-				all_obj = obj.get("Objects")
-				if obj.get("IP") == None:
-					logger.error("Not a valid YAML : 'IP' Missed")
-					return None
-				if all_obj == None or type(all_obj) != list or len(all_obj) < 1:
-					logger.error("Not a valid YAML : 'Objects' missing")
-					return None
-				
-				# Setting Object ID
-				objid = 0
-				for one_obj in all_obj:
-					#Change rank "JSON" to STRING ( because mondodb not accept $ carecter in key)
-					#one_obj.update({"rank":json.dumps(one_obj.get("rank"))})
-					if one_obj.get("function") == "self_check":
-						one_obj.update({"id":0})
-					else:
-						objid = objid + 1
-						one_obj.update({"id":objid})
-
-			return jsn
-		except Exception as e:
-			logger.exception("yaml_compiler")
-
-	def mongdb(self,TD,input="xls",filepath=None):
-		try:
-			INID  = 1
-			if input == "xls":
-				#csv_data = self.xls_input(filepath)
-				csv_data = self.yaml_compiler(filepath)
-				if csv_data == None or len(csv_data) == 0:
-					logger.error("No valid input file")
-					return None
-			else:
-				return None
-				#csv_data = list(csv.DictReader(open('input.csv')))
-			
-			#Get INID from SESSION
-			mcollection = self.mdb['SESSION']
-			session = (list(mcollection.find()))
-			if len(session) > 0:
-				INID = session[0].get("INID")
-				if INID != None:
-					INID = INID+1
-					
-			# ADD INID in INPUT collection
-			for d in csv_data:
-				# Json loads used to convert string to array object
-				d.update({"INID":INID,"Objects":d.get("Objects")})
-
-			mcollection = self.mdb['INPUT']
-			mcollection.insert(csv_data)
-
-			ses = mcollection.find({"INID":INID},{"Hostname":1,"IP":1,"_id":0})
-			# Add or Update new session in SESSION collection
-			mcollection = self.mdb['SESSION']
-			#print list(ses)
-			mcollection.update({"_id":1},{"_id":1,"INID":INID,"SESSION":0,"JOBNAME":self.jobname,"STATUS":list(ses),"STARTDATE":TD})
-			logger.info("SESSION UPDATED , INID = "+str(INID))
-			
-			#self.mongoc.close()
-			return True
-		except Exception as e:
-			logger.exception("mongdb")
-	
-	def main_run(self,filepath,jobname,apprentice):
-		# connect to LIVE database
-		logger.info("Starting Job ===============> "+str(jobname))
-		self.mongoc = pymongo.MongoClient('localhost', 27017)
-		self.mdb = self.mongoc['LIVE']
-		logger.info("Connected to 'LIVE' database...")
-
-		# Insitate Score Me object
-		scor = score_gen()
-		self.mongo_search_score = scor.mongo_search_score
-		self.start_run(filepath,jobname,apprentice)
+        # Insitate Score Me object
+        scor = score_gen()
+        self.mongo_search_score = scor.mongo_search_score
+        self.start_run(filepath, jobname, apprentice)
 
 
 if __name__ == '__main__':
-	pass;
-	logger.info("Manual Mode Running")
-	#m = main_model()
-	#m.main_run("test.yaml","YAML-TEST",101)
+    logger.info("Manual Mode Running")
+    #m = main_model()
+    #m.main_run("test.yaml","YAML-TEST",101)

@@ -2785,3 +2785,54 @@ NameError: global name 'STR' is not defined
 2017-10-29 00:40:47,236 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 76.0, 'SESSION': 1, 'Objects': {'$elemMatch': {'out.crc': {'$gt': 0}, 'id': 2}}}
 2017-10-29 00:40:47,237 > DEBUG > mongo_search_score > Pattern Not matched
 2017-10-29 00:40:47,237 > INFO > Scoring Completed
+2017-10-29 12:01:32,013 > INFO > Starting MonitoringEngine
+2017-10-29 12:01:32,551 > INFO > Starting MonitoringEngine
+2017-10-29 12:02:05,694 > INFO > Starting MonitoringEngine
+2017-10-29 12:02:06,231 > INFO > Starting MonitoringEngine
+2017-10-29 12:03:27,953 > INFO > Starting Job ===============> KPL-29-October-12:03:27
+2017-10-29 12:03:27,958 > INFO > Connected to 'LIVE' database...
+2017-10-29 12:03:27,958 > INFO > Scoring Object Insiated...
+2017-10-29 12:03:28,062 > INFO > SESSION UPDATED , INID = 77.0
+2017-10-29 12:03:28,114 > INFO > STARTING SESSION >1
+2017-10-29 12:03:28,160 > INFO > Apprentice>5
+2017-10-29 12:03:28,216 > INFO > getting ssh session
+2017-10-29 12:03:28,216 > INFO > Trying to Login:10.1.1.2
+2017-10-29 12:03:28,749 > INFO > getting ssh session
+2017-10-29 12:03:28,749 > INFO > Trying to Login:10.1.1.1
+2017-10-29 12:03:28,758 > INFO > Special gredential not found , Getting Default gredential 10.1.1.3
+2017-10-29 12:03:28,758 > INFO > getting ssh session
+2017-10-29 12:03:28,758 > INFO > Trying to Login:10.1.1.3
+2017-10-29 12:03:29,963 > INFO > Login Error>Could not establish connection to host:10.1.1.1
+2017-10-29 12:03:29,963 > INFO > Failed >GNS_H1 10.1.1.1 Reasion>TIMEOUT
+2017-10-29 12:03:29,963 > INFO > getting snmp session
+2017-10-29 12:03:29,963 > INFO > {'security_username': 'NPCI_NFS_NMSV3', 'auth_password': 'npcinfsnms', 'version': 3, 'hostname': u'10.1.1.1', 'security_level': 'auth_without_privacy'}
+2017-10-29 12:03:29,980 > INFO > getting snmp success
+2017-10-29 12:03:49,967 > INFO > Failed >GNS_H3 10.1.1.3 Reasion>TIMEOUT
+2017-10-29 12:03:49,967 > INFO > getting snmp session
+2017-10-29 12:03:49,967 > INFO > {'security_username': 'NPCI_NFS_NMSV3', 'auth_password': 'npcinfsnms', 'version': 3, 'hostname': u'10.1.1.3', 'security_level': 'auth_without_privacy'}
+2017-10-29 12:03:49,984 > INFO > Failed >GNS_H2 10.1.1.2 Reasion>TIMEOUT
+2017-10-29 12:03:49,984 > INFO > getting snmp session
+2017-10-29 12:03:49,984 > INFO > {'version': 3, 'security_level': 'auth_without_privacy', 'security_username': 'NPCI_NFS_NMSV3', 'auth_password': 'npcinfsnms', 'hostname': u'10.1.1.2'}
+2017-10-29 12:03:50,003 > INFO > getting snmp success
+2017-10-29 12:03:50,006 > INFO > getting snmp success
+2017-10-29 12:03:50,010 > INFO > Scoring Started
+2017-10-29 12:03:50,058 > DEBUG > Mongo search score for:77.0 1
+2017-10-29 12:03:50,059 > DEBUG > mongo_search_score > Starting score for > 10.1.1.1
+2017-10-29 12:03:50,059 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.1', 'INID': 77.0, 'SESSION': 1, 'Objects': {'$elemMatch': {'out.ssh': {'$ne': 'reachable'}, 'id': 0}}}
+2017-10-29 12:03:50,060 > DEBUG > mongo_search_score > Pattern Matched
+2017-10-29 12:03:50,060 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.1', 'INID': 77.0, 'SESSION': 1, 'Objects': {'$elemMatch': {'out.ssh': {'$ne': 'reachable'}, 'id': 0}}}, {'$set': {'Objects.$.score': 0}})
+2017-10-29 12:03:50,061 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.1', 'INID': 77.0, 'SESSION': 1, 'Objects': {'$elemMatch': {'out.ssh': 'reachable', 'id': 0}}}
+2017-10-29 12:03:50,062 > DEBUG > mongo_search_score > Pattern Not matched
+2017-10-29 12:03:50,062 > DEBUG > mongo_search_score > Starting score for > 10.1.1.3
+2017-10-29 12:03:50,062 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 77.0, 'SESSION': 1, 'Objects': {'$elemMatch': {'out.ssh': {'$ne': 'reachable'}, 'id': 0}}}
+2017-10-29 12:03:50,063 > DEBUG > mongo_search_score > Pattern Matched
+2017-10-29 12:03:50,063 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.3', 'INID': 77.0, 'SESSION': 1, 'Objects': {'$elemMatch': {'out.ssh': {'$ne': 'reachable'}, 'id': 0}}}, {'$set': {'Objects.$.score': 0}})
+2017-10-29 12:03:50,064 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.3', 'INID': 77.0, 'SESSION': 1, 'Objects': {'$elemMatch': {'out.ssh': 'reachable', 'id': 0}}}
+2017-10-29 12:03:50,065 > DEBUG > mongo_search_score > Pattern Not matched
+2017-10-29 12:03:50,065 > DEBUG > mongo_search_score > Starting score for > 10.1.1.2
+2017-10-29 12:03:50,066 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 77.0, 'SESSION': 1, 'Objects': {'$elemMatch': {'out.ssh': {'$ne': 'reachable'}, 'id': 0}}}
+2017-10-29 12:03:50,066 > DEBUG > mongo_search_score > Pattern Matched
+2017-10-29 12:03:50,067 > DEBUG > mongo_search_score > updating score >({'IP': u'10.1.1.2', 'INID': 77.0, 'SESSION': 1, 'Objects': {'$elemMatch': {'out.ssh': {'$ne': 'reachable'}, 'id': 0}}}, {'$set': {'Objects.$.score': 0}})
+2017-10-29 12:03:50,067 > DEBUG > mongo_search_score > searching DB for:{'IP': u'10.1.1.2', 'INID': 77.0, 'SESSION': 1, 'Objects': {'$elemMatch': {'out.ssh': 'reachable', 'id': 0}}}
+2017-10-29 12:03:50,068 > DEBUG > mongo_search_score > Pattern Not matched
+2017-10-29 12:03:50,069 > INFO > Scoring Completed
