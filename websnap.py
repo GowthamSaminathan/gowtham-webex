@@ -409,7 +409,9 @@ def merge_js_yaml():
 				yaml_js = yaml.load(yaml_data)
 				netsnap = yaml_js.get("networksnap")
 				if netsnap == None or type(netsnap) != list:
-					return jsonify({"error":"Not valid job file => networksnap not found"})
+					netsnap = []
+					new_entry = True
+					#return jsonify({"error":"Not valid job file => networksnap not found"})
 
 				for js in js_data:
 					js_ip = js.get("IP")
@@ -430,12 +432,12 @@ def merge_js_yaml():
 							# host already exist need to merge functions
 							fun = js.get("function")
 							inp = js.get("input")
-							objects.append({"function":fun,"input":inp})
+							objects.append({"function":fun,"input":json.loads(inp)})
 							ns.update({"Objects":objects})
 							break;
 					if new_entry == True:
 						# no existing host found need add new host
-						new_obj = {"Objects":[{"function":js_fun,"input":js_inp}],"IP":js_ip,"Hostname":js_host}
+						new_obj = {"Objects":[{"function":js_fun,"input":json.loads(js_inp)}],"IP":js_ip,"Hostname":js_host}
 						netsnap.append(new_obj)
 
 

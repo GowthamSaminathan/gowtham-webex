@@ -359,8 +359,7 @@ class main_model():
 							einput = element.get("input")
 							check = einput.get("check")
 							
-							# Removing username and password
-							element.update({"input":""})
+							#element.update({"input":""}) # Removing username and password
 							all_status = out_session.get("status")
 							element.update({"out":all_status})
 							# Check all required sessions are reachable else make continue_next as False
@@ -388,6 +387,7 @@ class main_model():
 					elif continue_next == True:
 						try:
 							et = element.get("function")
+							logger.debug("Starting function: "+str(et)+":"+str(IP)+" element:"+str(element))
 							out = globals()[et](out_session,element)
 							element.update({"out":out})
 						except Exception as e:
@@ -586,7 +586,7 @@ class main_model():
 				objid = 0
 				for one_obj in all_obj:
 					#Change rank "JSON" to STRING ( because mondodb not accept $ carecter in key)
-					one_obj.update({"rank":json.dumps(one_obj.get("rank"))})
+					#one_obj.update({"rank":json.dumps(one_obj.get("rank"))})
 					if one_obj.get("function") == "self_check":
 						one_obj.update({"id":0})
 					else:

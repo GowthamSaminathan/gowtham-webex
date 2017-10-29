@@ -1,6 +1,6 @@
 credential: default_auth
 networksnap:
-- Hostname: CHN_1
+- Hostname: GNS_H1
   IP: 10.1.1.1
   Objects:
   - function: self_check
@@ -9,11 +9,10 @@ networksnap:
       timeout: 10
       type: cisco
   - function: cisco_switch
-    input: {check: 'bits,duplex,speed,error', interface: fa0/1}
+    input: {'interface': fa0/0, check: 'bits,duplex,speed,error'}
   - function: cisco_switch
-    input: {check: 'bits,duplex,speed,error', interface: fa0/0}
-  - {function: self_check, input: '{interface:fa0/0}'}
-- Hostname: CHN_2
+    input: {'interface': fa0/1, check: 'bits,duplex,speed,error'}
+- Hostname: GNS_H2
   IP: 10.1.1.2
   Objects:
   - function: self_check
@@ -22,29 +21,19 @@ networksnap:
       timeout: 10
       type: cisco
   - function: cisco_switch
-    input: {check: 'bits,duplex,speed,error', interface: fa0/1}
+    input: {'interface': fa0/0, check: 'bits,duplex,speed,error'}
   - function: cisco_switch
-    input: {check: 'bits,duplex,speed,error', interface: fa0/0}
-  - {function: self_check, input: '{interface:fa0/0}'}
-- Hostname: Host3
+    input: {'interface': fa0/1, check: 'bits,duplex,speed,error'}
+- Hostname: GNS_H3
   IP: 10.1.1.3
   Objects:
-  - {function: self_check, input: '{interface:fa0/0}'}
-  - {function: self_check, input: '{interface:fa0/0}'}
-- Hostname: Host4
-  IP: 10.1.1.4
-  Objects:
-  - {function: self_check, input: '{interface:fa0/0}'}
-- Hostname: Host5
-  IP: 10.1.1.5
-  Objects:
-  - {function: self_check, input: '{interface:fa0/0}'}
-- Hostname: Host6
-  IP: 10.1.1.6
-  Objects:
-  - {function: self_check, input: '{interface:fa0/0}'}
-- Hostname: Host7
-  IP: 10.1.1.7
-  Objects:
-  - {function: self_check, input: '{interface:fa0/0}'}
+  - function: self_check
+    input:
+      check: [snmp, ssh]
+      timeout: 10
+      type: cisco
+  - function: cisco_switch
+    input: {'interface': fa0/0, check: 'bits,duplex,speed,error'}
+  - function: cisco_switch
+    input: {'interface': fa0/1, check: 'bits,duplex,speed,error'}
 score: default_score

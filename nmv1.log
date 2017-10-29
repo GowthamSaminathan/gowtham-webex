@@ -1,0 +1,100 @@
+2017-10-28 23:48:06,439 > ERROR > cis_sw_int
+Traceback (most recent call last):
+  File "/home/networksnap/div/network_snap/nmv1.py", line 159, in cisco_switch
+    cmd = "show interface "+in_
+TypeError: cannot concatenate 'str' and 'NoneType' objects
+2017-10-28 23:48:06,441 > ERROR > cis_sw_int
+Traceback (most recent call last):
+  File "/home/networksnap/div/network_snap/nmv1.py", line 159, in cisco_switch
+    cmd = "show interface "+in_
+TypeError: cannot concatenate 'str' and 'NoneType' objects
+2017-10-28 23:48:06,483 > ERROR > cis_sw_int
+Traceback (most recent call last):
+  File "/home/networksnap/div/network_snap/nmv1.py", line 159, in cisco_switch
+    cmd = "show interface "+in_
+TypeError: cannot concatenate 'str' and 'NoneType' objects
+2017-10-28 23:48:06,485 > ERROR > cis_sw_int
+Traceback (most recent call last):
+  File "/home/networksnap/div/network_snap/nmv1.py", line 159, in cisco_switch
+    cmd = "show interface "+in_
+TypeError: cannot concatenate 'str' and 'NoneType' objects
+2017-10-29 00:14:45,389 > ERROR > cis_sw_int
+Traceback (most recent call last):
+  File "/home/networksnap/div/network_snap/nmv1.py", line 159, in cisco_switch
+    cmd = "show interface "+in_
+TypeError: cannot concatenate 'str' and 'NoneType' objects
+2017-10-29 00:14:45,394 > ERROR > cis_sw_int
+Traceback (most recent call last):
+  File "/home/networksnap/div/network_snap/nmv1.py", line 159, in cisco_switch
+    cmd = "show interface "+in_
+TypeError: cannot concatenate 'str' and 'NoneType' objects
+2017-10-29 00:14:45,397 > ERROR > cis_sw_int
+Traceback (most recent call last):
+  File "/home/networksnap/div/network_snap/nmv1.py", line 159, in cisco_switch
+    cmd = "show interface "+in_
+TypeError: cannot concatenate 'str' and 'NoneType' objects
+2017-10-29 00:14:45,399 > ERROR > cis_sw_int
+Traceback (most recent call last):
+  File "/home/networksnap/div/network_snap/nmv1.py", line 159, in cisco_switch
+    cmd = "show interface "+in_
+TypeError: cannot concatenate 'str' and 'NoneType' objects
+2017-10-29 00:25:09,096 > ERROR > cis_sw_int
+Traceback (most recent call last):
+  File "/home/networksnap/div/network_snap/nmv1.py", line 159, in cisco_switch
+    cmd = "show interface "+in_
+TypeError: cannot concatenate 'str' and 'NoneType' objects
+2017-10-29 00:25:09,100 > ERROR > cis_sw_int
+Traceback (most recent call last):
+  File "/home/networksnap/div/network_snap/nmv1.py", line 159, in cisco_switch
+    cmd = "show interface "+in_
+TypeError: cannot concatenate 'str' and 'NoneType' objects
+2017-10-29 00:25:09,185 > ERROR > cis_sw_int
+Traceback (most recent call last):
+  File "/home/networksnap/div/network_snap/nmv1.py", line 159, in cisco_switch
+    cmd = "show interface "+in_
+TypeError: cannot concatenate 'str' and 'NoneType' objects
+2017-10-29 00:25:09,187 > ERROR > cis_sw_int
+Traceback (most recent call last):
+  File "/home/networksnap/div/network_snap/nmv1.py", line 159, in cisco_switch
+    cmd = "show interface "+in_
+TypeError: cannot concatenate 'str' and 'NoneType' objects
+2017-10-29 00:37:55,546 > ERROR > cis_sw_int
+Traceback (most recent call last):
+  File "/home/networksnap/div/network_snap/nmv1.py", line 161, in cisco_switch
+    cmd = "show interface "+in_
+TypeError: cannot concatenate 'str' and 'NoneType' objects
+2017-10-29 00:37:55,548 > ERROR > cis_sw_int
+Traceback (most recent call last):
+  File "/home/networksnap/div/network_snap/nmv1.py", line 161, in cisco_switch
+    cmd = "show interface "+in_
+TypeError: cannot concatenate 'str' and 'NoneType' objects
+2017-10-29 00:37:55,634 > ERROR > cis_sw_int
+Traceback (most recent call last):
+  File "/home/networksnap/div/network_snap/nmv1.py", line 161, in cisco_switch
+    cmd = "show interface "+in_
+TypeError: cannot concatenate 'str' and 'NoneType' objects
+2017-10-29 00:37:55,637 > ERROR > cis_sw_int
+Traceback (most recent call last):
+  File "/home/networksnap/div/network_snap/nmv1.py", line 161, in cisco_switch
+    cmd = "show interface "+in_
+TypeError: cannot concatenate 'str' and 'NoneType' objects
+2017-10-29 00:39:10,707 > ERROR > cis_sw_int
+Traceback (most recent call last):
+  File "/home/networksnap/div/network_snap/nmv1.py", line 159, in cisco_switch
+    cmd = "show interface "+in_
+TypeError: cannot concatenate 'str' and 'NoneType' objects
+2017-10-29 00:39:10,709 > ERROR > cis_sw_int
+Traceback (most recent call last):
+  File "/home/networksnap/div/network_snap/nmv1.py", line 159, in cisco_switch
+    cmd = "show interface "+in_
+TypeError: cannot concatenate 'str' and 'NoneType' objects
+2017-10-29 00:39:10,712 > ERROR > cis_sw_int
+Traceback (most recent call last):
+  File "/home/networksnap/div/network_snap/nmv1.py", line 159, in cisco_switch
+    cmd = "show interface "+in_
+TypeError: cannot concatenate 'str' and 'NoneType' objects
+2017-10-29 00:39:10,715 > ERROR > cis_sw_int
+Traceback (most recent call last):
+  File "/home/networksnap/div/network_snap/nmv1.py", line 159, in cisco_switch
+    cmd = "show interface "+in_
+TypeError: cannot concatenate 'str' and 'NoneType' objects

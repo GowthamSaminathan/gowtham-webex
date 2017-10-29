@@ -18,7 +18,7 @@
     password: cisco
 - juniper:
   ip:
-   10.1.1.20
+   all
   snmp:
     auth_password: npcinfsnms
     security_username: NPCI_NFS_NMSV3

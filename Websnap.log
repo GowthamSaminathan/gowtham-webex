@@ -898,3 +898,230 @@ Traceback (most recent call last):
   File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 1265, in bof_error
     raise XLRDError('Unsupported format, or corrupt file: ' + msg)
 XLRDError: Unsupported format, or corrupt file: Expected BOF record; found 'credenti'
+2017-10-28 22:16:34,066 > INFO > Starting MonitoringEngine
+2017-10-28 22:16:34,674 > INFO > Starting MonitoringEngine
+2017-10-28 22:49:07,483 > INFO > Starting MonitoringEngine
+2017-10-28 22:49:11,459 > INFO > Starting MonitoringEngine
+2017-10-28 22:49:22,467 > INFO > Starting MonitoringEngine
+2017-10-28 22:49:43,494 > INFO > Starting MonitoringEngine
+2017-10-28 22:49:50,226 > INFO > merge_js_yaml > Some data missed in JS , skipping
+2017-10-28 22:51:11,170 > ERROR > get_xl_group
+Traceback (most recent call last):
+  File "websnap.py", line 454, in get_xl_group
+    xl = pandas.ExcelFile(xl_file)
+  File "/usr/local/lib/python2.7/dist-packages/pandas/io/excel.py", line 260, in __init__
+    self.book = xlrd.open_workbook(io)
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/__init__.py", line 162, in open_workbook
+    ragged_rows=ragged_rows,
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 91, in open_workbook_xls
+    biff_version = bk.getbof(XL_WORKBOOK_GLOBALS)
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 1271, in getbof
+    bof_error('Expected BOF record; found %r' % self.mem[savpos:savpos+8])
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 1265, in bof_error
+    raise XLRDError('Unsupported format, or corrupt file: ' + msg)
+XLRDError: Unsupported format, or corrupt file: Expected BOF record; found 'credenti'
+2017-10-28 23:27:37,868 > INFO > Starting MonitoringEngine
+2017-10-28 23:27:51,972 > INFO > Starting MonitoringEngine
+2017-10-28 23:28:27,639 > ERROR > merge_js_yaml
+Traceback (most recent call last):
+  File "websnap.py", line 440, in merge_js_yaml
+    new_obj = {"Objects":[{"function":json.loads(js_fun),"input":js_inp}],"IP":js_ip,"Hostname":js_host}
+  File "/usr/lib/python2.7/json/__init__.py", line 339, in loads
+    return _default_decoder.decode(s)
+  File "/usr/lib/python2.7/json/decoder.py", line 364, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/usr/lib/python2.7/json/decoder.py", line 382, in raw_decode
+    raise ValueError("No JSON object could be decoded")
+ValueError: No JSON object could be decoded
+2017-10-28 23:29:57,104 > ERROR > merge_js_yaml
+Traceback (most recent call last):
+  File "websnap.py", line 440, in merge_js_yaml
+    new_obj = {"Objects":[{"function":json.loads(js_fun),"input":js_inp}],"IP":js_ip,"Hostname":js_host}
+  File "/usr/lib/python2.7/json/__init__.py", line 339, in loads
+    return _default_decoder.decode(s)
+  File "/usr/lib/python2.7/json/decoder.py", line 364, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/usr/lib/python2.7/json/decoder.py", line 382, in raw_decode
+    raise ValueError("No JSON object could be decoded")
+ValueError: No JSON object could be decoded
+2017-10-28 23:30:14,752 > INFO > Starting MonitoringEngine
+2017-10-28 23:30:24,253 > INFO > merge_js_yaml > Some data missed in JS , skipping
+2017-10-28 23:31:39,265 > ERROR > get_xl_group
+Traceback (most recent call last):
+  File "websnap.py", line 454, in get_xl_group
+    xl = pandas.ExcelFile(xl_file)
+  File "/usr/local/lib/python2.7/dist-packages/pandas/io/excel.py", line 260, in __init__
+    self.book = xlrd.open_workbook(io)
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/__init__.py", line 162, in open_workbook
+    ragged_rows=ragged_rows,
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 91, in open_workbook_xls
+    biff_version = bk.getbof(XL_WORKBOOK_GLOBALS)
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 1271, in getbof
+    bof_error('Expected BOF record; found %r' % self.mem[savpos:savpos+8])
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 1265, in bof_error
+    raise XLRDError('Unsupported format, or corrupt file: ' + msg)
+XLRDError: Unsupported format, or corrupt file: Expected BOF record; found 'credenti'
+2017-10-28 23:38:11,329 > INFO > Starting MonitoringEngine
+2017-10-28 23:38:47,123 > INFO > merge_js_yaml > Some data missed in JS , skipping
+2017-10-28 23:39:33,537 > INFO > Starting MonitoringEngine
+2017-10-28 23:39:56,552 > INFO > Starting MonitoringEngine
+2017-10-28 23:40:11,158 > INFO > merge_js_yaml > Some data missed in JS , skipping
+2017-10-28 23:40:45,357 > ERROR > get_xl_group
+Traceback (most recent call last):
+  File "websnap.py", line 454, in get_xl_group
+    xl = pandas.ExcelFile(xl_file)
+  File "/usr/local/lib/python2.7/dist-packages/pandas/io/excel.py", line 260, in __init__
+    self.book = xlrd.open_workbook(io)
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/__init__.py", line 162, in open_workbook
+    ragged_rows=ragged_rows,
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 91, in open_workbook_xls
+    biff_version = bk.getbof(XL_WORKBOOK_GLOBALS)
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 1271, in getbof
+    bof_error('Expected BOF record; found %r' % self.mem[savpos:savpos+8])
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 1265, in bof_error
+    raise XLRDError('Unsupported format, or corrupt file: ' + msg)
+XLRDError: Unsupported format, or corrupt file: Expected BOF record; found 'credenti'
+2017-10-28 23:41:22,893 > ERROR > get_xl_group
+Traceback (most recent call last):
+  File "websnap.py", line 454, in get_xl_group
+    xl = pandas.ExcelFile(xl_file)
+  File "/usr/local/lib/python2.7/dist-packages/pandas/io/excel.py", line 260, in __init__
+    self.book = xlrd.open_workbook(io)
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/__init__.py", line 162, in open_workbook
+    ragged_rows=ragged_rows,
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 91, in open_workbook_xls
+    biff_version = bk.getbof(XL_WORKBOOK_GLOBALS)
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 1271, in getbof
+    bof_error('Expected BOF record; found %r' % self.mem[savpos:savpos+8])
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 1265, in bof_error
+    raise XLRDError('Unsupported format, or corrupt file: ' + msg)
+XLRDError: Unsupported format, or corrupt file: Expected BOF record; found 'credenti'
+2017-10-28 23:47:36,681 > ERROR > get_xl_group
+Traceback (most recent call last):
+  File "websnap.py", line 454, in get_xl_group
+    xl = pandas.ExcelFile(xl_file)
+  File "/usr/local/lib/python2.7/dist-packages/pandas/io/excel.py", line 260, in __init__
+    self.book = xlrd.open_workbook(io)
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/__init__.py", line 162, in open_workbook
+    ragged_rows=ragged_rows,
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 91, in open_workbook_xls
+    biff_version = bk.getbof(XL_WORKBOOK_GLOBALS)
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 1271, in getbof
+    bof_error('Expected BOF record; found %r' % self.mem[savpos:savpos+8])
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 1265, in bof_error
+    raise XLRDError('Unsupported format, or corrupt file: ' + msg)
+XLRDError: Unsupported format, or corrupt file: Expected BOF record; found 'credenti'
+2017-10-28 23:52:53,466 > INFO > Starting MonitoringEngine
+2017-10-29 00:11:54,871 > INFO > Starting MonitoringEngine
+2017-10-29 00:12:02,392 > INFO > Starting MonitoringEngine
+2017-10-29 00:12:09,431 > INFO > Starting MonitoringEngine
+2017-10-29 00:12:24,495 > INFO > Starting MonitoringEngine
+2017-10-29 00:12:29,295 > ERROR > get_xl_group
+Traceback (most recent call last):
+  File "websnap.py", line 454, in get_xl_group
+    xl = pandas.ExcelFile(xl_file)
+  File "/usr/local/lib/python2.7/dist-packages/pandas/io/excel.py", line 260, in __init__
+    self.book = xlrd.open_workbook(io)
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/__init__.py", line 162, in open_workbook
+    ragged_rows=ragged_rows,
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 91, in open_workbook_xls
+    biff_version = bk.getbof(XL_WORKBOOK_GLOBALS)
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 1271, in getbof
+    bof_error('Expected BOF record; found %r' % self.mem[savpos:savpos+8])
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 1265, in bof_error
+    raise XLRDError('Unsupported format, or corrupt file: ' + msg)
+XLRDError: Unsupported format, or corrupt file: Expected BOF record; found 'credenti'
+2017-10-29 00:13:17,773 > INFO > Starting MonitoringEngine
+2017-10-29 00:14:26,858 > ERROR > get_xl_group
+Traceback (most recent call last):
+  File "websnap.py", line 454, in get_xl_group
+    xl = pandas.ExcelFile(xl_file)
+  File "/usr/local/lib/python2.7/dist-packages/pandas/io/excel.py", line 260, in __init__
+    self.book = xlrd.open_workbook(io)
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/__init__.py", line 116, in open_workbook
+    with open(filename, "rb") as f:
+IOError: [Errno 2] No such file or directory: '/home/networksnap/div/network_snap/input_file/default.xlsx'
+2017-10-29 00:14:33,430 > ERROR > get_xl_group
+Traceback (most recent call last):
+  File "websnap.py", line 454, in get_xl_group
+    xl = pandas.ExcelFile(xl_file)
+  File "/usr/local/lib/python2.7/dist-packages/pandas/io/excel.py", line 260, in __init__
+    self.book = xlrd.open_workbook(io)
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/__init__.py", line 162, in open_workbook
+    ragged_rows=ragged_rows,
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 91, in open_workbook_xls
+    biff_version = bk.getbof(XL_WORKBOOK_GLOBALS)
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 1271, in getbof
+    bof_error('Expected BOF record; found %r' % self.mem[savpos:savpos+8])
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 1265, in bof_error
+    raise XLRDError('Unsupported format, or corrupt file: ' + msg)
+XLRDError: Unsupported format, or corrupt file: Expected BOF record; found 'credenti'
+2017-10-29 00:22:02,026 > INFO > Starting MonitoringEngine
+2017-10-29 00:24:43,503 > INFO > Starting MonitoringEngine
+2017-10-29 00:24:51,530 > INFO > Starting MonitoringEngine
+2017-10-29 00:25:00,439 > ERROR > get_xl_group
+Traceback (most recent call last):
+  File "websnap.py", line 454, in get_xl_group
+    xl = pandas.ExcelFile(xl_file)
+  File "/usr/local/lib/python2.7/dist-packages/pandas/io/excel.py", line 260, in __init__
+    self.book = xlrd.open_workbook(io)
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/__init__.py", line 162, in open_workbook
+    ragged_rows=ragged_rows,
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 91, in open_workbook_xls
+    biff_version = bk.getbof(XL_WORKBOOK_GLOBALS)
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 1271, in getbof
+    bof_error('Expected BOF record; found %r' % self.mem[savpos:savpos+8])
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 1265, in bof_error
+    raise XLRDError('Unsupported format, or corrupt file: ' + msg)
+XLRDError: Unsupported format, or corrupt file: Expected BOF record; found 'credenti'
+2017-10-29 00:26:53,355 > INFO > Starting MonitoringEngine
+2017-10-29 00:28:48,613 > INFO > Starting MonitoringEngine
+2017-10-29 00:28:59,631 > INFO > Starting MonitoringEngine
+2017-10-29 00:29:27,667 > INFO > Starting MonitoringEngine
+2017-10-29 00:37:33,213 > INFO > Starting MonitoringEngine
+2017-10-29 00:37:46,777 > ERROR > get_xl_group
+Traceback (most recent call last):
+  File "websnap.py", line 454, in get_xl_group
+    xl = pandas.ExcelFile(xl_file)
+  File "/usr/local/lib/python2.7/dist-packages/pandas/io/excel.py", line 260, in __init__
+    self.book = xlrd.open_workbook(io)
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/__init__.py", line 162, in open_workbook
+    ragged_rows=ragged_rows,
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 91, in open_workbook_xls
+    biff_version = bk.getbof(XL_WORKBOOK_GLOBALS)
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 1271, in getbof
+    bof_error('Expected BOF record; found %r' % self.mem[savpos:savpos+8])
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 1265, in bof_error
+    raise XLRDError('Unsupported format, or corrupt file: ' + msg)
+XLRDError: Unsupported format, or corrupt file: Expected BOF record; found 'credenti'
+2017-10-29 00:38:55,421 > INFO > Starting MonitoringEngine
+2017-10-29 00:39:03,078 > ERROR > get_xl_group
+Traceback (most recent call last):
+  File "websnap.py", line 454, in get_xl_group
+    xl = pandas.ExcelFile(xl_file)
+  File "/usr/local/lib/python2.7/dist-packages/pandas/io/excel.py", line 260, in __init__
+    self.book = xlrd.open_workbook(io)
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/__init__.py", line 162, in open_workbook
+    ragged_rows=ragged_rows,
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 91, in open_workbook_xls
+    biff_version = bk.getbof(XL_WORKBOOK_GLOBALS)
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 1271, in getbof
+    bof_error('Expected BOF record; found %r' % self.mem[savpos:savpos+8])
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 1265, in bof_error
+    raise XLRDError('Unsupported format, or corrupt file: ' + msg)
+XLRDError: Unsupported format, or corrupt file: Expected BOF record; found 'credenti'
+2017-10-29 00:40:24,638 > ERROR > get_xl_group
+Traceback (most recent call last):
+  File "websnap.py", line 454, in get_xl_group
+    xl = pandas.ExcelFile(xl_file)
+  File "/usr/local/lib/python2.7/dist-packages/pandas/io/excel.py", line 260, in __init__
+    self.book = xlrd.open_workbook(io)
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/__init__.py", line 162, in open_workbook
+    ragged_rows=ragged_rows,
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 91, in open_workbook_xls
+    biff_version = bk.getbof(XL_WORKBOOK_GLOBALS)
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 1271, in getbof
+    bof_error('Expected BOF record; found %r' % self.mem[savpos:savpos+8])
+  File "/usr/local/lib/python2.7/dist-packages/xlrd/book.py", line 1265, in bof_error
+    raise XLRDError('Unsupported format, or corrupt file: ' + msg)
+XLRDError: Unsupported format, or corrupt file: Expected BOF record; found 'credenti'
