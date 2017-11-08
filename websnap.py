@@ -27,11 +27,6 @@ logger.addHandler(handler)
 
 logger.info("Starting MonitoringEngine")
 
-# Create dummy thread
-global main_thread
-main_thread = Thread(target="",name="No")
-main_thread.run()
-main_thread.isAlive()
 
 app = Flask(__name__,static_url_path='/static')
 app.config['MONGO_DBNAME'] = 'LIVE'
@@ -42,37 +37,24 @@ mongoc = PyMongo(app)
 
 
 									 
-def sqlget_input(INID=0,GETNEW=True):
-		try:
-			# connect to LIVE database
-			mdb = mongoc.db
-			if GETNEW == True:
-				# Get New INID from SESSION TABLE
-				mcollection = mdb['SESSION']
-				sesout = mcollection.find_one({"_id":1})
-				INID = sesout.get("INID")
-			
-			mcollection = mdb['INPUT']
-			all_data = mcollection.find({"INID":INID},{"_id":0})
-			return list(all_data)
-		except Exception as e:
-				logger.exception("sqlget_input")
+def sqlget_input(INID):
+	try:
+		# connect to LIVE database
+		mdb = mongoc.db
+		mcollection = mdb['INPUT']
+		all_data = mcollection.find({"INID":INID},{"_id":0})
+		return list(all_data)
+	except Exception as e:
+		logger.exception("sqlget_input")
 
-def sqlget_output(SESSION=0,INID=0,LIVE=True):
-		try:
-				# connect to LIVE database
-				mdb = mongoc.db
-				if LIVE == True:
-						# GET LIVE ID
-						mcollection = mdb['SESSION']
-						sesout = mcollection.find_one({"_id":1})
-						INID = sesout.get("INID")
-				
-				mcollection = mdb['OUTPUT']
-				all_data = mcollection.find({"INID":INID,"SESSION":SESSION},{"_id":0})
-				return list(all_data)
-		except Exception as e:
-				logger.exception("sqlget_output")
+def sqlget_output(INID):
+	try:
+		mdb = mongoc.db
+		mcollection = mdb['OUTPUT']
+		all_data = mcollection.find({"INID":INID},{"_id":0})
+		return list(all_data)
+	except Exception as e:
+		logger.exception("sqlget_output")
 
 
 @app.route('/')
@@ -107,12 +89,12 @@ def history():
 				
 				elif result["type"] == "session":
 						mcollection = mdb["OUTPUT"]
-						all_data = mcollection.find({"SESSION":int(result["session"]),"INID":int(result["input"])},{"_id":0,"Authentication":0})
+						all_data = mcollection.find({"INID":int(result["input"])},{"_id":0,"Authentication":0})
 						darray.append(list(all_data))
 				
 				elif result["type"] == "sessionrange":
 						mcollection = mdb['OUTPUT']
-						all_data = mcollection.find({"TD":{'$lt': end, '$gte': start}},{"_id":0,"SESSION":1,"INID":1})
+						all_data = mcollection.find({"TD":{'$lt': end, '$gte': start}},{"_id":0,"INID":1})
 						darray.append(list(all_data))
 				
 				elif result["type"] == "back":
@@ -122,14 +104,14 @@ def history():
 					qr = list(qr)
 					if len(qr) > 0:
 						qr = qr[0]
-						all_data = mcollection.find({"SESSION":qr.get("SESSION"),"INID":qr.get("INID")},{"_id":0,"Authentication":0})
+						all_data = mcollection.find({"INID":qr.get("INID")},{"_id":0,"Authentication":0})
 						darray.append(list(all_data))
 
 				elif result["type"] == "history_list":
 					tim = result["time"]
 					limit = int(result["limit"])
 					mcollection = mdb['HISTORY']
-					all_data = mcollection.find({"TD":{"$lte":datetime.datetime.strptime(tim+".999999", "%d-%m-%Y %H:%M:%S.%f")}},{"_id":0,"INID":1,"SESSION":1,"JOBNAME":1,"TD":1}).sort([("TD",-1)]).limit(limit)
+					all_data = mcollection.find({"TD":{"$lte":datetime.datetime.strptime(tim+".999999", "%d-%m-%Y %H:%M:%S.%f")}},{"_id":0,"INID":1,"JOBNAME":1,"TD":1}).sort([("TD",-1)]).limit(limit)
 					darray = list(all_data)
 
 				elif result["type"] == "forward":
@@ -139,7 +121,7 @@ def history():
 					qr = list(qr)
 					if len(qr) > 0:
 						qr = qr[0]
-						all_data = mcollection.find({"SESSION":qr.get("SESSION"),"INID":qr.get("INID")},{"_id":0,"Authentication":0})
+						all_data = mcollection.find({"INID":qr.get("INID")},{"_id":0,"Authentication":0})
 						darray.append(list(all_data))
 
 				return jsonify(darray)
@@ -152,11 +134,9 @@ def history():
 def result():
 	 dinput = 0
 	 doutput = 0
-	 draw = 0
 	 if request.method == 'POST':
 			result = request.form
 			INID = int(result.get("INID"))
-			SESSION = int(result.get("SESSION"))
 			history = result.get("history")
 
 			if history != None:
@@ -166,24 +146,24 @@ def result():
 
 				if history == "back":
 					#find({"$and":[{"TD":{"$lte":datetime.datetime.fromtimestamp(float(h_time))}}]},{"_id":0,"SESSION":1,"INID":1,"TD":1}).sort([("TD",-1)]).limit(1)
-					qr = mcollection.find({ "$or" : [ { "INID" : {"$ne": int(INID)} }, { "SESSION" : {"$ne": int(SESSION)} } ] ,"TD":{"$lte":datetime.datetime.strptime(h_time+".999999", "%d-%m-%Y %H:%M:%S.%f")}}).sort([("TD",-1)]).limit(1)
+					qr = mcollection.find({ "$or" : [ { "INID" : {"$ne": int(INID)} }] ,"TD":{"$lte":datetime.datetime.strptime(h_time+".999999", "%d-%m-%Y %H:%M:%S.%f")}}).sort([("TD",-1)]).limit(1)
 					qr = list(qr)
 					if len(qr) > 0:
 						qr = qr[0]
 						NEW_INID = int(qr.get("INID"))
-						NEW_SESSION = int(qr.get("SESSION"))
-						doutput = sqlget_output(NEW_SESSION,NEW_INID,LIVE=False)
+						doutput = sqlget_output(NEW_INID)
+						return jsonify({"output": doutput,"INID":NEW_INID})
 					else:
 						return "None"
 				
 				elif history == "forward":
-					qr = mcollection.find({ "$or" : [ { "INID" : {"$ne": int(INID)} }, { "SESSION" : {"$ne": int(SESSION)} } ] ,"TD":{"$gte":datetime.datetime.strptime(h_time, "%d-%m-%Y %H:%M:%S")}}).sort([("TD",1)]).limit(1)
+					qr = mcollection.find({ "$or" : [ { "INID" : {"$ne": int(INID)} } ] ,"TD":{"$gte":datetime.datetime.strptime(h_time, "%d-%m-%Y %H:%M:%S")}}).sort([("TD",1)]).limit(1)
 					qr = list(qr)
 					if len(qr) > 0:
 						qr = qr[0]
 						NEW_INID = int(qr.get("INID"))
-						NEW_SESSION = int(qr.get("SESSION"))
-						doutput = sqlget_output(NEW_SESSION,NEW_INID,LIVE=False)
+						doutput = sqlget_output(NEW_INID)
+						return jsonify({"output": doutput,"INID":NEW_INID})
 					else:
 						return "None"
 				else:
@@ -193,19 +173,19 @@ def result():
 				#mongoc = pymongo.MongoClient('localhost', 27017)
 				# connect to LIVE database
 				mdb = mongoc.db
-				mcollection = mdb['SESSION']
-				sesout = mcollection.find_one({"_id":1})
-				NEW_INID = int(sesout.get("INID"))
-				NEW_SESSION = int(sesout.get("SESSION"))
+				mcollection = mdb['HISTORY']
+				sesout = mcollection.find_one({"INID":INID},{"_id":0,"JOBSTATUS":1,"completedtime":1,"startedtime":1})
+				job_status = sesout.get("JOBSTATUS")
+				
 
-				if INID != int(NEW_INID) or SESSION != NEW_SESSION:
+				if job_status == "completed":
 						# INPUT NEW UPDATE REQUIRED
-						doutput = sqlget_output(NEW_SESSION,NEW_INID,LIVE=False)
+						doutput = sqlget_output(INID)
+						return jsonify({"output": doutput,"INID":INID,"JOBSTATUS":job_status,"completedtime":sesout.get("completedtime"),"startedtime":sesout.get("startedtime")})
+						
 				else:
-						# Client side INPUT is uptodate ( Not required to update input data )
-						doutput = 0
-			
-			return jsonify({"output": doutput,"INID":NEW_INID,"SESSION":NEW_SESSION})
+
+					return jsonify({"JOBSTATUS":str(job_status),"INID":INID})
 			
 	 if request.method == 'GET':
 			return jsonify(sqlget_output("0"))
@@ -233,50 +213,34 @@ def upload_input():
 			logger.exception("upload_input")
 			return "failed"
 
-@app.route('/job',methods = ['POST', 'GET'])
-def get_job():
+@app.route('/api/v1/skip_job',methods = ['POST', 'GET'])
+def skip_job():
+	"""
+	Skip the running job by INID
+	update 'skip' to 'yes' in 'SESSION' table  
+
+	"""
 	global main_thread
 	status = {"status":"error"}
 	if request.method == 'POST':
 		try:
 			typ = request.form.get('type')
-			if typ == "GetRunningJob":
-				if main_thread.isAlive() == True:
-					status = {"status":"Running","jobname":main_thread.getName()}
-				else:
-					status = {"status":"Not Running","jobname":main_thread.getName()}
-			elif typ == "skip":
+			INID = request.form.get('INID')
+			if typ == "skip":
 				mdb = mongoc.db
-				mcollection = mdb['SESSION']
-				mcollection.update({"_id":1},{ "$set": { "SKIP" : "yes"} })
+				mcollection = mdb['HISTORY']
+				mcollection.update({"INID":INID},{ "$set": { "SKIP" : "yes"} })
 				status = {"status": "Skipping" }
 			return jsonify(status)
 		except Exception as e:
 			return jsonify({"status":"error"})
 
-@app.route('/getgroup',methods = ['POST', 'GET'])
-def get_group():
-	try:
-		status = {"status":"error"}
-		if request.method == 'POST':
-			fn = request.form.get('filename')
-			if fn != None:
-				filename = secure_filename(fn)
-				full_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-				data = get_xl_group(full_path)
-				if data != None:
-					return jsonify(data)
-				else:
-					return jsonify({"status":"error"})
-		return jsonify(status)
-	except Exception as e:
-		logger.exception("get_group")
-		return jsonify({"status":"error"})
 
-
-@app.route('/new_job',methods = ['POST', 'GET'])
+@app.route('/api/v1/new_job',methods = ['POST', 'GET'])
 def new_job():
-	global main_thread
+	"""
+
+	"""
 	status = {"status":"error"}
 	if request.method == 'POST':
 		try:
@@ -284,38 +248,33 @@ def new_job():
 			fn = request.form.get('filename')
 			jn = request.form.get('jobname')
 			apr = request.form.get('apprentice')
-			try:
-				apr = int(apr)
-				if apr < 1:
-					apr = 1
-			except:
-				apr = 1
-			if fn == None or jn == None:
-				return jsonify(status)
-			jn = jn+"-"+str(datetime.datetime.now().strftime("%d-%B-%H:%M:%S"))
-			filename = secure_filename(fn)
-			if d_group != "no":
-				#Create Tempravery file
-				full_path2 = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-				new_xl_file = filename+"_temp_"+jn.replace(":","-")+"_"+str(random.randrange(10,10000))+".xlsx"
-				new_xl_file = os.path.join(app.config['TEMP_FOLDER'], new_xl_file)
-				grp = excell_filter(json.loads(d_group),full_path2,new_xl_file)
-				full_path = new_xl_file
-				if grp != True:
-					return jsonify({"status":"error","type":"group error"})
-			elif d_group == "no":
+			
+			if apr > 0:
+				if fn == None or jn == None:
+					return jsonify(status)
+				jn = jn+"-"+str(datetime.datetime.now().strftime("%d-%B-%H:%M:%S"))
+				filename = secure_filename(fn)
 				full_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-			if os.path.isfile(full_path):
-				# Schudle Job
-				if main_thread.isAlive() == False:
-					main_thread = Thread(target=net_auto_modul.main_run,name = jn, args=(full_path,jn,apr,))
+				INID = None
+				try:
+					mdb = mongoc.db
+					mcollection = mdb['SESSION']
+					INID = mcollection.find_and_modify(query = {"_id":1}, update = { "$inc": { "INID" : 1 }})
+					# Need to increase to sync with database INID
+					INID = INID + 1
+				except Exception as e:
+					logger.exception("new_job INID")
+				if INID == None:
+					return jsonify({"status":"error","type":"Creating INID failed"})
+				if os.path.isfile(full_path):
+					main_thread = Thread(target=net_auto_modul.main_run,name = jn, args=(full_path,jn,apr,INID,))
 					main_thread.start()
-					status = {"status":"Job Started"}
+					status = {"status":"Job Started","INID":INID}
 				else:
-					status = {"status":"ExistingJobRunning"}
+					status = {"status":"InputFileNotFound"}
+				return jsonify(status)
 			else:
-				status = {"status":"InputFileNotFound"}
-			return jsonify(status)
+				return jsonify({"status":"error","type":"apprentice not valid"})
 		except Exception as e:
 			logger.exception("new_job")
 			return jsonify({"status":"error"})
@@ -378,20 +337,176 @@ def rawdownload():
 			logger.exception("rawdownload")
 			return "failed"
 
+@app.route('/api/v1/getcompleted',methods = ['POST', 'GET'])
+def get_completed():
+	
+	"""
+	Get all completed jobs detail from 'SESSION' table
+	return 'INID,JOBNAME,STARTED DATE,JOBSTATUS' if job is in completed state and matches history
 
-@app.route('/getsession',methods = ['POST', 'GET'])
-def get_session():
-	if request.method == 'POST':
+	"""
+	if request.method == 'POST' or "GET":
 		try:
-			fn = request.form.get('session')
-			if fn == "live":
+			history = request.form.get('history')
+			dat_tim = request.form.get('time')
+			limit = request.form.get('limit')
+			outputrequired = request.form.get('outputrequired')
+			if limit != None:
+				limit = int(limit)
+			else:
+				limit = 1
+			if dat_tim != None:
+
+				if history == "back":
+					if outputrequired != "yes":
+						top_history_required = ".9999"
+					else:
+						top_history_required = ".0000"
+					search = {"startedtime":{"$lte":datetime.datetime.strptime(dat_tim+top_history_required, "%d-%m-%Y %H:%M:%S.%f")}}
+					short = -1
+				elif history == "forward":
+					search = {"startedtime":{"$gte":datetime.datetime.strptime(dat_tim+".9999", "%d-%m-%Y %H:%M:%S.%f")}}
+					short = 1
+				else:
+					return jsonify({"completed":"no" , "error":"not valid input"})
+				
 				mdb = mongoc.db
-				mcollection = mdb['SESSION']
-				session = mcollection.find({"_id":1},{"_id":0})
-				session = list(session)
-				return jsonify({"session":session})
+				mcollection = mdb['HISTORY']
+				search.update({"JOBSTATUS":"completed"})
+
+				if outputrequired == "yes":
+					session = mcollection.find(search,{"_id":0,"STATUS":0}).sort([("startedtime",short)]).limit(1)
+
+					session = list(session)
+
+					if len(session) > 0:
+						session = session [0]
+					print search
+					print session
+				else:
+					session = mcollection.find(search,{"_id":0,"STATUS":0}).sort([("startedtime",short)]).limit(limit)
+					session = list(session)
+				
+				if len(session) > 0:
+					# Found completed jobs
+					sts =  {"completed":"yes","jobs":session}
+					if outputrequired == "yes":
+						# Get output for INID
+						out = sqlget_output(session.get("INID"))
+						if type(out) == list:
+							sts.update({"output":out})
+					return jsonify(sts)
+				else:
+					# No completed jobs found
+					return jsonify({"completed":"no"})
+			else:
+				return jsonify({"error":"getcompleted"})
 		except Exception as e:
-			return "failed"
+			print e
+			return jsonify({"error":"getcompleted"})
+
+
+@app.route('/api/v1/getrunning',methods = ['POST', 'GET'])
+def get_running():
+	"""
+	Get all running jobs detail from 'SESSION' table
+	return 'INID,JOBNAME,STARTED DATE,JOBSTATUS' if job is in running state
+	
+	"""
+	if request.method == 'POST' or "GET":
+		try:
+			#fn = request.form.get('session')
+			mdb = mongoc.db
+			mcollection = mdb['HISTORY']
+			session = mcollection.find({"JOBSTATUS":"running"},{"_id":0,"STATUS":0})
+			session = list(session)
+			if len(session) > 0:
+				# Found running jobs
+				return jsonify({"running":"yes","jobs":session})
+			else:
+				# No running jobs found
+				return jsonify({"running":"no"})
+		except Exception as e:
+			return jsonify({"error":"getrunning"})
+
+@app.route('/api/v1/getstatus',methods = ['POST', 'GET'])
+def get_status():
+	"""
+	Get status of the job by INID from 'SESSION' table
+	return 'INID,JOBNAME,STARTED DATE,JOBSTATUS' if 'outputrequired' is true 
+	then search 'OUTPUT' table for INID and retun the result
+	
+	"""
+	if request.method == 'POST' or "GET":
+		try:
+			
+			INID = int(request.form.get('INID'))
+			outputrequired = request.form.get('outputrequired')
+			mdb = mongoc.db
+			mcollection = mdb['HISTORY']
+			session = mcollection.find_one({"INID":INID},{"_id":0})
+			if session != None:
+				# Found running jobs
+				sts = {"status":"yes","job":session}
+				if outputrequired == "yes":
+					# Get output for INID
+					out = sqlget_output(INID)
+					if type(out) == list:
+						sts.update({"output":out})
+				return jsonify(sts)
+			else:
+				# No running jobs found
+				return jsonify({"status":"no"})
+		except Exception as e:
+			return jsonify({"error":"getstatus"})
+
+@app.route('/api/v1/getlast',methods = ['POST', 'GET'])
+def get_last():
+
+	"""
+	Get last completed job from 'SESSION' table
+	return 'INID,JOBNAME,STARTED DATE,JOBSTATUS' if 'outputrequired' is true 
+	then search 'OUTPUT' table for INID and retun the result
+	
+	"""
+	if request.method == 'POST' or "GET":
+		try:
+			outputrequired = request.form.get('outputrequired')
+			know_id = request.form.get('knowninid')
+			if know_id != None:
+				know_id = int(know_id)
+			
+			mdb = mongoc.db
+			mcollection = mdb['SESSION']
+			last_completed = mcollection.find_one({"_id":1},{"_id":0})
+			
+			if last_completed != None:
+				INID = last_completed.get("LASTINID")
+			else:
+				return jsonify({"completed":"no"})
+
+			# knownid send by client if knownid and LASTINID is same then no need to send same output to user
+			if INID == None or know_id == INID:
+				return jsonify({"completed":"no"})
+
+			mcollection = mdb['HISTORY']
+			session = mcollection.find_one({"INID":INID},{"_id":0})
+			
+			if session != None:
+				# Found completed job
+				sts = {"completed":"yes","jobs":session}
+				if outputrequired == "yes":
+					# Get output for completed job
+					out = sqlget_output(INID)
+					if type(out) == list:
+						sts.update({"output":out})
+				return jsonify(sts)
+			else:
+				# No running jobs found
+				return jsonify({"completed":"no"})
+		except Exception as e:
+			print e
+			return jsonify({"error":"getstatus"})
 
 
 @app.route('/merge_js_yaml',methods = ['POST', 'GET'])
@@ -449,58 +564,6 @@ def merge_js_yaml():
 			logger.exception("merge_js_yaml")
 			return "failed"
 
-def get_xl_group(xl_file):
-	try:
-		xl = pandas.ExcelFile(xl_file)
-		df1 = xl.parse('input')
-		head = list(df1.columns.values)
-		nd = []
-		for index, row in df1.iterrows():
-			gp = row.get("Group")
-			le = row.get("Level")
-			if gp != None and le != None:
-				g = str(gp).split(",")
-				l = str(le).split(",")
-				d = {"Group":g,"Level":l}
-				if d in nd:
-					#No need to insert duplicate data
-					pass
-				else:
-					nd.append(d)
-		return {"data":nd}
-	except Exception as e:
-		logger.exception("get_xl_group")
-
-def excell_filter(d_group,xl_file,new_xl_file):
-	try:
-		xl = pandas.ExcelFile(xl_file)
-		df1 = xl.parse('input')
-		head = list(df1.columns.values)
-		head.remove("Group")
-		head.remove("Level")
-		nd = []
-		for index, row in df1.iterrows():
-			#row = list(row)
-			g = str(row["Group"]).split(",")
-			l = str(row["Level"]).split(",")
-			row.pop("Group")
-			row.pop("Level")
-			for d in d_group:
-				if d.get("Group") in g and d.get("Level") in l:
-					if list(row) in nd:
-						pass;
-					else:
-						nd.append(list(row))
-
-		if len(nd) == 0:
-			return False
-		newdf = pandas.DataFrame(nd,columns=head)
-		writer = pandas.ExcelWriter(new_xl_file)
-		newdf.to_excel(writer, sheet_name='input',startrow=0,startcol=0,index = False)
-		writer.save()
-		return True
-	except Exception as e:
-		logger.exception("excell_filter")
 
 if __name__ == '__main__':
 	net_auto_modul = MonitorEngine.main_model()
