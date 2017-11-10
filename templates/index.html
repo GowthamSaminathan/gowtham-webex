@@ -238,6 +238,22 @@
 
 
 
+<!-- Get all live job status -->
+  <div class="modal fade" id="showalllive" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"><span class="label label-default" style="display:inline">Running Jobs</span></h4>
+        </div>
+        <div class="modal-body">
+        <table id="livejobs" class="table table-striped table-bordered dt-responsive nowrap"></table>
+        </div>
+      </div>
+      </div></div>
+
+
 
 
 <!-- Get Session status -->
@@ -294,11 +310,13 @@
       <li><a href="#" onclick="manage_input()">Download | Delete input</a></li>
       </ul>
       </div></li>
+      <li>
 
-      <li class="active"><h4 style="margin-top: 13px;"><span id="outtime" class="label label-default"></span></h4></li>
+        <button type="button" onclick="show_live_stat()" style="float:left;margin:10px;width: 100%;height: 29px;" class="btn btn-warning">Running <span id="runningcount" class="badge">0</span></button></li>
       
+      <li class="active"><h4 style="margin-top: 13px;"><span id="outtime" class="label label-default"></span></h4></li>
      </ul>
-<div style="float:right;margin-top:10px">
+        <div style="float:right;margin-top:10px">
         <span id="load-status" class="label label-danger">RUNNING</span>
         
         
@@ -347,7 +365,9 @@
                 <div id="good-bar" class="progress-value">Loading</div>
             </div></div>
 
+
               <div class="col-md-6 col-sm-6">
+            <span class="label label-primary">JOB HISTORY</span>
             <table id="oldjobs" class="table table-striped table-bordered dt-responsive nowrap"></table>
           </div>
 
@@ -492,7 +512,10 @@ $("#listupdate").modal({backdrop: "static"});
 
 }
 
+function show_live_stat(){
+$("#showalllive").modal({backdrop: "static"});
 
+}
 
 function back_snap(){
 
@@ -897,6 +920,34 @@ oldjobtable = $('#oldjobs').DataTable( {
         ]
     } );
 
+
+
+var livejobtable
+livejobdata = []
+
+livejobtable = $('#livejobs').DataTable( {
+        data : livejobdata,
+        columnDefs: [{targets:0,render: function ( data, type, full, meta) {
+                    if(type === 'display'){
+                        data = '<a href="#" onclick="datatable_click_live('+"'"+data+"'"+')">' + data + '</a>';
+                    }
+                    return data;
+                }
+            }],
+        "scrollY":'100px',
+        "scrollCollapse":true,
+        "paging":false,
+        "order": [[ 0, "desc" ]],
+        responsive: true,
+        dom: 'lrtip',
+        columns: [
+             { title: "INID" },
+             { title: "TIME" },
+            { title: "JOBNAME" }
+            
+        ]
+    } );
+
 //List input file in datatable
 
 /* var listtable;
@@ -1090,6 +1141,37 @@ $(document).mousedown(function() {
 });
 
 
+live_job_tunning = false
+
+// Get all running jobs from server
+function get_all_live_job()
+{
+if (live_job_tunning == true) {console.log("Getting live Job paused...");return ""}
+live_job_tunning = true;
+try{
+console.log("Requesting all live sessions ...");
+$.ajax({type: 'POST',url:"/api/v1/getrunning",data:{},success:alllive_ses,error:function (xhr, ajaxOptions, thrownError)
+  {console.log("live Post Error");}})
+
+function alllive_ses(data){
+live_job_tunning = false;
+if (data.running == "no"){
+livejobtable.clear().draw();
+$("#runningcount").text(0);
+console.log("No Running jobs found ....")
+
+}else if(data.running == "yes")
+{
+run_count = data.jobs.length
+livejobtable.clear().draw();
+$("#runningcount").text(run_count)
+$.each(data.jobs, function (i,v) {
+livejobtable.rows.add([[v.INID,v.startedtime,v.JOBNAME]]);
+});
+livejobtable.draw();
+}else{console.log("Getting live job Error...");$("#runningcount").text(0);livejobtable.clear().draw();}
+}}catch(e){console.log("Getting Live Update Error....");$("#runningcount").text(0);livejobtable.clear().draw();live_job_tunning = false;}}
+
 
 
 function get_session()
@@ -1144,7 +1226,7 @@ stable.rows.add([[shost,sip,stype,JSON.stringify(sstate)]]);
 stable.draw();
 }
 }
-$("#sesjobstatus").text("");
+$("#sesjobstatus").text("Job Status");
 $("#sesjobname").text("Jobname: "+ses["JOBNAME"]);
 $("#tackinid").text("INID: "+ses["INID"]);
 $("#seshold").text("Hold: "+ses_hold);
@@ -1387,6 +1469,15 @@ dtable.draw();
 }
 
 
+// Trigger by live table to get given running status
+function datatable_click_live(live_inid){
+TRACKINID = live_inid;
+disp_session();
+
+}
+
+
+
 // Get DATA BY INID ( triggered by history )
 //function datatable_click(d){}
 
@@ -1455,7 +1546,8 @@ $("#sesjobstatus").text("SKIPPING FAILED !!!");
 //Get update
 get_up();
 setInterval(get_up,4000); // Get JOB output from DB
-setInterval(get_session,4000); // Get Running JOB details
+setInterval(get_session,4000); // Get Tracking Running JOB details
+setInterval(get_all_live_job,4000);  // Get all Running JOB details
 </script>
 
 </body>

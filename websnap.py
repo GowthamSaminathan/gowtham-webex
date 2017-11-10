@@ -322,6 +322,7 @@ def get_running():
 				# No running jobs found
 				return jsonify({"running":"no"})
 		except Exception as e:
+			print e
 			return jsonify({"error":"getrunning"})
 
 @app.route('/api/v1/getstatus',methods = ['POST', 'GET'])
