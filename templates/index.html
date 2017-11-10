@@ -248,7 +248,9 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title"><span id="sesjobstatus" class="label label-default">Loading Job Status ...</span></h4>
+          <h4 class="modal-title"><span id="sesjobstatus" class="label label-default" style="display:inline">Loading Job Status ...</span></h4>
+          <span id="sesjobname" class="label label-primary"></span>
+          <span id="tackinid" class="label label-info"></span></br>
           <span id="sescompleted" class="label label-success"></span>
           <span id="sesrunning" class="label label-primary"></span>
           <span id="seshold" class="label label-danger"></span>
@@ -536,11 +538,12 @@ else{
 
 }
 
-
+var raw_file_path = undefined;
 function downloadraw(){
 
+if (raw_file_path == undefined) {console.log("RAW FILE DOWNLOAD FILE....");return "";}
 var job_name = $("#jobdesc").text();
-window.open('rawdownload?download='+job_name, '_blank');
+window.open('rawdownload?download='+raw_file_path, '_blank');
 //window.location.href = 'rawdownload?download='+job_name;
 
 
@@ -887,7 +890,8 @@ oldjobtable = $('#oldjobs').DataTable( {
         responsive: true,
         dom: 'lrtip',
         columns: [
-             { title: "JOB HISTORY" },
+             { title: "INID" },
+             { title: "TIME" },
             { title: "JOBNAME" }
             
         ]
@@ -929,7 +933,7 @@ if (data.completed != "yes")
 else{
 oldjobtable.clear().draw();
 $.each(data["jobs"], function (i,v) {
-oldjobtable.rows.add([[v.startedtime,v.JOBNAME]]);
+oldjobtable.rows.add([[v.INID,v.startedtime,v.JOBNAME]]);
 //oldjobtable.rows.add([[v.JOBNAME,v.INID,v.SESSION]]);
 });
 oldjobtable.draw();
@@ -976,6 +980,7 @@ function send_suc(data)
  if ( data["status"] == "Job Started"){
   //if job started success , then display session status
   TRACKINID = data["INID"]
+  console.log("NEW JOB CREATED :"+TRACKINID);
   disp_session();
   $('#showinput').modal('hide');
  }
@@ -1093,7 +1098,7 @@ function get_session()
 if (TRACKINID != 0 )
 {
 try{
-console.log("Request session status");
+console.log("Request session status for: "+TRACKINID);
 $.ajax({type: 'POST',url:"/api/v1/getstatus",data:{"INID":TRACKINID},success:update_ses,error:function (xhr, ajaxOptions, thrownError)
   {console.log("Post Error");}})
 
@@ -1105,9 +1110,9 @@ if (data.status != "yes")
 }
 else
 {
-ses = data["job"]
+ses = data["jobs"]
 ses_status = ses["STATUS"];
-$('#outtime').text(ses_status+": "+ses["JOBNAME"]);
+$('#outtime').text(ses["JOBSTATUS"].toUpperCase()+": "+ses["JOBNAME"]);
 $('#outtime').fadeOut(150).fadeIn(150);
 // If tracking job is completed then reset TRACKID to "0"
 if (ses["JOBSTATUS"] == "completed" ){
@@ -1139,8 +1144,9 @@ stable.rows.add([[shost,sip,stype,JSON.stringify(sstate)]]);
 stable.draw();
 }
 }
-
-$("#sesjobstatus").text("Job: "+ses["JOBNAME"]);
+$("#sesjobstatus").text("");
+$("#sesjobname").text("Jobname: "+ses["JOBNAME"]);
+$("#tackinid").text("INID: "+ses["INID"]);
 $("#seshold").text("Hold: "+ses_hold);
 $("#sesrunning").text("Running: "+ses_running);
 $("#sescompleted").text("Completed: "+ses_completed+" / "+ses_status.length);
@@ -1156,7 +1162,9 @@ function disp_session()
 {
 // Clear Previous status
 stable.clear().draw();
-$("#sesjobstatus").text("Please Wait...");
+$("#sesjobstatus").text("Trying to get running job...");
+$("#sesjobname").text("");
+$("#tackinid").text("");
 $("#seshold").text("");
 $("#sesrunning").text("");
 $("#sescompleted").text("");
@@ -1275,17 +1283,31 @@ try{
 
 new_update_required = false;
 history_lock = false;
-if (typeof(INID) != "number" ) {INID = 0}
-console.log("LAST UPDATE:"+INID)
-if (data_history != "live"){
 
-// GET completed history update from server
+if (typeof(INID) != "number" ) {INID = 0}
+console.log("LAST UPDATE:"+INID);
+
+// Get live update
+if (data_history == "live")
+{
+  get_post = {"outputrequired": "yes","knowninid":INID}; 
+  post_url = "/api/v1/getlast";
+}
+
+// Get completed history by INID
+else if(data_history == "getbyinid"){
+// GET completed history by DATE
+// Hack timestmp is INID pass by caller
+get_post = {"INID" : timestmp};
+post_url = "/api/v1/getby";
+}
+
+else
+{
+// GET completed history by DATE
 get_post = {"history" : data_history, "time" : timestmp,"outputrequired": "yes"};
 post_url = "/api/v1/getcompleted";
-
 }
-// GETTING LIVE UPDATE FROM SERVER
-else{ get_post = {"outputrequired": "yes","knowninid":INID}; post_url = "/api/v1/getlast"}
 
 $("#load-status").text("loading...");
 $.ajax({type: 'POST',url:post_url,data:get_post,success:aj_post,error:function (xhr, ajaxOptions, thrownError)
@@ -1293,22 +1315,27 @@ $.ajax({type: 'POST',url:post_url,data:get_post,success:aj_post,error:function (
 
 function aj_post(data)
 {
-
+console.log(data);
 new_update_required = true;
 $("#load-status").text("Updated");
 $("#load-status").fadeOut(150).fadeIn(150);
+
 if(data.error != undefined){console.log("Getting update error >"+data.error);return;}
-if(data.completed != "yes"){console.log("NO NEW UPDATE");return "";}
+if(data.completed != "yes"){return "";}
+
+// Received new update , clearing old data
 console.log("RECEVING INID:"+data.jobs["INID"]+" JOB:"+data.jobs["JOBNAME"]);
+dtable.clear().draw();
 $('#inid').text("INID: "+data.jobs["INID"]);
 $('#jobdesc').text("JOBNAME: "+data.jobs["JOBNAME"]);
-//$('#outid').text("SNAP: "+data["SESSION"]);
 
 INID = data.jobs["INID"];
-//New update received for INPUT
 doutput = data.output;
 $("#datetimepicker1").fadeOut(150).fadeIn(150);
 $('#datetimepicker1').val(moment.utc(new Date(data.jobs["startedtime"])).format('DD-MM-YYYY HH:mm:ss'));
+
+// Process received output
+raw_file_path = data.jobs["logfile"]
 process_in_out(doutput)
 new_update_required = true;
 
@@ -1360,12 +1387,24 @@ dtable.draw();
 }
 
 
+// Get DATA BY INID ( triggered by history )
+//function datatable_click(d){}
+
 function datatable_click(dat)
 {
 
 try{
-$('#datetimepicker1').val(moment.utc(new Date(dat)).format('DD-MM-YYYY HH:mm:ss'));
-history("forward");
+
+if(play_snap == true)
+{
+    console.log("PAUSE");
+    play_snap = false;$('#play_ico').removeClass('glyphicon glyphicon-pause').addClass('glyphicon glyphicon-play');
+}
+
+history_lock = true;
+get_up("getbyinid",dat);
+
+
 }
 catch(err){console.log("Error datatable_click"+err);}
 }
@@ -1390,20 +1429,22 @@ get_up(h,t);
 
 function skipalljobs(){
 try{
-
+  
+  jbinid = $("#tackinid").text().split("INID: ")
+  jbinid = jbinid[1]
   chk = confirm("Skipping is little slow process, Are You Sure to SKIP JOB ?");
   if (chk == false){return false;}
-  console.log("SKIPPING JOB");
-$.ajax({type: 'POST',url:"api/v1/skip_job",data:{type:"skip","INID":SKIPINID},success:skiprunjob,error:function (xhr, ajaxOptions, thrownError)
+  console.log("SKIPPING JOB: "+jbinid);
+$.ajax({type: 'POST',url:"api/v1/skip_job",data:{type:"skip","INID":jbinid},success:skiprunjob,error:function (xhr, ajaxOptions, thrownError)
   {console.log("Error > job_skipping"); }})
-
 function skiprunjob(data){ 
-jbn = $("#sesjobstatus").text()
+jbn = $("#sesjobname").text()
 if (data["status"] == "Skipping"){
-$("#sesjobstatus").text("SKIPPING :"+jbn);
+console.log(data);
+$("#sesjobstatus").text("SKIPPING JOBS ....");
 }
 else{
-$("#sesjobstatus").text("SKIPPING FAILED : "+jbn);
+$("#sesjobstatus").text("SKIPPING FAILED !!!");
 }
 }
 }catch(err){console.log("skipping job Error"+err)}

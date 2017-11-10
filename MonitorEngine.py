@@ -22,15 +22,9 @@ import easysnmp
 import yaml
 from nmv1 import *
 
-logger = logging.getLogger("Rotating Log")
-logger.setLevel(logging.DEBUG)
-handler = RotatingFileHandler(os.getcwd()+"/MonitorEngine.log", maxBytes=5000000, backupCount=25)
-formatter = logging.Formatter('%(asctime)s > %(levelname)s > %(message)s')
-handler.setFormatter(formatter)
-logger.addHandler(handler)
-#logger.propagate = False # DISABLE LOG STDOUT
 
-logger.info("Starting MonitoringEngine")
+
+logger = logging.getLogger("Rotating Log")
 
 app = Flask(__name__)
 
@@ -189,7 +183,7 @@ class main_model():
         except Exception:
             logger.exception("get_credentials")
 
-    def login(self, hostname='', auth=[], logpath="default_log.txt", login_timeout=10, etimeout=6):
+    def login(self, hostname='', auth=[], logpath="default.log", login_timeout=10, etimeout=6):
         
         '''
         Login using open-ssl pxssh.
@@ -209,7 +203,7 @@ class main_model():
                 try:
                     s = pxssh.pxssh(options={"StrictHostKeyChecking": "no","UserKnownHostsFile": "/dev/null"}, timeout=login_timeout)
                     s.login(hostname, username, password, auto_prompt_reset=False, login_timeout=login_timeout)
-                    s.logfile = open(logpath+"_"+str(hostname)+".txt", "ab")
+                    s.logfile = open(logpath+"/"+str(hostname)+".txt", "ab")
                     # Send enter to get router prompt to check login success
                     ex = ["#", r">", r"\$", pexpect.TIMEOUT]
                     s.sendline('')
@@ -542,10 +536,6 @@ class main_model():
                 mcollection = self.mdb['INPUT']
                 all_data = mcollection.find({"INID":INID})
                 
-                #Check device log file storing folder exist else make folder
-                if not os.path.exists(device_log_file_path):
-                    os.makedirs(device_log_file_path)
-                
                 # Set number of parallel execution for hosts 
                 # Start parallel threads and assign task
                 with ThreadPoolExecutor(max_workers=apprentice) as executor:
@@ -672,8 +662,29 @@ class main_model():
         '''
         try:     
             # Connect to localhost mongoDB "LIVE" database
+            TD = datetime.datetime.now()
+            td_path = TD.strftime("%Y_%m_%d_%H_%M_%S_%f")
+            device_log_file_path = os.path.join(os.getcwd(), "divlog")
+            log_file_folder = jobname+"_"+str(INID)+"_"+td_path
+            device_log_file_path = os.path.join(device_log_file_path, log_file_folder)
+
+            #Check device log file storing folder exist else make folder
+            if not os.path.exists(device_log_file_path):
+                os.makedirs(device_log_file_path)
+
+            #Create Logging file
+            logger.setLevel(logging.DEBUG)
+            handler = RotatingFileHandler(device_log_file_path+"/_div.log", maxBytes=5000000, backupCount=25)
+            formatter = logging.Formatter('%(asctime)s > %(levelname)s > %(message)s')
+            handler.setFormatter(formatter)
+            logger.addHandler(handler)
+            #logger.propagate = False # DISABLE LOG STDOUT
+
             try:
                 logger.info("Initializing Job >>>>>>>>>> "+str(jobname))
+                logger.info("Input file: "+str(filepath))
+                logger.info("Apprentice: "+str(apprentice))
+                logger.info("INID: "+str(INID))
                 self.mongoc = pymongo.MongoClient('localhost', 27017)
                 self.mdb = self.mongoc['LIVE']
                 logger.info("Connected to 'LIVE' database success")
@@ -698,18 +709,13 @@ class main_model():
                 logger.error("No valid INID found")
                 return None
             
-            TD = datetime.datetime.now()
-            td_path = TD.strftime("%Y_%m_%d_%H_%M_%S_%f")
-            device_log_file_path = os.path.join(os.getcwd(), "divlog")
-            device_log_file_path = os.path.join(device_log_file_path, jobname+"_"+str(INID)+"_"+td_path)
-            
             # Initializing Score Me object
             mcollection = self.mdb['HISTORY']
-            mcollection.insert({"INID":INID,"JOBSTATUS" : "running","startedtime":TD,"JOBNAME":jobname})
+            mcollection.insert({"INID":INID,"JOBSTATUS" : "running","startedtime":TD,"JOBNAME":jobname,"logfile":log_file_folder})
             
             scor = score_gen()
             self.mongo_search_score = scor.mongo_search_score
-            self.start_run(filepath, jobname, device_log_file_path, INID, TD, apprentice)
+            self.start_run(filepath, jobname, device_log_file_path, int(INID), TD, int(apprentice))
             
             completed_time = datetime.datetime.now()
             mcollection = self.mdb['HISTORY']
@@ -723,7 +729,6 @@ class main_model():
             logger.exception("main error")
 
 if __name__ == '__main__':
-    logger.info("Manual Mode Running")
     fil = sys.argv[1]
     jobname = sys.argv[2]
     appr = sys.argv[3]

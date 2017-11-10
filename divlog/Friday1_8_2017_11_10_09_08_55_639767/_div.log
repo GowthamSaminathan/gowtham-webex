@@ -1,0 +1,90 @@
+2017-11-10 09:08:55,640 > INFO > Initializing Job >>>>>>>>>> Friday1
+2017-11-10 09:08:55,665 > INFO > Connected to 'LIVE' database success
+2017-11-10 09:08:55,749 > INFO > Scoring Object Insiated...
+2017-11-10 09:08:56,066 > INFO > Special gredential not found , Getting Default gredential for 20.1.1.1
+2017-11-10 09:08:56,066 > INFO > getting ssh session
+2017-11-10 09:08:56,066 > INFO > Trying to Login:20.1.1.1
+2017-11-10 09:09:01,728 > INFO > Special gredential not found , Getting Default gredential for 20.1.1.3
+2017-11-10 09:09:01,728 > INFO > getting ssh session
+2017-11-10 09:09:01,728 > INFO > Trying to Login:20.1.1.3
+2017-11-10 09:09:02,042 > INFO > Special gredential not found , Getting Default gredential for 20.1.1.2
+2017-11-10 09:09:02,043 > INFO > getting ssh session
+2017-11-10 09:09:02,043 > INFO > Trying to Login:20.1.1.2
+2017-11-10 09:09:24,230 > INFO > Failed >GNS_H3 20.1.1.3 Reasion>TIMEOUT
+2017-11-10 09:09:24,231 > INFO > getting snmp session
+2017-11-10 09:09:24,231 > INFO > {'security_username': 'NPCI_NFS_NMSV3', 'auth_password': 'npcinfsnms', 'version': 3, 'hostname': u'20.1.1.3', 'security_level': 'auth_without_privacy'}
+2017-11-10 09:09:24,231 > INFO > Failed >GNS_H1 20.1.1.1 Reasion>TIMEOUT
+2017-11-10 09:09:24,232 > INFO > getting snmp session
+2017-11-10 09:09:24,232 > INFO > {'version': 3, 'security_level': 'auth_without_privacy', 'security_username': 'NPCI_NFS_NMSV3', 'auth_password': 'npcinfsnms', 'hostname': u'20.1.1.1'}
+2017-11-10 09:09:24,290 > INFO > Failed >GNS_H2 20.1.1.2 Reasion>TIMEOUT
+2017-11-10 09:09:24,290 > INFO > getting snmp session
+2017-11-10 09:09:24,291 > INFO > {'version': 3, 'security_level': 'auth_without_privacy', 'security_username': 'NPCI_NFS_NMSV3', 'auth_password': 'npcinfsnms', 'hostname': u'20.1.1.2'}
+2017-11-10 09:09:24,309 > INFO > getting snmp success
+2017-11-10 09:09:24,290 > INFO > getting snmp success
+2017-11-10 09:09:24,326 > INFO > getting snmp success
+2017-11-10 09:09:24,350 > INFO > Scoring Started
+2017-11-10 09:09:24,389 > DEBUG > Mongo search score for:8
+2017-11-10 09:09:24,390 > DEBUG > mongo_search_score > Starting score for > 20.1.1.1
+2017-11-10 09:09:24,390 > DEBUG > mongo_search_score > searching DB for:{'IP': u'20.1.1.1', 'INID': 8, 'Objects': {'$elemMatch': {'out.ssh': {'$ne': 'reachable'}, 'id': 0}}}
+2017-11-10 09:09:24,391 > DEBUG > mongo_search_score > Pattern Matched
+2017-11-10 09:09:24,391 > DEBUG > mongo_search_score > updating score >({'IP': u'20.1.1.1', 'INID': 8, 'Objects': {'$elemMatch': {'out.ssh': {'$ne': 'reachable'}, 'id': 0}}}, {'$set': {'Objects.$.score': 0}})
+2017-11-10 09:09:24,392 > DEBUG > mongo_search_score > searching DB for:{'IP': u'20.1.1.1', 'INID': 8, 'Objects': {'$elemMatch': {'out.ssh': 'reachable', 'id': 0}}}
+2017-11-10 09:09:24,393 > DEBUG > mongo_search_score > Pattern Not matched
+2017-11-10 09:09:24,393 > DEBUG > mongo_search_score > Starting score for > 20.1.1.3
+2017-11-10 09:09:24,393 > DEBUG > mongo_search_score > searching DB for:{'IP': u'20.1.1.3', 'INID': 8, 'Objects': {'$elemMatch': {'out.ssh': {'$ne': 'reachable'}, 'id': 0}}}
+2017-11-10 09:09:24,393 > DEBUG > mongo_search_score > Pattern Matched
+2017-11-10 09:09:24,394 > DEBUG > mongo_search_score > updating score >({'IP': u'20.1.1.3', 'INID': 8, 'Objects': {'$elemMatch': {'out.ssh': {'$ne': 'reachable'}, 'id': 0}}}, {'$set': {'Objects.$.score': 0}})
+2017-11-10 09:09:24,394 > DEBUG > mongo_search_score > searching DB for:{'IP': u'20.1.1.3', 'INID': 8, 'Objects': {'$elemMatch': {'out.ssh': 'reachable', 'id': 0}}}
+2017-11-10 09:09:24,395 > DEBUG > mongo_search_score > Pattern Not matched
+2017-11-10 09:09:24,395 > DEBUG > mongo_search_score > Starting score for > 20.1.1.2
+2017-11-10 09:09:24,395 > DEBUG > mongo_search_score > searching DB for:{'IP': u'20.1.1.2', 'INID': 8, 'Objects': {'$elemMatch': {'out.ssh': {'$ne': 'reachable'}, 'id': 0}}}
+2017-11-10 09:09:24,396 > DEBUG > mongo_search_score > Pattern Matched
+2017-11-10 09:09:24,396 > DEBUG > mongo_search_score > updating score >({'IP': u'20.1.1.2', 'INID': 8, 'Objects': {'$elemMatch': {'out.ssh': {'$ne': 'reachable'}, 'id': 0}}}, {'$set': {'Objects.$.score': 0}})
+2017-11-10 09:09:24,397 > DEBUG > mongo_search_score > searching DB for:{'IP': u'20.1.1.2', 'INID': 8, 'Objects': {'$elemMatch': {'out.ssh': 'reachable', 'id': 0}}}
+2017-11-10 09:09:24,397 > DEBUG > mongo_search_score > Pattern Not matched
+2017-11-10 09:09:24,398 > INFO > Scoring Completed
+2017-11-10 09:30:29,557 > INFO > Initializing Job >>>>>>>>>> Friday2
+2017-11-10 09:30:29,560 > INFO > Connected to 'LIVE' database success
+2017-11-10 09:30:29,606 > INFO > Scoring Object Insiated...
+2017-11-10 09:30:29,856 > INFO > Special gredential not found , Getting Default gredential for 20.1.1.1
+2017-11-10 09:30:29,856 > INFO > getting ssh session
+2017-11-10 09:30:29,856 > INFO > Trying to Login:20.1.1.1
+2017-11-10 09:30:29,932 > INFO > Special gredential not found , Getting Default gredential for 20.1.1.3
+2017-11-10 09:30:29,933 > INFO > getting ssh session
+2017-11-10 09:30:29,933 > INFO > Trying to Login:20.1.1.3
+2017-11-10 09:30:29,986 > INFO > Special gredential not found , Getting Default gredential for 20.1.1.2
+2017-11-10 09:30:29,987 > INFO > getting ssh session
+2017-11-10 09:30:29,988 > INFO > Trying to Login:20.1.1.2
+2017-11-10 09:30:51,025 > INFO > Failed >GNS_H1 20.1.1.1 Reasion>TIMEOUT
+2017-11-10 09:30:51,025 > INFO > getting snmp session
+2017-11-10 09:30:51,026 > INFO > {'security_username': 'NPCI_NFS_NMSV3', 'auth_password': 'npcinfsnms', 'version': 3, 'hostname': u'20.1.1.1', 'security_level': 'auth_without_privacy'}
+2017-11-10 09:30:51,071 > INFO > getting snmp success
+2017-11-10 09:30:51,119 > INFO > Failed >GNS_H3 20.1.1.3 Reasion>TIMEOUT
+2017-11-10 09:30:51,120 > INFO > getting snmp session
+2017-11-10 09:30:51,120 > INFO > {'version': 3, 'security_level': 'auth_without_privacy', 'security_username': 'NPCI_NFS_NMSV3', 'auth_password': 'npcinfsnms', 'hostname': u'20.1.1.3'}
+2017-11-10 09:30:51,167 > INFO > Failed >GNS_H2 20.1.1.2 Reasion>TIMEOUT
+2017-11-10 09:30:51,168 > INFO > getting snmp session
+2017-11-10 09:30:51,168 > INFO > {'version': 3, 'security_level': 'auth_without_privacy', 'security_username': 'NPCI_NFS_NMSV3', 'auth_password': 'npcinfsnms', 'hostname': u'20.1.1.2'}
+2017-11-10 09:30:51,192 > INFO > getting snmp success
+2017-11-10 09:30:51,198 > INFO > getting snmp success
+2017-11-10 09:30:51,208 > INFO > Scoring Started
+2017-11-10 09:30:51,228 > DEBUG > Mongo search score for:9
+2017-11-10 09:30:51,229 > DEBUG > mongo_search_score > Starting score for > 20.1.1.1
+2017-11-10 09:30:51,229 > DEBUG > mongo_search_score > searching DB for:{'IP': u'20.1.1.1', 'INID': 9, 'Objects': {'$elemMatch': {'out.ssh': {'$ne': 'reachable'}, 'id': 0}}}
+2017-11-10 09:30:51,230 > DEBUG > mongo_search_score > Pattern Matched
+2017-11-10 09:30:51,230 > DEBUG > mongo_search_score > updating score >({'IP': u'20.1.1.1', 'INID': 9, 'Objects': {'$elemMatch': {'out.ssh': {'$ne': 'reachable'}, 'id': 0}}}, {'$set': {'Objects.$.score': 0}})
+2017-11-10 09:30:51,231 > DEBUG > mongo_search_score > searching DB for:{'IP': u'20.1.1.1', 'INID': 9, 'Objects': {'$elemMatch': {'out.ssh': 'reachable', 'id': 0}}}
+2017-11-10 09:30:51,231 > DEBUG > mongo_search_score > Pattern Not matched
+2017-11-10 09:30:51,232 > DEBUG > mongo_search_score > Starting score for > 20.1.1.3
+2017-11-10 09:30:51,232 > DEBUG > mongo_search_score > searching DB for:{'IP': u'20.1.1.3', 'INID': 9, 'Objects': {'$elemMatch': {'out.ssh': {'$ne': 'reachable'}, 'id': 0}}}
+2017-11-10 09:30:51,232 > DEBUG > mongo_search_score > Pattern Matched
+2017-11-10 09:30:51,233 > DEBUG > mongo_search_score > updating score >({'IP': u'20.1.1.3', 'INID': 9, 'Objects': {'$elemMatch': {'out.ssh': {'$ne': 'reachable'}, 'id': 0}}}, {'$set': {'Objects.$.score': 0}})
+2017-11-10 09:30:51,233 > DEBUG > mongo_search_score > searching DB for:{'IP': u'20.1.1.3', 'INID': 9, 'Objects': {'$elemMatch': {'out.ssh': 'reachable', 'id': 0}}}
+2017-11-10 09:30:51,235 > DEBUG > mongo_search_score > Pattern Not matched
+2017-11-10 09:30:51,235 > DEBUG > mongo_search_score > Starting score for > 20.1.1.2
+2017-11-10 09:30:51,235 > DEBUG > mongo_search_score > searching DB for:{'IP': u'20.1.1.2', 'INID': 9, 'Objects': {'$elemMatch': {'out.ssh': {'$ne': 'reachable'}, 'id': 0}}}
+2017-11-10 09:30:51,236 > DEBUG > mongo_search_score > Pattern Matched
+2017-11-10 09:30:51,236 > DEBUG > mongo_search_score > updating score >({'IP': u'20.1.1.2', 'INID': 9, 'Objects': {'$elemMatch': {'out.ssh': {'$ne': 'reachable'}, 'id': 0}}}, {'$set': {'Objects.$.score': 0}})
+2017-11-10 09:30:51,250 > DEBUG > mongo_search_score > searching DB for:{'IP': u'20.1.1.2', 'INID': 9, 'Objects': {'$elemMatch': {'out.ssh': 'reachable', 'id': 0}}}
+2017-11-10 09:30:51,251 > DEBUG > mongo_search_score > Pattern Not matched
+2017-11-10 09:30:51,251 > INFO > Scoring Completed
