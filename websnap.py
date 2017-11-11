@@ -32,12 +32,15 @@ app = Flask(__name__,static_url_path='/static')
 app.config['MONGO_DBNAME'] = 'LIVE'
 app.config['MONGO_URI'] = 'mongodb://127.0.0.1:27017/LIVE'
 app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(),"input_file")
-app.config['TEMP_FOLDER'] = os.path.join(os.getcwd(),"temp_file")
+#app.config['TEMP_FOLDER'] = os.path.join(os.getcwd(),"temp_file")
 mongoc = PyMongo(app)
 
 
 									 
 def sqlget_input(INID):
+	'''
+	Get all input from "INPUT" table for match INID (as list format)
+	'''
 	try:
 		# connect to LIVE database
 		mdb = mongoc.db
@@ -48,6 +51,10 @@ def sqlget_input(INID):
 		logger.exception("sqlget_input")
 
 def sqlget_output(INID):
+	'''
+	Get all output from "OUTPUT" table for match INID (as list format)
+	
+	'''
 	try:
 		mdb = mongoc.db
 		mcollection = mdb['OUTPUT']
@@ -59,10 +66,20 @@ def sqlget_output(INID):
 
 @app.route('/')
 def main():
-	 return render_template('index.html')
+	'''
+	Index file to serve
+	Stored in template/index.html
+	
+	'''
+	return render_template('index.html')
 
 @app.route('/upload_input',methods = ['POST', 'GET'])
 def upload_input():
+	'''
+	Upload YAML file in 'input_file' directory
+	* If file name is already existe then check override flage , if override is set to yes then override the filename
+
+	'''
 	if request.method == 'POST':
 		try:
 			f = request.files['file']
@@ -86,6 +103,10 @@ def upload_input():
 
 @app.route('/delete_input',methods = ['POST', 'GET'])
 def delete_input():
+	'''
+	Delete given file from 'input_file' directory
+
+	'''
 	if request.method == 'POST':
 		try:
 			status = {"status":"Not Deleted"}
@@ -102,6 +123,10 @@ def delete_input():
 
 @app.route('/download_input',methods = ['POST', 'GET'])
 def download_input():
+	'''
+	download given file from 'input_file' directory
+
+	'''
 	if request.method == 'GET':
 		try:
 			dfile = request.args.get('download')
@@ -114,6 +139,11 @@ def download_input():
 
 @app.route('/list_input',methods = ['POST', 'GET'])
 def list_input():
+	'''
+	List all file in 'input_file' directory
+	* Send all file name as list
+	'''
+
 	if request.method == 'POST':
 		try:
 			name = os.listdir(app.config['UPLOAD_FOLDER'])
@@ -126,12 +156,16 @@ def list_input():
 
 @app.route('/rawdownload',methods = ['POST', 'GET'])
 def rawdownload():
+	'''
+	Download log file as zip in "divlog" folder (folder name must be specified by client).
+	* If zip file is created already then send the file
+	* Else create new zip file and send
+	'''
 	if request.method == 'GET':
 		try:
 			rawfile = request.args.get('download')
 			if rawfile != None:
 				rf = os.path.join(os.getcwd(),"divlog")
-				rawfile = rawfile.replace(":","-")
 				fp = os.path.join(rf,rawfile)
 				if os.path.isfile(fp+".zip") == True:
 					pass;
@@ -169,6 +203,11 @@ def skip_job():
 @app.route('/api/v1/new_job',methods = ['POST', 'GET'])
 def new_job():
 	"""
+	Create new job and run using thread
+	* Get filename,jobname,number of apprentices 
+	* Create NEW INID (increase INID in 'SESION' table )
+	* Create full qualified path for input YAML file
+	* Start thread to execute
 
 	"""
 	status = {"status":"error"}
@@ -177,15 +216,18 @@ def new_job():
 			d_group = request.form.get('group')
 			fn = request.form.get('filename')
 			jn = request.form.get('jobname')
-			apr = request.form.get('apprentice')
+			apr = int(request.form.get('apprentice'))
 			
+			# validate : apprentice , input yaml and jobname
 			if apr > 0:
 				if fn == None or jn == None:
 					return jsonify(status)
+				
 				filename = secure_filename(fn)
 				full_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
 				INID = None
 				
+				# Increase INID in 'SESSION' table to create new INID
 				try:
 					mdb = mongoc.db
 					mcollection = mdb['SESSION']
@@ -198,6 +240,8 @@ def new_job():
 				
 				if INID == None:
 					return jsonify({"status":"error","type":"Creating INID failed"})
+				
+				# Start the thread to execute
 				if os.path.isfile(full_path):
 					main_thread = Thread(target=net_auto_modul.main_run,name = jn, args=(full_path,jn,apr,INID,))
 					main_thread.start()
@@ -215,6 +259,7 @@ def new_job():
 def get_by():
 	"""
 	Get output by its INID with HISTORY status
+
 	"""
 	if request.method == 'POST' or "GET":
 		try:
@@ -241,8 +286,8 @@ def get_by():
 def get_completed():
 	
 	"""
-	Get completed jobs detail from 'SESSION' table
-	return 'INID,JOBNAME,STARTED DATE,JOBSTATUS' if job is in completed state and matches history
+	Get completed jobs detail from 'HISTORY' table
+	return 'INID,JOBNAME,STARTED DATE,JOBSTATUS' etc.. if job is in completed state and matches history
 
 	"""
 	if request.method == 'POST' or "GET":
@@ -408,6 +453,13 @@ def get_last():
 
 @app.route('/merge_js_yaml',methods = ['POST', 'GET'])
 def merge_js_yaml():
+	'''
+	Merge JSON value to YAML
+	* Read JSON and add funtion to specifed IP YAML host
+	* If YAML file not contain JSON host then create new host entry in YAML file and insert the function
+	* Return merged output as YAML string
+
+	'''
 	if request.method == 'POST':
 		try:
 			js_data = request.form.get('js')
@@ -463,5 +515,9 @@ def merge_js_yaml():
 
 
 if __name__ == '__main__':
+	'''
+	Run webservice in all interface port 8888
+
+	'''
 	net_auto_modul = MonitorEngine.main_model()
 	app.run(host="0.0.0.0", port=int("8888"), debug=True)

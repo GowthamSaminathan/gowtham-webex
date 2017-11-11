@@ -1,0 +1,50 @@
+Score file used to create scoring for output of a completed job
+Scoring file contain query and score for that query and host details
+Score  file name are specified in input YAML file
+Score  files are alway in YAML format
+
+Score file format (YAML):
+
+---
+
+- function: <function name>
+  querys: 
+  - Q: <mongoDB query to search >
+    score: <score value in int format >
+  host: < ip address or 'all' to match the output>
+
+Example YAML:
+
+---
+- function: snmp_sys_uptime
+  querys: 
+  - Q: {result: {$ne: success}}
+    score: 0
+  - Q: {result: success,uptime: {$lt: 86400}}
+    score: 10
+  - Q: {result: success,uptime: {$gt: 86400}}
+    score: 100
+  host: all
+  
+- function: cisco_switch
+  querys: 
+  - Q: {interface: {$ne: up}}
+    score: 0
+  - Q: {interface: up}
+    score: 100
+  - Q: {duplex: Half}
+    score: 10
+  - Q: {duplex: "100mbs"}
+    score: 10
+  - Q: {duplex: "10mbs"}
+    score: 5
+  - Q: {output drops: {$gt: 0}}
+    score: 20
+  - Q: {input error: {$gt: 0}}
+    score: 20
+  - Q: {crc: {$gt: 0}}
+    score: 20
+  host: 
+   10.1.1.1
+   10.1.1.2
+   10.1.1.3

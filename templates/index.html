@@ -1141,7 +1141,7 @@ $(document).mousedown(function() {
 });
 
 
-live_job_tunning = false
+live_job_tunning = false;
 
 // Get all running jobs from server
 function get_all_live_job()
@@ -1151,7 +1151,7 @@ live_job_tunning = true;
 try{
 console.log("Requesting all live sessions ...");
 $.ajax({type: 'POST',url:"/api/v1/getrunning",data:{},success:alllive_ses,error:function (xhr, ajaxOptions, thrownError)
-  {console.log("live Post Error");}})
+  {console.log("live Post Error");live_job_tunning = false;}})
 
 function alllive_ses(data){
 live_job_tunning = false;

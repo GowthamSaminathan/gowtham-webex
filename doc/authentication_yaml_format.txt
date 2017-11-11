@@ -1,0 +1,58 @@
+Authentication file used to get authentication details for hosts.
+We can specify authenctation for ssh, snmp etc
+authentication file name are specified in input YAML file
+Authentication files are alway in YAML format
+
+Authentication  file format (YAML):
+
+---
+- cisco:
+  ip: < ip address seprated by space or we call specify as 'all'>
+  <authentication protocol> : <authentation string>
+
+Example YAML:
+
+---
+
+- cisco:
+  ip:
+   10.1.1.1
+   10.1.1.2
+   10.1.1.4
+   10.1.1.6
+   10.1.1.7
+   10.1.1.8
+   10.1.1.9
+  snmp:
+    auth_password: password
+    security_username: username
+    security_level: auth_without_privacy
+    version: 3
+  ssh:
+    username: cisco
+    password: cisco
+
+- juniper:
+  ip:
+   10.1.1.10
+  snmp:
+    auth_password: password
+    security_username: username
+    security_level: auth_without_privacy
+    version: 3
+  ssh:
+    username: cisco
+    password: cisco
+
+- allotherdevices:
+  ip:
+   all
+  snmp:
+    auth_password: password
+    security_username: username
+    security_level: auth_without_privacy
+    version: 3
+  ssh:
+    username: cisco
+    password: cisco
+...

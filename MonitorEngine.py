@@ -12,8 +12,6 @@ import ast
 import re
 import pymongo
 import pandas
-from flask import Flask, render_template, request
-from flask import jsonify
 import pexpect
 from pexpect import pxssh
 from concurrent.futures import ThreadPoolExecutor
@@ -26,7 +24,6 @@ from nmv1 import *
 
 logger = logging.getLogger("Rotating Log")
 
-app = Flask(__name__)
 
 ### PAGE 1 START ####
 class score_gen(object):
@@ -36,7 +33,7 @@ class score_gen(object):
 
     def get_querys_from_json(self, score_jsn, ip, function):
         '''
-        Get queries to make score using ip and function
+        Get required queries using ip and function
         '''
         try:
             jsn = score_jsn
@@ -63,8 +60,8 @@ class score_gen(object):
 
     def mongo_search_score(self, INID, mdb, score_jsn):
         '''
-        Create score for output and update score and issue funtion name
-        
+        Create score for output and update score and issue funtion name 
+
         '''
         try:
             logger.debug("Mongo search score for:"+str(str(INID)))
@@ -187,11 +184,12 @@ class main_model():
         
         '''
         Login using open-ssl pxssh.
-        1) Set StrictHostKeyChecking to no for open-ssl
-        2) Set UserKnownHostFile to null
-        3) Default time is 10 sec to login and prompt expecting time out is 6 sec
-        4) Send enter 3 time to get better prompt
-        5) Return session and expected string as list ( if login success )
+        * Set StrictHostKeyChecking to no for open-ssl
+        * Set UserKnownHostFile to null
+        * Default time is 10 sec to login and prompt expecting time out is 6 sec
+        * Send enter 3 time to get better prompt
+        * Return session and expected string as list ( if login success )
+        * Store log to file Ex: divlog/jobname_INID_datetime/hostname.txt (hostname is the ip of device or valid dns name)
         
         '''
         if len(auth) > 0:
@@ -252,12 +250,15 @@ class main_model():
             return ses
         return ses
 
-    def self_check(self, IP, Hostname, dir_path, element, my_credentials):
+    def self_check(self, IP, Hostname, device_log_file_path, element, my_credentials):
 
-        '''Do ssh / snmp check if required
-        Login using ssh and share the sesssion with expectation string
-        if type of the device is cisco then set terminal length 0
-        Curently there is no snmp validation , simply create snmp engine session'''
+        '''
+        Do ssh / snmp check if required
+        * Login using ssh and share the sesssion with expectation string
+        * If type of the device is cisco then set terminal length 0
+        * Curently there is no snmp validation , simply create snmp engine session
+
+        '''
 
         try:
             result = {}
@@ -266,6 +267,7 @@ class main_model():
             einput = element.get("input")
             check = einput.get("check")
             
+            # If ssh is specifed in 'check' , then create ssh session
             if "ssh" in check:
                 try:
                     logger.info("getting ssh session")
@@ -275,7 +277,7 @@ class main_model():
                     timeout = einput.get("timeout")
                     etype = einput.get("type")
                     auth = {"username":username, "password":password}
-                    sess = self.get_ssh_ses(IP, [auth], timeout, dir_path)
+                    sess = self.get_ssh_ses(IP, [auth], timeout, device_log_file_path)
                     if type(sess) == tuple:
                         # SSH login success
                         if etype == "cisco":
@@ -293,6 +295,7 @@ class main_model():
                 except:
                     logger.exception("self_check")
     
+            # If snmp is specifed in 'check' , then create snmp session
             if "snmp" in check:
                 try:
                     logger.info("getting snmp session")
@@ -311,7 +314,7 @@ class main_model():
         except Exception:
             logger.exception("self_check")
 
-    def device_check(self, host_objects, dir_path, mcollection,INID):
+    def device_check(self, host_objects, device_log_file_path, mcollection,INID):
         
         '''
         Read input and execute each function one by one.
@@ -382,7 +385,7 @@ class main_model():
                         logger.error("credential not found for:"+str(IP))
                         out_session = None
                     else:
-                        out_session = self.self_check(IP, Hostname, dir_path, element, my_credentials)
+                        out_session = self.self_check(IP, Hostname, device_log_file_path, element, my_credentials)
                     
                     if out_session != None:
                             
@@ -431,13 +434,15 @@ class main_model():
         except Exception:
             logger.exception("device_check")
 
-    def single_host(self, host_objects, dir_path , INID):
+    def single_host(self, host_objects, device_log_file_path , INID):
         
         '''
-        This is thread function called by ThreadPoolExecution.
-        Update "HISTORY" DB , set host status to running.
-        collect output and pass to caller
         
+        This is thread function called by ThreadPoolExecution.
+        * Update "HISTORY" DB , set host status to running.
+        * Collect output and pass to caller (ThreadPoolExecutor)
+        * host_objects contain function name,input to run
+
         '''
         try:
             IP = host_objects.get("IP")
@@ -450,7 +455,7 @@ class main_model():
             except Exception:
                 logger.exception("single_host DB")
 
-            jout = self.device_check(host_objects, dir_path, mcollection,INID)
+            jout = self.device_check(host_objects, device_log_file_path, mcollection,INID)
             if type(jout) == None:
                 logger.error("single_host return non list objects")
                 jout = []
@@ -493,12 +498,12 @@ class main_model():
         1) Get support file names from input file
         2) Get credential for all hosts from credential YAML file
         3) Get score query from score YAML file
-        4) update "HISTORY" table
+        4) Update "HISTORY" table once completed for each host
         
         '''
         try:
-            # Insert input file to DB
             self.jobname = jobname
+            # Insert input file to "INPUT" table in LIVE DB
             if self.adding_input_session_to_db(INID ,input_file_path) == True:
                 # input and session status update to DB
                 pass
@@ -510,8 +515,8 @@ class main_model():
             fils = self.get_support_files(input_file_path)
             
             #Get credential for all hosts from credential YAML file
-            # Get score file path
             credential_file_path = fils.get("credential_file")
+            # Get score file path
             score_file_path = fils.get("score_file")
             
             if credential_file_path == None:
@@ -530,7 +535,7 @@ class main_model():
                 logger.error("CREDENTIAL FILE ERROR")
                 return None
             
-            # Number of time job need to execute @ present one 
+            # Number of time job need to execute @ present only one 
             for y in range(1):
                 #Get input from "INPUT" database based on INID
                 mcollection = self.mdb['INPUT']
@@ -650,15 +655,22 @@ class main_model():
         except Exception:
             logger.exception("mongdb")
 
-    def main_run(self, filepath, jobname, apprentice,INID = None):
+    def main_run(self, input_yaml_file_path, jobname, apprentice,INID = None):
         
         '''
             Program starting Point , preparing necessary objects
-            1) Initializing MongoDB and connect it to "LIVE" database.
-            2) Initializing "score" function.
-            3) Start executing "start_run".
-            4) Create INID for job if not received from API , Auto increment the INID in "HISTORY" table and return.
-            
+            * Initializing MongoDB and connect it to "LIVE" database.
+            * Initializing "score" function.
+            * Create INID for job if it is not received from API , Auto increment the INID in "SESSION" table and return.
+            * Create log path to store all logfiles (store in divlog folder)
+            * Example log path format: divlog/jobname_INID_datetime/
+            * System loggings are store in divlog/jobname_INID_datetime/_div.log
+            * Network logs are stored in divlog/jobname_INID_datetime/hostname.txt (individually log file for each host)
+            * Insert Job details to HISTORY table (jobstatus as running and startedtime )
+            * Start executing "start_run".
+            * Update HISTORY table (jobstatus as completed and completedtime)
+            * Update 'SESSION' table with LASTINID in "_id:1" doc
+
         '''
         try:     
             # Connect to localhost mongoDB "LIVE" database
@@ -672,7 +684,7 @@ class main_model():
             if not os.path.exists(device_log_file_path):
                 os.makedirs(device_log_file_path)
 
-            #Create Logging file
+            #Create rottating Logging file
             logger.setLevel(logging.DEBUG)
             handler = RotatingFileHandler(device_log_file_path+"/_div.log", maxBytes=5000000, backupCount=25)
             formatter = logging.Formatter('%(asctime)s > %(levelname)s > %(message)s')
@@ -681,11 +693,11 @@ class main_model():
             #logger.propagate = False # DISABLE LOG STDOUT
 
             try:
-                logger.info("Initializing Job >>>>>>>>>> "+str(jobname))
-                logger.info("Input file: "+str(filepath))
+                logger.info("Initializing Job ============> "+str(jobname))
+                logger.info("Input file: "+str(input_yaml_file_path))
                 logger.info("Apprentice: "+str(apprentice))
                 logger.info("INID: "+str(INID))
-                self.mongoc = pymongo.MongoClient('localhost', 27017)
+                self.mongoc = pymongo.MongoClient('127.0.0.1', 27017)
                 self.mdb = self.mongoc['LIVE']
                 logger.info("Connected to 'LIVE' database success")
             except Exception:
@@ -709,19 +721,23 @@ class main_model():
                 logger.error("No valid INID found")
                 return None
             
-            # Initializing Score Me object
+            # Insert job details to HISTORY table
             mcollection = self.mdb['HISTORY']
             mcollection.insert({"INID":INID,"JOBSTATUS" : "running","startedtime":TD,"JOBNAME":jobname,"logfile":log_file_folder})
             
+            # Initializing Score Me object
             scor = score_gen()
             self.mongo_search_score = scor.mongo_search_score
-            self.start_run(filepath, jobname, device_log_file_path, int(INID), TD, int(apprentice))
             
+            # Start execute
+            self.start_run(input_yaml_file_path, jobname, device_log_file_path, int(INID), TD, int(apprentice))
+            
+            #Update completed time of the job in DB
             completed_time = datetime.datetime.now()
             mcollection = self.mdb['HISTORY']
             mcollection.update({"INID":INID}, {"$set": {"JOBSTATUS" : "completed","completedtime":completed_time}})
 
-            # Update the competed INID in "HISTORY" table
+            # Update the competed INID in "HISTORY" table as LASTINID, always update in _id 1
             mcollection = self.mdb['SESSION']
             new_id = mcollection.update({"_id":1}, {"$set": {"LASTINID" : INID } } )
         
@@ -729,6 +745,19 @@ class main_model():
             logger.exception("main error")
 
 if __name__ == '__main__':
+    
+    print "Manual Running ...."
+
+    """
+    Exampe arguments : 
+
+    MonitorEngine.py "/home/networksnap/dev/network_snap/input_file/default_job.yaml" JOBNAME 5
+
+    arg1 is input file
+    argv2 is jobname
+    argv3 is apprentice 
+
+    """
     fil = sys.argv[1]
     jobname = sys.argv[2]
     appr = sys.argv[3]

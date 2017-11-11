@@ -1,0 +1,44 @@
+Input file is used to execute given jobs on given remote devices.
+When creating a job we need to specify the input file name to be execute. 
+Input file is always in human readable YAML file.
+
+Input file format (YAML):
+---
+credential: <credential yaml file name>  <mandatory>
+score: <credential yaml file name , if no file specified then the program will use 'default_score' file > <not mandatory>
+networksnap:
+ - Hostname: <hostname> <not mandatory>
+   IP: <IP address of the host> <mandatory>
+   Objects:
+   - function: <function name to run <mandatory >
+     input: <Provide input to function> <mandatory if function required>
+
+Example YAML:
+ 
+---
+credential: default_auth
+networksnap:
+- Hostname: Router1
+  IP: 10.1.1.1
+  Objects:
+  - function: self_check
+    input:
+      check: [snmp, ssh]
+      timeout: 10
+      type: cisco
+  - function: cisco_switch
+    input: {'interface': fa0/0, check: 'bits,duplex,speed,error'}
+  - function: cisco_switch
+    input: {'interface': fa0/1, check: 'bits,duplex,speed,error'}
+- Hostname: Router2
+  IP: 10.1.1.2
+  Objects:
+  - function: self_check
+    input:
+      check: [snmp, ssh]
+      timeout: 10
+      type: cisco
+  - function: cisco_switch
+    input: {'interface': fa0/0, check: 'bits,duplex,speed,error'}
+  - function: cisco_switch
+    input: {'interface': fa0/1, check: 'bits,duplex,speed,error'}
